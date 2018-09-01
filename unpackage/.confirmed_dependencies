@@ -1,0 +1,53 @@
+{
+	"index.html": {
+		"refer": [
+			"page/(7lJ.html",
+			"page/main.html",
+			"page/announcements.html",
+			"page/main-find-friend.html",
+			"new_file.html"
+		]
+	},
+	"page/main.html": {
+		"resources": [
+			"page/~\u000b�-��\u0017h.html",
+			"page/find-friend-list.html"
+		],
+		"refer": [
+			"page/~\u000b�-��\u0017h.html",
+			"page/find_friend_list.html",
+			"page/setting.html",
+			"page/find-friend-list.html",
+			"page/msg.html",
+			"page/action-list.html"
+		]
+	},
+	"page/main-find-friend.html": {
+		"resources": [
+			"page/find_friend_list.html"
+		],
+		"refer": [
+			"page/find_friend_list.html",
+			"page/main-action.html",
+			"page/setting.html"
+		]
+	},
+	"page/main-action.html": {
+		"resources": [
+			"page/action-list.html"
+		],
+		"refer": [
+			"page/action-list.html",
+			"page/main-find-friend.html",
+			"page/main-setting.html"
+		]
+	},
+	"page/main-setting.html": {
+		"resources": [
+			"page/setting.html"
+		],
+		"refer": [
+			"page/setting.html"
+		]
+	}
+}
