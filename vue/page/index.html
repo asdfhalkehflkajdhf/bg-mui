@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">  
+    <title>男生女生-首页</title>
+	
+    <script src="common/commonHeadStyle_CDN.js"></script>
+
+</head>
+<body>
+	<!-- .navbar-expand{-sm|-md|-lg|-xl}用于响应式折叠,小于参数时折叠 -->
+	<nav class="navbar navbar-expand-sm navbar-dark bg-dark navbar-fixed-top" id="navMenu">
+		<!-- .navbar-brand 适用于您的公司，产品或项目名称。 -->
+		<a class="navbar-brand" href="#">
+			<!-- 显示图标 -->
+			<!-- <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="男生女生"> -->
+			男生女生
+		</a>
+		<!-- 显示菜单按钮 -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<!-- 左侧菜单 -->
+		<!-- .collapse .navbar-collapse 用于通过父断点对导航栏内容进行分组和隐藏 -->
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto" >
+				<li class="nav-item " v-for="item in nvaListLeft" 
+				v-bind:class="{active: isActive[item.name]}" 
+				v-on:click="modActionStatus(item.name)">
+					<a class="nav-link " :href="item.url" >
+						{{item.name}}
+						<!-- {{item}} -->
+					</a>
+				</li>
+				<!-- 一级菜单 -->
+				<!-- <li class="nav-item ">
+					<!-- aria-expanded:表示展开状态 -->
+					<!-- aria-haspopup :true表示点击的时候会出现菜单或是浮动元素 -->
+					<!-- <a class="nav-link " href="#" id="navbarMyDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+					<!-- 我的 -->
+					<!-- </a> -->
+					<!-- 二级菜单 -->
+<!-- 					<div class="dropdown-menu" aria-labelledby="navbarMyDropdownMenuLink">
+						<a class="dropdown-item" href="#">个人信息</a>
+						<a class="dropdown-item" href="#">活动管理</a>
+						<a class="dropdown-item" href="#">动态管理</a>
+						<a class="dropdown-item" href="#">黑名单</a>
+						<a class="dropdown-item" href="#">通知</a>
+					</div> -->
+				<!-- </li> -->
+			</ul>
+			
+			 <!-- 右侧菜单 -->
+			 <!-- mr-auto 距离自动 -->
+			<ul class="navbar-nav  justify-content-end">
+				<li class="nav-item justify-content-end" v-for="item in navListRight" 
+				v-bind:class="{active: isActive[item.name]}" 
+				v-on:click="modActionStatus(item.name)">
+					<a class="nav-link " href="" >
+						{{item.name}}
+						<!-- {{item}} -->
+					</a>
+				</li>
+<!-- 				<li class="">
+					<a class="nav-link" href="#">登陆</a>
+				</li>	
+				<li class="">
+					<a class="nav-link" href="#">注册</a>
+				</li>
+				<li class="">
+					<a class="nav-link" href="#">退出</a>
+				</li>	 -->	
+			</ul>
+			
+		</div>
+	</nav>
+	
+	<div class="body-content">
+		<div class="wrapper">
+ -->		</div>
+	</div>
+</body>
+<script>
+	
+	这里做全局变量引用,在非vue-cl情况下如何加载
+	不行就做单页面web.进行子页面值传递
+// import Vue from "vue";
+// import globalVar from "./common/globalVar.js";
+// Vue.prototype.define = globalVar;
+
+const nav = new Vue(
+{
+	el:"#navMenu",
+	data:{
+		nvaListLeft:[
+			{name:"朋友",url:"#"}
+			,{name:"活动",url:"#"}
+			,{name:"动态",url:"#"}
+			,{name:"消息",url:"#"}
+			,{name:"我的",url:"#"}
+		],
+		navListRight:[
+			{name:"登陆",url:"#"}
+			,{name:"注册",url:"#"}
+			,{name:"退出",url:"#"}
+		],
+		isActive:{
+			"朋友":true
+			,"活动":false
+			,"动态":false
+			,"消息":false
+			,"我的":false
+		},
+		//前一个选中的标签
+		curActive:"朋友"
+	},
+	methods:{
+		modActionStatus:function(navName, event){
+			//切换标签状态
+			// console.log(this.isActive);
+			this.isActive[this.curActive]=false;
+			this.isActive[navName]=true;
+			this.curActive=navName;
+			
+			//加载子页面
+			
+		},
+		
+		login:function(){
+			var res = {code:0,msg:"",token:""}
+			//发请请求登陆
+			
+			//解析结果
+			// 
+			if(res.code == 0){
+				// 保存状态
+				localStorage.setItem('boyg_token', JSON.stringify(res.token));
+				//修改导航栏状态
+			}else{
+				// 显示提示信息
+				layer.msg(res.msg);
+			}
+
+
+		},
+		logout:function(){
+			//发送请求
+			var info={token:""};
+			info.token = JSON.parse(localStorage.getItem('boyg_token'));
+			//解析结果
+			localStorage.removeItem('boyg_token');
+			var res = {code:0,msg:"",token:""}
+			// {code:0,msg:""}
+		},
+		regist:function(){
+			// {code:0,msg:"",data:{}}
+		},
+		mounted: function(){
+			// showData('挂载到dom后',this);
+			// 加载token查看是否在线
+		},
+	}
+	
+}
+);	
+</script>
+</html>
