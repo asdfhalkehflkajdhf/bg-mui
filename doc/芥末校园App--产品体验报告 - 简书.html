@@ -1,0 +1,2116 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)https://www.jianshu.com/p/11fc2858fa6a -->
+<html><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+
+  <!-- Start of Baidu Transcode -->
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta name="applicable-device" content="pc,mobile">
+  <meta name="MobileOptimized" content="width">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="mobile-agent" content="format=html5;url=https://www.jianshu.com/p/11fc2858fa6a">
+  <!-- End of Baidu Transcode -->
+
+    <meta name="description" content="笔者想比较全面地分析一款产品，培养自己的产品思维。本文如有分析不当之处，望大神们多多留言，批评指正。 体验环境 目录 1. 产品概况 1.1 产品简介 1.2 用户需求分析 1.3 市场分析 2. 产品分析 2.1 产品数据 2.2 产品结构 2.3 产品功能 2.4 视觉与交互设计 3. 用户意见 4. 未来迭代建议 5. 总结 1.产品概况 1.1 产品简介 产品Slogan：找同学，上...">
+
+  <meta name="360-site-verification" content="604a14b53c6b871206001285921e81d8">
+  <meta property="wb:webmaster" content="294ec9de89e7fadb">
+  <meta property="qc:admins" content="104102651453316562112116375">
+  <meta property="qc:admins" content="11635613706305617">
+  <meta property="qc:admins" content="1163561616621163056375">
+  <meta name="google-site-verification" content="cV4-qkUJZR6gmFeajx_UyPe47GW9vY6cnCrYtCHYNh4">
+  <meta name="google-site-verification" content="HF7lfF8YEGs1qtCE-kPml8Z469e2RHhGajy6JPVy5XI">
+  <meta http-equiv="mobile-agent" content="format=html5; url=https://www.jianshu.com/p/11fc2858fa6a">
+
+  <!-- Apple -->
+  <meta name="apple-mobile-web-app-title" content="简书">
+
+    <!--  Meta for Smart App Banner -->
+  <meta name="apple-itunes-app" content="app-id=888237539, app-argument=jianshu://notes/20379565">
+  <!-- End -->
+
+  <!--  Meta for Twitter Card -->
+  <meta content="summary" property="twitter:card">
+  <meta content="@jianshucom" property="twitter:site">
+  <meta content="芥末校园App--产品体验报告" property="twitter:title">
+  <meta content="笔者想比较全面地分析一款产品，培养自己的产品思维。本文如有分析不当之处，望大神们多多留言，批评指正。 体验环境 目录 1. 产品概况 1.1 产品简介 1.2 用户需求分析 ..." property="twitter:description">
+  <meta content="https://www.jianshu.com/p/11fc2858fa6a" property="twitter:url">
+  <!-- End -->
+
+  <!--  Meta for OpenGraph -->
+  <meta property="fb:app_id" content="865829053512461">
+  <meta property="og:site_name" content="简书">
+  <meta property="og:title" content="芥末校园App--产品体验报告">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.jianshu.com/p/11fc2858fa6a">
+  <meta property="og:description" content="笔者想比较全面地分析一款产品，培养自己的产品思维。本文如有分析不当之处，望大神们多多留言，批评指正。 体验环境 目录 1. 产品概况 1.1 产品简介 1.2 用户需求分析 1.3 市场分析 2...">
+  <!-- End -->
+
+  <!--  Meta for Facebook Applinks -->
+  <meta property="al:ios:url" content="jianshu://notes/20379565">
+  <meta property="al:ios:app_store_id" content="888237539">
+  <meta property="al:ios:app_name" content="简书">
+
+  <meta property="al:android:url" content="jianshu://notes/20379565">
+  <meta property="al:android:package" content="com.jianshu.haruki">
+  <meta property="al:android:app_name" content="简书">
+  <!-- End -->
+
+
+    <title>芥末校园App--产品体验报告 - 简书</title>
+
+  <meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="uNj90X3FiPAKfGuIALiapKDHYa/KyWuVMc8JHsgVkASIPDi14vHtZdo4xgGJjtZ5TJJglbkp9cDvhwBf8dH/qg==">
+
+  <link rel="stylesheet" media="all" href="./芥末校园App--产品体验报告 - 简书_files/web-7aa33b92940cc2f7886b.css">
+  
+  <link rel="stylesheet" media="all" href="./芥末校园App--产品体验报告 - 简书_files/entry-aa75deb505b1b600256a.css">
+
+  <link href="https://cdn2.jianshu.io/assets/favicons/favicon-e743bfb1821442341c3ab15bdbe804f7ad97676bd07a770ccc9483473aa76f06.ico" rel="shortcut icon" type="image/x-icon">
+      <link rel="apple-touch-icon-precomposed" href="https://cdn2.jianshu.io/assets/apple-touch-icons/57-a6f1f1ee62ace44f6dc2f6a08575abd3c3b163288881c78dd8d75247682a4b27.png" sizes="57x57">
+      <link rel="apple-touch-icon-precomposed" href="https://cdn2.jianshu.io/assets/apple-touch-icons/72-fb9834bcfce738fd7b9c5e31363e79443e09a81a8e931170b58bc815387c1562.png" sizes="72x72">
+      <link rel="apple-touch-icon-precomposed" href="https://cdn2.jianshu.io/assets/apple-touch-icons/76-49d88e539ff2489475d603994988d871219141ecaa0b1a7a9a1914f4fe3182d6.png" sizes="76x76">
+      <link rel="apple-touch-icon-precomposed" href="https://cdn2.jianshu.io/assets/apple-touch-icons/114-24252fe693524ed3a9d0905e49bff3cbd0228f25a320aa09053c2ebb4955de97.png" sizes="114x114">
+      <link rel="apple-touch-icon-precomposed" href="https://cdn2.jianshu.io/assets/apple-touch-icons/120-1bb7371f5e87f93ce780a5f1a05ff1b176828ee0d1d130e768575918a2e05834.png" sizes="120x120">
+      <link rel="apple-touch-icon-precomposed" href="https://cdn2.jianshu.io/assets/apple-touch-icons/152-bf209460fc1c17bfd3e2b84c8e758bc11ca3e570fd411c3bbd84149b97453b99.png" sizes="152x152">
+
+  <!-- Start of 访问统计 -->
+    <script src="./芥末校园App--产品体验报告 - 简书_files/push.js.下载"></script><script src="./芥末校园App--产品体验报告 - 简书_files/hm.js.下载"></script><script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0c0e9d9b1e7d617b3e6842e85b9fb068";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+  <!-- End of 访问统计 -->
+<style type="text/css">@charset "UTF-8";.image-package .image-container{position:relative;z-index:2;background-color:#eee;-webkit-transition:background-color .1s linear;-o-transition:background-color .1s linear;transition:background-color .1s linear;margin:0 auto}body.reader-night-mode .image-package .image-container{background-color:#545454}.image-package .image-container-fill{z-index:1}.image-package .image-container .image-view{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden}.image-package .image-container .image-view-error:after{content:"图片获取失败，请点击重试";position:absolute;top:50%;left:50%;width:100%;-webkit-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);transform:translate(-50%,-50%);color:#888;font-size:14px}.image-package .image-container .image-view img.image-loading{opacity:.3}.image-package .image-container .image-view img{-webkit-transition:all .15s linear;-o-transition:all .15s linear;transition:all .15s linear;z-index:2;opacity:1}</style><style type="text/css">fieldset[disabled] .multiselect {
+  pointer-events: none;
+}
+
+.multiselect__spinner {
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  width: 48px;
+  height: 35px;
+  background: #fff;
+  display: block;
+}
+
+.multiselect__spinner:after,
+.multiselect__spinner:before {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+  margin: -8px 0 0 -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  border-color: #41b883 transparent transparent;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: 0 0 0 1px transparent;
+}
+
+.multiselect__spinner:before {
+  animation: a 2.4s cubic-bezier(.41,.26,.2,.62);
+  animation-iteration-count: infinite;
+}
+
+.multiselect__spinner:after {
+  animation: a 2.4s cubic-bezier(.51,.09,.21,.8);
+  animation-iteration-count: infinite;
+}
+
+.multiselect__loading-enter-active,
+.multiselect__loading-leave-active {
+  transition: opacity .4s ease-in-out;
+  opacity: 1;
+}
+
+.multiselect__loading-enter,
+.multiselect__loading-leave-active {
+  opacity: 0;
+}
+
+.multiselect,
+.multiselect__input,
+.multiselect__single {
+  font-family: inherit;
+  font-size: 14px;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+.multiselect {
+  box-sizing: content-box;
+  display: block;
+  position: relative;
+  width: 100%;
+  min-height: 40px;
+  text-align: left;
+  color: #35495e;
+}
+
+.multiselect * {
+  box-sizing: border-box;
+}
+
+.multiselect:focus {
+  outline: none;
+}
+
+.multiselect--disabled {
+  opacity: .6;
+}
+
+.multiselect--active {
+  z-index: 1;
+}
+
+.multiselect--active:not(.multiselect--above) .multiselect__current,
+.multiselect--active:not(.multiselect--above) .multiselect__input,
+.multiselect--active:not(.multiselect--above) .multiselect__tags {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.multiselect--active .multiselect__select {
+  transform: rotate(180deg);
+}
+
+.multiselect--above.multiselect--active .multiselect__current,
+.multiselect--above.multiselect--active .multiselect__input,
+.multiselect--above.multiselect--active .multiselect__tags {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.multiselect__input,
+.multiselect__single {
+  position: relative;
+  display: inline-block;
+  min-height: 20px;
+  line-height: 20px;
+  border: none;
+  border-radius: 5px;
+  background: #fff;
+  padding: 0 0 0 5px;
+  width: 100%;
+  transition: border .1s ease;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  vertical-align: top;
+}
+
+.multiselect__tag~.multiselect__input,
+.multiselect__tag~.multiselect__single {
+  width: auto;
+}
+
+.multiselect__input:hover,
+.multiselect__single:hover {
+  border-color: #cfcfcf;
+}
+
+.multiselect__input:focus,
+.multiselect__single:focus {
+  border-color: #a8a8a8;
+  outline: none;
+}
+
+.multiselect__single {
+  padding-left: 6px;
+  margin-bottom: 8px;
+}
+
+.multiselect__tags-wrap {
+  display: inline;
+}
+
+.multiselect__tags {
+  min-height: 40px;
+  display: block;
+  padding: 8px 40px 0 8px;
+  border-radius: 5px;
+  border: 1px solid #e8e8e8;
+  background: #fff;
+}
+
+.multiselect__tag {
+  position: relative;
+  display: inline-block;
+  padding: 4px 26px 4px 10px;
+  border-radius: 5px;
+  margin-right: 10px;
+  color: #fff;
+  line-height: 1;
+  background: #41b883;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+}
+
+.multiselect__tag-icon {
+  cursor: pointer;
+  margin-left: 7px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  font-weight: 700;
+  font-style: normal;
+  width: 22px;
+  text-align: center;
+  line-height: 22px;
+  transition: all .2s ease;
+  border-radius: 5px;
+}
+
+.multiselect__tag-icon:after {
+  content: "\D7";
+  color: #266d4d;
+  font-size: 14px;
+}
+
+.multiselect__tag-icon:focus,
+.multiselect__tag-icon:hover {
+  background: #369a6e;
+}
+
+.multiselect__tag-icon:focus:after,
+.multiselect__tag-icon:hover:after {
+  color: #fff;
+}
+
+.multiselect__current {
+  min-height: 40px;
+  overflow: hidden;
+  padding: 8px 12px 0;
+  padding-right: 30px;
+  white-space: nowrap;
+  border-radius: 5px;
+  border: 1px solid #e8e8e8;
+}
+
+.multiselect__current,
+.multiselect__select {
+  line-height: 16px;
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.multiselect__select {
+  position: absolute;
+  width: 40px;
+  height: 38px;
+  right: 1px;
+  top: 1px;
+  padding: 4px 8px;
+  text-align: center;
+  transition: transform .2s ease;
+}
+
+.multiselect__select:before {
+  position: relative;
+  right: 0;
+  top: 65%;
+  color: #999;
+  margin-top: 4px;
+  border-style: solid;
+  border-width: 5px 5px 0;
+  border-color: #999 transparent transparent;
+  content: "";
+}
+
+.multiselect__placeholder {
+  color: #adadad;
+  display: inline-block;
+  margin-bottom: 10px;
+  padding-top: 2px;
+}
+
+.multiselect--active .multiselect__placeholder {
+  display: none;
+}
+
+.multiselect__content-wrapper {
+  position: absolute;
+  display: block;
+  background: #fff;
+  width: 100%;
+  max-height: 240px;
+  overflow: auto;
+  border: 1px solid #e8e8e8;
+  border-top: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 1;
+  -webkit-overflow-scrolling: touch;
+}
+
+.multiselect__content {
+  list-style: none;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  min-width: 100%;
+  vertical-align: top;
+}
+
+.multiselect--above .multiselect__content-wrapper {
+  bottom: 100%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: none;
+  border-top: 1px solid #e8e8e8;
+}
+
+.multiselect__content::webkit-scrollbar {
+  display: none;
+}
+
+.multiselect__element {
+  display: block;
+}
+
+.multiselect__option {
+  display: block;
+  padding: 12px;
+  min-height: 40px;
+  line-height: 16px;
+  text-decoration: none;
+  text-transform: none;
+  vertical-align: middle;
+  position: relative;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.multiselect__option:after {
+  top: 0;
+  right: 0;
+  position: absolute;
+  line-height: 40px;
+  padding-right: 12px;
+  padding-left: 20px;
+}
+
+.multiselect__option--highlight {
+  background: #41b883;
+  outline: none;
+  color: #fff;
+}
+
+.multiselect__option--highlight:after {
+  content: attr(data-select);
+  background: #41b883;
+  color: #fff;
+}
+
+.multiselect__option--selected {
+  background: #f3f3f3;
+  color: #35495e;
+  font-weight: 700;
+}
+
+.multiselect__option--selected:after {
+  content: attr(data-selected);
+  color: silver;
+}
+
+.multiselect__option--selected.multiselect__option--highlight {
+  background: #ff6a6a;
+  color: #fff;
+}
+
+.multiselect__option--selected.multiselect__option--highlight:after {
+  background: #ff6a6a;
+  content: attr(data-deselect);
+  color: #fff;
+}
+
+.multiselect--disabled {
+  background: #ededed;
+  pointer-events: none;
+}
+
+.multiselect--disabled .multiselect__current,
+.multiselect--disabled .multiselect__select,
+.multiselect__option--disabled {
+  background: #ededed;
+  color: #a6a6a6;
+}
+
+.multiselect__option--disabled {
+  cursor: text;
+  pointer-events: none;
+}
+
+.multiselect__option--disabled.multiselect__option--highlight {
+  background: #dedede!important;
+}
+
+.multiselect-enter-active,
+.multiselect-leave-active {
+  transition: all .15s ease;
+}
+
+.multiselect-enter,
+.multiselect-leave-active {
+  opacity: 0;
+}
+
+.multiselect__strong {
+  margin-bottom: 8px;
+  line-height: 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+[dir=rtl] .multiselect {
+  text-align: right;
+}
+
+[dir=rtl] .multiselect__select {
+  right: auto;
+  left: 1px;
+}
+
+[dir=rtl] .multiselect__tags {
+  padding: 8px 8px 0 40px;
+}
+
+[dir=rtl] .multiselect__content {
+  text-align: right;
+}
+
+[dir=rtl] .multiselect__option:after {
+  right: auto;
+  left: 0;
+}
+
+[dir=rtl] .multiselect__clear {
+  right: auto;
+  left: 12px;
+}
+
+[dir=rtl] .multiselect__spinner {
+  right: auto;
+  left: 1px;
+}
+
+@keyframes a {
+  0% {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(2turn);
+  }
+}</style><style type="text/css">
+@charset "UTF-8";
+/*
+ * 变量
+*/
+.youdao-fixed-ad {
+  display: block;
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+.youdao-fixed-ad .img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.youdao-fixed-ad .ad-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: block;
+    font-size: 12px;
+    padding: 2px 5px 0 6px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    cursor: pointer;
+}
+</style><style type="text/css">
+.yuxi-fixed-ad {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+.yuxi-fixed-ad .img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-image: url(//cdn2.jianshu.io/assets/web/yuxi-ads-d73b364baf42dfeca32d518c819a0136.jpg);
+}
+.yuxi-fixed-ad .ad-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: block;
+    font-size: 12px;
+    padding: 2px 5px 0 6px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    cursor: pointer;
+}
+</style><style type="text/css">
+@charset "UTF-8";
+/*
+ * 变量
+*/
+.like[data-v-6ddd02c6] {
+  display: inline-block;
+}
+.like .like-group[data-v-6ddd02c6] {
+    position: relative;
+    padding: 13px 0 15px 0;
+    font-size: 0;
+    border: 1px solid #EA6F5A;
+    border-radius: 40px;
+}
+.like .like-group[data-v-6ddd02c6]:hover {
+      background-color: rgba(236, 97, 73, 0.05);
+}
+.like .like-group .btn-like[data-v-6ddd02c6] {
+      display: inline-block;
+      font-size: 19px;
+}
+.like .like-group .btn-like[data-v-6ddd02c6]:before {
+        content: '';
+        position: absolute;
+        left: 12px;
+        top: 2px;
+        width: 50px;
+        height: 50px;
+        background-image: url(//cdn2.jianshu.io/assets/web/like_animation_steps-62a00a7b52377d3069927cdb8e61fd34.png);
+        background-position: left;
+        background-repeat: no-repeat;
+        background-size: 1000px 50px;
+}
+.like .like-group .btn-like a[data-v-6ddd02c6] {
+        position: relative;
+        padding: 18px 30px 18px 55px;
+        color: #EA6F5A;
+}
+.like .like-group .modal-wrap[data-v-6ddd02c6] {
+      font-size: 18px;
+      border-left: 1px solid rgba(236, 97, 73, 0.4);
+      display: inline-block;
+      margin-left: -15px;
+}
+.like .like-group .modal-wrap a[data-v-6ddd02c6] {
+        color: #EA6F5A;
+        padding: 18px 26px 18px 18px;
+}
+.like .like-group.like-animation[data-v-6ddd02c6], .like .like-group.active[data-v-6ddd02c6] {
+      background-color: #EA6F5A;
+}
+.like .like-group.like-animation .btn-like a[data-v-6ddd02c6], .like .like-group.active .btn-like a[data-v-6ddd02c6] {
+        color: white;
+}
+.like .like-group.like-animation .modal-wrap[data-v-6ddd02c6], .like .like-group.active .modal-wrap[data-v-6ddd02c6] {
+        border-left: 1px solid white;
+}
+.like .like-group.like-animation .modal-wrap a[data-v-6ddd02c6], .like .like-group.active .modal-wrap a[data-v-6ddd02c6] {
+          color: white;
+}
+.like .like-group.like-animation .btn-like[data-v-6ddd02c6]:before {
+      -webkit-animation: likeBlast-data-v-6ddd02c6 0.6s 1 steps(19);
+              animation: likeBlast-data-v-6ddd02c6 0.6s 1 steps(19);
+      background-position: right;
+}
+@-webkit-keyframes likeBlast {
+0% {
+    background-position: left;
+}
+100% {
+    background-position: right;
+}
+}
+@keyframes likeBlast-data-v-6ddd02c6 {
+0% {
+    background-position: left;
+}
+100% {
+    background-position: right;
+}
+}
+.like .like-group.active .btn-like[data-v-6ddd02c6]:before {
+      background-position: right;
+}
+</style><style type="text/css">
+@charset "UTF-8";
+/*
+ * 变量
+*/
+.main {
+  position: relative;
+  margin: 0 auto;
+  padding: 0 0 30px 0;
+  width: 620px;
+}
+.main .title {
+    padding-left: 8px;
+    border-left: 3px solid #EA6F5A;
+    line-height: 1;
+    font-size: 15px;
+}
+.main .collection-settings {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    font-size: 13px;
+    color: #A0A0A0;
+}
+.main .collection-settings span {
+      padding-left: 4px;
+}
+.main .include-collection {
+    width: 100%;
+    padding-top: 20px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+}
+.main .include-collection .item {
+      display: inline-block;
+      margin: 0 12px 12px 0;
+      min-height: 32px;
+      background-color: white;
+      border: 1px solid #DCDCDC;
+      border-radius: 4px;
+      vertical-align: top;
+      overflow: hidden;
+}
+.main .include-collection .item img {
+        width: 32px;
+        height: 32px;
+}
+.main .include-collection .item .name {
+        display: inline-block;
+        padding: 0 10px;
+        font-size: 14px;
+}
+.main .include-collection .add-collection-wrap {
+      margin: 0 12px 12px 0;
+}
+.main .include-collection .add-collection {
+      padding: 8px 12px;
+      font-size: 14px;
+      border: 1px solid #DCDCDC;
+      border-radius: 4px;
+}
+.main .include-collection .add-collection i {
+        margin-right: 4px;
+        color: #969696;
+}
+.main .recommend-note a {
+    position: relative;
+    margin: 20px 2px 0 0;
+    width: 200px;
+    height: 160px;
+    display: inline-block;
+}
+.main .recommend-note a:after {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 160px;
+      border-radius: 0 0 4px 4px;
+      -webkit-box-shadow: inset 0px -80px 50px -22px rgba(0, 0, 0, 0.6);
+              box-shadow: inset 0px -80px 50px -22px rgba(0, 0, 0, 0.6);
+      top: 0;
+      left: 0;
+      z-index: 1;
+}
+.main .recommend-note .name {
+    position: absolute;
+    bottom: 40px;
+    left: 10px;
+    right: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #ffffff;
+    z-index: 2;
+}
+.main .recommend-note .author {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    z-index: 2;
+}
+.main .recommend-note .avatar {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+.main .recommend-note .avatar img {
+      border-radius: 50%;
+}
+.main .recommend-note .author-name {
+    font-size: 12px;
+    color: #ffffff;
+    display: inline-block;
+    vertical-align: -1px;
+}
+.main .show-more {
+    margin: 0 12px 12px 0;
+    font-size: 14px;
+    color: #A0A0A0;
+}
+</style><style type="text/css">
+#featured-comment-list {
+  margin-top: 30px;
+  margin-bottom: -15px;
+}
+</style><style type="text/css">
+@charset "UTF-8";
+/*
+ * 变量
+*/
+.pc-bind-phone-modal .modal-content, .pc-bind-phone-modal .modal-body {
+  overflow: visible;
+}
+.pc-bind-phone-modal .modal-body {
+  padding-top: 14px;
+}
+.pc-bind-phone-modal .dropdown-menu {
+  max-height: 300px;
+  overflow: auto;
+}
+.pc-bind-phone-modal .dropdown-menu .tag {
+    background-color: #efefef;
+    color: #4A4A4A;
+    height: 28px;
+    line-height: 28px;
+    padding-left: 25px;
+    font-size: 12px;
+}
+.pc-bind-phone-modal .tips {
+  color: #999999;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  margin-bottom: 14px;
+}
+.pc-bind-phone-modal .tips a {
+    color: #3194D0;
+}
+.reader-night-mode .pc-bind-phone-modal .dropdown-menu .tag {
+  background-color: #2F2F2F;
+  color: #999999;
+}
+</style><style type="text/css">
+@charset "UTF-8";
+/*
+ * 变量
+*/
+.comment-images {
+  display: block;
+  width: 338px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  position: relative;
+  font-size: 0;
+}
+.comment-images .preview-img {
+    display: block;
+}
+.comment-images .image {
+    position: relative;
+    border-radius: 4px;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    border: 1px solid #f0f0f0;
+}
+body.reader-night-mode .comment-images .image {
+      border-color: #2f2f2f;
+}
+.comment-images .image:not(:nth-child(3n)) {
+      margin-right: 4px;
+}
+.comment-images .image:nth-child(n + 4) {
+      margin-top: 4px;
+}
+.comment-images .image.is-long:after {
+      content: '\957F\56FE';
+      position: absolute;
+      bottom: 0;
+      margin-left: -32px;
+      width: 32px;
+      height: 28px;
+      font-size: 12px;
+      text-align: center;
+      line-height: 28px;
+      background-color: #2f2f2f;
+      opacity: 0.5;
+      color: #fff;
+}
+.comment-images .one-image.is-long {
+    width: 110px;
+    height: 220px;
+    background-position: top left;
+    background-size: 110px auto;
+}
+.comment-images .one-image.is-long:after {
+      left: 100%;
+}
+.comment-images .one-image.is-normal {
+    height: 110px;
+    width: 100%;
+    background-size: contain;
+    background-position: center left;
+}
+.comment-images .many-image {
+    background-size: cover;
+    display: inline-block !important;
+    height: 110px;
+    width: 110px;
+}
+.comment-images .many-image:after {
+      left: 100%;
+}
+.comment-images .sub-image {
+    width: 105px;
+    height: 105px;
+}
+.comment-images .collapsed-btn {
+    display: block;
+    color: #3194d0;
+    font-size: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.comment-images .mask {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 32%;
+    border-radius: 2px;
+    background-color: rgba(47, 47, 47, 0.6);
+    overflow: hidden;
+    pointer-events: none;
+}
+.comment-images .mask span {
+      font-size: 15px;
+      color: #fff;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%);
+          -ms-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+      width: 100%;
+      text-align: center;
+}
+</style><style type="text/css">
+@charset "UTF-8";
+/*
+ * 变量
+*/
+.tips-card-loading[data-v-f3bf5228], .tips-card[data-v-f3bf5228] {
+  width: 460px;
+  position: relative;
+  left: 0;
+  top: 0;
+  border-radius: 6px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d9d9d9;
+}
+.tips-card-loading[data-v-f3bf5228] {
+  height: 200px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+.tips-card-loading div[data-v-f3bf5228] {
+    background-color: #EAEAEA;
+}
+.tips-card-loading .avatar[data-v-f3bf5228] {
+    width: 72px !important;
+    height: 72px !important;
+    border-radius: 50%;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+.tips-card-loading .name[data-v-f3bf5228] {
+    width: 120px;
+    height: 20px;
+    position: absolute;
+    left: 110px;
+    top: 31px;
+}
+.tips-card-loading .content[data-v-f3bf5228] {
+    position: absolute;
+    left: 110px;
+    top: 62px;
+    width: 238px;
+    height: 39.2px;
+    background-color: transparent;
+}
+.tips-card-loading .content .text[data-v-f3bf5228], .tips-card-loading .content .text-delay[data-v-f3bf5228] {
+      height: 14px;
+      position: absolute;
+      left: 0;
+      width: 100%;
+}
+.tips-card-loading .content .text[data-v-f3bf5228] {
+      top: 2px;
+      -webkit-animation: loading-data-v-f3bf5228 1s ease-in-out infinite;
+      animation: loading-data-v-f3bf5228 1s ease-in-out infinite;
+}
+.tips-card-loading .content .text-delay[data-v-f3bf5228] {
+      bottom: 3px;
+      -webkit-animation: loading-data-v-f3bf5228 1s ease-in-out -0.5s infinite;
+      animation: loading-data-v-f3bf5228 1s ease-in-out -0.5s infinite;
+}
+@keyframes loading-data-v-f3bf5228 {
+0% {
+    width: 60%;
+}
+50% {
+    width: 100%;
+}
+100% {
+    width: 60%;
+}
+}
+@-webkit-keyframes loading {
+0% {
+    width: 60%;
+}
+50% {
+    width: 100%;
+}
+100% {
+    width: 60%;
+}
+}
+.tips-card-loading .meta[data-v-f3bf5228] {
+    width: 30px;
+    height: 42px;
+    position: absolute;
+    bottom: 20px;
+    background-color: transparent;
+}
+.tips-card-loading .meta.meta-1[data-v-f3bf5228] {
+      left: 30px;
+}
+.tips-card-loading .meta.meta-2[data-v-f3bf5228] {
+      left: 90px;
+}
+.tips-card-loading .meta.meta-3[data-v-f3bf5228] {
+      left: 150px;
+}
+.tips-card-loading .meta .count[data-v-f3bf5228], .tips-card-loading .meta .type[data-v-f3bf5228] {
+      position: absolute;
+}
+.tips-card-loading .meta .count[data-v-f3bf5228] {
+      left: -5px;
+      top: 6px;
+      height: 18px;
+      width: 40px;
+}
+.tips-card-loading .meta .type[data-v-f3bf5228] {
+      left: 1px;
+      bottom: 2px;
+      height: 13px;
+      width: 28px;
+}
+.tips-card-loading .button[data-v-f3bf5228] {
+    position: absolute;
+    bottom: 17px;
+    width: 90px;
+    height: 40px;
+    border-radius: 40px;
+}
+.tips-card-loading .message[data-v-f3bf5228] {
+    right: 120px;
+}
+.tips-card-loading .follow[data-v-f3bf5228] {
+    right: 17px;
+}
+.tips-card[data-v-f3bf5228] {
+  z-index: 10;
+}
+.tips-card .card-content[data-v-f3bf5228] {
+    padding: 20px 20px 0 20px;
+}
+.tips-card .card-content .summary[data-v-f3bf5228] {
+      padding: 8px 0 20px 90px;
+      min-height: 92px;
+      position: relative;
+}
+.tips-card .card-content .summary .avatar[data-v-f3bf5228] {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 72px;
+        height: 72px;
+        cursor: pointer;
+        border-radius: 50%;
+        background-color: #EAEAEA;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+}
+.tips-card .card-content .summary .name[data-v-f3bf5228] {
+        height: 26px;
+        margin-right: 3px;
+        margin-bottom: 8px;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+            -ms-flex-direction: row;
+                flex-direction: row;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+            -ms-flex-pack: start;
+                justify-content: flex-start;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+            -ms-flex-align: center;
+                align-items: center;
+}
+.tips-card .card-content .summary .name .nickname[data-v-f3bf5228] {
+          color: #333333;
+          font-size: 19px;
+          font-weight: bold;
+          overflow: hidden;
+          -o-text-overflow: ellipsis;
+             text-overflow: ellipsis;
+          white-space: nowrap;
+          cursor: pointer;
+}
+.tips-card .card-content .summary .name .sex[data-v-f3bf5228], .tips-card .card-content .summary .name .badge[data-v-f3bf5228] {
+          -webkit-flex-shrink: 0;
+              -ms-flex-negative: 0;
+                  flex-shrink: 0;
+          display: inline-block;
+}
+.tips-card .card-content .summary .name .sex[data-v-f3bf5228] {
+          font-size: 19px;
+          width: 19px;
+          margin: 0 4px;
+}
+.tips-card .card-content .summary .intro[data-v-f3bf5228] {
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+           text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        margin-bottom: 12px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #333333;
+}
+.tips-card .card-content .summary .intro.block[data-v-f3bf5228] {
+          color: #999999;
+}
+.tips-card .card-content .summary .list .item[data-v-f3bf5228] {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 13px;
+        color: #999999;
+        cursor: pointer;
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+           text-overflow: ellipsis;
+        white-space: nowrap;
+}
+.tips-card .card-content .summary .list .item i[data-v-f3bf5228] {
+          margin-right: 2px;
+}
+.tips-card .card-footer[data-v-f3bf5228] {
+    border-top: 1px solid #F0F0F0;
+    padding: 15px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    overflow: hidden;
+    _zoom: 1;
+}
+.tips-card .card-footer .profile[data-v-f3bf5228] {
+      width: 198px;
+      overflow: hidden;
+      _zoom: 1;
+      float: left;
+}
+.tips-card .card-footer .profile div[data-v-f3bf5228] {
+        float: left;
+        width: 60px;
+        height: 44px;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+            -ms-flex-align: center;
+                align-items: center;
+}
+.tips-card .card-footer .profile div span[data-v-f3bf5228] {
+          display: block;
+          width: 100%;
+          text-align: center;
+}
+.tips-card .card-footer .profile div .type[data-v-f3bf5228] {
+          font-size: 13px;
+          color: #999999;
+}
+.tips-card .card-footer .profile div .count[data-v-f3bf5228] {
+          font-size: 18px;
+          color: #333333;
+}
+.tips-card .card-footer .social[data-v-f3bf5228] {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: row;
+          -ms-flex-direction: row;
+              flex-direction: row;
+      -webkit-box-pack: end;
+      -webkit-justify-content: flex-end;
+          -ms-flex-pack: end;
+              justify-content: flex-end;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center;
+      float: right;
+      overflow: hidden;
+      _zoom: 1;
+}
+.tips-card .card-footer .social .message[data-v-f3bf5228] {
+        border: 1px solid rgba(59, 194, 29, 0.7);
+        color: #42C02E;
+        margin: 0 10px 0 16px;
+        font-size: 15px;
+        padding: 8px 0;
+        width: 90px;
+        border-radius: 40px;
+        text-align: center;
+        cursor: pointer;
+        float: left;
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+}
+.tips-card .card-footer .social .message[data-v-f3bf5228]:hover {
+          border: 1px solid #42C02E;
+          color: #42C02E;
+          background-color: rgba(59, 194, 29, 0.05);
+}
+.tips-card .card-footer .social .user-follow-button[data-v-f3bf5228] {
+        font-size: 15px;
+        padding: 8px 0;
+        width: 100px;
+}
+.arrow[data-v-f3bf5228] {
+  position: absolute;
+  width: 100%;
+  height: 10px;
+  left: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+.arrow i[data-v-f3bf5228] {
+    position: absolute;
+    left: 50%;
+    margin: 0;
+    margin-left: -10px;
+    border-width: 10px;
+    border-color: transparent;
+    padding: 0;
+}
+.arrow em[data-v-f3bf5228] {
+    display: block;
+    position: absolute;
+    left: -9px;
+    border-width: 9px;
+    border-color: transparent;
+    margin: 0;
+    padding: 0;
+}
+.arrow-type-top[data-v-f3bf5228] {
+  bottom: 1px;
+}
+.arrow-type-top i[data-v-f3bf5228] {
+    border-top-color: #d9d9d9;
+    border-style: solid dashed dashed;
+    top: 0;
+}
+.arrow-type-top em[data-v-f3bf5228] {
+    border-style: solid dashed dashed;
+    border-top-color: #ffffff;
+    top: -10px;
+}
+.arrow-type-bottom[data-v-f3bf5228] {
+  top: 1px;
+}
+.arrow-type-bottom i[data-v-f3bf5228] {
+    border-bottom-color: #d9d9d9;
+    border-style: dashed dashed solid;
+    top: -10px;
+}
+.arrow-type-bottom em[data-v-f3bf5228] {
+    border-style: dashed dashed solid;
+    border-bottom-color: #ffffff;
+    top: -8px;
+}
+.reader-night-mode .tips-card-loading[data-v-f3bf5228] {
+  background-color: #3F3F3F;
+  border-color: #2F2F2F;
+}
+.reader-night-mode .tips-card-loading .avatar[data-v-f3bf5228], .reader-night-mode .tips-card-loading .name[data-v-f3bf5228], .reader-night-mode .tips-card-loading .text[data-v-f3bf5228], .reader-night-mode .tips-card-loading .text-delay[data-v-f3bf5228], .reader-night-mode .tips-card-loading .count[data-v-f3bf5228], .reader-night-mode .tips-card-loading .type[data-v-f3bf5228], .reader-night-mode .tips-card-loading .button[data-v-f3bf5228] {
+    background-color: #545454;
+}
+.reader-night-mode .tips-card[data-v-f3bf5228] {
+  background-color: #3F3F3F;
+  border-color: #2F2F2F;
+}
+.reader-night-mode .tips-card .card-content .summary .name .nickname[data-v-f3bf5228] {
+    color: #C8C8C8;
+}
+.reader-night-mode .tips-card .card-content .summary .name .nickname[data-v-f3bf5228]:hover {
+      color: #ffffff;
+}
+.reader-night-mode .tips-card .card-content .summary .intro[data-v-f3bf5228] {
+    color: #C8C8C8;
+}
+.reader-night-mode .tips-card .card-footer[data-v-f3bf5228] {
+    border-top-color: #2F2F2F;
+}
+.reader-night-mode .tips-card .card-footer .profile div .count[data-v-f3bf5228] {
+      color: #C8C8C8;
+}
+.reader-night-mode .arrow.arrow-type-top em[data-v-f3bf5228] {
+  border-top-color: #3F3F3F;
+}
+.reader-night-mode .arrow.arrow-type-top i[data-v-f3bf5228] {
+  border-top-color: #2F2F2F;
+}
+.reader-night-mode .arrow.arrow-type-bottom em[data-v-f3bf5228] {
+  border-bottom-color: #3F3F3F;
+}
+.reader-night-mode .arrow.arrow-type-bottom i[data-v-f3bf5228] {
+  border-bottom-color: #2F2F2F;
+}
+</style><style type="text/css">
+.v-tooltip-container,
+.v-tooltip-content {
+  display: inline-block;
+}
+.v-tooltip-container {
+  position: relative;
+}
+.v-tooltip-container .v-tooltip-content {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+.v-tooltip-container .v-tooltip-wrap {
+    position: absolute;
+}
+.v-tooltip-container .v-tooltip-wrap.v-tooltip-wrap-top {
+      bottom: 100%;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+          -ms-transform: translateX(-50%);
+              transform: translateX(-50%);
+      padding-bottom: 10px;
+}
+.v-tooltip-container .v-tooltip-wrap.v-tooltip-wrap-bottom {
+      top: 100%;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+          -ms-transform: translateX(-50%);
+              transform: translateX(-50%);
+      padding-top: 10px;
+}
+.v-tooltip-container .v-tooltip-wrap.v-tooltip-wrap-left {
+      top: 50%;
+      right: 100%;
+      -webkit-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+              transform: translateY(-50%);
+      padding-right: 10px;
+}
+.v-tooltip-container .v-tooltip-wrap.v-tooltip-wrap-right {
+      top: 50%;
+      left: 100%;
+      -webkit-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+              transform: translateY(-50%);
+      padding-left: 10px;
+}
+.v-tooltip-container .v-tooltip-wrap.v-tooltip-wrap-top-start {
+      bottom: 100%;
+      left: 0;
+      padding-bottom: 10px;
+}
+.v-tooltip-container .v-tooltip-wrap.v-tooltip-wrap-top-end {
+      bottom: 100%;
+      right: 0;
+      padding-bottom: 10px;
+}
+.v-tooltip-container .v-tooltip-wrap.v-tooltip-wrap-bottom-start {
+      top: 100%;
+      left: 0;
+      padding-top: 10px;
+}
+.v-tooltip-container .v-tooltip-wrap.v-tooltip-wrap-bottom-end {
+      top: 100%;
+      right: 0;
+      padding-top: 10px;
+}
+.v-tooltip-container .v-tooltip-wrap.v-tooltip-wrap-left-start {
+      top: 0;
+      right: 100%;
+      padding-right: 10px;
+}
+.v-tooltip-container .v-tooltip-wrap.v-tooltip-wrap-left-end {
+      bottom: 0;
+      right: 100%;
+      padding-right: 10px;
+}
+.v-tooltip-container .v-tooltip-wrap.v-tooltip-wrap-right-start {
+      top: 0;
+      left: 100%;
+      padding-left: 10px;
+}
+.v-tooltip-container .v-tooltip-wrap.v-tooltip-wrap-right-end {
+      bottom: 0;
+      left: 100%;
+      padding-left: 10px;
+}
+</style><style type="text/css">
+@charset "UTF-8";
+/*
+ * 变量
+*/
+.like-button[data-v-cdecbe24] {
+  position: relative;
+  padding-left: 23px;
+}
+.like-button[data-v-cdecbe24]:before {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: -16px;
+    width: 50px;
+    height: 50px;
+    background-image: url(//cdn2.jianshu.io/assets/web/zan_animation_steps-8d65a474b670eb6a022516f4e0b8e9a4.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: 1050px 50px;
+}
+.like-button[data-v-cdecbe24]:hover:before {
+    background-position: -50px;
+}
+.like-button.zan-animation span[data-v-cdecbe24], .like-button.active span[data-v-cdecbe24] {
+    color: #333333;
+}
+body.reader-night-mode .like-button.zan-animation span[data-v-cdecbe24], body.reader-night-mode .like-button.active span[data-v-cdecbe24] {
+      color: #C8C8C8;
+}
+.like-button.zan-animation[data-v-cdecbe24]:before {
+    -webkit-animation: likeBlast-data-v-cdecbe24 0.6s 1 steps(19);
+            animation: likeBlast-data-v-cdecbe24 0.6s 1 steps(19);
+    background-position: right;
+}
+@-webkit-keyframes likeBlast {
+0% {
+    background-position: -50px;
+}
+100% {
+    background-position: right;
+}
+}
+@keyframes likeBlast-data-v-cdecbe24 {
+0% {
+    background-position: -50px;
+}
+100% {
+    background-position: right;
+}
+}
+.like-button.active[data-v-cdecbe24]:before {
+    background-position: right;
+}
+</style><style type="text/css">
+@charset "UTF-8";
+/*
+ * 变量
+*/
+.recommend-note {
+  margin-bottom: 20px;
+}
+.recommend-note .meta, .recommend-note .list {
+    width: 620px;
+    margin: 0 auto;
+}
+.recommend-note .meta .title {
+    padding-left: 8px;
+    border-left: 3px solid #EA6F5A;
+    line-height: 1;
+    font-size: 15px;
+}
+.recommend-note .meta .title .more {
+      float: right;
+      font-size: 14px;
+      color: #A0A0A0;
+}
+.recommend-note .list {
+    margin-top: 20px;
+}
+.recommend-note .list .note {
+      display: block;
+      margin-bottom: 25px;
+      padding: 0 0 25px 0;
+      border-bottom: 1px solid #DDDDDD;
+}
+.recommend-note .list .note.have-img {
+        min-height: 136px;
+}
+.recommend-note .list .note.have-img.no-user .description {
+          -webkit-line-clamp: 3;
+}
+.recommend-note .list .note .cover {
+        float: right;
+        margin: -5px 0 0 15px;
+        width: 150px;
+        height: 120px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 6px;
+}
+.recommend-note .list .note .title {
+        display: inherit;
+        margin-bottom: 4px;
+        font-size: 18px;
+        line-height: 27px;
+        font-weight: bold;
+        color: #333333;
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+           text-overflow: ellipsis;
+        white-space: nowrap;
+}
+.recommend-note .list .note .title:hover {
+          text-decoration: underline;
+}
+.recommend-note .list .note .title:visited {
+          color: #999999;
+}
+.recommend-note .list .note .description {
+        margin-bottom: 12px;
+        font-size: 13px;
+        line-height: 23px;
+        color: #333333;
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+           text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+}
+.recommend-note .list .note .author .avatar {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        margin-right: 3px;
+        border-radius: 50%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        vertical-align: middle;
+}
+.recommend-note .list .note .author .name {
+        font-size: 13px;
+        color: #333333;
+        vertical-align: middle;
+}
+</style><style type="text/css">
+@charset "UTF-8";
+/*
+ * 变量
+*/
+.youdao-recommended-ad {
+  position: relative;
+  display: block;
+}
+.youdao-recommended-ad .img {
+    display: block;
+    float: right;
+    width: 150px;
+    height: 120px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: RGB(241, 243, 244);
+    border-radius: 6px;
+    margin: -5px 0 0 15px;
+}
+body.reader-night-mode .youdao-recommended-ad .img {
+      background-color: #4f4f4f;
+}
+.youdao-recommended-ad .info {
+    overflow: hidden;
+}
+.youdao-recommended-ad .info .title {
+      display: block;
+      color: #333;
+      line-height: 27px;
+      font-size: 18px;
+      font-weight: 700;
+      margin-top: -4px;
+      cursor: pointer;
+}
+body.reader-night-mode .youdao-recommended-ad .info .title {
+        color: #969696;
+}
+.youdao-recommended-ad .info .intro {
+      display: block;
+      font-size: 13px;
+      color: #999;
+      overflow: hidden;
+      -o-text-overflow: ellipsis;
+         text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      line-height: 24px;
+      max-height: 48px;
+      -webkit-box-sizing: content-box;
+              box-sizing: content-box;
+      white-space: normal;
+}
+.youdao-recommended-ad .info .ad-badge {
+      position: absolute;
+      left: 0;
+      top: 95px;
+      display: block;
+      width: 38px;
+      height: 18px;
+      line-height: 16px;
+      text-align: center;
+      border-radius: 2px;
+      border: solid 1px #999999;
+      color: #999999;
+      font-size: 12px;
+}
+</style></head>
+
+  <!-- 只给10%的用户添加代码 -->
+  <!-- ###第四范式-智能推荐：代码直接复制 无需修改参数### -->
+  <!-- ###功能：上报内容并反馈用户行为### -->
+  <!--
+  -->
+  <body lang="zh-CN" class="reader-black-font">
+    <!-- 全局顶部导航栏 -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="width-limit">
+    <!-- 左上方 Logo -->
+    <a class="logo" href="https://www.jianshu.com/"><img src="./芥末校园App--产品体验报告 - 简书_files/nav-logo-4c7bbafe27adc892f3046e6978459bac.png" alt="Nav logo"></a>
+
+    <!-- 右上角 -->
+      <!-- 未登录显示登录/注册/写文章 -->
+      <a class="btn write-btn" target="_blank" href="https://www.jianshu.com/writer#/">
+        <i class="iconfont ic-write"></i>写文章
+</a>      <a class="btn sign-up" id="sign_up" href="https://www.jianshu.com/sign_up">注册</a>
+      <a class="btn log-in" id="sign_in" href="https://www.jianshu.com/sign_in">登录</a>
+
+    <!-- 如果用户登录，显示下拉菜单 -->
+
+    <div class="style-mode"><a class="style-mode-btn"><i class="iconfont ic-navigation-mode"></i></a> <div class="popover-modal" style="left: 0px; display: none;"><div class="meta"><i class="iconfont ic-navigation-night"></i><span>夜间模式</span></div> <div class="switch day-night-group"><a class="switch-btn">开</a> <a class="switch-btn active">关</a></div> <hr> <div class="switch font-family-group"><a class="switch-btn font-song">宋体</a> <a class="switch-btn font-hei active">黑体</a></div> <div class="switch"><a class="switch-btn active">简</a> <a class="switch-btn">繁</a></div></div></div>
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="nav navbar-nav">
+            <li class="tab ">
+              <a href="https://www.jianshu.com/">
+                <span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>
+</a>            </li>
+            <li class="tab ">
+              <a id="web-nav-app-download-btn" class="app-download-btn" href="https://www.jianshu.com/apps?utm_medium=desktop&amp;utm_source=navbar-apps"><span class="menu-text">下载App</span><i class="iconfont ic-navigation-download menu-icon"></i></a>
+            </li>
+          <li class="search">
+            <form target="_blank" action="https://www.jianshu.com/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+              <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索" class="search-input">
+              <a class="search-btn" href="javascript:void(null)"><i class="iconfont ic-search"></i></a>
+</form>          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+    
+<div class="note">
+  <div id="note-fixed-ad-container">
+    <div id="fixed-ad-container">
+      <div style="display: block;"><a target="_blank" href="https://www.jianshu.com/apps/redirect?utm_source=side-banner-click" id="web-note-ad-fixed"><span class="close">×</span></a></div>
+      <a href="https://dsp-click.youdao.com/clk/request.s?slot=30edd91dd8637d9f645baa8448ba90b3&amp;k=uABh10RxdbY61tgJb8U04sPmGw%2Fn8qDLa8vi5u9z%2BtrXxo%2BoRxcJpjjAgKuViCqvIxCHqA9N%2F2c%2F9Be%2FcwcSr%2F41p17%2BINqIAltgtrn2lhPMlOcFYg%2FgZMYv8PfD1%2Fgnyi0VVgp%2B7Yg5auaZergWWVQli0L2%2FJrkFGZW2hafTFb%2BNm%2F2OHSh6UdIJ8eVGYtS3EtEfufmgxqhkFf3tTQR296mkrmNYU1r%2FdQYn%2BG9hAVdC4WfKQe7HYf1QjlMtIxSy725Gm8NosGmGEraT4UzNqNSPhpByNmvHobKYLKLH7e%2BlyfdrLSAQpyqz1OvMRQftHJL5CE7Dtbuc1LURE9iaEwg4GH3oHkTVvTiS7u1%2FHEp3DXt0HuGReB8cXG4v14B72iPIvDC7sWBDU0l1SjtwH%2FrEdQmk%2FUFTZvF5qEDExMCmgv3tc0OozwylA1nJVbKDVaXAtMp4OndAN%2BYKqGBYawu%2F8kxAAoChoSvmSzvEAzkXEjvsguWrehPObjxp%2FhWoua2sJasL6FYYOgNm0ZtQ4uXTvzkoUz17AfLllAFoSPXsToia0dw0lC5imabvBbd7vI9QfJv6a%2BYy65uelo8rPyLq3EBBG4CPjLQvcQS1H3mvFbtx4WDhoJj6%2BJ1ibgJJFRhVyumcPBd3aBxeOCTzv9rTD1YK%2BtLaMgaHTiS0oGSApkiaWdWLPMCVXYUWrpM2SGlQ6xypk52XNnYBbD8KbEKyhSKRVNuGlq7XHXwCo%2FZm8zJX%2FX9N6%2FoQHf10wF7nzXFrhXEOVpAnXKrYpafMoyJmtcw9PCGILIXNurck8%2FUP0rAhuASVcw147w0RxP1KAWfkKOnnpj9cg0zOa93vS1uLP1lSgdwESC4%2FEW%2F89eaJkajziwD0PKeRIhPK%2BPHD242OvYh3VU3oliWjFJDEHgKH5LJllhY4MEVC7xh6BYCg3%2FgexlyNClmfjOcfOlKrZrini50KMPqCbfFkb33IR%2BOV6tO%2FbAXbKQxb8HzvESsGhI%2BRMBvLERzRm%2FD%2F7w2rujJZxnN1oWwv4CN3f%2FLJtfGj6hHFwmmOMCAq5WIKq%2FXxo%2BoRxcJpjjAgKuViCqvgiljglp%2BZmdNsONs56w%2BPmbjpezBq8xMO1Ak0rqnSwo%3D&amp;youdao_bid=9a5741c0-2c33-46c8-b9c4-f458b728dd64&amp;iid=%7B%22-3992077638992921566%22%3A4%7D&amp;sid=17024" target="_blank" class="youdao-fixed-ad"><div class="img" style="background-image: url(&quot;https://oimageb7.ydstatic.com/image?id=-3992077638992921566&amp;product=adpublish&amp;w=360&amp;h=360&amp;sc=0&amp;rm=2&amp;gsb=0&amp;gsbd=60&quot;);"></div> <span class="ad-badge">广告</span></a>
+      <a href="http://e.cn.miaozhen.com/r/k=2110413&amp;p=7L9Gn&amp;dx=__IPDX__&amp;rt=2&amp;ns=__IP__&amp;ni=__IESID__&amp;v=__LOC__&amp;xa=__ADPLATFORM__&amp;tr=__REQUESTID__&amp;mo=__OS__&amp;m0=__OPENUDID__&amp;m0a=__DUID__&amp;m1=__ANDROIDID1__&amp;m1a=__ANDROIDID__&amp;m2=__IMEI__&amp;m4=__AAID__&amp;m5=__IDFA__&amp;m6=__MAC1__&amp;m6a=__MAC__&amp;vo=3f2e070eb&amp;vr=2&amp;o=https%3A%2F%2Fwww.jianshu.com%2Fp%2Fee05f7eff678" target="_blank" class="yuxi-fixed-ad" style="display: none;"><div class="img"></div> <span class="ad-badge">广告</span></a>
+      <div id="_so_pdsBy_0"></div>
+    </div>
+  </div>
+  <div class="post">
+    <div class="article">
+        <h1 class="title">芥末校园App--产品体验报告</h1>
+
+        <!-- 作者区域 -->
+        <div class="author">
+          <a class="avatar" href="https://www.jianshu.com/u/e8e6bc8d77a2">
+            <img src="./芥末校园App--产品体验报告 - 简书_files/64e9be07-a378-4ee8-91bc-67e424a1641c.jpg" alt="96">
+</a>          <div class="info">
+            <span class="name"><a href="https://www.jianshu.com/u/e8e6bc8d77a2">爱吃香菜的z小悦</a></span>
+            <!-- 关注用户按钮 -->
+            <a class="btn btn-success follow"><i class="iconfont ic-follow"></i><span>关注</span></a>
+            <!-- 文章数据信息 -->
+            <div class="meta">
+              <!-- 如果文章更新时间大于发布时间，那么使用 tooltip 显示更新时间 -->
+                <span class="publish-time" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="最后编辑于 2017.12.01 20:24">2017.12.01 11:16*</span>
+              <span class="wordage">字数 6165</span>
+            <span class="views-count">阅读 1056</span><span class="comments-count">评论 3</span><span class="likes-count">喜欢 10</span><span class="rewards-count ">赞赏 1</span></div>
+          </div>
+          <!-- 如果是当前作者，加入编辑按钮 -->
+        </div>
+
+
+        <!-- 文章内容 -->
+        <div data-note-content="" class="show-content">
+          <div class="show-content-free">
+            <p>笔者想比较全面地分析一款产品，培养自己的产品思维。本文如有分析不当之处，望大神们多多留言，批评指正。</p><hr><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 431px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 54.42%;"></div>
+<div class="image-view" data-width="792" data-height="431"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-3913d150a07368db.jpg" data-original-width="792" data-original-height="431" data-original-format="image/jpeg" data-original-filesize="16553" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-3913d150a07368db.jpg"></div>
+</div>
+<div class="image-caption"></div>
+</div><h1><b>体验环境</b></h1><div class="image-package">
+<div class="image-container" style="max-width: 537px; max-height: 201px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 37.43%;"></div>
+<div class="image-view" data-width="537" data-height="201"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-585837da7d030931.jpg" data-original-width="537" data-original-height="201" data-original-format="image/jpeg" data-original-filesize="19625" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-585837da7d030931.jpg"></div>
+</div>
+<div class="image-caption"></div>
+</div><h1>目录</h1><p><b>1. 产品概况</b></p><p>1.1 产品简介</p><p>1.2 用户需求分析</p><p>1.3 市场分析</p><p><b>2. 产品分析</b></p><p>2.1 产品数据</p><p>2.2 产品结构</p><p>2.3 产品功能</p><p>2.4 视觉与交互设计</p><p><b>3. 用户意见</b></p><p><b>4. 未来迭代建议</b></p><p><b>5. 总结</b></p><hr><h1><b><b>1.</b><b>产品概况</b><br></b></h1><h3><b><b>1.1 产品简介</b></b></h3><p><b>产品Slogan：</b>找同学，上芥末</p><p><b>产品官方介绍：</b></p><p>芥末校园，只有大学生的实名社区</p><p>校园实名，找同校学长学姐、师弟师妹</p><p>兴趣相投，找【基】友臭味相投</p><p>9s悄悄话，找年轻人放开聊的轻松方式</p><p>...&nbsp;  ...</p><h3>1.2 用户需求分析</h3><p><b>(1) 用户特征</b></p><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 794px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 113.55999999999999%;"></div>
+<div class="image-view" data-width="767" data-height="871"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-6abaef9a03e0b22a.png" data-original-width="767" data-original-height="871" data-original-format="image/png" data-original-filesize="107786" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-6abaef9a03e0b22a.png"></div>
+</div>
+<div class="image-caption">（数据来源：易观千帆）</div>
+</div><p>在性别分布上，芥末校园的女性用户居多，占52%，男性用户占25.48%。</p><p>在年龄分布上，芥末校园的用户年龄层主要集中在24岁以下，占比超过40%，大学生用户占主流。</p><p>在地域分布上，主要分布在一线城市，占比超过86%。北京、西安、青岛、武汉用户占据前五。</p><p>消费能力上，中高等和中等用户居多。</p><p>&nbsp; &nbsp; &nbsp; &nbsp; 芥末校园的特色是<b>兴趣交友</b>，用户通过添加兴趣标签的方式，在社区里寻找到兴趣相投、志同道合的伙伴。用户人群主要是在校大学生，这些年轻人追求个性，喜欢研究新事物，兴趣爱好广泛，同时，渴望拓宽视野、结交新朋友。他们不满足于微信、QQ等平台建立的“以熟人为主”的社交关系，而又反感陌陌等不太单纯的主打陌生人社交的产品，所以寄希望于校园社交App，来结交与自己年龄、价值观相近的新朋友。</p><p><b>(2) 用户需求</b></p><p>1. 寻找并结交与自己兴趣相投的人，获得归属感。</p><p>2. 陌生人社交有诸多安全隐患，对方信息难辨真假。进行安全、绿色的社交是在校大学生的诉求。</p><p>3. 结交同校、同院的学长学姐、师弟师妹，提升线上好友转化为线下好友的可能性。</p><p><b>(3) 解决方案</b></p><p>1. 通过添加兴趣标签，将广泛的兴趣（如：音乐、追星、运动）细分到更小的概念（如摇滚、林俊杰、羽毛球）。除此之外，按照学校、专业、年级来筛选能更加快捷、精准的定位到志同道合的伙伴，降低无效社交的成本。</p><p>2. 用户实名制，非学生不准入内，解决交友安全隐患，保障社区的校园氛围。</p><p>3. 智能推荐可能认识的本校同学。</p><h3>1.3 市场分析</h3><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 269px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 36.9%;"></div>
+<div class="image-view" data-width="729" data-height="269"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-720e76aa9d6f98a0.jpg" data-original-width="729" data-original-height="269" data-original-format="image/jpeg" data-original-filesize="27690" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-720e76aa9d6f98a0.jpg"></div>
+</div>
+<div class="image-caption">（数据来源：艾瑞咨询）</div>
+</div><p>&nbsp; &nbsp; &nbsp; &nbsp; 据艾瑞咨询发布的《2017年中国移动社交用户洞察报告》显示，在用户经常使用和最常使用的移动社交应用类型中，综合社交、兴趣社交、图片社交、商务社交和校园社交分别依次位列前五，由此可见，兴趣社交和校园社交产品的用户规模非常可观。</p><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 315px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 35.8%;"></div>
+<div class="image-view" data-width="880" data-height="315"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-99af043283d2a048.png" data-original-width="880" data-original-height="315" data-original-format="image/png" data-original-filesize="227845" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-99af043283d2a048.png"></div>
+</div>
+<div class="image-caption">（数据来源：艾瑞咨询）</div>
+</div><p>&nbsp; &nbsp; &nbsp; &nbsp; 根据我国不同年龄段的用户选择社交类型的TGI指数汇总图可以发现，18岁以下的用户较多的聚集在校园社交中，TGI指数为159.8，大幅领先其他类型，兴趣社交TGI指数为106.3，位列第二；在19-24岁成长的过程中，年轻用户选择校园社交的TGI指数仅次于陌生人社交，表现依旧抢眼；随着年龄增长，25-30岁这一批用户更多的选择了母婴、婚恋和商务社交，对社交的功能性更加看重，也更加务实。</p><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 423px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 49.94%;"></div>
+<div class="image-view" data-width="847" data-height="423"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-8337aa226a295b43.png" data-original-width="847" data-original-height="423" data-original-format="image/png" data-original-filesize="250037" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-8337aa226a295b43.png"></div>
+</div>
+<div class="image-caption">（数据来源：艾瑞咨询）</div>
+</div><p>&nbsp; &nbsp; &nbsp; &nbsp; 据2017年中国用户使用移动社交应用的原因统计，70.8%的用户使用移动社交的主要原因是希望“认识新朋友、扩大朋友圈”，61.9%的用户希望“找到志趣相投的伙伴或伴侣”,也就是说，通过兴趣相近而认识新朋友是大多数用户的诉求。</p><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 388px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 43.69%;"></div>
+<div class="image-view" data-width="888" data-height="388"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-af3b5bc6fafc40ef.png" data-original-width="888" data-original-height="388" data-original-format="image/png" data-original-filesize="132859" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-af3b5bc6fafc40ef.png"></div>
+</div>
+<div class="image-caption">校园应用月度独立设备数（艾瑞数据）</div>
+</div><p>&nbsp; &nbsp; &nbsp; &nbsp; 综合以上数据发现，校园社交和兴趣社交产品的用户需求市场都很庞大。从校园社交App的角度来讲，全国几千万在校大学生这一群体一直是行业关注的焦点，在诸多校园社交产品中，有主打工具属性的课程格子、超级课程表，完美校园，有主打分时社交的11点11分，以及更加小众的Simplr、Feeling等实名校园社交平台。芥末校园App的月度独立设备数目前无法得到，但是从其它几个常用校园应用的数据来看，在巨大的需求市场背景下，这些产品大多不温不火。</p><p>&nbsp; &nbsp; &nbsp; &nbsp; 为了提升用户对产品的依赖程度，一些具有校园场景特色的版块（如实习兼职、失物招领、二手交易、收发快递等）纷纷出现在产品页面上，但依然很难突破用户黏性差、产品活跃度低的行业现状。笔者认为，随着同类型的App如雨后春笋般不断上线，校园社交产品不仅需要更深层次的挖掘用户需求，提高运营水平，结合线下推广，更重要的是在面对巨大的竞争压力时，要使产品具备差异化优势，防止被市场淘汰。所以，<b>在校园社交产品上“嫁接”更多吸引用户的功能点，就成为必然趋势</b>。</p><p>&nbsp; &nbsp; &nbsp; &nbsp; 兴趣社交产品与校园社交产品不同，微博、豆瓣、Bilibili、贴吧等都是典型的代表，这类产品的用户活跃度通常都非常高。但是这些产品也存在一些问题，在庞大的用户群中，不乏以发布低俗信息或广告博取浏览量的用户，以及水军，甚至键盘侠。在输入相关兴趣关键字之后，进入群组发现里面充斥着广告、刷帖，无疑会让用户感到扫兴。因此，<b>营造舒适、健康的社区氛围</b>是兴趣社交类产品所面临的问题。</p><p>&nbsp; &nbsp; &nbsp; &nbsp; 芥末校园以兴趣作为切入点，并将其“嫁接”在校园社交上，使相识始于兴趣相投。这种“<b>校园+兴趣</b>”相结合的新颖的交友模式，将目标人群同时对准校园交友用户和兴趣交友用户，与一般校园社交产品相比，这种模式使交友效率更高，与兴趣社交产品相比，这种模式通过大学生实名制的方式，为用户排除社交安全隐患。</p><hr><h1>2. 产品分析<br>
+</h1><h3>2.1 产品数据</h3><p><b>(1) 迭代过程</b></p><p>&nbsp; &nbsp; &nbsp; &nbsp; 芥末校园App的版本更新周期非常频繁，平均迭代周期在1个月2次及以上，下图仅列出了关键版本和新需求推出的版本迭代情况。</p><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 1037px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 148.18%;"></div>
+<div class="image-view" data-width="1428" data-height="2116"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-3869b6cf6d6e9d61.png" data-original-width="1428" data-original-height="2116" data-original-format="image/png" data-original-filesize="292802" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-3869b6cf6d6e9d61.png"></div>
+</div>
+<div class="image-caption"></div>
+</div><p>通过版本迭代能够看出：</p><p>1. 芥末校园App从上线到现在，标题更换过多次：&nbsp; &nbsp; </p><p><i>2015年</i>：芥末校园</p><p><i>2016年</i>：</p><p>芥末校园—相识始于兴趣相投,找同校学长学姐,学弟学妹</p><p>芥末校园—只有大学生的实名社区,相识始于兴趣相投</p><p>芥末校园—只有大学生的实名社区,找学长学姐,学弟学妹</p><p>芥末校园—只有大学生的实名社区</p><p><i>2017年</i>：</p><p>芥末校园—找同学，上芥末</p><p>&nbsp; &nbsp; &nbsp; &nbsp; 体现在标题中的关键字，由最初的兴趣在前，找同学在后，变为找同学在前，兴趣在后，以及到如今的只有找同学，芥末校园App已经由最初的注重兴趣相投的交友方式，逐渐变为以大学生社交为主的平台</p><p>2. 芥末校园App一直不断完善产品功能，优化用户体验以及交互方式（例如注册流程的优化，只用手机号就可以登录，不必再记密码）。</p><p>3. 逐渐完善找同学模块（增加专业填写、增加找老乡、高中、大学同学，地理位置等）。</p><p>4. 芥末校园App一直顺应新潮流，添加新玩法。增加好友新鲜事模块，可以发布小视频，进行图片评论，发起话题，组建群聊，收藏表情包这些功能，尽可能地防止用户流失，但还是不可避免的存在用户在认识后，将聊天阵地转移到更常用的微信、QQ这样的情况。</p><p>5. 芥末校园区别于其他校园社交产品的一个特色就是兴趣社交，单纯的大学生社交产品模式并不新奇，虽然近几年玩起校园社交的App层出不穷，但大都不温不火。人人网是校园社交产品的典型，由校内网改名后，不断尝试转型，而现在主打直播业务，风光不再。从人人网的前车之鉴可以看出，芥末校园App应避免禁锢于校园社交方向，兴趣功能上也应该不断优化用户体验。争取“兴趣+校园”两条腿走路，不断提升差异化优势。</p><p><b>(2) 排名及下载量</b></p><p>艾瑞数据提供的芥末校园排名：</p><p>总榜： 9648&nbsp; &nbsp; &nbsp; &nbsp; 社区交友：235</p><div class="image-package">
+<div class="image-container" style="max-width: 671px; max-height: 324px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 48.29%;"></div>
+<div class="image-view" data-width="671" data-height="324"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-6c2ec35cd219bcbe.png" data-original-width="671" data-original-height="324" data-original-format="image/png" data-original-filesize="58762" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-6c2ec35cd219bcbe.png"></div>
+</div>
+<div class="image-caption">芥末校园App Store中国娱乐免费榜实时排名（ASO100 2017年11月18日）</div>
+</div><div class="image-package">
+<div class="image-container" style="max-width: 678px; max-height: 471px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 69.47%;"></div>
+<div class="image-view" data-width="678" data-height="471"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-b6e068858999a5d8.jpg" data-original-width="678" data-original-height="471" data-original-format="image/jpeg" data-original-filesize="17431" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-b6e068858999a5d8.jpg"></div>
+</div>
+<div class="image-caption">芥末校园安卓端累计下载量（酷传网）</div>
+</div><div class="image-package">
+<div class="image-container" style="max-width: 683px; max-height: 372px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 54.47%;"></div>
+<div class="image-view" data-width="683" data-height="372"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-3e370806f2bb352b.jpg" data-original-width="683" data-original-height="372" data-original-format="image/jpeg" data-original-filesize="17915" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-3e370806f2bb352b.jpg"></div>
+</div>
+<div class="image-caption">芥末校园用户设备分布（易观千帆）</div>
+</div><p>&nbsp; &nbsp; &nbsp; &nbsp; 酷传网统计的安卓端下载量超过126万。iPhone端暂无下载量统计数据，但是根据易观千帆提供的芥末校园的用户设备分布，其在iPhone端的下载量预计在68万左右。使用苹果和OPPO的用户是绝对主力军。</p><h3>2.2 产品结构<br>
+</h3><p>芥末校园App的页面结构图如下：</p><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 706px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 101.0%;"></div>
+<div class="image-view" data-width="1001" data-height="1011"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-b62516c27e7431e0.png" data-original-width="1001" data-original-height="1011" data-original-format="image/png" data-original-filesize="50352" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-b62516c27e7431e0.png"></div>
+</div>
+<div class="image-caption"></div>
+</div><p>&nbsp; &nbsp; &nbsp; &nbsp; 芥末校园产品结构主要由5大部分组成，分别是“新鲜事”、“加好友”、“兴趣相投”、“悄悄话”、“我”。其中“兴趣相投”和“加好友”是本产品中寻找好友的两种核心方式。</p><h3>2.3 产品功能<br>
+</h3><p><b>(1) 兴趣相投推荐好友</b></p><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 664px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 90.46%;"></div>
+<div class="image-view" data-width="734" data-height="664"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-6b749d0736a8e9ce.png" data-original-width="734" data-original-height="664" data-original-format="image/png" data-original-filesize="110924" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-6b749d0736a8e9ce.png"></div>
+</div>
+<div class="image-caption"></div>
+</div><p><b>优点：</b></p><p>1. 芥末校园App的兴趣相投功能采取与陌陌类似的照片左右滑匹配形式，用户也可以通过点击屏幕相应的按钮完成操作。<b>页面中不仅呈现了用户的头像（真实照片）、学校、学院、专业等关键信息，还显示出了双方的共同兴趣点。</b>双方同时点赞成为好友，有一方或双方全部无感则切换下一位。</p><p>2. 超级喜欢”功能的增加，将用户的兴趣分为一般喜欢和特别喜欢两种，有利于成功的找到真正的相同爱好者。</p><p><b>建议：</b></p><p>1. 筛选功能目前只能按性别筛选，较为单调，笔者认为可以<b>增加地域筛选，递进到学校、学院甚至专业筛选，以及某一范围距离的筛选</b>（例如：离我1km以内），使用户在兴趣相投的基础上，能够进一步缩小范围，更<b>精准快速</b>地找到合适的伙伴。</p><p>2. 系统提供的兴趣标签数量很少，当用户要提交系统没有收录的兴趣标签时，还需要经过一段时间的等待，用户体验不好，可能在等待过程中会产生焦虑，甚至导致用户在这一环节流失。应该<b>将兴趣标签由宽泛的领域不断定位到更小更具体的概念</b>，不断追踪热点，增加系统提供的标签数，同时也要进一步<b>优化用户自建兴趣标签的功能</b>。</p><p>3. 笔者发现，每次打开App打开兴趣相投页面时都会有上图所示的2秒钟左右的空白等待时间，降低了用户体验，应该针对此问题进行优化。</p><p><b>(2)根据学校找好友</b></p><p>&nbsp; &nbsp; &nbsp; &nbsp; “加好友”页面里不仅提供了“加好友请求”，还智能推荐了“可能认识”，主要根据“同校同学院”、“同高中”、“老乡”这几个关键点进行筛选推荐。在一定程度上节约了用户寻找好友的时间。</p><div class="image-package">
+<div class="image-container" style="max-width: 655px; max-height: 318px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 48.55%;"></div>
+<div class="image-view" data-width="655" data-height="318"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-7905d2f7d70113f3.png" data-original-width="655" data-original-height="318" data-original-format="image/png" data-original-filesize="147951" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-7905d2f7d70113f3.png"></div>
+</div>
+<div class="image-caption"></div>
+</div><p><b>建议：</b></p><p>1. 删除好友请求时，点击删除按钮会显示好友请求已删除，但只有当刷新页面或者点击“更多”才会有新的好友请求出现。应该对过程进行优化，当删除某个好友请求后，马上出现新的请求消息，使操作更为简洁。</p><p>2. 在顶部导航中除了“加好友”以外，还包括了同城的一些学校，最右侧有一个下拉菜单的标志。用户在滑动查看有哪些学校时会耗费很多时间，而在滑动过程中很有可能对这些学校都没有兴趣，再想返回去查看“加好友请求”时，又需要滑回最左端才能找到。笔者认为，“加好友”应该与下拉标志一样，被固定在页面上，无论用户滑到哪里都可以快速回到最初位置。</p><p>3. 顶部导航中通过左右滑显示在页面上的学校名称完全照搬下拉菜单中的“推荐”和 “同城”中的部分学校，排序也不变，笔者认为这一滑动看学校功能设计略显鸡肋，可以将其去掉，同时下拉符号换为更具概括性的词语，让其更明显。如果要延续这种左右滑风格，那么<b>综合用户的好友所在地区、学校等分布特征来显示少数几个学校</b>可能会更贴心，用户查看方便，同时也可避免长时间左右滑后却一无所获的问题。</p><p><b>(3)查看好友新鲜事</b></p><div class="image-package">
+<div class="image-container" style="max-width: 664px; max-height: 665px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 100.15%;"></div>
+<div class="image-view" data-width="664" data-height="665"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-a1b0ae9bfb639fba.png" data-original-width="664" data-original-height="665" data-original-format="image/png" data-original-filesize="277154" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-a1b0ae9bfb639fba.png"></div>
+</div>
+<div class="image-caption"></div>
+</div><p>&nbsp; &nbsp; &nbsp; &nbsp; “新鲜事”的顶部导航分为“关注”和“发现”两个标签，用户可以对其他人的帖子点赞、评论、转发，在每条帖子下面默认显示评论，类似于QQ空间。值得一提的是<b>“芥末杂谈”</b>这一栏目，它默认显示在关注区，是由系统发起话题，邀请用户参与讨论，话题聚焦于校园、爱情、搞笑以及热点时事等，用户也可针对自己感兴趣的话题进行投稿，审核通过后由系统发起此话题进行讨论。“芥末杂谈”也会不定期发起一些有奖参与的活动，对一些点赞数高的用户评论进行奖励。这一栏目旨在<b>提高用户参与度，引起共鸣，进一步丰富社区内容。</b></p><p><b>建议：</b></p><p>1. 在“关注”页面查看朋友的状态时，最先看到的是“发现”和“可能认识的人”推荐，然后是“芥末杂谈”，之后才能看到想看的内容，会让用户产生烦躁感。所以如果想在“关注”里进行“可能认识的人”推荐，不应该放于页面最开始的重要位置，可以在用户浏览过几条新鲜事之后，再穿插其中。</p><p>2. “发现”不应放于“关注”里在占据版面，因为在页面最上方有“发现”的导航标签。</p><p>3. “芥末杂谈”可以放于上方的导航中，与“关注”和“发现”并列，方便用户寻找，可以分为“最新话题”和“精选话题”两部分，更好的提升用户体验。</p><p><b>(4)悄悄话</b></p><div class="image-package">
+<div class="image-container" style="max-width: 437px; max-height: 665px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 152.17000000000002%;"></div>
+<div class="image-view" data-width="437" data-height="665"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-6559c0a22b9301f0.png" data-original-width="437" data-original-height="665" data-original-format="image/png" data-original-filesize="118726" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-6559c0a22b9301f0.png"></div>
+</div>
+<div class="image-caption">悄悄话页面及相关交互页面</div>
+</div><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 320px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 38.190000000000005%;"></div>
+<div class="image-view" data-width="838" data-height="320"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-029fdf0489837c08.png" data-original-width="838" data-original-height="320" data-original-format="image/png" data-original-filesize="92232" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-029fdf0489837c08.png"></div>
+</div>
+<div class="image-caption">找好友聊天路径页面示意图</div>
+</div><p>&nbsp; &nbsp; &nbsp; &nbsp; 悄悄话功能增加了聊天的趣味性，在某种程度上也可以让聊天内容更加私密。在悄悄话页面里默认显示“校园人气之星”和“共有xx人给你悄悄点赞”这两个内容，校园人气之星意味着他们在芥末校园中人气很高，同时很喜欢与其他同学互动，活跃度高，每个满足相应条件的同学都可以申请成为人气之星，被评为人气之星后，相当于拥有了芥末校园的VIP用户，拥有一些主页装扮特权等等。这种由官方发起的活动，可以提升用户活跃度，营造友好的社区氛围，是一种激励用户更多的使用芥末校园APP的方法。</p><p><b>建议：</b></p><p>1. 校园人气之星目前是由用户申请，再由芥末校园官方审核决定。笔者认为，如果让用户打开“校园人气之星”页面，仅仅是为了看一看是谁获此殊荣的话，这样的规则不足以驱动更多的用户做打开页面的操作。更好的方式是<b>让每一名用户都可以参与其中</b>。建议<b>增加用户投票功能</b>，可以在每个月里发起最佳人气王的评选活动，由官方在月初选定本月的人气之星用户进行公示，同时开启投票，月末投票截止后出现一名最佳人气王，由官方送出特别大礼。即使用户不满足人气之星的评选条件，也可以为感兴趣的人投出自己的一票。同时，支持将投票链接分享到微信朋友圈等，已经成为人气之星的同学可以分享链接进行拉票，这样势必会带来更多的<b>潜在用户</b>和<b>访问量</b>，也为整个社区增加活力。</p><p>2. “共有XX人为你悄悄点赞了”这一提醒是以对话的方式呈现的，会让用户误以为在点击后会呈现一个相应的对话框，结果点击完后直接跳到“兴趣相投”的页面，交互效果敷衍，用户体验不好。笔者一开始误以为出现了bug，在尝试几次后才恍然大悟，当笔者尝试将这一对话删除的时候，发现其无法删除。实际上，在用户的主页里已经显示了被赞过的次数，在“悄悄话”功能里再加这样的提醒有些鸡肋，交互体验也不佳。所以建议去掉“共有XX人为你悄悄点赞了”这一默认提醒。</p><p>3. 在“悄悄话”页面右上角更多功能中，包含发起群聊、添加好友、扫二维码等，目前用户想给没有聊天记录的好友发送消息或者发送悄悄话时，都需要从主页里的好友中选择相应人选，进入该好友主页，点击“悄悄话”按钮，开启聊天这样的过程（如上图）。笔者认为应简化整个过程，为用户提供更为便捷的方式。建议在“悄悄话”页面中应<b>增加一个与好友开启一对一聊天的按钮，点击后直接呈现出用户的好友列表，进而给好友发送消息。</b></p><h3><b>2.4 视觉与交互体验<br></b></h3><p><b>(1) 启动页</b></p><div class="image-package">
+<div class="image-container" style="max-width: 141px; max-height: 245px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 173.76%;"></div>
+<div class="image-view" data-width="141" data-height="245"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-608286363ba54365.png" data-original-width="141" data-original-height="245" data-original-format="image/png" data-original-filesize="5138" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-608286363ba54365.png"></div>
+</div>
+<div class="image-caption"></div>
+</div><p>&nbsp; &nbsp; &nbsp; &nbsp; 芥末校园启动页以接近全屏的白色为背景，搭配一抹绿色的产品Logo，简约大气。白色干净明快，绿色是芥末的颜色，是青春、自然、清爽的象征，二者搭配在一起给人以清新之感。</p><p><b>(2) 交互体验</b></p><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 334px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 35.05%;"></div>
+<div class="image-view" data-width="953" data-height="334"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-1ab196765d266fad.png" data-original-width="953" data-original-height="334" data-original-format="image/png" data-original-filesize="180661" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-1ab196765d266fad.png"></div>
+</div>
+<div class="image-caption"></div>
+</div><p>&nbsp; &nbsp; &nbsp; &nbsp; 芥末校园App页面大体选择以灰色、绿色、白色这三种颜色作为主色，在“新鲜事”和“加好友”页面中，由于内容较多，所以采用顶部+底部双导航模式，其中，顶部tab支持手势左右滑动切换，操作方便。在“加好友”页面中，顶部导航的背景图片是学校的主要建筑图，独具创意，随着左右滑动更改学校后，背景图片也相应更换，使得整个页面变得生动起来，但是因为学校名称一般有5个字以上，所以顶部tab字体显得稍小。</p><hr><h1>3. 用户意见<br>
+</h1><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 380px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 33.6%;"></div>
+<div class="image-view" data-width="1131" data-height="380"><img data-original-src="//upload-images.jianshu.io/upload_images/9280980-f9fb3e259c06ea8f.png" data-original-width="1131" data-original-height="380" data-original-format="image/png" data-original-filesize="199552" class="" style="cursor: zoom-in;" src="./芥末校园App--产品体验报告 - 简书_files/9280980-f9fb3e259c06ea8f.png"></div>
+</div>
+<div class="image-caption"></div>
+</div><p>&nbsp; &nbsp; &nbsp; &nbsp; 用户评论摘自App Store和知乎一些具有代表性的评价，从评价来看，负面评价较多，说明芥末校园App还有很多问题需要整改和优化，主要体现在注册、二维码、举报封号、客服态度等方面。</p><hr><h1>4. 未来迭代建议<br>
+</h1><p>1. 增加“<b>兴趣圈子</b>”，相当于线下的学校社团的形式，使具有相同兴趣爱好的人可以聚集在一起，由一对一的交友变为一对多的交友方式，<b>提升用户的归属感</b>。由用户发起的话题更能激发讨论，增加用户黏性。</p><p>2. 为了使兴趣圈子里用户发布的内容更丰富，开辟一片专门的<b>UGC 空间</b>也是必要的。用户可以查看和评论来自兴趣圈内其他用户的原创帖，也可以自己发帖，获得沉浸感。系统要为用户提供个性化推荐，智能推送有关用户兴趣的、点赞数高的优质文章、资讯等，除了让用户能知道最近发生了哪些趣闻、看到想要了解的内容之外，也可以在UGC社区里投放合适的相关的广告，<b>增加盈利</b>。</p><hr><h1>5. 总结</h1><p>&nbsp; &nbsp; &nbsp; &nbsp; 目前来看，芥末校园作为一款“兴趣+校园”两种交友模式相结合的社交产品，在做好校园实名交友的同时，应更深度的挖掘用户需求，在产品功能和交互设计上继续打磨，不断优化产品体验，完善用户服务，另外，还要在兴趣交友这一特色功能上多下功夫，建立起与其他同类校园社交产品的壁垒。在优化自身产品的基础上，也需要更积极的进行线下高校推广工作，不断扩大产品影响力，打造良好口碑。究竟芥末校园在未来的表现如何，值得期待。</p>
+          </div>
+        </div>
+    </div>
+
+    <!-- 如果是付费文章，未购买，则显示购买按钮 -->
+
+    <!-- 连载目录项 -->
+
+    <!-- 如果是付费文章 -->
+      <!-- 如果是付费连载，已购买，且作者允许赞赏，则显示付费信息和赞赏 -->
+
+      <div class="show-foot">
+        <a class="notebook" href="https://www.jianshu.com/nb/19372908">
+          <i class="iconfont ic-search-notebook"></i>
+          <span>日记本</span>
+</a>        <div class="copyright" data-toggle="tooltip" data-html="true" data-original-title="转载请联系作者获得授权，并标注“简书作者”。">
+          © 著作权归作者所有
+        </div>
+        <div class="modal-wrap" data-report-note="">
+          <a id="report-modal">举报文章</a>
+        </div>
+      </div>
+
+      <!-- 文章底部作者信息 -->
+        <div class="follow-detail">
+          <div class="info">
+            <a class="avatar" href="https://www.jianshu.com/u/e8e6bc8d77a2">
+              <img src="./芥末校园App--产品体验报告 - 简书_files/64e9be07-a378-4ee8-91bc-67e424a1641c.jpg" alt="96">
+</a>            <a class="btn btn-success follow"><i class="iconfont ic-follow"></i><span>关注</span></a>
+            <a class="title" href="https://www.jianshu.com/u/e8e6bc8d77a2">爱吃香菜的z小悦</a>
+              <i class="iconfont ic-woman"></i>
+          <p>写了 6165 字，被 3 人关注，获得了 10 个喜欢</p></div>
+            <div class="signature">一棵年纪轻轻的香菜。</div>
+        </div>
+
+    <div class="meta-bottom">
+      <div data-v-6ddd02c6="" class="like"><div data-v-6ddd02c6="" class="btn like-group"><div data-v-6ddd02c6="" class="btn-like"><a data-v-6ddd02c6="">喜欢</a></div> <div data-v-6ddd02c6="" class="modal-wrap"><a data-v-6ddd02c6="">10</a></div></div> <!----></div>
+      <div class="share-group">
+        <a class="share-circle" data-action="weixin-share" data-toggle="tooltip" data-original-title="分享到微信">
+          <i class="iconfont ic-wechat"></i>
+        </a>
+        <a class="share-circle" data-action="weibo-share" data-toggle="tooltip" href="javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f=&#39;http://v.t.sina.com.cn/share/share.php?appkey=1881139527&#39;,u=z||d.location,p=[&#39;&amp;url=&#39;,e(u),&#39;&amp;title=&#39;,e(t||d.title),&#39;&amp;source=&#39;,e(r),&#39;&amp;sourceUrl=&#39;,e(l),&#39;&amp;content=&#39;,c||&#39;gb2312&#39;,&#39;&amp;pic=&#39;,e(p||&#39;&#39;)].join(&#39;&#39;);function%20a(){if(!window.open([f,p].join(&#39;&#39;),&#39;mb&#39;,[&#39;toolbar=0,status=0,resizable=1,width=440,height=430,left=&#39;,(s.width-440)/2,&#39;,top=&#39;,(s.height-430)/2].join(&#39;&#39;)))u.href=[f,p].join(&#39;&#39;);};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,&#39;&#39;,&#39;&#39;,&#39;&#39;, &#39;推荐 爱吃香菜的z小悦 的文章《芥末校园App--产品体验报告》（ 分享自 @简书 ）&#39;,&#39;https://www.jianshu.com/p/11fc2858fa6a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weibo&#39;,&#39;页面编码gb2312|utf-8默认gb2312&#39;));" data-original-title="分享到微博">
+          <i class="iconfont ic-weibo"></i>
+        </a>
+        <a class="share-circle" data-toggle="tooltip" id="longshare" target="_blank" data-original-title="" title="">
+            <div class="qrcode" id="qrcode">
+             <img src="./芥末校园App--产品体验报告 - 简书_files/download-index-side-qrcode-cb13fc9106a478795f8d10f9f632fccf.png" alt="Download index side qrcode">
+             <p>下载app生成长微博图片</p>
+             </div>
+          <i class="iconfont ic-picture"></i>
+        </a>
+        <a class="share-circle more-share" tabindex="0" data-toggle="popover" data-placement="top" data-html="true" data-trigger="focus" href="javascript:void(0);" data-content="
+          &lt;ul class=&quot;share-list&quot;&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=&#39;+e(&#39;https://www.jianshu.com/p/11fc2858fa6a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=qzone&#39;)+&#39;&amp;title=&#39;+e(&#39;推荐 爱吃香菜的z小悦 的文章《芥末校园App--产品体验报告》&#39;),x=function(){if(!window.open(r,&#39;qzone&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-zone&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到QQ空间&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://twitter.com/share?url=&#39;+e(&#39;https://www.jianshu.com/p/11fc2858fa6a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=twitter&#39;)+&#39;&amp;text=&#39;+e(&#39;推荐 爱吃香菜的z小悦 的文章《芥末校园App--产品体验报告》（ 分享自 @jianshucom ）&#39;)+&#39;&amp;related=&#39;+e(&#39;jianshucom&#39;),x=function(){if(!window.open(r,&#39;twitter&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-twitter&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到Twitter&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://www.facebook.com/dialog/share?app_id=483126645039390&amp;display=popup&amp;href=https://www.jianshu.com/p/11fc2858fa6a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=facebook&#39;,x=function(){if(!window.open(r,&#39;facebook&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-facebook&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到Facebook&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://plus.google.com/share?url=&#39;+e(&#39;https://www.jianshu.com/p/11fc2858fa6a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=google_plus&#39;),x=function(){if(!window.open(r,&#39;google_plus&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-google&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到Google+&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:&#39;&#39;,r=&#39;http://www.douban.com/recommend/?url=&#39;+e(&#39;https://www.jianshu.com/p/11fc2858fa6a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=douban&#39;)+&#39;&amp;title=&#39;+e(&#39;芥末校园App--产品体验报告&#39;)+&#39;&amp;sel=&#39;+e(s)+&#39;&amp;v=1&#39;,x=function(){if(!window.open(r,&#39;douban&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r+&#39;&amp;r=1&#39;};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-douban&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到豆瓣&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        " data-original-title="" title="">更多分享</a>
+      </div>
+    </div>
+
+      <a id="web-note-ad-1" target="_blank" href="https://www.jianshu.com/apps/redirect?utm_source=note-bottom-click"><img src="./芥末校园App--产品体验报告 - 简书_files/web-note-ad-1-c2e1746859dbf03abe49248893c9bea4.png" alt="Web note ad 1"></a>
+
+    <!--
+    <div id="note-comment-above-ad-container">
+      <span id="youdao-comment-ad" class="ad-badge">广告</span>
+    </div>
+    -->
+    <div><div id="comment-list" class="comment-list"><div><form class="new-comment"><a class="avatar"><img src="./芥末校园App--产品体验报告 - 简书_files/avatar_default-78d4d1f68984cd6d4379508dd94b4210.png"></a> <div class="sign-container"><a href="https://www.jianshu.com/sign_in?utm_source=desktop&amp;utm_medium=not-signed-in-comment-form" class="btn btn-sign">登录</a> <span>后发表评论</span></div></form> <!----></div> <!----> <div class="comments-placeholder" style="display: none;"><div class="author"><div class="avatar"></div> <div class="info"><div class="name"></div> <div class="meta"></div></div></div> <div class="text"></div> <div class="text animation-delay"></div> <div class="tool-group"><i class="iconfont ic-zan-active"></i><div class="zan"></div> <i class="iconfont ic-list-comments"></i><div class="zan"></div></div></div> <div id="normal-comment-list" class="normal-comment-list"><div><div><div class="top-title"><span>3条评论</span> <a class="author-only">只看作者</a> <a class="close-btn" style="display: none;">关闭评论</a> <div class="pull-right"><a class="active">按时间倒序</a><a class="">按时间正序</a></div></div></div> <!----> <!----> <div class="comments-placeholder" style="display: none;"><div class="author"><div class="avatar"></div> <div class="info"><div class="name"></div> <div class="meta"></div></div></div> <div class="text"></div> <div class="text animation-delay"></div> <div class="tool-group"><i class="iconfont ic-zan-active"></i><div class="zan"></div> <i class="iconfont ic-list-comments"></i><div class="zan"></div></div></div> <div id="comment-31796371" class="comment"><div><div class="author"><div data-v-f3bf5228="" class="v-tooltip-container" style="z-index: 0;"><div class="v-tooltip-content"><a href="https://www.jianshu.com/u/0819c4a1f916" target="_blank" class="avatar"><img src="./芥末校园App--产品体验报告 - 简书_files/38ba11ce-53fc-43c3-8cb2-b69acf6eaf02.png"></a>  </div> <!----></div> <div class="info"><a href="https://www.jianshu.com/u/0819c4a1f916" target="_blank" class="name">聆默无语</a> <!----> <!----> <div class="meta"><span>4楼 · 2018.12.06 13:35</span></div></div></div> <div class="comment-wrap"><p>这是一篇写得非常棒的体验报告！👍</p> <!----> <div class="tool-group"><a data-v-cdecbe24="" id="like-button-31796371" class="like-button"><span data-v-cdecbe24="">赞</span></a> <a class=""><i class="iconfont ic-comment"></i> <span>回复</span></a> <!----> <!----></div></div></div> <div class="sub-comment-list hide"><!----> <!----></div></div><div id="comment-19322055" class="comment"><div><div class="author"><div data-v-f3bf5228="" class="v-tooltip-container" style="z-index: 0;"><div class="v-tooltip-content"><a href="https://www.jianshu.com/u/d8ca85031cae" target="_blank" class="avatar"><img src="./芥末校园App--产品体验报告 - 简书_files/4-3397163ecdb3855a0a4139c34a695885.jpg"></a>  </div> <!----></div> <div class="info"><a href="https://www.jianshu.com/u/d8ca85031cae" target="_blank" class="name">南凉甘椒</a> <!----> <!----> <div class="meta"><span>3楼 · 2018.01.07 10:31</span></div></div></div> <div class="comment-wrap"><p>请问下，那些用户男女比例、城市使用人数比例这些数据是怎么得到的？是有专门的分析网站么？</p> <!----> <div class="tool-group"><a data-v-cdecbe24="" id="like-button-19322055" class="like-button"><span data-v-cdecbe24="">赞</span></a> <a class=""><i class="iconfont ic-comment"></i> <span>回复</span></a> <!----> <!----></div></div></div> <div class="sub-comment-list hide"><!----> <!----></div></div><div id="comment-18018484" class="comment"><div><div class="author"><div data-v-f3bf5228="" class="v-tooltip-container" style="z-index: 0;"><div class="v-tooltip-content"><a href="https://www.jianshu.com/u/518c4e2531a8" target="_blank" class="avatar"><img src="./芥末校园App--产品体验报告 - 简书_files/1a944991-a663-42c4-8bfd-4d58f4a97c2e"></a>  </div> <!----></div> <div class="info"><a href="https://www.jianshu.com/u/518c4e2531a8" target="_blank" class="name">馨月妖娆</a> <!----> <!----> <div class="meta"><span>2楼 · 2017.12.01 20:28</span></div></div></div> <div class="comment-wrap"><p>感觉蛮有道理的，不错，赞一个！</p> <!----> <div class="tool-group"><a data-v-cdecbe24="" id="like-button-18018484" class="like-button"><span data-v-cdecbe24="">1人赞</span></a> <a class=""><i class="iconfont ic-comment"></i> <span>回复</span></a> <!----> <!----></div></div></div> <div class="sub-comment-list hide"><!----> <!----></div></div></div></div> <!----> <div><!----></div></div></div>
+  </div>
+
+  <div class="side-tool"><ul><li data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="回到顶部" style=""><a class="function-button"><i class="iconfont ic-backtop"></i></a></li> <!----> <!----> <!----> <!----> <li data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="分享文章" id="share"><a tabindex="0" role="button" data-toggle="popover" data-placement="left" data-html="true" data-trigger="focus" href="javascript:void(0);" data-content="&lt;ul class=&#39;share-list&#39; style=&quot;width:220px&quot;&gt;
+                  &lt;li&gt;&lt;a class=&quot;weixin-share&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-weixin&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到微信&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f=&#39;http://v.t.sina.com.cn/share/share.php?appkey=1881139527&#39;,u=z||d.location,p=[&#39;&amp;url=&#39;,e(u),&#39;&amp;title=&#39;,e(t||d.title),&#39;&amp;source=&#39;,e(r),&#39;&amp;sourceUrl=&#39;,e(l),&#39;&amp;content=&#39;,c||&#39;gb2312&#39;,&#39;&amp;pic=&#39;,e(p||&#39;&#39;)].join(&#39;&#39;);function%20a(){if(!window.open([f,p].join(&#39;&#39;),&#39;mb&#39;,[&#39;toolbar=0,status=0,resizable=1,width=440,height=430,left=&#39;,(s.width-440)/2,&#39;,top=&#39;,(s.height-430)/2].join(&#39;&#39;)))u.href=[f,p].join(&#39;&#39;);};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,&#39;&#39;,&#39;&#39;,&#39;&#39;, &#39;推荐 爱吃香菜的z小悦 的文章《芥末校园App--产品体验报告》（ 分享自 @简书 ）&#39;,&#39;https://www.jianshu.com/p/11fc2858fa6a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weibo&#39;,&#39;页面编码gb2312|utf-8默认gb2312&#39;));&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-weibo&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到微博&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                  
+                  &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=&#39;+e(&#39;https://www.jianshu.com/p/11fc2858fa6a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=qzone&#39;)+&#39;&amp;title=&#39;+e(&#39;推荐 爱吃香菜的z小悦 的文章《芥末校园App--产品体验报告》&#39;),x=function(){if(!window.open(r,&#39;qzone&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-zone&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到QQ空间&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://twitter.com/share?url=&#39;+e(&#39;https://www.jianshu.com/p/11fc2858fa6a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=twitter&#39;)+&#39;&amp;text=&#39;+e(&#39;推荐 爱吃香菜的z小悦 的文章《芥末校园App--产品体验报告》（ 分享自 @jianshucom ）&#39;)+&#39;&amp;related=&#39;+e(&#39;jianshucom&#39;),x=function(){if(!window.open(r,&#39;twitter&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-twitter&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到Twitter&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://www.facebook.com/dialog/share?app_id=483126645039390&amp;display=popup&amp;href=https://www.jianshu.com/p/11fc2858fa6a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=facebook&#39;,x=function(){if(!window.open(r,&#39;facebook&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-facebook&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到Facebook&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://plus.google.com/share?url=&#39;+e(&#39;https://www.jianshu.com/p/11fc2858fa6a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=google_plus&#39;),x=function(){if(!window.open(r,&#39;google_plus&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-google&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到Google+&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:&#39;&#39;,r=&#39;http://www.douban.com/recommend/?url=&#39;+e(&#39;https://www.jianshu.com/p/11fc2858fa6a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=douban&#39;)+&#39;&amp;title=&#39;+e(&#39;芥末校园App--产品体验报告&#39;)+&#39;&amp;sel=&#39;+e(s)+&#39;&amp;v=1&#39;,x=function(){if(!window.open(r,&#39;douban&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r+&#39;&amp;r=1&#39;};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-douban&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到豆瓣&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;" data-original-title="" title="" class="function-button"><i class="iconfont ic-share"></i></a> <!----></li> <!----></ul></div>
+</div>
+<div class="note-bottom">
+  <div><div class="main"><div class="title">被以下专题收入，发现更多相似内容</div> <!----> <div class="include-collection"><!----> <a href="https://www.jianshu.com/c/18bc5207091c?utm_source=desktop&amp;utm_medium=notes-included-collection" target="_blank" class="item"><img src="./芥末校园App--产品体验报告 - 简书_files/f9605e28805cb41222797fc317f4e8be0486d0e57764-Z8Dchn_fw658.jpg"><div class="name">产品体验报告</div></a><a href="https://www.jianshu.com/c/89da68a6bfc0?utm_source=desktop&amp;utm_medium=notes-included-collection" target="_blank" class="item"><img src="./芥末校园App--产品体验报告 - 简书_files/1429764274.jpg"><div class="name">移动产品PM</div></a> <!----></div></div> <!----> <!----></div>
+  <div><div class="recommend-note"><div class="meta"><div class="title">
+        推荐阅读
+        <a target="_blank" href="https://www.jianshu.com/" class="more">
+           更多精彩内容<i class="iconfont ic-link"></i></a></div></div> <div class="list"><div class="note have-img"><a target="_blank" href="https://www.jianshu.com/p/d51ff8f32510?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="cover" style="background-image: url(&quot;//upload-images.jianshu.io/upload_images/14715425-bd0aa63449d8cc82.png?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240/format/webp&quot;);"></a> <a target="_blank" href="https://www.jianshu.com/p/d51ff8f32510?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="title">Day42 撒钻5万没人领，小管家被气哭了</a> <p class="description">大家好，今天是2018年12月27日，每个人的2018余额还剩4.5天——来自小管家的午间报时嘻嘻。 昨天简书钻分发文章榜第一篇是旸瑫《扔向何方（三）》，分给作者899.318钻，分给投票者299.724钻。 幸运楼层1，取8+9+9+3+1+8=38的个位数，借钻10000～ 幸运楼层2，取2+9+9+7+2+4=33的十位数和个位数，借钻10000～注意一下，这位上周也中了10000钻，好运常相伴耶～ 幸运楼层3，33+26=59，借钻10000～ 幸运楼层4，59+26=85，借钻10000～ 幸运楼层5，85+26=111，借钻10000～ 幸运楼层6，111+26=137，第1...</p> <a target="_blank" href="https://www.jianshu.com/u/c5a2ce84f60b?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="author"><div class="avatar" style="background-image: url(&quot;//upload.jianshu.io/users/upload_avatars/14715425/e0668349-8c75-43db-8a9d-c388e5f00d0d.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/24/h/24/format/webp&quot;);"></div> <span class="name">简书钻首席小管家</span></a></div><div class="note"><a href="https://dsp-click.youdao.com/clk/request.s?slot=f2ac00aef0eb6b673f4e4639046bc6f8&amp;k=ABh9tY866L4%2FqxpRpqpwHd6Z13USytwpgvotqlp47JzXxo%2BoRxcJpjjAgKuViCqvIxCHqA9N%2F2c%2F9Be%2FcwcSrytzsXtwWLcKWfmEr%2F%2BaTNTPdtx%2FLK0WBlCm6LMKKSb37pswpHP3JFbOCJeM%2BGpA31Qli0L2%2FJrkFGZW2hafTFb%2BNm%2F2OHSh6UdIJ8eVGYtSS1KVmMUUJpjPfkubkgg%2BWSh35JsQiIreLSdX%2BLhFRz7NqonQ2bE2wVFcTLmudKaQy725Gm8NosGmGEraT4UzNqNSPhpByNmvHobKYLKLH7erXppYowwr25Ur12g7hM0ntHJL5CE7Dtbuc1LURE9iaEwg4GH3oHkTVvTiS7u1%2FHEp3DXt0HuGReB8cXG4v14B72iPIvDC7sWBDU0l1SjtwABrmHpf%2F2krVLtPuh8NssiYdHMuUQUAMNqUj%2BZdKD9P%2Ff%2B%2BhanzoVJ1s1olxwGm1JM9c0pLZx2q9a8V5DZ3bHTkXEjvsguWrehPObjxp%2FhWPRM0iwN2luYL6jz7i2KhAWYd1o%2FIBPKywFhPT1rlXGd3LyaUroRV7y3WQYNQMOw6rH35p0nBjLiJiJ%2FWQp69tKxiW8pj3sXvmfqf9WQqKvkjgLsjkwwZ4iz6i%2Bdokh5Qvx3qGDfW25wrNh2M4zmE%2FkrU5CAC0mKdQqiVGU5ahdz%2BcAiplTgOdvyl0YVhE4YulL34abjDc3iqS7pR2sNnO95abLN752hRnn7%2Fnhz5qKg26KfG2xy7can7EjeROkZfkUc%2BeL2%2FhfnymhVXjSLcI7X6%2BjKdnxB1au83z8Vqtg7482i72Tdu6tLlr0suhp3dofZByODidaEsc%2FjxfKQ7UDmVPaEQRBMYMBSDgMBo%2FMGaJkajziwD0PKeRIhPK%2BPHD242OvYh3VU3oliWjFJDEHgKH5LJllhY4MEVC7xh6BYCg3%2FgexlyNClmfjOcfOlKrZrini50KMPqCbfFkb33IbHn0LtMc4qbPMCDPaIcQtX4HNQD5HXkEo2nnrEZtxSY0slIiA5KTOM74S6j%2FsAU1dfGj6hHFwmmOMCAq5WIKq%2FXxo%2BoRxcJpjjAgKuViCqvfMQgFyJbFEE8crVBJ33WoqoCJC%2BBjiNaHZdVE%2Fpzl8E%3D&amp;youdao_bid=3fbd3877-b8c9-4deb-bc31-4c24554e60b6&amp;iid=%7B%223488633954591681395%22%3A1%7D&amp;sid=17836" target="_blank" class="youdao-recommended-ad clearfix"><span class="img" style="background-image: url(&quot;https://oimagea4.ydstatic.com/image?id=3488633954591681395&amp;product=adpublish&amp;w=320&amp;h=240&amp;sc=0&amp;rm=0&quot;);"></span> <div class="info"><span class="title">从Python开始学习，构建你的神经网络</span> <span class="intro">小班辅导，一站式掌握AI红利！报名立享900元新年专属福利！</span> <span class="ad-badge">广告</span></div></a></div><div class="note have-img"><a target="_blank" href="https://www.jianshu.com/p/0b0a6efef906?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="cover" style="background-image: url(&quot;//upload-images.jianshu.io/upload_images/12615935-4394fd3365677082.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240/format/webp&quot;);"></a> <a target="_blank" href="https://www.jianshu.com/p/0b0a6efef906?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="title">诚善者悟菜根谭：一起欲便觉，一觉便转念《菜根谭》</a> <p class="description">诚善者悟菜根谭，同纬度不同思维。 《菜根谭》一起欲便觉，一觉便转念。  念头起处，才觉向欲路上去，便挽从理路上来；一起便觉，一觉便转，此是转祸为福、起死回生的关头，切莫轻易错过。  【译文】：当心中念头产生时，只要一察觉这念头是走向欲望之路的，就立刻把这念头拉回正道上来。欲念刚一产生就立刻发觉，一发觉就立刻把念头转到正路上来，这是把祸害变为福气、起死回生的关键时刻，万万不可轻易错过。 读“一起欲便觉，一觉便转念”的感悟。 凡事三思，谨慎决定，时时刻刻提醒自己保持理智，不要堕入欲望的深渊，这样就可以使我们少犯些错误，少些事后悔。 平时就培养成克制自己的好习惯，无论做什么事情都要仔细思考，想...</p> <a target="_blank" href="https://www.jianshu.com/u/063836621d8a?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="author"><div class="avatar" style="background-image: url(&quot;//upload.jianshu.io/users/upload_avatars/12615935/c4fecbf9-27fc-465d-b114-aa4396eea6bd.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/24/h/24/format/webp&quot;);"></div> <span class="name">诚善者聂风</span></a></div><div class="note have-img"><a target="_blank" href="https://www.jianshu.com/p/ac8cedfa4d99?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="cover" style="background-image: url(&quot;//upload-images.jianshu.io/upload_images/12615935-11b85e5d8b770b0f.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240/format/webp&quot;);"></a> <a target="_blank" href="https://www.jianshu.com/p/ac8cedfa4d99?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="title">诚善者悟菜根谭：无得罪昭昭，无得罪冥冥《菜根谭》</a> <p class="description">诚善者悟菜根谭，同纬度不同思维。 《菜根谭》无得罪昭昭，无得罪冥冥。 肝受病则目不能视，肾受病则耳不能听。 病受于人所不见，必发于人所共见。 故君子欲无得罪于昭昭， 必先无得罪于冥冥。 【译文】：人的肝脏有了病，眼睛就会看不清东西，肾脏有了病，耳朵就会听不清楚声音。疾病生在人看不见的地方，而在人都能看得见的地方发作。因此君子想要在大家都能看得见的地方不犯错误，首先在人看不见的地方端正自己的言行。 读“无得罪昭昭，无得罪冥冥”的感悟。 我们做什么事情，都要考虑后果，如果做错了什么事情，都要从自身找原因，不要去推卸责任，这样才能避免错上加错。 善与恶是可以相互转化的，恶与善也只是一念之差，改...</p> <a target="_blank" href="https://www.jianshu.com/u/063836621d8a?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="author"><div class="avatar" style="background-image: url(&quot;//upload.jianshu.io/users/upload_avatars/12615935/c4fecbf9-27fc-465d-b114-aa4396eea6bd.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/24/h/24/format/webp&quot;);"></div> <span class="name">诚善者聂风</span></a></div><div class="note have-img"><a target="_blank" href="https://www.jianshu.com/p/e5178df45e49?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="cover" style="background-image: url(&quot;//upload-images.jianshu.io/upload_images/9296968-668deb078199488c.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240/format/webp&quot;);"></a> <a target="_blank" href="https://www.jianshu.com/p/e5178df45e49?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="title">儿时的年味|为了一个“元宝”，那一别便成了永别</a> <p class="description">小时候，我最爱过年。过年不仅会穿“花衣服”、新鞋子，吃很多平时吃不到的好吃的东西，还能去外婆家玩。 给我印象最深刻的是八岁那年的春节，也是我最后一次去外婆家。 没想到，这一次发生了一件事，在我幼小的心灵播下了怨恨的种子，改变了我的性格，甚至影响了我往后十多年的人生。 事情的原由是这样的—— 和往年的任何一个春节一样，我和妈妈一起高高兴兴地拎着礼去外婆家拜年。 同时，去外婆家拜年的还有几个姨娘。 这里要交代一下: 外公在我妈妈五岁的时候就去世了,姨娘和我妈妈是同母异父的姊妹。 每年正月初二，姊妹几个都会不约而同地来到外婆家。 大正月的，图个彩头嘛，我们的习俗就是出门最少吃到两个“元宝”。所...</p> <a target="_blank" href="https://www.jianshu.com/u/f277bc06471b?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="author"><div class="avatar" style="background-image: url(&quot;//upload.jianshu.io/users/upload_avatars/9296968/bd60ba52-9993-4aa6-b23f-a83d2f71974e.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/24/h/24/format/webp&quot;);"></div> <span class="name">绳月</span></a></div><div class="note have-img"><a target="_blank" href="https://www.jianshu.com/p/5421678147d0?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="cover" style="background-image: url(&quot;//upload-images.jianshu.io/upload_images/15569637-53decddd4f59a1e5.png?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240/format/webp&quot;);"></a> <a target="_blank" href="https://www.jianshu.com/p/5421678147d0?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="title">2019年第一天，我亲眼看见鹿晗跌落神坛</a> <p class="description">昨日，浙江卫视跨年演唱会的海报，在微博上引起了一场火药味十足的骂战。 海报中，曾经的流量之王鹿晗，只位居第三排的最右边。而新晋人气鲜肉蔡徐坤，却能与成龙大哥共站C位。 这次“番位之争”，一方面点燃了双方粉丝之间的战火，另一方面也让大家似乎嗅出了鹿晗身上的“流量危机”。 尽管有鹿晗的粉丝解释，海报位置的安排是根据鹿晗在《跑男》节目中的番位而定。但这似乎并不能改变大多数人心里默认的一个共识： 鹿晗的人气，正在以肉眼可见的速度下跌。 在今年10月份的鹿晗北京工体演唱会前，大批黄牛将手中的门票打折出售，仍然止不住无人问津的尴尬场面。 这对于鹿晗是不可想象的。一年前，鹿晗的首场个人巡回演唱会，门票...</p> <a target="_blank" href="https://www.jianshu.com/u/23cc51033fa6?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="author"><div class="avatar" style="background-image: url(&quot;//upload.jianshu.io/users/upload_avatars/15569637/8fd769c0-65bc-4567-b690-e813e6fbd2bb?imageMogr2/auto-orient/strip|imageView2/1/w/24/h/24/format/webp&quot;);"></div> <span class="name">陈俊JackyChen</span></a></div></div></div></div>
+  <!-- 相关文章 -->
+    <!-- 未登录用户 -->
+    <div class="seo-recommended-notes">
+
+          <div class="note ">
+                        <a class="title" target="_blank" href="https://www.jianshu.com/p/25104bf5afbd?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">《社交红利》浅读笔记</a>
+            <p class="description">社交红利阅读笔记 书名:社交红利（修订升级版） 作者:徐志斌 出版社:中信出版社 正文前笔记： 推荐序1摘要 社交网络带来创新变革的机会 马蔚华 招商银行前行长兼CEO 看本书时，也看到一些类似的感觉： 要求企业与时俱进。 方便为客户提供更优质的服务。社交网络与企业合作可以...</p>
+            <a class="author" target="_blank" href="https://www.jianshu.com/u/2c332021faed?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+              <div class="avatar">
+                <img src="./芥末校园App--产品体验报告 - 简书_files/7-0993d41a595d6ab6ef17b19496eb2f21.jpg" alt="48">
+              </div>
+              <span class="name">凫水</span>
+</a>          </div>
+
+          <div class="note ">
+                        <a class="title" target="_blank" href="https://www.jianshu.com/p/9b11c792843c?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">校园产品的调研分析</a>
+            <p class="description">这部分内容是2015年9月统计的。资料均来源于互联网。 社交/社区 社交： tataufo——实名认证绿色交友平台 ——跳出熟人小圈子，带你发现新世界 创始人：郑玹宇 故事：tataUFO创始人郑玹宇表示，作为韩国留学生的他在北京大学读书期间，发现中韩两国大学之间有个不同是...</p>
+            <a class="author" target="_blank" href="https://www.jianshu.com/u/187ca589b4cd?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+              <div class="avatar">
+                <img src="./芥末校园App--产品体验报告 - 简书_files/1-04bbeead395d74921af6a4e8214b4f61.jpg" alt="48">
+              </div>
+              <span class="name">szy916</span>
+</a>          </div>
+
+          <div class="note ">
+                        <a class="title" target="_blank" href="https://www.jianshu.com/p/d86807f33945?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">欧阳泽林：社交化移动化招聘营销与雇主品牌传播研究报告（2014-2015）</a>
+            <p class="description">关于作者：欧阳泽林，对于个体我“不误正业”——助力个人品牌IPO；对于组织我“业涉撩人”——助力企业的雇主品牌和招聘创新，个人微信：zhaopiner1 欢迎批判性点赞和报复性打赏！ 致读者：本报告作者欧阳泽林（借见智库联合创始人/招聘行业社群前媒体总监野生设计湿，个人微信...</p>
+            <a class="author" target="_blank" href="https://www.jianshu.com/u/92006db4641b?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+              <div class="avatar">
+                <img src="./芥末校园App--产品体验报告 - 简书_files/d6584d3c54dd" alt="48">
+              </div>
+              <span class="name">欧阳泽林</span>
+</a>          </div>
+
+          <div class="note ">
+                        <a class="title" target="_blank" href="https://www.jianshu.com/p/ed5b2ce84d35?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">设计思维 之 奢侈品</a>
+            <p class="description">因为大数据的信息含量太低，相当于低品位的矿石，你要用多少吨的贫矿才能生产炼出一吨铁? 这句话我很认同，不是有了数据就能够做出精准的用户画像，一直以来，定制设计是件奢侈的事情，专业的设计师会对这方面的分析能力比较强，是因为他们能够看出表象和内在需求有时会是正反两个形式。设计思...</p>
+            <a class="author" target="_blank" href="https://www.jianshu.com/u/c53d948c6dcb?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+              <div class="avatar">
+                <img src="./芥末校园App--产品体验报告 - 简书_files/7436a816451c" alt="48">
+              </div>
+              <span class="name">胡鹏</span>
+</a>          </div>
+
+          <div class="note ">
+                        <a class="title" target="_blank" href="https://www.jianshu.com/p/129aa18cd215?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">一个过去的你到了未来</a>
+            <p class="description">天上打雷， 窗前飘着雨， 地上流淌着水。 一场雨就这样来， 一段时光就这样走， 一个过去的你到了未来。</p>
+            <a class="author" target="_blank" href="https://www.jianshu.com/u/92a3948b19d6?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+              <div class="avatar">
+                <img src="./芥末校园App--产品体验报告 - 简书_files/625f82fe-8853-46ad-bebe-4e3cd3527587.jpg" alt="48">
+              </div>
+              <span class="name">阿文话职场</span>
+</a>          </div>
+
+          <div class="note ">
+                        <a class="title" target="_blank" href="https://www.jianshu.com/p/2a16ccbfa83c?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">飘零（一）</a>
+            <p class="description">你的微笑洒满墨纸，月光为你铺成一首诗 我拿着定格你美丽的相片，独自成痴 谁玩弄着窗棂剪纸，却镌刻你的名字 烛火摇动，轻轻抚慰想念影子 叶落，风不止；思念，待随时 花开花落流水思，树眠树醒候鸟迟 那一轮明月，皎洁清美满心池 配以璀璨星空，勾动心底哀思 你的美化为碎片在风中飘零...</p>
+            <a class="author" target="_blank" href="https://www.jianshu.com/u/3fcb4b55d8c0?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+              <div class="avatar">
+                <img src="./芥末校园App--产品体验报告 - 简书_files/ef1f5274-ef10-49d6-b88d-e8696b0699ed.jpg" alt="48">
+              </div>
+              <span class="name">梦醒江南</span>
+</a>          </div>
+
+          <div class="note ">
+                        <a class="title" target="_blank" href="https://www.jianshu.com/p/cc4c3e6c9731?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">003花云天的信</a>
+            <p class="description">小御： 你好！ 我是你爷爷的好朋友。他的一些研究导致世界已经乱了，名为jps-38的病毒已经蔓延了整个世界，可以说，几乎有人的地方都能波及。唯一活下来的方法，就是注射异能试剂。也是你爷爷王严成研究的，试剂只有三支，一支用在了你身上，一支用在了我孙女花铃身上。还有一支我把他放...</p>
+            <a class="author" target="_blank" href="https://www.jianshu.com/u/00c5e710f7e3?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+              <div class="avatar">
+                <img src="./芥末校园App--产品体验报告 - 简书_files/8e6ac3ac6515" alt="48">
+              </div>
+              <span class="name">迷之深</span>
+</a>          </div>
+
+          <div class="note have-img">
+            <a class="cover" target="_blank" href="https://www.jianshu.com/p/5732ad4610e6?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+              <img src="./芥末校园App--产品体验报告 - 简书_files/5819680-3764448a6394342c.jpg" alt="240">
+</a>            <a class="title" target="_blank" href="https://www.jianshu.com/p/5732ad4610e6?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">简单，即是安好</a>
+            <p class="description">时光踏着轻快的步伐，越过春的烂漫，从隆冬到初夏，渐变着季节的衣衫，在雨水的洗涤下，铺展岁月的愁容，洗刷过往的尘埃。 路途遥远，这一生的牵绊躲不过岁月的洗礼，平凡的快乐锁住了似水的年华。花香鸟语、草长莺飞，自然界敞开的大门里，浸透了生活的荒芜与繁杂，停住脚步，驻足观望，生活不...</p>
+            <a class="author" target="_blank" href="https://www.jianshu.com/u/bedc77dd6e83?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+              <div class="avatar">
+                <img src="./芥末校园App--产品体验报告 - 简书_files/40335c09-1636-4c32-a02e-ef7dd3300872.jpg" alt="48">
+              </div>
+              <span class="name">水木云兮</span>
+</a>          </div>
+    </div>
+</div>
+
+    <script type="application/json" data-name="page-data">{"user_signed_in":false,"locale":"zh-CN","os":"windows","read_mode":"day","read_font":"font2","note_show":{"is_author":false,"is_following_author":false,"is_liked_note":false,"follow_state":0,"uuid":"1d4c42c0-221f-4983-af67-120d3555a130"},"note":{"id":20379565,"slug":"11fc2858fa6a","user_id":9280980,"notebook_id":19372908,"commentable":true,"likes_count":10,"views_count":1056,"public_wordage":6165,"comments_count":3,"featured_comments_count":0,"total_rewards_count":1,"is_author":false,"paid_type":"free","paid":false,"paid_content_accessible":false,"author":{"nickname":"爱吃香菜的z小悦","total_wordage":6165,"followers_count":3,"total_likes_count":10}}}</script>
+    
+    <script src="./芥末校园App--产品体验报告 - 简书_files/babel-polyfill-6cd2d6b53fe3184b71cc.js.下载" crossorigin="anonymous"></script>
+    <script src="./芥末校园App--产品体验报告 - 简书_files/web-base-5fed1ee4c36a6359f493.js.下载" crossorigin="anonymous"></script>
+<script src="./芥末校园App--产品体验报告 - 简书_files/web-616b0eb7aa07c225eaca.js.下载" crossorigin="anonymous"></script>
+    
+    <script src="./芥末校园App--产品体验报告 - 简书_files/entry-9d461ca287ff774d7b3e.js.下载" crossorigin="anonymous"></script>
+    <script>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+  
+
+<!----><!----></body></html>
