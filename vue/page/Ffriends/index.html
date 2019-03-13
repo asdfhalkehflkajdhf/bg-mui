@@ -18,8 +18,10 @@
 	<link rel="stylesheet" href="./js/sortable/sortable.min.css">
 	<script type="text/javascript" src="./js/sortable/sortable.min.js"></script>
 
-
-
+	<script type="text/javascript" src="../../res/js/up_animate.js" ></script>
+	<link rel="stylesheet" href="../../res/css/up_animate.css" type="text/css" />
+	
+	<link href="https://cdn.bootcss.com/font-awesome/5.7.2/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
@@ -211,7 +213,22 @@
 							<img class="card__picture" src="./images/item-9.jpg" alt="">
 							<div class="card-infos">
 								<div class="card__span">
-									<span>时间</span>图片<span></span><span>点赞</span>
+<!-- 									<div align="left">
+										<span style="">时间</span>
+									</div>
+									<div align="center">
+										图片
+									</div>
+									<div align="right">
+										点赞
+									</div> -->
+									<span class="card__span_left"><i class="fa fa-circle-thin"></i>2019-3-13 18:10</span>
+									<!-- <span style="text-align:center;">4张相片</span> -->
+									<span class="card__span_right up_btn"  data-aid="用户id">
+										<span title="点赞" >
+											<i class="layui-icon layui-icon-star" > 5000</i>
+										</span>
+									</span>
 								</div>
 								<div class="card__link"></div>
 								<h2 class="card__title">Example 9</h2>
@@ -340,6 +357,24 @@
 
 </body>
 <!-- 动态加载数据 -->
-<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="app.js">
+	//点赞回调函数
+	function upCallBackFunction(upThisObj){
+			var up_obj = $(upThisObj).find('i');
+			var up_num = parseInt(up_obj.text())+1;
+			up_obj.text(' '+up_num);
+			//发送请求
+			//向服务端发送更新指令
+			$.ajax({
+					url:'api/upAction.php',
+					type:'post',
+					dataType: "text", //"json",//预期服务器返回的数据类型
+					data: {"action_id":$(upThisObj).attr('data-aid')},
+					success: function(resData){
+							console.log(resData);
+					},
+			});
+	}
+</script>
 
 </html>

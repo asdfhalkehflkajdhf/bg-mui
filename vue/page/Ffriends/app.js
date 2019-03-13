@@ -4,7 +4,8 @@
 document.querySelector('#sortable').sortablejs()
 
 
-	
+
+
 const lunBoTuVar = new Vue(
 {
 	el:"#lunBoTuDiv",
