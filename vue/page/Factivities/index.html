@@ -1,249 +1,137 @@
-
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<!-- //允许网页宽度自动调整 -->
-		<!-- //https://www.cnblogs.com/MissZhao/p/5773091.html -->
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>男生女生-找活动</title>
-		
-		<script src="../common/commonHeadStyle_CDN.js"></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<!-- //允许网页宽度自动调整 -->
+	<!-- //https://www.cnblogs.com/MissZhao/p/5773091.html -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+    <title>男生女生-找朋友</title>
+	
+    <script src="../common/commonHeadStyle_CDN.js"></script>
+	<link rel="stylesheet" type="text/css" href="../common/background-1.css">
 
-	</head>
-
-	<body  >
-
-		<div class="update_area">
-
-			<div class="update_area_content">
-				<ul class="update_area_lists cl" id="index_ajax_list">
- 					<li class="i_list list_n2">
-						<a href="showInfo.html"  target="_blank">
-							<img class="waitpic" src="common/images/thumb_2.png"  data-original="http://udydemo.chenxingpay.cn/wp-content/uploads/cx_img/303/amtuba-136-006-405x555-.jpg" alt="小名" width="405" height="555"/>
-							<div class="postlist-imagenum"><span>3</span>张</div><div class="qxdownbook"><span ><i class="online_icon">在线</i></span></div>
-
-						</a>
-						<div class="case_info">
-							<div class="meta-title"> 交友描述交友描述交友描述交友描述交友描述交友描述交友描述 </div>
-							<div class="meta-post"><i class="iconfont">&#xe652;</i>上次登录时间<span class="cx_like"><i class="iconfont">&#xe631;</i>59<i class="iconfont">&#xe63b;</i>4766</span></div>
+	<!-- 自有资源 -->
+	<link rel="stylesheet" type="text/css" href="./css/main.css">
+	<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+	<script src="https://cdn.bootcss.com/jquery.imagesloaded/4.1.4/imagesloaded.min.js"></script>
+	<!-- awesome图标 -->
+	<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css"></head>
+<body>
+	<div class="container">
+	    <div class="wrapper">
+			<!-- 轮播图 ，图片统一大小，设置宽度为父页面比例一样-->
+			<div id="lunBoTuDiv" class="carousel slide" data-ride="carousel">
+				<ol class="carousel-indicators">
+					<li data-target="#lunBoTuDiv" 
+						v-for="item,index in res" :data-slide-to="index" v-bind:class="{ true: !index }" ></li>
+				</ol>
+				<div class="carousel-inner">
+					<div class="carousel-item " 
+						v-for="item,index in res" v-bind:class="{ active: !index }">
+						<!-- w-100 百分比 -->
+						<img class="d-block w-100" :height="item.height" 
+							:width="item.width" :src="item.src" :alt="item.alt">
+						<div class="carousel-caption d-none d-md-block">
+							<h5>{{item.h5}}</h5>
+							<p>{{item.p}}</p>
 						</div>
-					</li>
- 					<li class="i_list list_n2">
-						<a href="showInfo.html"  target="_blank">
-							<img class="waitpic" src="common/images/thumb_2.png"  data-original="http://udydemo.chenxingpay.cn/wp-content/uploads/cx_img/303/amtuba-136-006-405x555-.jpg" alt="小名" width="405" height="555"/>
-							<div class="postlist-imagenum"><span>3</span>张</div><div class="qxdownbook"><span ><i class="online_icon">在线</i></span></div>
-
-						</a>
-						<div class="case_info">
-							<div class="meta-title"> 交友描述交友描述交友描述交友描述交友描述交友描述交友描述 </div>
-							<div class="meta-post"><i class="iconfont">&#xe652;</i>上次登录时间<span class="cx_like"><i class="iconfont">&#xe631;</i>59<i class="iconfont">&#xe63b;</i>4766</span></div>
-						</div>
-					</li>
- 					<li class="i_list list_n2">
-						<a href="showInfo.html"  target="_blank">
-							<img class="waitpic" src="common/images/thumb_2.png"  data-original="http://udydemo.chenxingpay.cn/wp-content/uploads/cx_img/303/amtuba-136-006-405x555-.jpg" alt="小名" width="405" height="555"/>
-							<div class="postlist-imagenum"><span>3</span>张</div><div class="qxdownbook"><span ><i class="online_icon">在线</i></span></div>
-
-						</a>
-						<div class="case_info">
-							<div class="meta-title"> 交友描述交友描述交友描述交友描述交友描述交友描述交友描述 </div>
-							<div class="meta-post"><i class="iconfont">&#xe652;</i>上次登录时间<span class="cx_like"><i class="iconfont">&#xe631;</i>59<i class="iconfont">&#xe63b;</i>4766</span></div>
-						</div>
-					</li>
- 					<li class="i_list list_n2">
-						<a href="showInfo.html"  target="_blank">
-							<img class="waitpic" src="common/images/thumb_2.png"  data-original="http://udydemo.chenxingpay.cn/wp-content/uploads/cx_img/303/amtuba-136-006-405x555-.jpg" alt="小名" width="405" height="555"/>
-							<div class="postlist-imagenum"><span>3</span>张</div><div class="qxdownbook"><span ><i class="online_icon">在线</i></span></div>
-
-						</a>
-						<div class="case_info">
-							<div class="meta-title"> 交友描述交友描述交友描述交友描述交友描述交友描述交友描述 </div>
-							<div class="meta-post"><i class="iconfont">&#xe652;</i>上次登录时间<span class="cx_like"><i class="iconfont">&#xe631;</i>59<i class="iconfont">&#xe63b;</i>4766</span></div>
-						</div>
-					</li>
- 					<li class="i_list list_n2">
-						<a href="showInfo.html"  target="_blank">
-							<img class="waitpic" src="common/images/thumb_2.png"  data-original="http://udydemo.chenxingpay.cn/wp-content/uploads/cx_img/303/amtuba-136-006-405x555-.jpg" alt="小名" width="405" height="555"/>
-							<div class="postlist-imagenum"><span>3</span>张</div><div class="qxdownbook"><span ><i class="online_icon">在线</i></span></div>
-
-						</a>
-						<div class="case_info">
-							<div class="meta-title"> 交友描述交友描述交友描述交友描述交友描述交友描述交友描述 </div>
-							<div class="meta-post"><i class="iconfont">&#xe652;</i>上次登录时间<span class="cx_like"><i class="iconfont">&#xe631;</i>59<i class="iconfont">&#xe63b;</i>4766</span></div>
-						</div>
-					</li>
- 					<li class="i_list list_n2">
-						<a href="showInfo.html"  target="_blank">
-							<img class="waitpic" src="common/images/thumb_2.png"  data-original="http://udydemo.chenxingpay.cn/wp-content/uploads/cx_img/303/amtuba-136-006-405x555-.jpg" alt="小名" width="405" height="555"/>
-							<div class="postlist-imagenum"><span>3</span>张</div><div class="qxdownbook"><span ><i class="online_icon">在线</i></span></div>
-
-						</a>
-						<div class="case_info">
-							<div class="meta-title"> 交友描述交友描述交友描述交友描述交友描述交友描述交友描述 </div>
-							<div class="meta-post"><i class="iconfont">&#xe652;</i>上次登录时间<span class="cx_like"><i class="iconfont">&#xe631;</i>59<i class="iconfont">&#xe63b;</i>4766</span></div>
-						</div>
-					</li>
- 					<li class="i_list list_n2">
-						<a href="showInfo.html"  target="_blank">
-							<img class="waitpic" src="common/images/thumb_2.png"  data-original="http://udydemo.chenxingpay.cn/wp-content/uploads/cx_img/303/amtuba-136-006-405x555-.jpg" alt="小名" width="405" height="555"/>
-							<div class="postlist-imagenum"><span>3</span>张</div><div class="qxdownbook"><span ><i class="online_icon">在线</i></span></div>
-
-						</a>
-						<div class="case_info">
-							<div class="meta-title"> 交友描述交友描述交友描述交友描述交友描述交友描述交友描述 </div>
-							<div class="meta-post"><i class="iconfont">&#xe652;</i>上次登录时间<span class="cx_like"><i class="iconfont">&#xe631;</i>59<i class="iconfont">&#xe63b;</i>4766</span></div>
-						</div>
-					</li>
- 					<li class="i_list list_n2">
-						<a href="showInfo.html"  target="_blank">
-							<img class="waitpic" src="common/images/thumb_2.png"  data-original="http://udydemo.chenxingpay.cn/wp-content/uploads/cx_img/303/amtuba-136-006-405x555-.jpg" alt="小名" width="405" height="555"/>
-							<div class="postlist-imagenum"><span>3</span>张</div><div class="qxdownbook"><span ><i class="online_icon">在线</i></span></div>
-
-						</a>
-						<div class="case_info">
-							<div class="meta-title"> 交友描述交友描述交友描述交友描述交友描述交友描述交友描述 </div>
-							<div class="meta-post"><i class="iconfont">&#xe652;</i>上次登录时间<span class="cx_like"><i class="iconfont">&#xe631;</i>59<i class="iconfont">&#xe63b;</i>4766</span></div>
-						</div>
-					</li>
- 					<li class="i_list list_n2">
-						<a href="showInfo.html"  target="_blank">
-							<img class="waitpic" src="common/images/thumb_2.png"  data-original="http://udydemo.chenxingpay.cn/wp-content/uploads/cx_img/303/amtuba-136-006-405x555-.jpg" alt="小名" width="405" height="555"/>
-							<div class="postlist-imagenum"><span>3</span>张</div><div class="qxdownbook"><span ><i class="online_icon">在线</i></span></div>
-
-						</a>
-						<div class="case_info">
-							<div class="meta-title"> 交友描述交友描述交友描述交友描述交友描述交友描述交友描述 </div>
-							<div class="meta-post"><i class="iconfont">&#xe652;</i>上次登录时间<span class="cx_like"><i class="iconfont">&#xe631;</i>59<i class="iconfont">&#xe63b;</i>4766</span></div>
-						</div>
-					</li>
- 					<li class="i_list list_n2">
-						<a href="showInfo.html"  target="_blank">
-							<img class="waitpic" src="common/images/thumb_2.png"  data-original="http://udydemo.chenxingpay.cn/wp-content/uploads/cx_img/303/amtuba-136-006-405x555-.jpg" alt="小名" width="405" height="555"/>
-							<div class="postlist-imagenum"><span>3</span>张</div><div class="qxdownbook"><span ><i class="online_icon">在线</i></span></div>
-
-						</a>
-						<div class="case_info">
-							<div class="meta-title"> 交友描述交友描述交友描述交友描述交友描述交友描述交友描述 </div>
-							<div class="meta-post"><i class="iconfont">&#xe652;</i>上次登录时间<span class="cx_like"><i class="iconfont">&#xe631;</i>59<i class="iconfont">&#xe63b;</i>4766</span></div>
-						</div>
-					</li>
- 					<li class="i_list list_n2">
-						<a href="showInfo.html"  target="_blank">
-							<img class="waitpic" src="common/images/thumb_2.png"  data-original="http://udydemo.chenxingpay.cn/wp-content/uploads/cx_img/303/amtuba-136-006-405x555-.jpg" alt="小名" width="405" height="555"/>
-							<div class="postlist-imagenum"><span>3</span>张</div><div class="qxdownbook"><span ><i class="online_icon">在线</i></span></div>
-
-						</a>
-						<div class="case_info">
-							<div class="meta-title"> 交友描述交友描述交友描述交友描述交友描述交友描述交友描述 </div>
-							<div class="meta-post"><i class="iconfont">&#xe652;</i>上次登录时间<span class="cx_like"><i class="iconfont">&#xe631;</i>59<i class="iconfont">&#xe63b;</i>4766</span></div>
-						</div>
-					</li>
- 					<li class="i_list list_n2">
-						<a href="showInfo.html"  target="_blank">
-							<img class="waitpic" src="common/images/thumb_2.png"  data-original="http://udydemo.chenxingpay.cn/wp-content/uploads/cx_img/303/amtuba-136-006-405x555-.jpg" alt="小名" width="405" height="555"/>
-							<div class="postlist-imagenum"><span>3</span>张</div><div class="qxdownbook"><span ><i class="online_icon">在线</i></span></div>
-
-						</a>
-						<div class="case_info">
-							<div class="meta-title"> 交友描述交友描述交友描述交友描述交友描述交友描述交友描述 </div>
-							<div class="meta-post"><i class="iconfont">&#xe652;</i>上次登录时间<span class="cx_like"><i class="iconfont">&#xe631;</i>59<i class="iconfont">&#xe63b;</i>4766</span></div>
-						</div>
-					</li>
-<!--					<li class="i_list list_n2">
-						<a href="showInfo.html"  target="_blank">
-							<img class="waitpic" src="common/images/thumb_2.png"  data-original="http://udydemo.chenxingpay.cn/wp-content/uploads/cx_img/221/amtuba-170-001-405x555-1.jpg" alt="清纯美女学生制服诱惑写真" width="405" height="555"/>
-							<div class="postlist-imagenum"><span>13</span>张</div><div class="qxdownbook"><span ><i class="online_icon"><img src="common/images/online.png"  alt="在线在线" width="128" height="128"></i></span></div>
-						</a>
-						<div class="case_info">
-							<div class="meta-title"> 清纯美女学生制服诱惑写真 </div>
-							<div class="meta-post"><i class="iconfont">&#xe652;</i>2年前<span class="cx_like"><i class="iconfont">&#xe631;</i>83<i class="iconfont">&#xe63b;</i>10177</span></div>
-						</div>
-					</li>
-
-					<li class="i_list list_n2"><a href="showInfo.html"  target="_blank"><img class="waitpic" src="common/images/thumb_2.png"  data-original="http://udydemo.chenxingpay.cn/wp-content/uploads/cx_img/219/amtuba-169-003-405x555-1.jpg" alt="性感长腿女神白色内衣诱惑写真" width="405" height="555"><div class="postlist-imagenum"><span>5</span>张</div><div class="qxdownbook"></div></a><div class="case_info"><div class="meta-title"> 性感长腿女神白色内衣诱惑写真 </div><div class="meta-post"><i class="iconfont">&#xe652;</i>2年前<span class="cx_like"><i class="iconfont">&#xe631;</i>75<i class="iconfont">&#xe63b;</i>11466</span></div></div></li>
-					<li class="i_list list_n2"><a href="showInfo.html"  target="_blank"><img class="waitpic" src="common/images/thumb_2.png"  data-original="http://udydemo.chenxingpay.cn/wp-content/uploads/cx_img/217/amtuba-168-005-405x555-.jpg" alt="性感嫩模护士制服诱惑" width="405" height="555"/><div class="postlist-imagenum"><span>7</span>张</div></a><div class="case_info"><div class="meta-title"> 性感嫩模护士制服诱惑 </div><div class="meta-post"><i class="iconfont">&#xe652;</i>2年前<span class="cx_like"><i class="iconfont">&#xe631;</i>30<i class="iconfont">&#xe63b;</i>5888</span></div></div></li>
-					<li class="i_list list_n2"><a href="showInfo.html"  target="_blank"><img class="waitpic" src="common/images/thumb_2.png"  data-original="http://udydemo.chenxingpay.cn/wp-content/uploads/cx_img/215/amtuba-167-002-405x555-.jpg" alt="人妻王熙浴室黑色丝袜诱惑" width="405" height="555"/><div class="postlist-imagenum"><span>8</span>张</div><div class="qxdownbook"></div></a><div class="case_info"><div class="meta-title"> 人妻王熙浴室黑色丝袜诱惑 </div><div class="meta-post"><i class="iconfont">&#xe652;</i>2年前<span class="cx_like"><i class="iconfont">&#xe631;</i>21<i class="iconfont">&#xe63b;</i>6500</span></div></div></li>
-					<li class="i_list list_n2">
-						<a href="showInfo.html"  target="_blank"><img class="waitpic" src="common/images/thumb_2.png"  data-original="http://udydemo.chenxingpay.cn/wp-content/uploads/cx_img/172/amtuba-166-003-405x555-1.jpg" alt="性感撩人的红色内衣美" width="405" height="555" /><div class="postlist-imagenum"><span>7</span>张</div><div class="qxdownbook"></div></a>
-						<div class="case_info"><div class="meta-title"> 性感撩人的红色内衣美妇</div><div class="meta-post"><i class="iconfont">&#xe652;</i>2年前<span class="cx_like"><i class="iconfont">&#xe631;</i>22<i class="iconfont">&#xe63b;</i>5205</span></div></div>
-					</li> -->
-
-				</ul>
+					</div>
+				</div>
+				<!-- 上下手动换页 -->
+				<a class="carousel-control-prev" href="#lunBoTuDiv" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="carousel-control-next" href="#lunBoTuDiv" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
 			</div>
-		</div>
+				
+			<!-- 查找条件 -->
+			<div id="accordion">
+				<div class="card">
+					<div class="card-header" id="headingOne">
+						<h5 class="mb-0 text-center">
+						<button class="btn btn-primary " data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+							设置查找条件
+						</button>
+						</h5>
+					</div>
 
-<style>
-.update_area{width:100%;background:#f0f0f0;overflow:hidden;position:relative}
-.update_area_inner{max-width:1180px;width:100%;margin:0 auto}
-.update_area_content{max-width:1200px;width:100%;margin:auto;position:relative;overflow:hidden}
-.update_area_lists{max-width:1200px;width:100%;margin:0 auto;margin-top:10px;padding-top:10px;margin-bottom:10px;height:auto;overflow:hidden}
-.update_area_left{position:absolute;top:330px;left:0;font-size:80px;opacity:.4;display:none}
-.update_area_right{position:absolute;top:330px;right:0;font-size:80px;opacity:.4;display:none}
-.update_area_left:hover,.update_area_right:hover{opacity:1}
-.update_area:hover .update_area_left,.update_area:hover .update_area_right{display:block}
-.i_list{
-	float:left;
-	background:#ddd;
-	overflow:hidden;
-	position:relative;
-	margin:0 10px 20px;
-	padding-bottom:41px;
-	-webkit-box-shadow:0 0 10px transparent;
-	-moz-box-shadow:0 0 10px transparent;
-	box-shadow:0 0 10px transparent;
-	cursor:pointer}
-.i_list img{
-	-webkit-transition:all .6s;
-	-moz-transition:all .6s;
-	-ms-transition:all .6s;
-	-o-transition:all .6s;
-	transition:all .6s;
-	-webkit-backface-visibility:hidden;
-	width:100%;height:auto;
-	backface-visibility:hidden}
-/* .i_list>a>img:hover{-webkit-transform:scale(1.05);-moz-transform:scale(1.05);-ms-transform:scale(1.05);-o-transform:scale(1.05);transform:scale(1.05)}
-.i_list:hover .case_info{max-height:95px}
-.i_list:hover .case_info .meta-title{white-space:normal;max-height:64px;color: #666;-webkit-transition:all .35s;-moz-transition:all .35s;-ms-transition:all .35s;-o-transition:all .35s;transition:all .35s}
-.i_list:hover .case_info .meta-post{height: 20px;margin-bottom: 15px}
- */
-.list_n1{width:-moz-calc(25% - 20px);width:-webkit-calc(25% - 20px);width:calc(25% - 20px);height:auto}
-.list_n2{width:-moz-calc(20% - 20px);width:-webkit-calc(20% - 20px);width:calc(20% - 20px);height:auto}
-.list_n3{width:-moz-calc(33.333% - 20px);width:-webkit-calc(33.333% - 20px);width:calc(33.333% - 20px);height:auto}
-.list_n3 .case_info .meta-title{color:#a0a0a0;text-align:center}
-/* .i_list.list_n3:hover .case_info{height:58px} */
+					<!-- show 默认显示 -->
+					<div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+						<div class="card-body">
+							<form>
+							  <div class="form-group">
+								<label for="formGroupExampleInput">Example label</label>
+								<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+							  </div>
+							  <div class="form-group">
+								<label for="formGroupExampleInput2">Another label</label>
+								<input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+							  </div>
+							</form>					
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<!-- 用户list -->
+			<!-- 
+			masonry 不能直接追加元素，
+			margin-bottom: 10px;设置组件的纵向间距
+			gutter可以设置组件的横向间距 
+			"columnWidth": 250
+			data-masonry='{ "itemSelector": ".grid-item", "gutter": 10}'
+			-->
+			<div class="grid row js-masonry" id="imgListDiv" class="sjs-default" style="margin-top: 20px;">
+				<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12 "
+				  v-for="resItem in res" >
+					<div class="card ">
+						<img class="card-img-top" :src="resItem.src" :alt="resItem.alt">
+						<div class="card-body">
+							<div class="card__span">
+								<span class="card__span_left">
+									<span class="fa fa-clock-o">{{resItem.ontime}}</span>
+								</span>
+								<span class="card__span_right"  :data-aid="resItem.uid">
+									<span title="点赞" >
+											<span class="fa fa-eye ">{{resItem.eye}}</span>
+									</span>
+								</span>
+							</div>								
+							<!-- <div class="card__link"></div> -->
+							<hr />
+							<h2 class="card-title">{{resItem.nickname}}</h2>
+							<p class="card-text">{{resItem.brief}}</p>
+						</div>
+					</div>
+				</div>
 
-@media (min-width: 1200px) {
-    .i_list {
-        width: 130px;
-        margin: 0px 26px 17px 0;
-    }
-}
- 
-@media (min-width: 980px ) and ( max-width: 1199px ) {
-    .i_list {
-        width: 120px;
-        margin: 0px 20px 20px 0;
-    }
-}
- 
-@media (min-width: 768px ) and ( max-width: 979px ) {
-    .i_list {
-        width: 120px;
-        margin: 0px 20px 20px 0;
-    }
-}
- 
-@media ( max-width: 767px ) {
- 
-    .i_list {
-        width: 100px;
-        margin: 0px 20px 20px 0;
-    }
-}
-
-</style>
+			</div>
+				
+			
+			<!-- 查找更多 -->
+			<div class="card">
+				<div class="card-header" >
+					<h5 class="mb-0 text-center">
+					<button class="btn btn-link " id="getGridItem" onclick="">
+						查找更多
+					</button>
+					</h5>
+				</div>
+			</div>			
+			
+		</div> <!-- wrapper -->
+	</div> <!-- container -->
 
 
-	</body>
+</body>
+<!-- 动态加载数据 -->
+<script type="text/javascript" src="app.js"></script>
+
+
 </html>

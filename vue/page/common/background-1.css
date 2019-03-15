@@ -1,0 +1,51 @@
+:root{
+  --main-bg-color: #ff7675;
+}
+*,
+*::after,
+*::before{
+  box-sizing: border-box;
+}
+html{
+  font-size: .625em;
+  font-size: calc(1em * .625);
+  background: #f4f4f4;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+body{
+	-webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+  padding: 0;
+	
+	background: #494A5F;	
+}
+
+img{
+  max-width: 100%;
+}
+
+
+
+::selection{
+  background: var(--main-bg-color);
+  color: #fff;
+}
+::-moz-selection{
+  background: var(--main-bg-color);
+  color: #fff;
+}
+
+.container{
+  width: 100%;
+	height: auto;  /*自适应*/
+  max-width: 1290px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+//顶部距离
+.wrapper{
+  padding: 10px 0;
+	height: auto;  /*自适应*/
+}

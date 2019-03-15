@@ -1,93 +1,204 @@
 
 
-//瀑布图片展示初始化
-document.querySelector('#sortable').sortablejs()
-
-
-
-
+// 加载轮播图数据
 const lunBoTuVar = new Vue(
 {
 	el:"#lunBoTuDiv",
 	data:{
-		res:[
-			{height:"200",width:"200",src:"/vue/res/img/hdp/3.jpg",alt:"alt",h5:"h5",p:"p"}
-			,{height:"200",width:"200",src:"/vue/res/img/hdp/1.jpg",alt:"alt",h5:"h5",p:"p"}
-			,{height:"200",width:"200",src:"/vue/res/img/hdp/2.jpg",alt:"alt",h5:"h5",p:"p"}
-
-		],
+		res:[],
 	},
 	created:function() {
-		
 		$('.carousel').carousel({
 		  interval: 2000
-		})
+		});
+		this.getLunBoTuList();
 	},
 	methods:{
-		modActionStatus:function(navName, event){
-			//切换标签状态
-			// console.log(this.isActive);
-			this.isActive[this.curActive]=false;
-			this.isActive[navName]=true;
-			this.curActive=navName;
-			
-			//加载子页面
-			
-		},
-		
-		login:function(){
-			var res = {code:0,msg:"",token:""}
-			//发请请求登陆
-			
-			//解析结果
-			// 
-			if(res.code == 0){
-				// 保存状态
-				localStorage.setItem('boyg_token', JSON.stringify(res.token));
-				//修改导航栏状态
-			}else{
-				// 显示提示信息
-				layer.msg(res.msg);
-			}
-
-
-		},
-		logout:function(){
-			//发送请求
-			var info={token:""};
-			info.token = JSON.parse(localStorage.getItem('boyg_token'));
-			//解析结果
-			localStorage.removeItem('boyg_token');
-			var res = {code:0,msg:"",token:""}
-			// {code:0,msg:""}
-		},
-		regist:function(){
-			// {code:0,msg:"",data:{}}
-		},
-		mounted: function(){
-			// showData('挂载到dom后',this);
-			// 加载token查看是否在线
-		},
+        getLunBoTuList:function(){
+            var _this = this;
+			// post 本地json会失败
+			axios.get('lunBoTuTest.json', {
+				firstName: 'Fred',
+				lastName: 'Flintstone'
+			})
+			.then(function (response) {
+				if(response.status==200){
+					_this.res=response.data;
+				}else{
+					console.log(response.statusText);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+        }
 	}
-	
+// 	mounted: function(){
+// 		// showData('挂载到dom后',this);
+// 		// 加载token查看是否在线
+// 	},	
 }
 );
 
+const formTag = new Vue({
+	el:"form",
+	data:{
+		
+	},
+	methods:{
+		//检查表单
+		checkForm(e){
+			
+		}
+		//获取表单		getFrom(){
+			
+		}
+		//更新表单
+		upFrom(){
+			
+		}
+	}
+});
+
+// 更新数据，并追加到masonry容器中
 const imgListVar = new Vue({
 	el:"#imgListDiv",
 	data:{
-		res2:[
-			{height:"200",width:"200",src:"http://static.runoob.com/images/mix/img_avatar.png",alt:"alt",nickname:"",brief:"",online_state:true}
-			,{height:"200",width:"200",src:"/vue/res/img/hdp/1.jpg",alt:"alt"}
-			,{height:"200",width:"200",src:"/vue/res/img/hdp/2.jpg",alt:"alt"}
-			,{height:"200",width:"200",src:"/vue/res/img/hdp/1.jpg",alt:"alt"}
-			,{height:"200",width:"200",src:"/vue/res/img/hdp/2.jpg",alt:"alt"}
-			,{height:"200",width:"200",src:"/vue/res/img/hdp/1.jpg",alt:"alt"}
-			,{height:"200",width:"200",src:"/vue/res/img/hdp/2.jpg",alt:"alt"}
-			,{height:"200",width:"200",src:"/vue/res/img/hdp/1.jpg",alt:"alt"}
-			,{height:"200",width:"200",src:"/vue/res/img/hdp/2.jpg",alt:"alt"}
-			,{height:"200",width:"200",src:"/vue/res/img/hdp/1.jpg",alt:"alt"}
-			,{height:"200",width:"200",src:"/vue/res/img/hdp/2.jpg",alt:"alt"}
-		]
+		res:[]
+	},
+	created:function(){
+		var _this = this;
+		// 生成 card
+		reloadGridItem();
+         // this.$nextTick(function(){
+			 // document.getElementById('lz66303').outerHTML
+         // });
+		
+// 		console.log($("#imgListDivTemp"));
+		console.log("created");
+		// $("#imgListDiv")
+	},
+	mounted:function(){
+        var _this = this;
+        this.$nextTick(function(){
+	        _this.getImgList();
+			$("#imgListDiv").masonry();
+			// console.log(document.getElementById('imgListDivTemp').outerHTML);
+			//.prop("innerHTML")
+			// https://zhidao.baidu.com/question/652695212709545885.html
+// 			var tvar=$("#imgListDivTemp")
+// 			console.log(tvar.prop("outerHTML"));
+        });
+		// this.$forceUpdate();
+		console.log("mounted");
+    },
+	watch:{
+		// 监听到了 res 数据发生变化执行arr方法
+		res: function() {
+			this.$nextTick(function(){
+				/*现在数据已经渲染完毕*/
+	            _this.getImgList();
+				// console.log($("#imgListDivTemp").prop("outerHTML"));
+				$("#imgListDiv").masonry();
+			})
+			console.log("wathc");
+		}
+    },
+    methods:{
+        getImgList:function(){
+            var _this = this;
+        }
+
+    }
+});
+
+
+// jQuery页面加载后执行的事件(3种方式)
+// 1 $(function () { });
+// 2 $(document).ready(function () { });
+// 3 window.onload = function () { }
+
+
+//JS瀑布流插件masonry动态载入数据
+$(function () {
+	$("#getGridItem").on("click",function(){
+		reloadGridItem();
+	});
+	
+	function reloadGridItem(){
+		var $container = $('#imgListDiv');
+	
+		// post 本地json会失败
+		axios.get('imgtest.json', {
+			firstName: 'Fred',
+			lastName: 'Flintstone'
+		})
+		.then(function (response) {
+// {
+//   // 服务端返回的数据
+//   data: {},
+//   // 服务端返回的状态码
+//   status: 200,
+//   // 服务端返回的状态信息
+//   statusText: 'OK',
+//   // 响应头
+//   // 所有的响应头名称都是小写
+//   headers: {},
+//   // axios请求配置
+//   config: {},
+//   // 请求
+//   request: {}
+// }
+			var res=[];
+			if(response.status==200){
+				console.log(1);
+				res=response.data;
+			}else{
+				console.log(response.statusText);
+			}
+			
+			//生成item
+			$.each(res, function (i, data) {
+				var $gitem = $(
+					'<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12 ">'
+					+'	<div class="card ">'
+					+'		<img class="card-img-top" src="'+data['src']+'" alt="'+data['alt']+'">'
+					+'		<div class="card-body">'
+					+'			<div class="card__span">'
+					+'				<span class="card__span_left">'
+					+'					<span class="fa fa-clock-o">'+data['ontime']+'</span>'
+					+'				</span>'
+					+'				<span class="card__span_right"  data-aid="'+data['uid']+'">'
+					+'					<span title="点赞" >'
+					+'							<span class="fa fa-eye ">'+data['eye']+'</span>'
+					+'						<!-- <a href=""><a> -->'
+					+'					</span>'
+					+'				</span>'
+					+'			</div>			'					
+					+'			<!-- <div class="card__link"></div> -->'
+					+'			<hr />'
+					+'			<h2 class="card-title">'+data['nickname']+'</h2>'
+					+'			<p class="card-text">'+data['brief']+'</p>'
+					+'		</div>'
+					+'	</div>'
+					+'</div>'
+				);
+				$container.append($gitem).masonry('appended', $gitem, true);
+			});
+				// // jQuery方式。重新布局，添加元素，另一种方式添加元素，重新布局
+			// https://segmentfault.com/a/1190000007316788
+			$container.imagesLoaded( function() {
+				// new Masonry( document.getElementById('container'),{itemSelector:'.item'} );
+				$container.masonry();			
+			});
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
 	}
+	
+	reloadGridItem();
+// 	var $getTempItemListElems=$($("#imgListDivTemp").html());
+// 	$("#imgListDivTemp").empty();
+	// $container.append($getTempItemListElems).masonry('appended', $getTempItemListElems,true).masonry();
 });

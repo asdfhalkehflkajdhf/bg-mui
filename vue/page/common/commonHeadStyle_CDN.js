@@ -1,6 +1,7 @@
 
 // jquery 
-document.write('<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>');
+document.write('<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>');
+// document.write('<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>');
 
 // axios 请求接口
 document.write('<script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"  type="text/javascript"></script>');
