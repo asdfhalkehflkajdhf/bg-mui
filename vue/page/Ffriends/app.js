@@ -17,7 +17,7 @@ const lunBoTuVar = new Vue(
         getLunBoTuList:function(){
             var _this = this;
 			// post 本地json会失败
-			axios.get('lunBoTuTest.json', {
+			axios.get('testjson/lunBoTuTest.json', {
 				firstName: 'Fred',
 				lastName: 'Flintstone'
 			})
@@ -129,7 +129,7 @@ $(function () {
 		var $container = $('#imgListDiv');
 	
 		// post 本地json会失败
-		axios.get('imgtest.json', {
+		axios.get('testjson/imgtest.json', {
 			firstName: 'Fred',
 			lastName: 'Flintstone'
 		})
