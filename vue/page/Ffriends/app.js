@@ -1,6 +1,6 @@
 
-
 // 加载轮播图数据
+// 这个是广告，信息分类，轮播图，个人信息页，活动信息页，动态信息页，主要是以图片+跳转链接，显示状态，和计算过程
 const lunBoTuVar = new Vue(
 {
 	el:"#lunBoTuDiv",
@@ -40,19 +40,21 @@ const lunBoTuVar = new Vue(
 }
 );
 
+// 查找时为，一个表结构
 const formTag = new Vue({
 	el:"form",
 	data:{
+		"Current_Living_Place":"不可修改",
 		
 	},
 	methods:{
 		//检查表单
 		checkForm(e){
 			
-		}
+		},
 		//获取表单		getFrom(){
 			
-		}
+		},
 		//更新表单
 		upFrom(){
 			
@@ -61,6 +63,7 @@ const formTag = new Vue({
 });
 
 // 更新数据，并追加到masonry容器中
+// 相册，视频，图片为一个表，按页页面分类，个人信息，动态信息，活动信息，资源保存以路径形式存储，时间，uid
 const imgListVar = new Vue({
 	el:"#imgListDiv",
 	data:{
@@ -69,20 +72,19 @@ const imgListVar = new Vue({
 	created:function(){
 		var _this = this;
 		// 生成 card
-		reloadGridItem();
          // this.$nextTick(function(){
 			 // document.getElementById('lz66303').outerHTML
          // });
 		
 // 		console.log($("#imgListDivTemp"));
-		console.log("created");
+		// console.log("created");
 		// $("#imgListDiv")
 	},
 	mounted:function(){
         var _this = this;
         this.$nextTick(function(){
 	        _this.getImgList();
-			$("#imgListDiv").masonry();
+			// $("#imgListDiv").masonry();
 			// console.log(document.getElementById('imgListDivTemp').outerHTML);
 			//.prop("innerHTML")
 			// https://zhidao.baidu.com/question/652695212709545885.html
@@ -90,7 +92,7 @@ const imgListVar = new Vue({
 // 			console.log(tvar.prop("outerHTML"));
         });
 		// this.$forceUpdate();
-		console.log("mounted");
+		// console.log("mounted");
     },
 	watch:{
 		// 监听到了 res 数据发生变化执行arr方法
@@ -99,9 +101,9 @@ const imgListVar = new Vue({
 				/*现在数据已经渲染完毕*/
 	            _this.getImgList();
 				// console.log($("#imgListDivTemp").prop("outerHTML"));
-				$("#imgListDiv").masonry();
+				// $("#imgListDiv").masonry();
 			})
-			console.log("wathc");
+			// console.log("wathc");
 		}
     },
     methods:{
@@ -124,7 +126,7 @@ $(function () {
 	$("#getGridItem").on("click",function(){
 		reloadGridItem();
 	});
-	
+
 	function reloadGridItem(){
 		var $container = $('#imgListDiv');
 	
@@ -151,16 +153,16 @@ $(function () {
 // }
 			var res=[];
 			if(response.status==200){
-				console.log(1);
+				// console.log(1);
 				res=response.data;
 			}else{
-				console.log(response.statusText);
+				// console.log(response.statusText);
 			}
 			
 			//生成item
 			$.each(res, function (i, data) {
 				var $gitem = $(
-					'<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12 ">'
+					'<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12" >'
 					+'	<div class="card ">'
 					+'		<img class="card-img-top" src="'+data['src']+'" alt="'+data['alt']+'">'
 					+'		<div class="card-body">'
@@ -189,7 +191,8 @@ $(function () {
 			// https://segmentfault.com/a/1190000007316788
 			$container.imagesLoaded( function() {
 				// new Masonry( document.getElementById('container'),{itemSelector:'.item'} );
-				$container.masonry();			
+				$container.masonry();
+				
 			});
 		})
 		.catch(function (error) {
@@ -198,7 +201,8 @@ $(function () {
 	}
 	
 	reloadGridItem();
-// 	var $getTempItemListElems=$($("#imgListDivTemp").html());
-// 	$("#imgListDivTemp").empty();
+	// var $getTempItemListElems=$($("#imgListDivTemp").html());
+	// $("#imgListDivTemp").empty();
 	// $container.append($getTempItemListElems).masonry('appended', $getTempItemListElems,true).masonry();
 });
+

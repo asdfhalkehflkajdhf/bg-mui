@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">  
+	<!-- //允许网页宽度自动调整 -->
+	<!-- //https://www.cnblogs.com/MissZhao/p/5773091.html -->
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>男生女生-登陆注册</title>
+	
+    <script src="../common/commonHeadStyle_CDN.js"></script>
+	<!-- 自有资源 -->
+	<!-- awesome图标 -->
+	<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css"></head>
+
+</head>
+<body>
+<script>$(document).ready(function(c) {
+        $('.close').on('click', function(c){
+            $('.login-form').fadeOut('slow', function(c){
+                $('.login-form').remove();
+            });
+        });
+    });
+</script>
+<!--SIGN UP-->
+<h1></h1>
+<div class="login-form">
+    <div class="close"> </div>
+    <div class="head-info">
+        <label class="lbl-1"></label>
+        <label class="lbl-2"></label>
+        <label class="lbl-3"></label>
+    </div>
+
+    <form id="upInfo">
+        <input type="text" class="text" value="" placeholder="手机号" name="phone" maxlength="11" id="phone"  required />
+        <input type="password" class="pwCheck" value="" placeholder="密码" name="password" id="password" maxlength="64" required />
+        <input type="password" class="pwCheck" value="" placeholder="重新输入密码" name="password_again" id="password_again" maxlength="64" required />
+<!--        <div class="send">-->
+            <input type="check" name="identify_code" id="identify_code" maxlength="6" value="" placeholder="验证码"  required="required" />
+<!--        </div>-->
+
+    </form>
+    <div class="signinOtherText">
+        <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=20a735e8c3475f517c537748009c3a49cb494a9955def3b6d9028c8e50580ea7" title="qq群1"><i class="fa fa-qq fa-fw"></i></a>
+        <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=93ac2c61a7c52b8b731c0d84a491371e146c6bcf74d79d92f76c8f429a9425c0" title="qq群2"><i class="fa fa-qq fa-fw"></i></a>
+        <a target="_blank" href="mailto:liuzhuchen@163.com" title="邮件liuzhuchen@163.com"><i class="fa fa-envelope-o fa-fw"></i></a>
+
+
+        <a href="../Bulletin/">公告</a><a href="../Login/" >登录</a><input type="button" value="获取验证码"  class="sendCheck" />
+
+    </div>
+    <div class="signin">
+        <input type="submit" class="submit" value="注册" >
+    </div>
+</div>
+<!-- Copyright -->
+						<div class="copyright">
+                            <p><span style="color:black;">Copyright©2018-2019 男生女生.cn 版权所有。<a href="http://www.miitbeian.gov.cn/" rel="nofollow" target="_blank">&nbsp;京ICP备18030752号&nbsp;</a> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=13072802000022" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">&nbsp;<img src="/res/img/备案图标.png" style="float:left;"/>冀公网安备 13072802000022号&nbsp;</a></span></p>                            <!-- <a href="/page/j/Bulletin">公告</a>-<a href="/page/j/Login">登录</a>-<a href="/page/j/Register">注册</a> -->
+                        </div>
+<script>
+    layui.use(['layer'], function() {
+        var layer = layui.layer;
+
+        $(".submit").on('click', function () {
+
+            $.ajax({
+                url:'reg.php',
+                type:'post',
+                dataType: "json",//返回值类型
+                data: $("#upInfo").serialize(),
+                success:function(data){
+                    if(data.code!=0){
+                        layer.msg(data.msg);
+                    }else{
+                        location.href=data.msg;
+                    }
+                }
+            })
+
+
+        });
+
+        $("#phone").on('blur', function () {
+            phone_style_check();
+        });
+
+        $(".pwCheck").on('blur', function () {
+            var pw1 = $("#password").val();
+            var pw2 = $("#password_again").val();
+            if (pw1!="" && pw2!="" && pw2!=pw1 ){
+                layer.msg("二次密码不对！请重新输入。");
+                $("#password_again").val("");
+            }
+
+        });
+
+
+        $(".sendCheck").on('click', function () {
+            send_获取手机验证_code(this);
+        });
+
+        function phone_style_check(){
+            phoneNum=document.getElementById("phone").value;
+            if(/^1[0-9]{10}$/.test(phoneNum) || phoneNum==""){
+                return true;
+            }else{
+                // alert("手机号格式不对");
+                layer.msg("手机号格式不对");
+                return false;
+            }
+        }
+        function send_获取手机验证_code(identify){
+            if(!phone_style_check()){
+                return false;
+            }
+
+            $.ajax({
+                url:'send_identify_code_phone.php',
+                type:'post',
+                // target: '_blank',
+                dataType: "json",//预期服务器返回的数据类型
+                data:{ "phone": $("#phone").val(), "resDataType": "json"},
+                success: function(data){
+                    if(data.code == 0){
+                        layer.msg('发送成功,'+data.msg);
+                        // window.location.reload(true);
+                    }else{
+                        layer.msg('发送失败,'+data.msg);
+                    }
+                },
+                error : function(){layer.msg('发送失败。');}
+            });
+
+            settime(identify);
+            return true;
+
+        };
+
+
+        var countdown=60;
+        function settime(val) {
+
+            if (countdown == 0) {
+                val.removeAttribute("disabled");
+                val.value="获取验证码";
+                countdown = 60;
+                return true;
+            } else {
+                val.setAttribute("disabled", true);
+                val.value="重新发送(" + countdown + ")";
+                countdown--;
+            }
+            setTimeout(function() { settime(val)  },1000)
+        }
+
+    });
+</script>
+<script>
+
+</script>
+</body>
+</html>

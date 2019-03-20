@@ -16,6 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
 	<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 	<script src="https://cdn.bootcss.com/jquery.imagesloaded/4.1.4/imagesloaded.min.js"></script>
+
 	<!-- awesome图标 -->
 	<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css"></head>
 <body>
@@ -64,16 +65,12 @@
 					<!-- show 默认显示 -->
 					<div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
 						<div class="card-body">
-							<form
-							  @submit="checkForm"
-							  action="https://vuejs.org/"
-							  method="post"
-							  <!-- novalidate="true" -->
-							>
+							<!-- novalidate="true" 不跳转页面，加载更多时，条件查询变更-->
+							<form >
 								<div class="form-group row">
 									<label for="生活地" class="col-sm-1 col-form-label">生活地</label>
 									<div class="col-sm-5">
-										<input type="text" readonly class="form-control" id="生活地" value="不可修改">
+										<input type="text" readonly class="form-control" id="生活地" value="">
 									</div>
 									
 									<label for="性别" class="col-sm-1 col-form-label">性别</label>
@@ -165,7 +162,8 @@
 			"columnWidth": 250
 			data-masonry='{ "itemSelector": ".grid-item", "gutter": 10}'
 			-->
-			<div class="grid row js-masonry" id="imgListDiv" class="sjs-default" style="margin-top: 20px;">
+
+			<div class="grid row js-masonry" id="imgListDiv" style="margin-top: 20px;">
 <!-- 				<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12 "
 				  v-for="resItem in res" >
 					<div class="card ">
@@ -191,7 +189,6 @@
  -->
 			</div>
 				
-			
 			<!-- 查找更多 -->
 			<div class="card">
 				<div class="card-header" >
@@ -211,5 +208,6 @@
 <!-- 动态加载数据 -->
 <script type="text/javascript" src="app.js"></script>
 
-
+<script type="text/javascript">
+</script>
 </html>

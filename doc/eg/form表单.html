@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bootstrap 实例 </title>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+		<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<form>
+	<div class="form-group row">
+		<label for="生活地" class="col-sm-1 col-form-label">生活地</label>
+		<div class="col-sm-5">
+			<input type="text" readonly class="form-control" id="生活地" value="不可修改">
+		</div>
+		
+	    <label for="性别" class="col-sm-1 col-form-label">性别</label>
+		<div class="col-sm-5 row">
+			<select class="custom-select" id="性别">
+				<option value="3" selected>请选择</option>
+				<option value="2">男</option>
+				<option value="1">女</option>
+			</select>
+		</div>
+	</div>
+	<hr />
+	<div class="form-group row">
+   
+		<label for="年龄" class="col-sm-1   col-form-label">年龄</label>
+		<div class="col-sm-5 input-group">
+			<input type="text"  class="form-control" id="年龄1" value="3">
+			<span class="input-group-text">-</span>
+			<input type="text"  class="form-control" id="年龄2" value="6">
+		</div>
+		
+		<label for="身高" class="col-sm-1   col-form-label">身高</label>
+		<div class="col-sm-5 input-group">
+			<input type="text"  class="form-control" id="身高1" value="">
+			<span class="input-group-text">-</span>
+			<input type="text"  class="form-control" id="身高2" value="">
+			<span class="input-group-text">cm</span>
+		</div>
+	</div>
+	<hr />
+	<div class="form-group row">
+		<label for="学历" class="col-sm-1 col-form-label">学历</label>
+		<div class="col-sm-5">
+			<select class="custom-select" id="学历">
+				<option selected>Open this select menu</option>
+				<option value="1">One</option>
+				<option value="2">Two</option>
+				<option value="3">Three</option>
+			</select>
+		</div>
+	
+	
+		<label for="学校" class="col-sm-1 col-form-label">学校</label>
+		<div class="col-sm-5">
+			<select class="custom-select" id="学校">
+				<option selected>Open this select menu</option>
+				<option value="1">One</option>
+				<option value="2">Two</option>
+				<option value="3">Three</option>
+			</select>
+		</div>
+	</div>
+	<hr />
+    <div class="form-group row">
+		<label for="收入" class="col-sm-1 col-form-label">收入></label>
+		<div class="col-sm-5">
+			<select class="custom-select" id="收入">
+				<option selected>Open this select menu</option>
+				<option value="1">One</option>
+				<option value="2">Two</option>
+				<option value="3">Three</option>
+			</select>
+		</div>
+	
+	
+		<label for="状态" class="col-sm-1 col-form-label">状态</label>
+		<div class="col-sm-5">
+			<select class="custom-select" id="状态">
+				<option selected>Open this select menu</option>
+				<option value="1">One</option>
+				<option value="2">Two</option>
+				<option value="3">Three</option>
+			</select>
+		</div>
+	</div>
+	<hr />
+	<button type="button" class="btn btn-primary btn-lg btn-block">保存</button>
+</form>
+
+<!-- <form class="form-inline"> -->
+  <!-- <div class="form-group mb-2"> -->
+    <!-- <label for="staticEmail2" class="sr-only">Email</label> -->
+    <!-- <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com"> -->
+  <!-- </div> -->
+  <!-- <div class="form-group mx-sm-3 mb-2"> -->
+    <!-- <label for="inputPassword2" class="sr-only">Password</label> -->
+    <!-- <input type="password" class="form-control" id="inputPassword2" placeholder="Password"> -->
+  <!-- </div> -->
+  <!-- <button type="submit" class="btn btn-primary mb-2">Confirm identity</button> -->
+<!-- </form> -->
+
+</body>
+
+</html>

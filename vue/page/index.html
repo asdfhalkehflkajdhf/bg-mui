@@ -10,7 +10,8 @@
     <script src="common/commonHeadStyle_CDN.js"></script>
 
 </head>
-<body>
+<body >
+	
 	<!-- .navbar-expand{-sm|-md|-lg|-xl}用于响应式折叠,小于参数时折叠 -->
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark navbar-fixed-top" id="navMenu">
 		<!-- .navbar-brand 适用于您的公司，产品或项目名称。 -->
@@ -27,10 +28,10 @@
 		<!-- 左侧菜单 -->
 		<!-- .collapse .navbar-collapse 用于通过父断点对导航栏内容进行分组和隐藏 -->
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto" >
-				<li class="nav-item " v-for="item in nvaListLeft" 
-				v-bind:class="{active: isActive[item.name]}" 
-				v-on:click="modActionStatus(item.name)">
+			<ul class="navbar-nav mr-auto" id="navMenuLeft">
+				<li class="nav-item " v-for="item,index in nvaListLeft" 
+				v-bind:class='{active: item.isActive}'
+				v-on:click="modActionStatus(index)">
 					<a class="nav-link " :href="item.url" >
 						{{item.name}}
 						<!-- {{item}} -->
@@ -56,24 +57,21 @@
 			
 			 <!-- 右侧菜单 -->
 			 <!-- mr-auto 距离自动 -->
-			<ul class="navbar-nav  justify-content-end">
-				<li class="nav-item justify-content-end" v-for="item in navListRight" 
-				v-bind:class="{active: isActive[item.name]}" 
-				v-on:click="modActionStatus(item.name)">
-					<a class="nav-link " href="" >
-						{{item.name}}
-						<!-- {{item}} -->
-					</a>
-				</li>
-<!-- 				<li class="">
-					<a class="nav-link" href="#">登陆</a>
-				</li>	
-				<li class="">
-					<a class="nav-link" href="#">注册</a>
-				</li>
-				<li class="">
-					<a class="nav-link" href="#">退出</a>
-				</li>	 -->	
+			<ul class="navbar-nav  justify-content-end" id="navMenuRight" >
+				<div v-show="!landing">
+					<li class="nav-item justify-content-end" >
+						<a class="nav-link " href="#" data-toggle="modal" data-target="#loginModal">
+							登陆/注册
+						</a>
+					</li>
+				</div>
+				<div v-show="landing">
+					<li class="nav-item justify-content-end" >
+						<a class="nav-link " href="#" v-on:click="logout">
+							退出
+						</a>
+					</li>
+				</div>
 			</ul>
 			
 		</div>
@@ -81,55 +79,137 @@
 	
 	<div class="body-content">
 		<div class="wrapper">
- -->		</div>
+			<div id="subPage">
+<!-- 			<iframe id="subPageIframe" src="Ffriends/index.html" 
+			frameborder="0" scrolling="no"  width="100%"  style=" "
+			></iframe> -->
+			</div>
+		</div>
+	</div>
+
+	<!-- 登陆注册modal -->
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+<!-- 					<div class="modal-header">
+					<h5 class="modal-title" id="loginModalLabel">New message</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div> -->
+				<div class="modal-body">
+					<!-- 登陆模态框 -->
+					<div id="accordion">
+						<div id="collapseOne" class="collapse show" data-parent="#accordion">
+							<h2 class="text-center">登陆</h2>
+
+							<form>
+								<div class="form-group row">
+									<!-- <label for="手机号" class="col-sm-2 col-form-label">手机号</label> -->
+									<div class="col-sm-12">
+									<input type="number" class="form-control" placeholder="手机号" v-model="loginForm.phone" maxlength="11" >
+									</div>
+								</div>
+								<div class="form-group row">
+									<!-- <label for="inputPassword" class="col-sm-2 col-form-label">密码</label> -->
+									<div class="col-sm-12">
+									<input type="password" class="form-control" placeholder="密码" v-model="loginForm.pw" maxlength="16">
+									</div>
+								</div>
+								<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="login()">发送</button>
+							</form>	
+							<div style="text-align: right;">
+								<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo">注册</button>
+								<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseThree">忘记密码</button>
+							</div>
+						</div>
+						<div id="collapseTwo" class="collapse" data-parent="#accordion">
+							<h2 class="text-center">注册</h2>
+							<form>
+								<div class="form-group row">
+									<!-- <label for="手机号" class="col-sm-2 col-form-label">手机号</label> -->
+									<div class="col-sm-12">
+									<input type="number" class="form-control"  placeholder="手机号" v-model="registForm.phone" maxlength="11" >
+									</div>
+								</div>
+								<div class="form-group row">
+									<!-- <label for="inputPassword" class="col-sm-2 col-form-label">密码</label> -->
+									<div class="col-sm-12">
+									<input type="password" class="form-control"  placeholder="密码" v-model="registForm.pw" maxlength="16">
+									</div>
+								</div>
+								<div class="form-group row">
+									<!-- <label for="checkCode" class="col-sm-2 col-2 col-form-label">验证码</label> -->
+									<div class="col-sm-8 col-8">
+									<input type="text" class="form-control"  placeholder="验证码" v-model="registForm.checkCode" maxlength="16">
+									</div>
+									<button type="button" class="btn btn-link col-sm-4 col-4" >获取验证码</button>
+								</div>
+								<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="regist()">发送</button>
+							</form>	
+							<div style="text-align: right;">
+								<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne">登陆</button>
+								<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseThree">忘记密码</button>
+							</div>
+
+						</div>
+						<div id="collapseThree" class="collapse" data-parent="#accordion">
+							<h2 class="text-center">忘记密码</h2>
+							<form>
+								<div class="form-group row">
+									<!-- <label for="手机号" class="col-sm-2 col-form-label">手机号</label> -->
+									<div class="col-sm-12">
+									<input type="number" class="form-control" placeholder="手机号" v-model="forgetForm.phone" maxlength="11" >
+									</div>
+								</div>
+								<div class="form-group row">
+									<!-- <label for="手机号" class="col-sm-2 col-form-label">手机号</label> -->
+									<div class="col-sm-12">
+									<input type="email" class="form-control"  placeholder="邮箱" v-model="forgetForm.email"  >
+									</div>
+								</div>
+
+								<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="forget()">发送</button>
+							</form>
+							<div style="text-align: right;">
+								<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne">登陆</button>
+								<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo">注册</button>
+							</div>
+						</div>
+					</div>
+
+				</div>
+<!-- 					<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Send message</button>
+				</div> -->
+			</div>
+		</div>
 	</div>
 </body>
-<script>
-	
-	// 这里做全局变量引用,在非vue-cl情况下如何加载
-	// 不行就做单页面web.进行子页面值传递
-// import Vue from "vue";
-// import globalVar from "./common/globalVar.js";
-// Vue.prototype.define = globalVar;
+<!-- 动态加载数据 -->
+<script type="text/javascript" src="app.js"></script>
 
-const nav = new Vue(
-{
-	el:"#navMenu",
+<script type="text/javascript" language="javascript">
+
+var loginModal=new Vue({
+	el:"#loginModal",
 	data:{
-		nvaListLeft:[
-			{name:"朋友",url:"#"}
-			,{name:"活动",url:"#"}
-			,{name:"动态",url:"#"}
-			,{name:"消息",url:"#"}
-			,{name:"我的",url:"#"}
-		],
-		navListRight:[
-			{name:"登陆",url:"#"}
-			,{name:"注册",url:"#"}
-			,{name:"退出",url:"#"}
-		],
-		isActive:{
-			"朋友":true
-			,"活动":false
-			,"动态":false
-			,"消息":false
-			,"我的":false
+		loginForm:{
+			phone:"",
+			pw:""
 		},
-		//前一个选中的标签
-		curActive:"朋友"
+		registForm:{
+			phone:"",
+			pw:"",
+			checkCode:""
+		},
+		forgetForm:{
+			phone:"",
+			email:""
+		},
 	},
 	methods:{
-		modActionStatus:function(navName, event){
-			//切换标签状态
-			// console.log(this.isActive);
-			this.isActive[this.curActive]=false;
-			this.isActive[navName]=true;
-			this.curActive=navName;
-			
-			//加载子页面
-			
-		},
-		
 		login:function(){
 			var res = {code:0,msg:"",token:""}
 			//发请请求登陆
@@ -138,34 +218,32 @@ const nav = new Vue(
 			// 
 			if(res.code == 0){
 				// 保存状态
-				localStorage.setItem('boyg_token', JSON.stringify(res.token));
+				sessionStorage.setItem('BoyGToken', JSON.stringify(res.token));
 				//修改导航栏状态
+				console.log(navMenuRight);
+				navMenuRight.setLanding(true);
+				$("#loginModal").modal('hide');
 			}else{
 				// 显示提示信息
 				layer.msg(res.msg);
 			}
-
-
-		},
-		logout:function(){
-			//发送请求
-			var info={token:""};
-			info.token = JSON.parse(localStorage.getItem('boyg_token'));
-			//解析结果
-			localStorage.removeItem('boyg_token');
-			var res = {code:0,msg:"",token:""}
-			// {code:0,msg:""}
+		
+		
 		},
 		regist:function(){
 			// {code:0,msg:"",data:{}}
+			console.log(this.registForm);
 		},
-		mounted: function(){
-			// showData('挂载到dom后',this);
-			// 加载token查看是否在线
+		forget:function(){
+			// 忘记密码
+			// {code:0,msg:"",data:{}}
+			console.log(this.forgetForm);
+			
 		},
 	}
-	
-}
-);	
+});
+
+
 </script>
+
 </html>
