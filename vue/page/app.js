@@ -85,6 +85,88 @@ const navMenuLeft = new Vue({
 }
 );	
 
+var loginModal=new Vue({
+	el:"#loginModal",
+	data:{
+		loginForm:{
+			phone:"",
+			pw:""
+		},
+		registForm:{
+			phone:"",
+			pw:"",
+			checkCode:""
+		},
+		forgetForm:{
+			phone:"",
+			email:""
+		},
+	},
+	methods:{
+		login:function(){
+			var res = {code:0,msg:"",token:""};
+			//发请请求登陆
+			
+			//解析结果
+			if(res.code == 0){
+				// 保存状态
+				sessionStorage.setItem('BoyGToken', JSON.stringify(res.token));
+				//修改导航栏状态
+				console.log(navMenuRight);
+				navMenuRight.setLanding(true);
+				$("#loginModal").modal('hide');
+			}else{
+				// 显示提示信息
+				layer.msg(res.msg);
+			}
+		},
+		regist:function(){
+			var res = {code:0,msg:"",token:""};
+			//解析结果
+			if(res.code == 0){
+				// 保存状态
+				sessionStorage.setItem('BoyGToken', JSON.stringify(res.token));
+				//修改导航栏状态
+				console.log(navMenuRight);
+				navMenuRight.setLanding(true);
+				$("#loginModal").modal('hide');
+			}else{
+				// 显示提示信息
+				layer.msg(res.msg);
+			}
+			// {code:0,msg:"",data:{}}
+			console.log(this.registForm);
+		},
+		forget:function(){
+			// 忘记密码
+			var res = {code:0,msg:""};
+			//解析结果
+			if(res.code == 0){
+				// 提示跳转到登陆面
+				layer.msg(res.msg);
+			}else{
+				// 显示提示信息
+				layer.msg(res.msg);
+			}
+
+			// {code:0,msg:"",data:{}}
+			console.log(this.forgetForm);
+		},
+		getCheckCode:function(){
+			// 发送验证码
+			var res = {code:0,msg:""};
+			//解析结果
+			if(res.code == 0){
+				// 提示有效时间，
+				layer.msg(res.msg);
+			}else{
+				// 显示提示信息
+				layer.msg(res.msg);
+			}
+			console.log(this.registForm);
+		}
+	}
+});
 // 子页面切换
 function subPageSwitch(url){
 	// console.log("subPageSwitch");

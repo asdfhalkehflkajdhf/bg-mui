@@ -192,56 +192,7 @@
 
 <script type="text/javascript" language="javascript">
 
-var loginModal=new Vue({
-	el:"#loginModal",
-	data:{
-		loginForm:{
-			phone:"",
-			pw:""
-		},
-		registForm:{
-			phone:"",
-			pw:"",
-			checkCode:""
-		},
-		forgetForm:{
-			phone:"",
-			email:""
-		},
-	},
-	methods:{
-		login:function(){
-			var res = {code:0,msg:"",token:""}
-			//发请请求登陆
-			
-			//解析结果
-			// 
-			if(res.code == 0){
-				// 保存状态
-				sessionStorage.setItem('BoyGToken', JSON.stringify(res.token));
-				//修改导航栏状态
-				console.log(navMenuRight);
-				navMenuRight.setLanding(true);
-				$("#loginModal").modal('hide');
-			}else{
-				// 显示提示信息
-				layer.msg(res.msg);
-			}
-		
-		
-		},
-		regist:function(){
-			// {code:0,msg:"",data:{}}
-			console.log(this.registForm);
-		},
-		forget:function(){
-			// 忘记密码
-			// {code:0,msg:"",data:{}}
-			console.log(this.forgetForm);
-			
-		},
-	}
-});
+
 
 
 </script>

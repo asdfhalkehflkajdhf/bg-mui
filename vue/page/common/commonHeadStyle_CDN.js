@@ -7,7 +7,7 @@ document.write('<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"
 document.write('<script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"  type="text/javascript"></script>');
 
 // vue库
-document.write('<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"   type="text/javascript"></script>');
+document.write('<script src="https://cdn.bootcss.com/vue/2.6.9/vue.min.js"></script>');
  
 // layer 弹出层 
 // http://layer.layui.com/
@@ -29,8 +29,8 @@ document.write('<link href="https://cdn.bootcss.com/layer/2.3/skin/layer.css" re
 // document.write('<script src="https://unpkg.com/element-ui@2.3.7/lib/index.js"></script>');
 
 //bootstrap/4.0.0
-document.write('<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">');
-document.write('<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>');
+// document.write('<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">');
+// document.write('<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>');
 
 //  wangEditor
 // document.write('<link href="https://cdn.bootcss.com/wangEditor/10.0.13/wangEditor.min.css" rel="stylesheet">');

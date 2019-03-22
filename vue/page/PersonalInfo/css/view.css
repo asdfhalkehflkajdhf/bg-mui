@@ -1,0 +1,48 @@
+
+
+.card {
+	/* margin-bottom:10px; */
+	/* margin: 10px,10px,10px,10px; */
+	/* padding:4px 1px 1px 1px; */
+}
+
+.placeholder-20{
+	height: 20px;
+}
+.placeholder-10{
+	height: 10px;
+}
+
+/* 配置组//间隔设置 */
+.group-item{
+	padding-top:10px;
+}
+
+/*图片瀑布流*/
+.grid-item {
+	margin-top: 5px;
+	width: 200px;
+	/* height: 120px; */
+	float: left;
+	/* background: #D26; */
+	/* border: 2px solid #333; */
+	/* border-color: hsla(0, 0%, 0%, 0.5); */
+	/* border-radius: 5px; */
+	
+}
+
+/*鼠标移动到img显示放大*/
+.grid-item > img{
+	cursor: -webkit-zoom-in;
+	cursor: zoom-in;
+}
+
+.card__span_left{
+		padding-top: 10px;
+		padding-left: 10px;
+}
+
+.card__span_right{
+	float:right;
+	cursor:pointer;
+}

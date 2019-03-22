@@ -18,7 +18,8 @@
 	<script src="https://cdn.bootcss.com/jquery.imagesloaded/4.1.4/imagesloaded.min.js"></script>
 
 	<!-- awesome图标 -->
-	<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css"></head>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+</head>
 <body>
 	<div class="container">
 	    <div class="wrapper">
@@ -70,15 +71,13 @@
 								<div class="form-group row">
 									<label for="生活地" class="col-sm-1 col-form-label">生活地</label>
 									<div class="col-sm-5">
-										<input type="text" readonly class="form-control" id="生活地" value="">
+										<input type="text" readonly class="form-control" id="生活地" :value="conditionalForm.currentLivingPlace" v-model="conditionalForm.currentLivingPlace">
 									</div>
 									
 									<label for="性别" class="col-sm-1 col-form-label">性别</label>
 									<div class="col-sm-5 ">
-										<select class="custom-select" id="性别">
-											<option value="3" selected>请选择</option>
-											<option value="2">男</option>
-											<option value="1">女</option>
+										<select class="custom-select" id="性别" v-model="conditionalForm.sex">
+											<option :value="item.value" v-for="item in conditionalData.sexList">{{item.text}}</option>
 										</select>
 									</div>
 								</div>
@@ -87,16 +86,16 @@
 							   
 									<label for="年龄" class="col-sm-1   col-form-label">年龄</label>
 									<div class="col-sm-5 input-group">
-										<input type="text"  class="form-control" id="年龄1" value="3">
+										<input type="number"  class="form-control" maxlength="2" id="年龄1" value="3" v-model="conditionalForm.age1">
 										<span class="input-group-text">-</span>
-										<input type="text"  class="form-control" id="年龄2" value="6">
+										<input type="number"  class="form-control" maxlength="2" id="年龄2" value="6" v-model="conditionalForm.age2">
 									</div>
 									
 									<label for="身高" class="col-sm-1   col-form-label">身高</label>
 									<div class="col-sm-5 input-group">
-										<input type="text"  class="form-control" id="身高1" value="">
+										<input type="number"  class="form-control" maxlength="3" id="身高1" value="" v-model="conditionalForm.height1">
 										<span class="input-group-text">-</span>
-										<input type="text"  class="form-control" id="身高2" value="">
+										<input type="number"  class="form-control" maxlength="3" id="身高2" value="" v-model="conditionalForm.height2">
 										<span class="input-group-text">cm</span>
 									</div>
 								</div>
@@ -104,22 +103,16 @@
 								<div class="form-group row">
 									<label for="学历" class="col-sm-1 col-form-label">学历</label>
 									<div class="col-sm-5">
-										<select class="custom-select" id="学历">
-											<option selected>Open this select menu</option>
-											<option value="1">One</option>
-											<option value="2">Two</option>
-											<option value="3">Three</option>
+										<select class="custom-select" id="学历" v-model="conditionalForm.edu">
+											<option :value="item.value" v-for="item in conditionalData.eduList">{{item.text}}</option>
 										</select>
 									</div>
 								
 								
 									<label for="学校" class="col-sm-1 col-form-label">学校</label>
 									<div class="col-sm-5">
-										<select class="custom-select" id="学校">
-											<option selected>Open this select menu</option>
-											<option value="1">One</option>
-											<option value="2">Two</option>
-											<option value="3">Three</option>
+										<select class="custom-select" id="学校" v-model="conditionalForm.school">
+											<option :value="item.value" v-for="item in conditionalData.schoolList">{{item.text}}</option>
 										</select>
 									</div>
 								</div>
@@ -127,27 +120,19 @@
 								<div class="form-group row">
 									<label for="收入" class="col-sm-1 col-form-label">收入></label>
 									<div class="col-sm-5">
-										<select class="custom-select" id="收入">
-											<option selected>Open this select menu</option>
-											<option value="1">One</option>
-											<option value="2">Two</option>
-											<option value="3">Three</option>
-										</select>
+										<input type="number"  class="form-control" id="年龄1" value="" v-model="conditionalForm.income">
 									</div>
 								
 								
 									<label for="状态" class="col-sm-1 col-form-label">状态</label>
 									<div class="col-sm-5">
-										<select class="custom-select" id="状态">
-											<option selected>Open this select menu</option>
-											<option value="1">One</option>
-											<option value="2">Two</option>
-											<option value="3">Three</option>
+										<select class="custom-select" id="状态" v-model="conditionalForm.ownness">
+											<option :value="item.value" v-for="item in conditionalData.ownnessList">{{item.text}}</option>
 										</select>
 									</div>
 								</div>
 								<hr class="" />
-								<button type="button" class="btn btn-primary btn-lg btn-block">保存</button>
+								<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="upFrom()">保存</button>
 							</form>					
 						</div>
 					</div>
