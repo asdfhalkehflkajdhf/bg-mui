@@ -4,6 +4,14 @@ var editor_si = new E('#personalIntroduction');
 var editor_ti = new E('#duifangIntroduction');
 editor_si.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
 editor_ti.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
+
+editor_si.customConfig.uploadImgMaxSize = 3 * 1024 * 1024 // 将图片大小限制为 3M
+// editor_si.customConfig.uploadImgMaxLength = 1 // 限制一次最多上传 5 张图片
+
+editor_ti.customConfig.uploadImgMaxSize = 3 * 1024 * 1024 // 将图片大小限制为 3M
+// editor_ti.customConfig.uploadImgMaxLength = 1 // 限制一次最多上传 5 张图片
+
+
 // 创建编辑器之后，使用editor.txt.html(...)设置编辑器内容
 var editorMenus=[
     'head',  // 标题
