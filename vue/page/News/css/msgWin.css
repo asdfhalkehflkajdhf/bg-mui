@@ -1,11 +1,4 @@
 
-
-.card {
-	/* margin-bottom:10px; */
-	/* margin: 10px,10px,10px,10px; */
-	/* padding:4px 1px 1px 1px; */
-}
-
 .placeholder-20{
 	height: 20px;
 }
@@ -15,12 +8,8 @@
 
 /* 配置组//间隔设置 */
 .group-item{
-	padding-top:10px;
+	/* padding-top:10px; */
 }
-
-
-
-
 
 .card__span_left{
 		padding-top: 10px;
@@ -30,4 +19,15 @@
 .card__span_right{
 	float:right;
 	cursor:pointer;
+}
+
+
+.msg-text-backcolor-left {
+	background-color: #E8E8E8;
+}
+.msg-text-backcolor-right {
+	background-color: #99CC66;
+}
+.msg-time-backcolor {
+	color: #C8C8C8;
 }

@@ -1,0 +1,34 @@
+
+hr {
+	/* padding: 1px 0px 1px 0px; */
+}
+
+.card {
+	/* margin-bottom:10px; */
+	/* margin: 10px,10px,10px,10px; */
+	/* padding:4px 1px 1px 1px; */
+}
+
+.placeholder-20{
+	height: 20px;
+}
+.placeholder-10{
+	height: 10px;
+}
+
+/* 配置组//间隔设置 */
+.group-item{
+	/* padding-top:10px; */
+}
+
+.card__span_left{
+		padding-top: 10px;
+		padding-left: 10px;
+}
+
+.card__span_right{
+	float:right;
+	cursor:pointer;
+}
+
+

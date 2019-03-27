@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>BoyG-修改密码</title>
+	<!-- // jquery -->
+	<script src="../../res/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+	<!-- // axios 请求接口 -->
+	<script src="../../res/axios-0.19.0/axios.min.js"  type="text/javascript"></script>
+	<!-- // vue库 -->
+	<script src="../../res/vue-2.6.7/vue.min.js" type="text/javascript"></script>
+	<!-- // layer 弹出层 -->
+	<!-- // http://layer.layui.com/ -->
+	<script src="../../res/layer-v3.1.1/layer.js"></script>
+	<link href="../../res/layer-v3.1.1/theme/default/layer.css" rel="stylesheet">
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="../../res/bootstrap-4.0.0/css/bootstrap.min.css">
+	<script src="../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../common/background-1.css">
+
+	</head>
+	<body>
+		<div class="container">
+		    <div class="wrapper">
+		
+				<div class="row card">
+					<form>
+						<div style="height: 10px;"></div>
+						<div class="input-group col-sm">
+<!-- 							<div class="input-group-prepend">
+								<span class="input-group-text" id="inputGroup-sizing-sm">原密码</span>
+							</div> -->
+							<input type="password" class="form-control" aria-label="原密码" aria-describedby="inputGroup-sizing-sm" 
+							placeholder="原密码" required="required" v-model="changePWForm.srcPw">
+						</div>
+						<div style="height: 10px;"></div>
+						<div class="input-group col-sm">
+<!-- 							<div class="input-group-prepend">
+								<span class="input-group-text" id="inputGroup-sizing-sm">新密码</span>
+							</div> -->
+							<input type="password" class="form-control" aria-label="新密码" aria-describedby="inputGroup-sizing-sm" 
+							placeholder="新密码" required="required" v-model="changePWForm.newPw1">
+						</div>
+						<div style="height: 10px;"></div>
+						
+						<div class="input-group col-sm">
+<!-- 							<div class="input-group-prepend">
+								<span class="input-group-text" id="inputGroup-sizing-sm">验证码</span>
+							</div> -->
+							<input type="password" class="form-control" aria-label="确认新密码" aria-describedby="inputGroup-sizing-sm" 
+							placeholder="确认新密码" required="required" v-model="changePWForm.newPw2">
+						</div>
+						<div style="height: 10px;"></div>
+						
+						<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="changePW()">发送</button>
+					</form>
+				</div>
+			</div>
+		</div>	
+	</body>
+	
+	<script>
+		const form = new Vue({
+			el:"form",
+			data:{
+				changePWForm:{
+					srcPw:"",
+					newPw1:"",
+					newPw2:""
+
+				}
+			},
+			created:function(){
+				// 获取邮箱信息,为空时提示未绑定
+			},
+			mounted:function(){
+				
+			},
+			methods:{
+				checkForm:function(){
+					
+				},
+				changePW:function(){
+					
+				},
+			}
+		})
+	</script>
+	
+</html>

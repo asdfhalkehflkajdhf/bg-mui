@@ -49,9 +49,9 @@ const navMenuLeft = new Vue({
 		nvaListLeft:[
 			 {name:"朋友",url:"#", isActive:true , ifm_url:"Ffriends/index.html"}
 			,{name:"活动",url:"#", isActive:false, ifm_url:"Factivities/index.html"}
-			,{name:"动态",url:"#", isActive:false, ifm_url:"Factivities/index.html"}
-			,{name:"消息",url:"#", isActive:false, ifm_url:"Factivities/index.html"}
-			,{name:"我的",url:"#", isActive:false, ifm_url:"Factivities/index.html"}
+			,{name:"动态",url:"#", isActive:false, ifm_url:"Dynamic/index.html"}
+			,{name:"消息",url:"#", isActive:false, ifm_url:"News/index.html"}
+			,{name:"我的",url:"#", isActive:false, ifm_url:"PersonalInfo/index.html"}
 		],
 		//前一个选中的标签,在mounted中初始化
 		preNavItem:[],
