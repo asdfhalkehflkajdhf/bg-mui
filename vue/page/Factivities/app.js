@@ -46,39 +46,15 @@ const formTag = new Vue({
 	data:{
 		conditionalForm:{
 			currentLivingPlace:"不可修改",
-			status:1,
-			age1:3,
-			age2:5,
-			height1:56,
-			height2:17,
-			edu:2,
-			school:3,
-			income:1,
-			ownness:2
+			status:1
 		},
 		conditionalData:{
 			statusList:[
 				{value:1,text:"全部"},
 				{value:2,text:"进行中"},
 				{value:3,text:"已结束"},
-			],
-			eduList:[
-				{value:1,text:"全部"},
-				{value:2,text:"全部1"},
-				{value:3,text:"全部2"},
-				{value:4,text:"全部3"},
-			],
-			schoolList:[
-				{value:1,text:"全部"},
-				{value:2,text:"全部1"},
-				{value:3,text:"全部2"},
-				{value:4,text:"全部3"},
-			],
-			ownnessList:[
-				{value:1,text:"全部"},
-				{value:2,text:"全部1"},
-				{value:3,text:"全部2"},
-				{value:4,text:"全部3"},
+				{value:3,text:"参加过的"},
+
 			]
 		}
 		
@@ -207,19 +183,30 @@ $(function () {
 				var $gitem = $(
 					'<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12" >'
 					+'	<div class="card ">'
-					+'		<a target="_blank" href="../PersonalInfo/view.html?uid='+data['uid']+'" >'
+					+'		<a target="_blank" href="./viewAction.html?uid='+data['uid']+'" >'
 					+'			<img class="card-img-top" src="'+data['src']+'" alt="'+data['alt']+'">'
 					+'		</a>'
 					+'		<div class="card-body">'
 					+'			<div class="card__span">'
 					+'				<span class="card__span_left">'
-					+'					<span class="fa fa-clock-o">'+data['ontime']+'</span>'
+					+'					<span class="btn btn-outline-success" id="">北京</span>'
+					+'					<span class="btn bg-secondary text-white " id="">进行中</span>'
 					+'				</span>'
-					+'				<span class="card__span_right"  data-aid="'+data['uid']+'">'
+					+'				<span class="btn card__span_right"  data-aid="'+data['uid']+'">'
 					+'					<span title="点赞" >'
 					+'							<span class="fa fa-eye ">'+data['eye']+'</span>'
 					+'						<!-- <a href=""><a> -->'
 					+'					</span>'
+					+'				</span>'
+					+'			</div>			'					
+					+'			<!-- <div class="card__link"></div> -->'
+					+'			<hr />'
+					+'			<div class="card__span">'
+					+'				<span class="card__span_left">'
+					+'					<span class="fa fa-clock-o">s:'+data['ontime']+'</span>'
+					+'				</span>'
+					+'				<span class="card__span_right"  data-aid="'+data['uid']+'">'
+					+'					<span class="fa fa-clock-o">e:'+data['ontime']+'</span>'
 					+'				</span>'
 					+'			</div>			'					
 					+'			<!-- <div class="card__link"></div> -->'
