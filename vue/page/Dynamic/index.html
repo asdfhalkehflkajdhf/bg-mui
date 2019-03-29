@@ -6,7 +6,7 @@
 	<!-- //https://www.cnblogs.com/MissZhao/p/5773091.html -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>BoyG-动态</title>
+	<title>BoyG-动态列表</title>
 	<!-- // jquery -->
 	<script src="../../res/js/jquery-3.3.1.min.js" type="text/javascript"></script>
 	<!-- // axios 请求接口 -->
@@ -17,6 +17,8 @@
 	<!-- // http://layer.layui.com/ -->
 	<script src="../../res/layer-v3.1.1/layer.js"></script>
 	<link href="../../res/layer-v3.1.1/theme/default/layer.css" rel="stylesheet">
+	<!-- 下拉菜单 -->
+	<script src="https://cdn.bootcss.com/popper.js/1.14.7/umd/popper.js"></script>
 	<!-- bootstrap -->
 	<link rel="stylesheet" href="../../res/bootstrap-4.0.0/css/bootstrap.min.css">
 	<script src="../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
@@ -25,38 +27,67 @@
 	<!-- 自有资源 -->
 	<link rel="stylesheet" type="text/css" href="./css/index.css">
 
-
 </head>
 <body>
 	<div class="container">
 	    <div class="wrapper">
-
-			<div class="group">
-				<div class="card">
-					<div class="">
-						<div>nickname</div>
-						<div>时间</div>
+			<!-- //导航菜单 -->
+			<div class="card">
+				<div class="card-header" id="headingOne">
+					<div class="btn-group text-right" role="group">
+						<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							动态管理
+						</button>
+						<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+							<a class="dropdown-item" href="#">我的动态</a>
+							<a class="dropdown-item" href="#">发布动态</a>
+						</div>
 					</div>
-					<div class="mt-1 mb-1">
-						内容
-					</div>
-					<!-- // 四个以下，-4，四个以上-5 -->
-					<ul class="pictures pictures-4">
-						<li class=""><img onclick="viewImgList()" class="rounded " data-original="../../api/common/PHPaliyun-oss-sdk/example.jpg" src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="Cuo Na Lake"></li>
-						<li class=""><img class="rounded " data-original="../../api/common/PHPaliyun-oss-sdk/example.jpg" src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="Tibetan Plateau"></li>
-						<!-- <li><img class="rounded " src="../Ffriends/images/item-2.jpg" alt="Card image cap"></li> -->
-						<li class=""><img class="rounded " data-original="../../api/common/PHPaliyun-oss-sdk/example.jpg" src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="Jokhang Temple"></li>
-						<li class=""><img class="rounded " data-original="../../api/common/PHPaliyun-oss-sdk/example.jpg" src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="Potala Palace 1"></li>
-						<!-- <li><img data-original="../docs/images/tibet-5.jpg" src="../docs/images/thumbnails/tibet-5.jpg" alt="Potala Palace 2"></li> -->
-						<!-- <li><img data-original="../docs/images/tibet-6.jpg" src="../docs/images/thumbnails/tibet-6.jpg" alt="Potala Palace 3"></li> -->
-						<!-- <li><img data-original="../docs/images/tibet-7.jpg" src="../docs/images/thumbnails/tibet-7.jpg" alt="Lhasa River"></li> -->
-						<!-- <li><img data-original="../docs/images/tibet-8.jpg" src="../docs/images/thumbnails/tibet-8.jpg" alt="Namtso 1"></li> -->
-						<!-- <li><img data-original="../docs/images/tibet-9.jpg" src="../docs/images/thumbnails/tibet-9.jpg" alt="Namtso 2"></li> -->
-					</ul>
+					</h5>
 				</div>
 			</div>
+			<!-- // 点位符 -->
+			<div class="placeholder-10"></div>
+			<!-- //内容 -->
+			<div class="row">
+				<!-- //左侧动态内容list -->
+				<div class="col-sm-8 ">
+
+					<div class="group">
+						<div class="card">
+							<div class="card-body">
+								<span class="card__span_left font-weight-bold" style="font-size: 15px;">nickname</span>
+								<span class="card__span_right">时间</span>
+								
+								<div style="font-size: 20px;">
+									内容
+								</div>
+							</div>
 
   
+							<div class="card-body">
+								<!-- // 四个以下，-4，四个以上-5 -->								
+								<ul class="pictures pictures-5 " style="text-align:center;">
+									<li class=""><img onclick="viewImgList()" class=" " data-original="../../api/common/PHPaliyun-oss-sdk/example.jpg" src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="Cuo Na Lake"></li>
+									<li class=""><img class=" " data-original="../../api/common/PHPaliyun-oss-sdk/example.jpg" src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="Tibetan Plateau"></li>
+									<!-- <li><img class="rounded " src="../Ffriends/images/item-2.jpg" alt="Card image cap"></li> -->
+									<li class=""><img class=" " data-original="../../api/common/PHPaliyun-oss-sdk/example.jpg" src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="Jokhang Temple"></li>
+									<li class=""><img class=" " data-original="../../api/common/PHPaliyun-oss-sdk/example.jpg" src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="Potala Palace 1"></li>
+									<li><img data-original="../docs/images/tibet-5.jpg" src="../docs/images/thumbnails/tibet-5.jpg" alt="Potala Palace 2"></li>
+									<!-- <li><img data-original="../docs/images/tibet-6.jpg" src="../docs/images/thumbnails/tibet-6.jpg" alt="Potala Palace 3"></li> -->
+									<!-- <li><img data-original="../docs/images/tibet-7.jpg" src="../docs/images/thumbnails/tibet-7.jpg" alt="Lhasa River"></li> -->
+									<!-- <li><img data-original="../docs/images/tibet-8.jpg" src="../docs/images/thumbnails/tibet-8.jpg" alt="Namtso 1"></li> -->
+									<!-- <li><img data-original="../docs/images/tibet-9.jpg" src="../docs/images/thumbnails/tibet-9.jpg" alt="Namtso 2"></li> -->
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- //右侧无关内容list -->
+				<div class="col-sm-4 sideEdge">
+					asd
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

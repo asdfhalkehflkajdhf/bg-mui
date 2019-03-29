@@ -41,7 +41,7 @@ editor_ti.create();
 // 参数 https://blog.csdn.net/u012526194/article/details/69937741/
 var fileUpLoadVar={
 	language: 'zh', //设置语言
-	theme: 'fas',
+	theme: 'fa',
 	// showUpload: true,
 	showCaption: false,//按钮前边的输入框
 	// showPreview: false,

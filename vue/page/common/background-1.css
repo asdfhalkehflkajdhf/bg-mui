@@ -49,3 +49,10 @@ img{
   padding: 10px 0;
 	height: auto;  /*自适应*/
 }
+
+.placeholder-20{
+	height: 20px;
+}
+.placeholder-10{
+	height: 10px;
+}

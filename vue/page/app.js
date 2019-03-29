@@ -11,7 +11,6 @@ const navMenuRight = new Vue({
 		landing:false
 	},
 	methods:{
-
 		logout:function(){
 			//发送请求
 			var info={token:""};

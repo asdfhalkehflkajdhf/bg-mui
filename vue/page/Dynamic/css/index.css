@@ -51,31 +51,49 @@ span {
 
 
 
-
+// 图片状态显示
+body,ul,li{margin:0;padding:0;}   
 .pictures {
-	  margin: 0;
-	  padding: 0;
-	  list-style: none;
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
-
+.pictures >li {
+	float: left;
+	width: 33.3%;
+	height: 33.3%;
+	margin: 0 -1px -1px 0;
+	border: 1px solid transparent;
+	overflow: hidden;
+}
 .pictures-5 >li {
-	  float: left;
-	  width: 33.3%;
-	  height: 33.3%;
-	  margin: 0 -1px -1px 0;
-	  border: 1px solid transparent;
-	  overflow: hidden;
+	float: left;
+	width: 33.3%;
+	height: 33.3%;
+	margin: 0 -1px -1px 0;
+	border: 1px solid transparent;
+	overflow: hidden;
 }
 .pictures-4 >li {
-	  float: left;
-	  width: 50%;
-	  height: 50%;
-	  margin: 0 -1px -1px 0;
-	  border: 1px solid transparent;
-	  overflow: hidden;
+	float: left;
+	width: 50%;
+	height: 50%;
+	margin: 0 -1px -1px 0;
+	border: 1px solid transparent;
+	overflow: hidden;
 }
 .pictures > li > img {
-	  width: 100%;
-	  cursor: -webkit-zoom-in;
-	  cursor: zoom-in;
+	width: 100%;
+	cursor: -webkit-zoom-in;
+	cursor: zoom-in;
+}
+
+/* // 右侧内容隐藏*/
+.sideEdge {
+	display: block;
+}
+@media screen and (max-width: 400px) {
+	.sideEdge {
+		display: none;
+	}
 }

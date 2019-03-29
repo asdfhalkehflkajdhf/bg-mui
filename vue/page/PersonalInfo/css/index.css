@@ -1,0 +1,27 @@
+
+
+.card {
+	/* margin: 1px,1px,1px,1px; */
+	/* padding:4px 1px 1px 1px; */
+}
+
+
+/*中间的过度的横线*/
+.card__link {
+		width: 100%;
+		height: 1px;
+		/* border-top: solid #ACC0D8 1px; */
+		margin-bottom: 5px;
+		margin-top: 5px;
+}
+
+
+/* // 右侧内容隐藏*/
+.sideEdge {
+	display: block;
+}
+@media screen and (max-width: 400px) {
+	.sideEdge {
+		display: none;
+	}
+}
