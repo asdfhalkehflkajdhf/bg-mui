@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- //允许网页宽度自动调整 -->
+		<!-- //https://www.cnblogs.com/MissZhao/p/5773091.html -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>BogG-个人信息设置</title>
+		
+		<!-- // jquery -->
+		<script src="../../../res/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+		<!-- // axios 请求接口 -->
+		<script src="../../../res/axios-0.19.0/axios.min.js"  type="text/javascript"></script>
+		<!-- // vue库 -->
+		<script src="../../../res/vue-2.6.7/vue.min.js" type="text/javascript"></script>
+		<!-- // layer 弹出层 -->
+		<!-- // http://layer.layui.com/ -->
+		<script src="../../../res/layer-v3.1.1/layer.js"></script>
+		<link href="../../../res/layer-v3.1.1/theme/default/layer.css" rel="stylesheet">
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="../../../res/bootstrap-4.0.0/css/bootstrap.min.css">
+		<script src="../../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
+		
+		<!-- 自有资源 -->
+		<!-- 编辑 -->
+		<script type="text/javascript" src="../../../res/wangEditor-3.1.1/wangEditor.min.js"></script>
+		<link rel="stylesheet" href="../../../res/wangEditor-3.1.1/wangEditor.min.css" type="text/css" />
+		<!-- 瀑布流 20190322-->
+		<script src="../../../res/js/masonry.pkgd.min.js"></script>
+		<script src="../../../res/js/imagesloaded.pkgd.min.js"></script>
+		<!--图片上传插件-->
+		<script type="text/javascript" src="../../../res/bootstrap-fileinput-4.5.2/js/fileinput.min.js"></script>
+		<script type="text/javascript" src="../../../res/bootstrap-fileinput-4.5.2/js/locales/zh.js"></script>
+		<link rel="stylesheet" href="../../../res/bootstrap-fileinput-4.5.2/css/fileinput.min.css">
+		<script src="../../../res/bootstrap-fileinput-4.5.2/themes/fa/theme.js" type="text/javascript"></script>
+		<script src="../../../res/bootstrap-fileinput-4.5.2/themes/explorer-fa/theme.js" type="text/javascript"></script>
+		<link href="../../../res/bootstrap-fileinput-4.5.2/themes/explorer-fa/theme.css" media="all" rel="stylesheet" type="text/css"/>
+		<!-- awesome图标 -->
+		<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+
+	</head>
+	<body>
+		<div class="container ">
+		    <div class="wrapper">
+				
+				<!-- //个人信息展示组 -->
+				<div class="group" id="setPersonalInfo">
+					<div  class="placeholder-10"></div>
+					
+					<button type="button" class="btn btn-success">个人信息可被查找</button>
+					<button type="button" class="btn btn-outline-success">个人信息不可被查找</button>
+					
+					<div class="group-item">
+						<div class="card" style="">
+							<div class="card-header">
+								联系方式
+							</div>
+							<!-- <div class="card-body"></div> -->
+							<ul class="list-group list-group-flush">
+								<!-- <li class="list-group-item">站内</li> -->
+								<li class="list-group-item ">
+
+									
+									<div class="row">
+										<div class="input-group col-sm">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="inputGroup-sizing-sm">预留</span>
+											</div>
+											<input type="text" class="form-control" aria-label="预留" aria-describedby="inputGroup-sizing-sm" 
+											placeholder="这个联系方式可选项,可以使用站内">
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+
+					<div class="group-item">
+						<div class="card" style="">
+							<div class="card-header">
+								基本信息
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<div class="row">
+										<div class="input-group col-sm">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="inputGroup-sizing-sm">昵称</span>
+											</div>
+											<input type="text" class="form-control" aria-label="昵称" aria-describedby="inputGroup-sizing-sm" 
+											placeholder="必填项,最长32字符" required="required" maxlength="32">
+										</div>
+										<div class="input-group col-sm">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="inputGroup-sizing-sm">身高</span>
+											</div>
+											<input type="number" class="form-control" aria-label="身高" aria-describedby="inputGroup-sizing-sm" 
+											placeholder="必填项" required="required" maxlength="3">
+											<div class="input-group-append">
+												<span class="input-group-text">cm</span>
+											</div>
+										</div>
+										<div class="input-group col-sm">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="inputGroup-sizing-sm">体重</span>
+											</div>
+											<input type="number" class="form-control" aria-label="体重" aria-describedby="inputGroup-sizing-sm" 
+											placeholder="必填项" required="required" maxlength="3">
+											<div class="input-group-append">
+												<span class="input-group-text">kg</span>
+											</div>
+										</div>
+									</div>
+
+
+								</li>
+								<li class="list-group-item">
+									
+									<div class="row">
+										<div class="input-group col-sm">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="inputGroup-sizing-sm">生活地</span>
+											</div>
+											<select class="form-control custom-select" id="生活地" aria-label="生活地" v-model="conditionalForm.ownness">
+												<option :value="item.value" v-for="item in conditionalData.ownnessList">{{item.text}}</option>
+											</select>
+										</div>
+										<div class="input-group col-sm">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="inputGroup-sizing-sm">职业</span>
+											</div>
+											<input type="text" class="form-control" aria-label="职业" aria-describedby="inputGroup-sizing-sm" 
+											placeholder="必填项,最长45字符" required="required" maxlength="45">
+										</div>
+
+										<div class="input-group col-sm">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="inputGroup-sizing-sm">收入</span>
+											</div>
+											<input type="number" class="form-control" aria-label="收入" aria-describedby="inputGroup-sizing-sm" 
+											placeholder="必填项" required="required" >
+											<div class="input-group-append">
+												<span class="input-group-text">RMB</span>
+											</div>
+										</div>
+
+									</div>
+								</li>
+								<li class="list-group-item">
+									<div class="row">
+										<div class="input-group col-sm">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="inputGroup-sizing-sm">我最喜欢的活动</span>
+											</div>
+											<input type="text" class="form-control" aria-label="我最喜欢的活动" aria-describedby="inputGroup-sizing-sm" 
+											placeholder="必填项,最长128字符,多项使用逗号分割" required="required" maxlength="128">
+										</div>
+										<div class="input-group col-sm">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="inputGroup-sizing-sm">状态</span>
+											</div>
+											<select class="form-control custom-select" id="状态" v-model="conditionalForm.ownness">
+												<option :value="item.value" v-for="item in conditionalData.ownnessList">{{item.text}}</option>
+											</select>
+
+										</div>
+
+									</div>
+								</li>
+								
+								
+								<li class="list-group-item">
+									<table class="table table-striped">
+									  <thead>
+										<tr>
+										  <th scope="col">#</th>
+										  <th scope="col">学校</th>
+										  <th scope="col">层次</th>
+										</tr>
+									  </thead>
+									  <tbody>
+										<tr>
+										  <th scope="row">1</th>
+										  <td>Mark</td>
+										  <td>Otto</td>
+										</tr>
+										<tr>
+										  <th scope="row">2</th>
+										  <td>Jacob</td>
+										  <td>Thornton</td>
+										</tr>
+										<tr>
+										  <th scope="row">3</th>
+										  <td>Larry</td>
+										  <td>the Bird</td>
+										</tr>
+									  </tbody>
+									</table>
+									<div class="row">
+										<div class="input-group col-sm">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="inputGroup-sizing-sm">添加在线学籍认证</span>
+											</div>
+											<input type="text" class="form-control" aria-label="添加在线学籍认证" aria-describedby="inputGroup-sizing-sm" 
+											placeholder="在线验证码" >
+											<div class="input-group-append">
+												<button class="btn btn-outline-secondary text-primary" type="button">添加</button>
+											</div>
+										</div>
+
+									</div>
+								</li>
+							</ul>
+						</div>				
+					</div>
+					<div class="group-item">
+						<div class="card" style="">
+							<div class="card-header">
+								个人介绍
+							</div>
+							<div class="card-body" id="personalIntroduction">
+								<!-- 个人介绍 -->
+							</div>
+
+						</div>				
+					</div>
+					<div class="group-item">
+						<div class="card" style="">
+							<div class="card-header">
+								对方要求
+							</div>
+							<div class="card-body" id="duifangIntroduction">
+								<!-- 对方要求 -->
+							</div>
+						</div>			
+					</div>
+					<!-- 相册 -->
+					<div class="group-item">
+						<div class="card" style="">
+							<div class="card-header">
+								相册
+							</div>
+							<!-- //  -->
+							<div class="grid row js-masonry " id="imgListDiv" >
+				
+							</div>
+
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<div  class="placeholder-10"></div>
+									<div class="row">
+										<div class=" col-sm">
+											<button type="button" class="btn btn-outline-success">批量删除</button>
+										</div>
+										<div class=" col-sm">
+											<input type="file" name="txt_file" id="txt_file" multiple class="file-loading el-col-offset-1" />
+										</div>
+									</div>
+									<div  class="placeholder-10"></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+<!-- 					<div class="group-item">
+						<div class="card" style="">
+							<div class="card-header">
+								视频
+							</div>
+						</div>
+					</div> -->
+					<div  class="placeholder-10"></div>
+				
+				</div>
+			</div> <!-- wrapper -->
+		</div>
+	</body>
+	<!-- 动态加载数据 -->
+	<script type="text/javascript" src="./userAdd.js"></script>
+	
+</html>

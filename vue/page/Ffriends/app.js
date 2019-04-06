@@ -1,4 +1,4 @@
-
+var localToken = getLocalToken();
 // 加载轮播图数据
 // 这个是广告，信息分类，轮播图，个人信息页，活动信息页，动态信息页，主要是以图片+跳转链接，显示状态，和计算过程
 const lunBoTuVar = new Vue(
@@ -17,21 +17,41 @@ const lunBoTuVar = new Vue(
         getLunBoTuList:function(){
             var _this = this;
 			// post 本地json会失败
-			axios.get('testjson/lunBoTuTest.json', {
-				firstName: 'Fred',
-				lastName: 'Flintstone'
+			// axios.get('testjson/lunBoTuTest.json', {
+			gAxios.post('api/ads/getLunBoTuList.php', {
+				token: localToken
 			})
 			.then(function (response) {
 				if(response.status==200){
-					_this.res=response.data;
+					_this.res=response.data.data;
 				}else{
-					console.log(response.statusText);
+					parent.layer.msg(response.statusText+response.data.msg);
 				}
 			})
 			.catch(function (error) {
 				console.log(error);
+				// parent.layer.msg(error);
 			});
-        }
+        },
+		upAdsStatusInfo:function(id, herf){
+			var _this = this;
+			gAxios.post('api/ads/upAdsStatusInfo.php', {
+				id: id
+			})
+			.then(function (response) {
+				if(response.status==200){
+					// _this.res=response.data.data;
+					window.open(herf);
+				}else{
+					parent.layer.msg(response.statusText+response.data.msg);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+				// parent.layer.msg(error);
+			});
+			
+		}
 	}
 // 	mounted: function(){
 // 		// showData('挂载到dom后',this);
@@ -40,118 +60,8 @@ const lunBoTuVar = new Vue(
 }
 );
 
-// 查找时为，一个表结构
-const formTag = new Vue({
-	el:"form",
-	data:{
-		conditionalForm:{
-			currentLivingPlace:"不可修改",
-			sex:1,
-			age1:3,
-			age2:5,
-			height1:56,
-			height2:17,
-			edu:2,
-			school:3,
-			income:1,
-			ownness:2
-		},
-		conditionalData:{
-			sexList:[
-				{value:1,text:"全部"},
-				{value:2,text:"男"},
-				{value:3,text:"女"},
-			],
-			eduList:[
-				{value:1,text:"全部"},
-				{value:2,text:"全部1"},
-				{value:3,text:"全部2"},
-				{value:4,text:"全部3"},
-			],
-			schoolList:[
-				{value:1,text:"全部"},
-				{value:2,text:"全部1"},
-				{value:3,text:"全部2"},
-				{value:4,text:"全部3"},
-			],
-			ownnessList:[
-				{value:1,text:"全部"},
-				{value:2,text:"全部1"},
-				{value:3,text:"全部2"},
-				{value:4,text:"全部3"},
-			]
-		}
-		
-	},
-	created:function(){
-		
-	},
-	methods:{
-		//检查表单
-		checkForm(){
-			
-		},
-		//获取表单		getFrom(){
-			
-		},
-		//更新表单
-		upFrom(){
-			console.log(this.conditionalForm);
-		}
-	}
-});
 
-// 更新数据，并追加到masonry容器中
-// 相册，视频，图片为一个表，按页页面分类，个人信息，动态信息，活动信息，资源保存以路径形式存储，时间，uid
-const imgListVar = new Vue({
-	el:"#imgListDiv",
-	data:{
-		res:[]
-	},
-	created:function(){
-		var _this = this;
-		// 生成 card
-         // this.$nextTick(function(){
-			 // document.getElementById('lz66303').outerHTML
-         // });
-		
-// 		console.log($("#imgListDivTemp"));
-		// console.log("created");
-		// $("#imgListDiv")
-	},
-	mounted:function(){
-        var _this = this;
-        this.$nextTick(function(){
-	        _this.getImgList();
-			// $("#imgListDiv").masonry();
-			// console.log(document.getElementById('imgListDivTemp').outerHTML);
-			//.prop("innerHTML")
-			// https://zhidao.baidu.com/question/652695212709545885.html
-// 			var tvar=$("#imgListDivTemp")
-// 			console.log(tvar.prop("outerHTML"));
-        });
-		// this.$forceUpdate();
-		// console.log("mounted");
-    },
-	watch:{
-		// 监听到了 res 数据发生变化执行arr方法
-		res: function() {
-			this.$nextTick(function(){
-				/*现在数据已经渲染完毕*/
-	            _this.getImgList();
-				// console.log($("#imgListDivTemp").prop("outerHTML"));
-				// $("#imgListDiv").masonry();
-			})
-			// console.log("wathc");
-		}
-    },
-    methods:{
-        getImgList:function(){
-            var _this = this;
-        }
 
-    }
-});
 
 
 // jQuery页面加载后执行的事件(3种方式)
@@ -161,8 +71,11 @@ const imgListVar = new Vue({
 
 
 //JS瀑布流插件masonry动态载入数据
-$(function () {
+// $(function () {
+	// 更新list数据
 	$("#getGridItem").on("click",function(){
+		formTag.page++;
+		// console.log(formTag);
 		reloadGridItem();
 	});
 
@@ -171,11 +84,10 @@ $(function () {
 	
 		// post 本地json会失败
 		axios.get('testjson/imgtest.json', {
-			firstName: 'Fred',
-			lastName: 'Flintstone'
+			token: localToken
 		})
 		.then(function (response) {
-// {
+// response{
 //   // 服务端返回的数据
 //   data: {},
 //   // 服务端返回的状态码
@@ -194,12 +106,13 @@ $(function () {
 			if(response.status==200){
 				// console.log(1);
 				res=response.data;
+				
 			}else{
-				layer.msg("获取信息失败！");
+				parent.layer.msg("获取信息失败！");
 				return;
 			}
 			if(res.length==0){
-				layer.msg("没有更多，请修改查找条件！");
+				parent.layer.msg("没有更多，请修改查找条件！");
 				return;
 			}
 			//生成item
@@ -244,9 +157,133 @@ $(function () {
 		});
 	}
 	
-	reloadGridItem();
 	// var $getTempItemListElems=$($("#imgListDivTemp").html());
 	// $("#imgListDivTemp").empty();
 	// $container.append($getTempItemListElems).masonry('appended', $getTempItemListElems,true).masonry();
+// });
+
+
+// 查找时为，一个表结构
+const formTag = new Vue({
+	el:"form",
+	data:{
+		conditionalForm:{
+// 			currentLivingPlace:"不可修改",
+// 			sex:1,
+// 			age1:3,
+// 			age2:5,
+// 			height1:56,
+// 			height2:17,
+// 			edu:2,
+// 			school:3,
+// 			income:1,
+// 			ownness:2
+		},
+		conditionalData:{
+// 			sexList:[
+// 				{value:1,text:"全部"},
+// 				{value:2,text:"男"},
+// 				{value:3,text:"女"},
+// 			],
+// 			eduList:[
+// 				{value:1,text:"全部"},
+// 				{value:2,text:"全部1"},
+// 				{value:3,text:"全部2"},
+// 				{value:4,text:"全部3"},
+// 			],
+// 			schoolList:[
+// 				{value:1,text:"全部"},
+// 				{value:2,text:"全部1"},
+// 				{value:3,text:"全部2"},
+// 				{value:4,text:"全部3"},
+// 			],
+// 			ownnessList:[
+// 				{value:1,text:"全部"},
+// 				{value:2,text:"全部1"},
+// 				{value:3,text:"全部2"},
+// 				{value:4,text:"全部3"},
+// 			]
+		},
+		page:0
+		
+	},
+	created:function(){
+		//请求查询条件数据
+		this.getFrom();
+	},
+	methods:{
+		//检查表单
+		checkForm(){
+			
+		},
+		//获取表单
+		getFrom(){
+			var _vueThis = this;
+			gAxios.post('api/friends/getSearchCondition.php', {
+				token: localToken,
+			})
+			.then(function (response) {
+				var res=[];
+				if(response.status==200){
+					// console.log(1);
+					res=response.data;
+					_vueThis.conditionalForm=res['data']['conditionalForm'];
+					_vueThis.conditionalData=res['data']['conditionalData'];
+
+				}else{
+					parent.layer.msg("获取信息失败！");
+					return;
+				}
+
+			})
+			.catch(function (error) {
+				// parent.layer.msg(error);
+			});
+		},
+		//更新表单
+		upFrom(){
+			var _vueThis = this;
+			// 初始化page信息
+			_vueThis.page=0;
+			gAxios.post('api/friends/putSearchCondition.php', {
+				token: localToken,
+				data:_vueThis.conditionalForm
+			})
+			.then(function (response) {
+				var res=[];
+				if(response.status==200){
+					res=response.data;
+					parent.layer.msg(res['msg']);
+					console.log(res);
+				}else{
+					parent.layer.msg("获取信息失败！");
+					return;
+				}
+			
+			})
+			.catch(function (error) {
+				console.log(error);
+				// parent.layer.msg(error);
+			});
+		},
+		
+	},
+	mounted:function(){
+		reloadGridItem();
+	},
+	watch:{
+		// 监听到了 res 数据发生变化执行arr方法
+		res: function() {
+			this.$nextTick(function(){
+				/*现在数据已经渲染完毕*/
+	            _this.getImgList();
+				// console.log($("#imgListDivTemp").prop("outerHTML"));
+				// $("#imgListDiv").masonry();
+			})
+			// console.log("wathc");
+		}
+    },
+
 });
+
 
