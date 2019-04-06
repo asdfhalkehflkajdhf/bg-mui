@@ -21,6 +21,8 @@
 	<link rel="stylesheet" href="../../res/bootstrap-4.0.0/css/bootstrap.min.css">
 	<script src="../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="../common/background-1.css">
+	<script src="../common/globalVar.js"></script>
+
 	<!-- 自有资源 -->
 	<link rel="stylesheet" type="text/css" href="./css/index.css">
 
@@ -28,88 +30,57 @@
 <body >
 	<!-- //这个页面使用layer open打开，是给用户看的。 -->
 	<div class="container">
-	    <div class="wrapper">
+		<div class="wrapper" >
 			<div class="row">
-				<div class="col-sm-8 ">
+				<div class="col-sm-8 " id="app">
 					<ul class="nav list-group list-group-flush">
 						<!-- //个人记录管理 -->
-						<li class="list-group-item nav-item">
-							<a class="nav-link" href="#">
-								个人信息管理
+						<li class="list-group-item nav-item" v-for="item in res">
+							<a class="nav-link" href="#" v-on:click="openSubPage(item)">
+								{{item.title}}
 							</a>
 						</li>
-						<li class="list-group-item nav-item">
-							<a class="nav-link" href="#">
-								活动管理
-							</a>
-						</li>
-						<li class="list-group-item nav-item">
-							<a class="nav-link" href="#">
-								动态管理
-							</a>
-						</li>
-						
-						<li class="list-group-item"></li>
-						<li class="list-group-item nav-item">
-							<a class="nav-link" href="#">
-								黑名单管理
-							</a>
-						</li>
-						<li class="list-group-item nav-item">
-							<a class="nav-link" href="#">
-								问题建议
-							</a>
-						</li>						
-						
-						<!-- //修改账号相关内容 -->
-						<li class="list-group-item"></li>
-						<li class="list-group-item nav-item">
-							<a class="nav-link" href="#">
-								修改密码
-							</a>
-						</li>
-						<li class="list-group-item nav-item">
-							<a class="nav-link" href="#">
-								邮箱绑定
-							</a>
-						</li>
-						<li class="list-group-item nav-item">
-							<a class="nav-link" href="#">
-								账号注销
-							</a>
-						</li>
-
 					</ul>
 				</div>
-				<div class="col-sm-4 sideEdge">
+				<div class="col-sm-4 sideEdge" id="sideEdeg">
 					<div class="card">
 						<div class="card-header">
-							全部活动排名
+							活动排名
 						</div>
 						<ul class="list-group list-group-flush">
-							<li class="list-group-item">Cras justo odio</li>
-							<li class="list-group-item">Dapibus ac facilisis in</li>
-							<li class="list-group-item">Vestibulum at eros</li>
+							<li class="list-group-item" v-for="item,index in activeRankList">
+								<span class="btn-outline-success">{{item.region_name}}</button>
+								<a :href="'../Factivities/viewAction.html?id='+item.id" target="_blank">{{item.title}}</a>
+								<span class="badge badge-pill badge-success">{{item.eye}}</span>
+
+							</li>
 						</ul>
 					</div >
+					<div class="placeholder-10"></div>
 					<div class="card">
 						<div class="card-header">
 							公告
+							<span class="card__span_right">
+								<a href="../Other/announcementList.html" target="_blank" title="更多">>></a>
+							</span>
 						</div>
 						<ul class="list-group list-group-flush">
-							<li class="list-group-item">Cras justo odio</li>
-							<li class="list-group-item">Dapibus ac facilisis in</li>
-							<li class="list-group-item">Vestibulum at eros</li>
+							<li class="list-group-item" v-for="item,index in announcementList">
+								<!-- 带查询参数，下面的结果为 /register?plan=private -->  <!-- 使用js时不能使用router-link -->
+								<!-- <router-link :to="{ path: '../Other/viewAnnouncement.html', query: { id: item.id }}">{{item.title}}</router-link> -->
+								<a :href="'../Other/viewAannouncement.html?id='+item.id" target="_blank">{{item.title}}</a>
+							</li>
 						</ul>
 					</div >						
+					<div class="placeholder-10"></div>
 					<div class="card">
 						<div class="card-header">
 							友情链接
 						</div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item">Cras justo odio</li>
-							<li class="list-group-item">Dapibus ac facilisis in</li>
-							<li class="list-group-item">Vestibulum at eros</li>
+						<ul class="list-group list-group-flush ">
+							<li class="list-group-item" v-for="item,index in friendshipLinkList">
+								<a :href="item.url" target="_blank">{{item.name}}</a>
+							</li>
 						</ul>
 					</div >
 				</div >
@@ -128,15 +99,13 @@
 		</div>
 	</div>
 
-
 </body>
+
 <!-- 动态加载数据 -->
+<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="sideEdge.js"></script>
 
 <script type="text/javascript" language="javascript">
-
-
-
-
 </script>
 
 </html>

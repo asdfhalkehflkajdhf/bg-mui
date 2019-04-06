@@ -4,7 +4,13 @@
 	/* margin: 1px,1px,1px,1px; */
 	/* padding:4px 1px 1px 1px; */
 }
-
+.card__span_left{
+	
+}
+.card__span_right{
+	float:right;
+	cursor:pointer;
+}
 
 /*中间的过度的横线*/
 .card__link {

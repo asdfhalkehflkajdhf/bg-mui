@@ -140,7 +140,7 @@ var loginModal=new Vue({
 					if(res.code == 0){
 						if(res.data.isa==1){
 							// navMenuLeft.nvaListLeft.push(res.data.nav);
-							Vue.set(navMenuLeft.nvaListLeft,navMenuLeft.nvaListLeft.length,res.data.nav));
+							Vue.set(navMenuLeft.nvaListLeft, navMenuLeft.nvaListLeft.length, res.data.nav);
 						}
 						//
 						// 保存状态
