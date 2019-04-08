@@ -78,6 +78,7 @@ const navMenuLeft = new Vue({
 			,{name:"动态",url:"#", isActive:false, ifm_url:"Dynamic/index.html"}
 			,{name:"消息",url:"#", isActive:false, ifm_url:"News/msgList.html"}
 			,{name:"我的",url:"#", isActive:false, ifm_url:"PersonalInfo/index.html"}
+			
 		],
 		//前一个选中的标签,在mounted中初始化
 		preNavItem:[],
@@ -206,6 +207,7 @@ var loginModal=new Vue({
 				if(response.status==200){
 					res=response.data;
 					//解析结果
+					
 					parent.layer.msg(res.msg);
 				}else{
 					parent.layer.msg(response.statusText+res.msg);

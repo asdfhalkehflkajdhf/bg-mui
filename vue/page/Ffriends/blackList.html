@@ -23,6 +23,7 @@
 		<script src="../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
 		<!-- 背景样式 -->
 		<link rel="stylesheet" type="text/css" href="../common/background-1.css">
+		<script src="../common/globalVar.js"></script>
 		
 		<!-- 自有资源 -->
 		<link rel="stylesheet" type="text/css" href="./css/main.css">
@@ -49,18 +50,21 @@
 						<table id="msgTable" 
 							data-toggle="table" 
 							data-thead-classes="thead-light" 
-							data-url="testjson/data1.json"
+							data-ajax="ajaxRequest"
 							data-mobile-responsive="true"
 							data-show-refresh="true"
 							data-show-toggle="true"
 							data-show-fullscreen="true"
-
+							data-query-params="queryParams"
+							data-method="post"
+							data-search="true"
 						>
 							<thead>
 								<tr>
-									<th data-field="uid" data-formatter="uidFormatter" data-events="optEvent">uid</th>
+									<th data-field="black_uid" data-formatter="uidFormatter" data-events="optEvent">uid</th>
 									<th data-field="name" data-formatter="nameFormatter" data-events="optEvent">用户名</th>
-									<th data-field="opt" data-formatter="optFormatter" data-events="optEvent">操作</th>
+									<th data-field="ctime" data-sortable="true">添加时间</th>
+									<th data-field="" data-formatter="optFormatter" data-events="optEvent">操作</th>
 								</tr>
 							</thead>
 						</table>
@@ -74,170 +78,7 @@
 		</div>
 	</body>
 	<!-- 动态加载数据 -->
-	<script type="text/javascript" >
-
-		//打开个人信息预览窗口函数
-		function openViewFun123(user_id, friend_id){
-			//多窗口模式，层叠置顶
-			request_url = '../PersonalInfo/view.html?user_id='+user_id+'&friend_id='+friend_id;
-			// openMsgWinWidth=window.screen.availWidth;//window.screen.availHeight
-			// openMsgWinHeight=window.screen.availHeight;//window.screen.availWidth
-			openMsgWinWidth=document.documentElement.clientWidth;
-			openMsgWinHeight=document.documentElement.clientHeight;
-			if (openMsgWinWidth>900){
-				openMsgWinWidth=900;
-			}
-			if (openMsgWinHeight>700){
-				openMsgWinHeight=700;
-			}
-
-			var index = layer.open({
-				type: 2 //此处以iframe举例
-				,title: 'message'
-				//,area: ['900px', '700px']
-				,area: [ String(openMsgWinWidth)+'px', String(openMsgWinHeight)+'px' ]
-				,shade: 0
-				,maxmin: true //最大最小化
-				,offset: 'auto'
-				,content: request_url
-// 				,btn: ['全部关闭', '全部关闭'] //只是为了演示  http://www.layui.com/doc/modules/layer.html#btn
-// 				,yes: function(){       //第一个按钮,按钮1的回调是yes，而从按钮2开始，则回调为btn2: function(){}，以此类推。
-// 					layer.msg('全部关闭');
-// 					layer.closeAll();
-// 				}
-// 				,btn2: function(){
-// 				  layer.closeAll();
-// 				}
-// 				,btnAlign: 'l' //按钮排列
-// 
-				,zIndex: layer.zIndex //重点1
-				,success: function(layero){
-				  layer.setTop(layero); //重点2
-				}
-			});
-			// layer 弹出默认全屏
-			// layer.full(index);
-		}
-		
-		//打开消息窗口函数
-		function sendMsgFun123(user_id, friend_id){
-			//多窗口模式，层叠置顶
-			request_url = '../News/msgWin.html?user_id='+user_id+'&friend_id='+friend_id;
-			// openMsgWinWidth=window.screen.availWidth;//window.screen.availHeight
-			// openMsgWinHeight=window.screen.availHeight;//window.screen.availWidth
-			openMsgWinWidth=document.documentElement.clientWidth;
-			openMsgWinHeight=document.documentElement.clientHeight;
-			if (openMsgWinWidth>900){
-				openMsgWinWidth=900;
-			}
-			if (openMsgWinHeight>700){
-				openMsgWinHeight=700;
-			}
-
-			var index = layer.open({
-				type: 2 //此处以iframe举例
-				,title: 'message'
-				//,area: ['900px', '700px']
-				,area: [ String(openMsgWinWidth)+'px', String(openMsgWinHeight)+'px' ]
-				,shade: 0
-				,maxmin: true //最大最小化
-				,offset: 'auto'
-				,content: request_url
-// 				,btn: ['全部关闭', '全部关闭'] //只是为了演示  http://www.layui.com/doc/modules/layer.html#btn
-// 				,yes: function(){       //第一个按钮,按钮1的回调是yes，而从按钮2开始，则回调为btn2: function(){}，以此类推。
-// 					layer.msg('全部关闭');
-// 					layer.closeAll();
-// 				}
-// 				,btn2: function(){
-// 				  layer.closeAll();
-// 				}
-// 				,btnAlign: 'l' //按钮排列
-// 
-				,zIndex: layer.zIndex //重点1
-				,success: function(layero){
-				  layer.setTop(layero); //重点2
-				}
-			});
-			// layer 弹出默认全屏
-			// layer.full(index);
-		}
-
-		var  optEvent={
-// event：jQuery事件。
-// value：字段值。
-// row：行记录数据。
-// index：行索引
- 			'click .blacklist': function (e, value, row, index) {
-				layer.confirm('您是否要把对方从黑名单移除？', 
-					{
-						title: false, //不显示标题栏,
-						btn: ['是','不是'] //按钮
-					}, function(){
-						//按钮btn1
-						
-						// 发起请求
-						layer.msg('msg', {icon: 1});
-					}, function(){
-						//按钮btn2
-						layer.msg('保存冷静', {
-							time: 2000, //2s后自动关闭
-						});
-					}	
-				);
-			},
-			'click .remove': function (e, value, row, index) {
-				// 在服务端删除
-				
-				// 在页面删除
-				$("#msgTable").bootstrapTable('remove', {
-					field: 'id',
-					values: [row.id]
-				});
-			},
- 			'click .name': function (e, value, row, index) {
-				console.log("打开msgWin",row, value);
-				sendMsgFun123(row.uid, 0);
-
-			},
- 			'click .uid': function (e, value, row, index) {
-				console.log("打开msgWin",row, value);
-				openViewFun123(row.uid, 0);
-			},
-
-		}
-		
-		function optFormatter(value, row, index, field){
-// value：字段值。
-// row：行记录数据 字典。
-// index：行索引。
-// field：行字段name。
-// 			console.log(value);
-// 			console.log(row);
-// 			console.log(index);
-// 			console.log(field);
-			return [
-			  '<a class="remove" href="javascript:void(0)" title="删除">',
-			  '	<i class="fa fa-trash-o"></i>',
-			  '</a>'
-			].join('')
-		}
-		
-		function nameFormatter(value, row, index, field){
-			return [
-			  '<a class="name" href="javascript:void(0)" title="msg">',
-				value,
-				'<span class="badge badge-pill badge-danger">4</span>',
-			  '</a> '
-			].join('')
-		}
-		function uidFormatter(value, row, index, field){
-			return [
-			  '<a class="uid" href="javascript:void(0)" title="uid">',
-				value,
-			  '</a> '
-			].join('')
-		}	
-	</script>
+	<script type="text/javascript" src="blackList.js"></script>
 	<script type="text/javascript" >
 
 		

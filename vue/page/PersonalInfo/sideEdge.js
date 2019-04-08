@@ -6,7 +6,7 @@ const sideEdeg = new Vue({
 		activeRankList:[],
 		announcementList:[],
 		friendshipLinkList:[
-			{id:-1,name:'联系方式',url:"../Other/contact.html"},
+			// {id:-1,name:'联系方式',url:"../Other/contact.html"},
 		]
 	},
 	methods:{

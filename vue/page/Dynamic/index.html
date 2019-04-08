@@ -118,9 +118,31 @@
 					<div class="placeholder-10"></div>
 					<div class="card">
 						<div class="card-header">
-							友情链接
+							<a href="#" data-toggle="modal" data-target="#connectModal" title="查看联系方式">友情链接</a>
+						</div>
+						<div class="modal fade" id="connectModal" tabindex="-1" role="dialog" aria-labelledby="connectModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-body">
+										<!-- 登陆模态框 -->
+										<h2 class="text-center">联系方式</h2>
+										<p>群1：666809502 
+										<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=20a735e8c3475f517c537748009c3a49cb494a9955def3b6d9028c8e50580ea7" title="qq群1"><i class="fa fa-qq fa-fw"></i></a>
+										</p>
+										<p>群2：720321749 
+										<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=93ac2c61a7c52b8b731c0d84a491371e146c6bcf74d79d92f76c8f429a9425c0" title="qq群2"><i class="fa fa-qq fa-fw"></i></a>
+										</p>
+										<p>邮箱：
+										<a target="_blank" href="mailto:liuzhuchen@163.com" title="邮件liuzhuchen@163.com"><i class="fa fa-envelope-o fa-fw"></i></a>
+										</p>
+									</div>
+								</div>
+							</div>
 						</div>
 						<ul class="list-group list-group-flush ">
+							<li class="list-group-item">
+								<a href="#" data-toggle="modal" data-target="#connectModal" title="查看联系方式">联系方式</a>
+							</li>
 							<li class="list-group-item" v-for="item,index in friendshipLinkList">
 								<a :href="item.url" target="_blank">{{item.name}}</a>
 							</li>

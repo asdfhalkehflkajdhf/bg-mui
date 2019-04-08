@@ -56,25 +56,55 @@
 	</body>
 	
 	<script>
+		var localToken = getLocalToken();
+		
 		const form = new Vue({
 			el:"form",
 			data:{
 				cancelForm:{
+					token:localToken,
 					email:"",
 					checkCode:""
 				}
 			},
 			created:function(){
 				// 获取邮箱信息,为空时提示未绑定
+				this.getEmail();
 			},
 			mounted:function(){
 				
 			},
 			methods:{
+				getEmail:function(){
+					//发送请求
+					var _vueThis = this;
+					gAxios.post('api/personalInfo/emailGet.php', {
+						token:localToken
+					})
+					.then(function (response) {
+						if(response.status==200){
+							res=response.data;
+							//解析结果
+							if(res.code == 0){
+								// {code:0,msg:""}
+								_vueThis.cancelForm.email=res.data;
+							}else{
+								parent.layer.msg(res.msg);								
+							}
+						}else{
+							parent.layer.msg(response.statusText+response.data.msg);
+						}
+					})
+					.catch(function (error) {
+						console.log(error);
+						// parent.layer.msg(error);
+					});
+					
+				},
 				cancel:function(){
 					//发送请求
 					var _vueThis = this;
-					gAxios.post('api/personalInfo/cancel.php')
+					gAxios.post('api/personalInfo/cancel.php', _vueThis.cancelForm)
 					.then(function (response) {
 						if(response.status==200){
 							res=response.data;
@@ -83,7 +113,7 @@
 								// {code:0,msg:""}
 								parent.layer.msg(res.msg);
 								//强制刷新页面
-								
+								window.location.reload();
 							}
 						}else{
 							parent.layer.msg(response.statusText+response.data.msg);
@@ -96,7 +126,22 @@
 					
 				},
 				getCheckCodeEmail:function(){
-					
+					var _vueThis = this;
+					gAxios.post('api/personalInfo/emailCodeSend.php', _vueThis.cancelForm)
+					.then(function (response) {
+						if(response.status==200){
+							res=response.data;
+							//解析结果
+							parent.layer.msg(res.msg);
+						}else{
+							parent.layer.msg(response.statusText+res.msg);
+						}
+					})
+					.catch(function (error) {
+						console.log(error);
+						// parent.layer.msg(error);
+					});
+
 				}
 			}
 		})

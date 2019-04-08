@@ -23,33 +23,102 @@
 		<link rel="stylesheet" href="../../res/bootstrap-4.0.0/css/bootstrap.min.css">
 		<script src="../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="../common/background-1.css">
+		<script src="../common/globalVar.js"></script>
+		
+		<!-- awesome图标 -->
+		<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+
 	</head>
 	<body>
 		
 		<div class="card">
 			问题建议QQ群：
-			群1：666809502
-			群2：720321749
+			<p>群1：666809502
+			<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=20a735e8c3475f517c537748009c3a49cb494a9955def3b6d9028c8e50580ea7" title="qq群1"><i class="fa fa-qq fa-fw"></i></a>
+			</p><p>群2：720321749
+				<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=93ac2c61a7c52b8b731c0d84a491371e146c6bcf74d79d92f76c8f429a9425c0" title="qq群2"><i class="fa fa-qq fa-fw"></i></a>
+			</p><p>邮箱：
+			<a target="_blank" href="mailto:liuzhuchen@163.com" title="邮件liuzhuchen@163.com"><i class="fa fa-envelope-o fa-fw"></i></a>
+			</p>
 			<h2 class="text-center">问题建议</h2>
 			<form>
 				<div class="form-group row">
 					<!-- <label for="标题" class="col-sm-2 col-form-label">标题</label> -->
 					<div class="col-sm-12">
-						<input type="number" class="form-control" placeholder="标题" v-model="forgetForm.phone" maxlength="11" >
+						<input type="number" class="form-control" maxlength="255" placeholder="标题1-255" v-model="suggestForm.title" maxlength="11" >
 					</div>
 				</div>
 				<div class="form-group row">
 					<!-- <label for="内容" class="col-sm-2 col-form-label">内容</label> -->
 					<div class="col-sm-12">
-						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="内容"></textarea>
+						<textarea class="form-control" id="exampleFormControlTextarea1" 
+						rows="3" maxlength="1024" placeholder="内容1-1024"
+						v-model="suggestForm.content"></textarea>
 					</div>
 				</div>
 			
-				<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="forget()">发送</button>
+				<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="suggest()">发送</button>
 			</form>
 			
 		</div>
-		
-		
 	</body>
+	<script>
+		var localToken = getLocalToken();
+		
+		const suggestForm = new Vue({
+			el:"form",
+			data:{
+				suggestForm:{
+					token: localToken,
+					title:"",
+					content:"",
+				}
+			},
+			created:function(){
+				// 获取邮箱信息,为空时提示未绑定
+			},
+			mounted:function(){
+				
+			},
+			methods:{
+				checkForm:function(){
+
+					if(this.suggestForm.title.length==0 or 
+					this.suggestForm.content.length==0 
+					){
+						parent.layer.msg("输入不能为空");
+						return false;
+					}
+					
+					return true;
+				},
+				suggest:function(){
+					//发送请求
+					var _vueThis = this;
+					
+					if( !_vueThis.checkForm() ){
+						return false;
+					}
+					
+					gAxios.post('api/other/suggest.php', _vueThis.suggestForm)
+					.then(function (response) {
+						if(response.status==200){
+							res=response.data;
+							//解析结果
+							parent.layer.msg(res.msg);								
+							
+						}else{
+							parent.layer.msg(response.statusText+response.data.msg);
+						}
+					})
+					.catch(function (error) {
+						console.log(error);
+						// parent.layer.msg(error);
+					});
+
+				},
+			}
+		})
+	</script>
+
 </html>
