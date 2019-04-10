@@ -1,3 +1,5 @@
+var localToken = getLocalToken();
+
 // 编辑框初始化
 var E = window.wangEditor;
 var editor_si = new E('#personalIntroduction');
@@ -36,170 +38,253 @@ editor_ti.customConfig.menus =editorMenus;
 editor_si.create();
 editor_ti.create();
 
-			
-// 上传初始化
-// 参数 https://blog.csdn.net/u012526194/article/details/69937741/
-var fileUpLoadVar={
-	language: 'zh', //设置语言
-	theme: 'fa',
-	// showUpload: true,
-	showCaption: false,//按钮前边的输入框
-	// showPreview: false,
-	dropZoneEnabled: false,
-	browseClass: "btn btn-success",
-	previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-	overwriteInitial: false,
-	// initialPreviewAsData: true,
-	// deleteUrl:String,//删除图片时的请求路径
-	// deleteExtraData:Object,删除图片时额外传入的参数{}
-	allowedFileExtensions:['jpg','png','gif','jpeg','bmp'],
-	uploadUrl:"String",//上传图片时的请求路径
-	// uploadExtraData:Object,上传图片时额外传入的参数{}
-	maxFileSize:5*1024,//以kb计算
-	maxFileCount:10,
-	previewFileType:['image', 'video'],//预览文件类型,内置
-	uploadAsync:false,// 关闭异步上传
-};
-
-$("#txt_file").fileinput(fileUpLoadVar);
-
-
-// 文件上传方法
-// $("#txt_file").fileinput("upload");
-// 上传成功后处理方法
-$("#txt_file").on("fileuploaded", function(event, data, previewId, index) {
-
-});
 
 
 // 查找时为，一个表结构
-const formTag = new Vue({
-	el:"form",
+const userInfo = new Vue({
+	el:"#setPersonalInfo",
 	data:{
-		conditionalForm:{
-			currentLivingPlace:"不可修改",
-			sex:1,
-			age1:3,
-			age2:5,
-			height1:56,
-			height2:17,
-			edu:2,
-			school:3,
-			income:1,
-			ownness:2
+		res:{
+			find_switch:false,
+			uid:'',
+			eye:'',
+			contact:"",
+			nick_name:"",
+			height:"",
+			weight:"",
+			living_place:"",
+			profession:"",
+			income:"",
+			tryst_expect:"",
+			marital_status:"",
+			selfIntr:"",
+			otehrIntr:"",
 		},
-		conditionalData:{
-			sexList:[
-				{value:1,text:"全部"},
-				{value:2,text:"男"},
-				{value:3,text:"女"},
-			],
-			eduList:[
-				{value:1,text:"全部"},
-				{value:2,text:"全部1"},
-				{value:3,text:"全部2"},
-				{value:4,text:"全部3"},
-			],
-			schoolList:[
-				{value:1,text:"全部"},
-				{value:2,text:"全部1"},
-				{value:3,text:"全部2"},
-				{value:4,text:"全部3"},
-			],
-			ownnessList:[
-				{value:1,text:"全部"},
-				{value:2,text:"全部1"},
-				{value:3,text:"全部2"},
-				{value:4,text:"全部3"},
-			]
-		}
+		eduList:[],
 		
+		verify_code:'',
+		livingPlaceList:[],
+		maritalStatusList:[],
+
 	},
 	created:function(){
+		this.getUserInfo();
+		this.userLivingPlaceGet();
+		this.userMaritalStatusGet();
 		
 	},
+	mounted:function(){
+		editor_si.txt.html(this.res.selfIntr);
+		editor_ti.txt.html(this.res.otherIntr);
+	},
 	methods:{
-		//检查表单
-		checkForm(){
-			
-		},
-		//获取表单		getFrom(){
-			
-		},
-		//更新表单
-		upFrom(){
-			console.log(this.conditionalForm);
-		}
-	}
-});
-
-
-
-// jQuery页面加载后执行的事件(3种方式)
-// 1 $(function () { });
-// 2 $(document).ready(function () { });
-// 3 window.onload = function () { }
-
-
-//JS瀑布流插件masonry动态载入数据
-$(function () {
-	// 保存成功之后，返回data list
-	$("#getGridItem").on("click",function(){
-		reloadGridItem();
-	});
-
-	function reloadGridItem(){
-		var $container = $('#imgListDiv');
-	
-		// post 本地json会失败
-		axios.get('../Ffriends/testjson/imgtest.json', {
-			firstName: 'Fred',
-			lastName: 'Flintstone'
-		})
-		.then(function (response) {
-			var res=[];
-			if(response.status==200){
-				res=response.data;
-				if(res.code==0){
-					//生成item
-					$.each(res.data, function (i, data) {
-						var $gitem = $(
-				
-							'<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12" >'
-							+'	<div class="card ">'
-							+'			<img class="card-img-top" src="'+data['src']+'" imgShowRul="'+data['src']+'" alt="'+data['alt']+'">'
-							+'		<div class="">'
-							+'				<input type="checkbox" class="card__span_left">'
-							+'				<button type="button" class="btn btn-link card__span_right">删除</button>'
-							+'		</div>'
-							+'	</div>'
-							+'</div>'					
-							
-						);
-						
-						$container.append($gitem).masonry('appended', $gitem, true);
-					});
-						// // jQuery方式。重新布局，添加元素，另一种方式添加元素，重新布局
-					// https://segmentfault.com/a/1190000007316788
-					$container.imagesLoaded( function() {
-						$container.masonry();
-					});
-				}else{
+		//查找开关
+		up_find_switch(){
+			this.res.find_switch = !this.res.find_switch;
+            var _this = this;
+			// post 本地json会失败
+			gAxios.post('api/personalInfo/userFindSwitchSet.php', {
+				token: localToken,
+			})
+			.then(function (response) {
+				if(response.status==200){
+					var res=response.data;
 					parent.layer.msg(res.msg);
+				}else{
+					parent.layer.msg(response.statusText);
 				}
-			}else{
-				parent.layer.msg(response.statusText+response.data.msg);
-			}
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+		},
+		//更新联系方式
+		userContactSet(){
+			var _this = this;
+			// post 本地json会失败
+			gAxios.post('api/personalInfo/userContactSet.php', {
+				token: localToken,
+				contact: _this.res.contact
+			})
+			.then(function (response) {
+				if(response.status==200){
+					var res=response.data;
+					parent.layer.msg(res.msg);
+				}else{
+					parent.layer.msg(response.statusText);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+
+		},
+		//获取user info		getUserInfo(){
+            var _this = this;
+			// post 本地json会失败
+			gAxios.post('api/personalInfo/userinfoGet.php', {
+				token: localToken,
+				uid:setLocalID()
+			})
+			.then(function (response) {
+				if(response.status==200){
+					var res=response.data;
+					if(res.code == 0){
+						_this.res=res.data.res;
+						_this.eduList=res.data.eduList;
+					}else{
+						parent.layer.msg(res.msg);
+					}
+				}else{
+					parent.layer.msg(response.statusText);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+		},
+		userLivingPlaceGet(){
+            var _this = this;
+			// post 本地json会失败
+			gAxios.post('api/personalInfo/userLivingPlaceGet.php', {
+				token: localToken,
+			})
+			.then(function (response) {
+				if(response.status==200){
+					var res=response.data;
+					if(res.code==0){
+						_this.livingPlaceList=res.data;
+					}else{
+						parent.layer.msg(res.msg);
+					}
+				}else{
+					parent.layer.msg(response.statusText);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 			
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
+		},
+		userMaritalStatusGet(){
+            var _this = this;
+			// post 本地json会失败
+			gAxios.post('api/personalInfo/userMaritalStatusGet.php', {
+				token: localToken,
+			})
+			.then(function (response) {
+				if(response.status==200){
+					var res=response.data;
+					if(res.code==0){
+						_this.maritalStatusList=res.data;
+					}else{
+						parent.layer.msg(res.msg);
+					}
+				}else{
+					parent.layer.msg(response.statusText);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+		},
+
+		
+		userBaseSet(){
+			var _this = this;
+			// post 本地json会失败
+			gAxios.post('api/personalInfo/userBaseSet.php', {
+				token: localToken,
+				nick_name:_this.res.nick_name,
+				height:_this.res.height,
+				weight:_this.res.weight,
+				living_place:_this.res.living_place,
+				profession:_this.res.profession,
+				income:_this.res.income,
+				tryst_expect:_this.res.tryst_expect,
+				marital_status:_this.res.marital_status,
+			})
+			.then(function (response) {
+				if(response.status==200){
+					var res=response.data;
+					parent.layer.msg(res.msg);
+				}else{
+					parent.layer.msg(response.statusText);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+
+			
+		},
+		userSelfIntrSet(){
+            var _this = this;
+			// post 本地json会失败
+			gAxios.post('api/personalInfo/userSelfIntrSet.php', {
+				token: localToken,
+				selfIntr: editor_si.txt.html()
+			})
+			.then(function (response) {
+				if(response.status==200){
+					var res=response.data;
+					parent.layer.msg(res.msg);
+				}else{
+					parent.layer.msg(response.statusText);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+			
+		},
+		userOtherIntrSet(){
+            var _this = this;
+			// post 本地json会失败
+			gAxios.post('api/personalInfo/userOtherIntrSet.php', {
+				token: localToken,
+				otherIntr: editor_ti.txt.html()
+			})
+			.then(function (response) {
+				if(response.status==200){
+					var res=response.data;
+					parent.layer.msg(res.msg);
+				}else{
+					parent.layer.msg(response.statusText);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+
+
+		},
+		userEduSet(){
+            var _this = this;
+			// post 本地json会失败
+			gAxios.post('api/personalInfo/userEduSet.php', {
+				token: localToken,
+				verify_code: _this.verify_code
+			})
+			.then(function (response) {
+				if(response.status==200){
+					var res=response.data;
+					if(res.code==0){
+						_this.verify_code="";
+					}
+					parent.layer.msg(res.msg);
+				}else{
+					parent.layer.msg(response.statusText);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+			
+		},
+
+
 	}
-	
-	reloadGridItem();
-	// var $getTempItemListElems=$($("#imgListDivTemp").html());
-	// $("#imgListDivTemp").empty();
-	// $container.append($getTempItemListElems).masonry('appended', $getTempItemListElems,true).masonry();
 });
+
 

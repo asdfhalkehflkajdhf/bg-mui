@@ -216,8 +216,7 @@ const formTag = new Vue({
 		checkForm(){
 			
 		},
-		//获取表单
-		getFrom(){
+		//获取表单		getFrom(){
 			var _vueThis = this;
 			gAxios.post('api/friends/getSearchCondition.php', {
 				token: localToken,

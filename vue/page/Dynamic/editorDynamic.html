@@ -70,15 +70,15 @@ var fileUpLoadVar={
 	showUpload: true,
 	showCaption: true,//按钮前边的输入框
 	// showPreview: false,
-	dropZoneEnabled: true,
+	dropZoneEnabled: false, //拖拽区
 	browseClass: "btn btn-success",
 	// previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
 	overwriteInitial: false,
 	// initialPreviewAsData: true,
 	// deleteUrl:String,//删除图片时的请求路径
-	// deleteExtraData:Object,删除图片时额外传入的参数{}
+	// deleteExtraData:{token:localToken}, //删除图片时额外传入的参数{}
 	allowedFileExtensions:['jpg','png','gif','jpeg','bmp','mp4'],
-	uploadUrl:"String",//上传图片时的请求路径
+	uploadUrl:'${baseURL}api/personalInfo/userImgUp.php', //上传图片时的请求路径
 	// uploadExtraData:Object,上传图片时额外传入的参数{}
 	maxFileSize:5*1024,//以kb计算
 	maxFileCount:9,

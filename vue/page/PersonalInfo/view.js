@@ -1,5 +1,70 @@
 
+var localToken = getLocalToken();
 
+
+// 个人信息
+// 相册，视频，图片为一个表，按页页面分类，个人信息，动态信息，活动信息，资源保存以路径形式存储，时间，uid
+const userInfo = new Vue(
+{
+	el:"#showPersonalInfo",
+	data:{
+		res:{
+			uid:'',
+			eye:'',
+			contact:"",
+			nick_name:"",
+			height:"",
+			weight:"",
+			living_place:"",
+			profession:"",
+			income:"",
+			tryst_expect:"",
+			marital_status:"",
+			selfIntr:"",
+			otehrIntr:"",
+			find_switch:false
+		},
+		eduList:[],
+
+	},
+	created:function() {
+		this.getUserInfo();
+	},
+	methods:{
+		getUserInfo:function(){
+            var _this = this;
+			// post 本地json会失败
+			gAxios.post('api/personalInfo/userinfoGet.php', {
+				token: localToken,
+				uid:getQueryString("fid")
+			})
+			.then(function (response) {
+				if(response.status==200){
+					var res=response.data;
+					if(res.code == 0){
+						_this.res=res.data.res;
+						_this.eduList=res.data.eduList;
+					}else{
+						parent.layer.msg(res.msg);
+					}
+				}else{
+					parent.layer.msg(response.statusText);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+        }
+	}
+
+});
+
+
+// jQuery页面加载后执行的事件(3种方式)
+// 1 $(function () { });
+// 2 $(document).ready(function () { });
+// 3 window.onload = function () { }
+//相册更新数据，并追加到masonry容器中
 function viewerGalley() {
 	var galley = document.getElementById('imgListDiv');
 	var viewer = new Viewer(galley, {
@@ -39,163 +104,60 @@ function viewerGalley() {
 		
 	});
 };
-	
-// 加载轮播图数据
-// 这个是广告，信息分类，轮播图，个人信息页，活动信息页，动态信息页，主要是以图片+跳转链接，显示状态，和计算过程
-const userInfo = new Vue(
-{
-	el:"#showPersonalInfo",
-	data:{
-		res:[],
-	},
-	created:function() {
-		$('.carousel').carousel({
-		  interval: 2000
-		});
-		this.getLunBoTuList();
-	},
-	methods:{
-        getLunBoTuList:function(){
-            var _this = this;
-			// post 本地json会失败
-			axios.get('testjson/lunBoTuTest.json', {
-				firstName: 'Fred',
-				lastName: 'Flintstone'
-			})
-			.then(function (response) {
-				if(response.status==200){
-					_this.res=response.data;
-				}else{
-					console.log(response.statusText);
-				}
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
-        }
-	}
-// 	mounted: function(){
-// 		// showData('挂载到dom后',this);
-// 		// 加载token查看是否在线
-// 	},	
-}
-);
-
-
-
-// 更新数据，并追加到masonry容器中
-// 相册，视频，图片为一个表，按页页面分类，个人信息，动态信息，活动信息，资源保存以路径形式存储，时间，uid
-const imgListVar = new Vue({
-	el:"#imgListDiv",
-	data:{
-		res:[]
-	},
-	created:function(){
-		var _this = this;
-		// 生成 card
-         // this.$nextTick(function(){
-			 // document.getElementById('lz66303').outerHTML
-         // });
-		
-// 		console.log($("#imgListDivTemp"));
-		// console.log("created");
-		// $("#imgListDiv")
-	},
-	mounted:function(){
-        var _this = this;
-        this.$nextTick(function(){
-	        _this.getImgList();
-			// $("#imgListDiv").masonry();
-			// console.log(document.getElementById('imgListDivTemp').outerHTML);
-			//.prop("innerHTML")
-			// https://zhidao.baidu.com/question/652695212709545885.html
-// 			var tvar=$("#imgListDivTemp")
-// 			console.log(tvar.prop("outerHTML"));
-        });
-		// this.$forceUpdate();
-		// console.log("mounted");
-    },
-	watch:{
-		// 监听到了 res 数据发生变化执行arr方法
-		res: function() {
-			this.$nextTick(function(){
-				/*现在数据已经渲染完毕*/
-	            _this.getImgList();
-				// console.log($("#imgListDivTemp").prop("outerHTML"));
-				// $("#imgListDiv").masonry();
-			})
-			// console.log("wathc");
-		}
-    },
-    methods:{
-        getImgList:function(){
-            var _this = this;
-        }
-
-    }
-});
-
-
-// jQuery页面加载后执行的事件(3种方式)
-// 1 $(function () { });
-// 2 $(document).ready(function () { });
-// 3 window.onload = function () { }
-
-
 //JS瀑布流插件masonry动态载入数据
 $(function () {
 	$("#getGridItem").on("click",function(){
 		reloadGridItem();
 	});
 
+	function getQueryString(name) { 
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+		var r = window.location.search.substr(1).match(reg); //获取url中"?"符后的字符串并正则匹配
+		var context = ""; 
+		if (r != null) 
+			context = r[2]; 
+		reg = null; 
+		r = null; 
+		return context == null || context == "" || context == "undefined" ? "" : context; 
+	}
+	// console.log(getQueryString("fid"));
+
 	function reloadGridItem(){
 		var $container = $('#imgListDiv');
 	
 		// post 本地json会失败
-		axios.get('../Ffriends/testjson/imgtest.json', {
-			firstName: 'Fred',
-			lastName: 'Flintstone'
+		gAxios.post('api/personalInfo/userImgGetList.php', {
+				token: localToken,
+				uid:getQueryString("fid")
 		})
 		.then(function (response) {
-// {
-//   // 服务端返回的数据
-//   data: {},
-//   // 服务端返回的状态码
-//   status: 200,
-//   // 服务端返回的状态信息
-//   statusText: 'OK',
-//   // 响应头
-//   // 所有的响应头名称都是小写
-//   headers: {},
-//   // axios请求配置
-//   config: {},
-//   // 请求
-//   request: {}
-// }
 			var res=[];
 			if(response.status==200){
 				// console.log(1);
 				res=response.data;
+				if(res.code!=0){
+					parent.layer.msg(res.msg);
+				}else{
+					//生成item
+					$.each(res.data, function (i, data) {
+						var $gitem = $(
+							'<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12" >'
+							+'		<img class="" src="'+data['src']+'" imgShowRul="'+data['src']+'" alt="'+data['alt']+'">'
+							+'</div>'
+						);
+						$container.append($gitem).masonry('appended', $gitem, true);
+					});
+						// // jQuery方式。重新布局，添加元素，另一种方式添加元素，重新布局
+					// https://segmentfault.com/a/1190000007316788
+					$container.imagesLoaded( function() {
+						$container.masonry();
+						viewerGalley();
+					});					
+				}
 			}else{
-				// console.log(response.statusText);
+				parent.layer.msg(response.statusText);
 			}
 			
-			//生成item
-			$.each(res, function (i, data) {
-				var $gitem = $(
-					'<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12" >'
-					+'		<img class="" src="'+data['src']+'" imgShowRul="'+data['src']+'" alt="'+data['alt']+'">'
-					+'</div>'
-				);
-				$container.append($gitem).masonry('appended', $gitem, true);
-			});
-				// // jQuery方式。重新布局，添加元素，另一种方式添加元素，重新布局
-			// https://segmentfault.com/a/1190000007316788
-			$container.imagesLoaded( function() {
-				// new Masonry( document.getElementById('container'),{itemSelector:'.item'} );
-				$container.masonry();
-				viewerGalley();
-			});
 		})
 		.catch(function (error) {
 			console.log(error);

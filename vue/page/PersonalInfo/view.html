@@ -22,6 +22,7 @@
 		<link rel="stylesheet" href="../../res/bootstrap-4.0.0/css/bootstrap.min.css">
 		<script src="../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="../common/background-1.css">
+		<script src="../common/globalVar.js"></script>
 		
 		<!-- 自有资源 -->
 		<link rel="stylesheet" type="text/css" href="./css/view.css">
@@ -32,6 +33,8 @@
 		<link rel="stylesheet" href="../../res/viewer-js/viewer.min.css">
 		<script src="../../res/viewer-js/viewer.min.js"></script>
 
+		<!-- awesome图标 -->
+		<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
 
 	</head>
 	<body>
@@ -45,6 +48,12 @@
 					<div class="group-item">
 						<div class="card" style="">
 							<div class="card-header">
+								<div>
+								uid:{{res.uid}}
+								<span class="fa fa-eye card__span_right" title="观看人数">{{res.eye}}</span>
+								</div>
+							</div>
+							<div class="card-header">
 								联系方式
 							</div>
 							<!-- <div class="card-body"></div> -->
@@ -57,7 +66,7 @@
 												<span class="input-group-text" id="inputGroup-contact-sm">预留</span>
 											</div>
 											<input type="text" class="form-control" aria-label="预留" aria-describedby="inputGroup-contact-sm" 
-											style="background-color:white;border:0;" readonly="readonly" value="email@example.com">
+											style="background-color:white;border:0;" readonly="readonly" :value="res.contact">
 										</div>
 
 										
@@ -91,14 +100,14 @@
 												<span class="input-group-text" id="inputGroup-sizing-sm">昵称</span>
 											</div>
 											<input type="text" class="form-control" aria-label="昵称" aria-describedby="inputGroup-sizing-sm" 
-											style="background-color:white;border:0;" readonly="readonly" value="aaa">
+											style="background-color:white;border:0;" readonly="readonly" :value="res.nick_name">
 										</div>
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
 												<span class="input-group-text" id="inputGroup-sizing-sm">身高</span>
 											</div>
 											<input type="number" class="form-control" aria-label="身高" aria-describedby="inputGroup-sizing-sm" 
-											style="background-color:white;border:0;" readonly="readonly">
+											style="background-color:white;border:0;" readonly="readonly" :value="res.height">
 											<div class="input-group-append">
 												<span class="input-group-text">cm</span>
 											</div>
@@ -108,7 +117,7 @@
 												<span class="input-group-text" id="inputGroup-sizing-sm">体重</span>
 											</div>
 											<input type="number" class="form-control" aria-label="体重" aria-describedby="inputGroup-sizing-sm" 
-											style="background-color:white;border:0;" readonly="readonly">
+											style="background-color:white;border:0;" readonly="readonly" :value="res.weight">
 											<div class="input-group-append">
 												<span class="input-group-text">kg</span>
 											</div>
@@ -125,14 +134,14 @@
 												<span class="input-group-text" id="inputGroup-sizing-sm">生活地</span>
 											</div>
 											<input type="text" class="form-control" aria-label="生活地" aria-describedby="inputGroup-sizing-sm" 
-											style="background-color:white;border:0;" readonly="readonly">
+											style="background-color:white;border:0;" readonly="readonly" :value="res.living_place">
 										</div>
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
 												<span class="input-group-text" id="inputGroup-sizing-sm">职业</span>
 											</div>
 											<input type="text" class="form-control" aria-label="职业" aria-describedby="inputGroup-sizing-sm" 
-											style="background-color:white;border:0;" readonly="readonly">
+											style="background-color:white;border:0;" readonly="readonly" :value="res.profession">
 										</div>
 
 										<div class="input-group col-sm">
@@ -140,7 +149,7 @@
 												<span class="input-group-text" id="inputGroup-sizing-sm">收入</span>
 											</div>
 											<input type="number" class="form-control" aria-label="收入" aria-describedby="inputGroup-sizing-sm" 
-											style="background-color:white;border:0;" readonly="readonly" >
+											style="background-color:white;border:0;" readonly="readonly" :value="res.income">
 											<div class="input-group-append">
 												<span class="input-group-text">RMB</span>
 											</div>
@@ -155,14 +164,14 @@
 												<span class="input-group-text" id="inputGroup-sizing-sm">我最喜欢的活动</span>
 											</div>
 											<input type="text" class="form-control" aria-label="我最喜欢的活动" aria-describedby="inputGroup-sizing-sm" 
-											style="background-color:white;border:0;" readonly="readonly">
+											style="background-color:white;border:0;" readonly="readonly" :value="res.tryst_expect">
 										</div>
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
 												<span class="input-group-text" id="inputGroup-sizing-sm">状态</span>
 											</div>
 											<input type="text" class="form-control" aria-label="状态" aria-describedby="inputGroup-sizing-sm" 
-											style="background-color:white;border:0;" readonly="readonly">
+											style="background-color:white;border:0;" readonly="readonly" :value="res.marital_status">
 
 										</div>
 
@@ -176,24 +185,18 @@
 										<tr>
 										  <th scope="col">#</th>
 										  <th scope="col">学校</th>
+										  <th scope="col">专业</th>
 										  <th scope="col">层次</th>
+										  <th scope="col">入学</th>
+										  <th scope="col">毕业</th>
 										</tr>
 									  </thead>
 									  <tbody>
-										<tr>
-										  <th scope="row">1</th>
-										  <td>Mark</td>
-										  <td>Otto</td>
-										</tr>
-										<tr>
-										  <th scope="row">2</th>
-										  <td>Jacob</td>
-										  <td>Thornton</td>
-										</tr>
-										<tr>
-										  <th scope="row">3</th>
-										  <td>Larry</td>
-										  <td>the Bird</td>
+										<tr v-for="item, index in eduList">
+										  <th scope="row">{{index}}</th>
+										  <td>{{item.university}}</td><td>{{item.profession}}</td>
+										  <td>{{item.level}}</td><td>{{item.s_time}}</td>
+										  <td>{{item.e_time}}</td>
 										</tr>
 									  </tbody>
 									</table>
@@ -208,7 +211,7 @@
 								个人介绍
 							</div>
 							<div class="card-body" id="personalIntroduction">
-								个人介绍内容
+								{{res.selfIntr}}
 							</div>
 
 						</div>				
@@ -219,7 +222,7 @@
 								对方要求
 							</div>
 							<div class="card-body" id="duifangIntroduction">
-								对方要求内容
+								{{res.otehrIntr}}
 							</div>
 						</div>			
 					</div>

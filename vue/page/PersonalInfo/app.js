@@ -5,6 +5,8 @@ const personalInfo = new Vue({
 	data:{
 		res:[
 			{title: "个人信息管理", url:"set.html"},
+			{title: "相册管理", url:"photoAlbum.html"},
+
 			{title: "活动管理", url:"../Factivities/manageAction.html"},
 			{title: "动态管理", url:"../Dynamic/manageDynamic.html"},
 			{title: "", url:""},

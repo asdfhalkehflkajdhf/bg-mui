@@ -22,6 +22,7 @@
 		<link rel="stylesheet" href="../../res/bootstrap-4.0.0/css/bootstrap.min.css">
 		<script src="../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="../common/background-1.css">
+		<script src="../common/globalVar.js"></script>
 		
 		<!-- 自有资源 -->
 		<link rel="stylesheet" type="text/css" href="./css/set.css">
@@ -53,8 +54,8 @@
 					<div class="group-item">
 						<div class="card" style="">
 							<div>
-								<button type="button" class="btn btn-success">个人信息可被查找</button>
-								<button type="button" class="btn btn-outline-success">个人信息不可被查找</button>
+								<button type="button" class="btn btn-success" v-show="res.find_switch" v-on:click="up_find_switch()">个人信息可被查找</button>
+								<button type="button" class="btn btn-outline-success" v-show="!res.find_switch" v-on:click="up_find_switch()">个人信息不可被查找</button>
 							</div>
 						</div>
 					</div>
@@ -64,7 +65,7 @@
 							<div class="card-header">
 								<div>
 									<span class="align-middle">联系方式</span>
-									<button type="button" class="btn btn-success card__span_right">保存</button>
+									<button type="button" class="btn btn-success card__span_right" v-on:click="userContactSet()">保存</button>
 								</div>
 							</div>
 							<!-- <div class="card-body"></div> -->
@@ -79,7 +80,7 @@
 												<span class="input-group-text" id="inputGroup-sizing-sm">预留</span>
 											</div>
 											<input type="text" class="form-control" aria-label="预留" aria-describedby="inputGroup-sizing-sm" 
-											placeholder="这个联系方式可选项,可以使用站内">
+											placeholder="这个联系方式可选项,可以使用站内" v-model="res.contact">
 										</div>
 									</div>
 								</li>
@@ -93,7 +94,7 @@
 							<div class="card-header">
 								<div>
 									<span class="align-middle">基本信息</span>
-									<button type="button" class="btn btn-success card__span_right">保存</button>
+									<button type="button" class="btn btn-success card__span_right"  v-on:click="userBaseSet()">保存</button>
 								</div>
 							</div>
 							<ul class="list-group list-group-flush">
@@ -104,14 +105,14 @@
 												<span class="input-group-text" id="inputGroup-sizing-sm">昵称</span>
 											</div>
 											<input type="text" class="form-control" aria-label="昵称" aria-describedby="inputGroup-sizing-sm" 
-											placeholder="必填项,最长32字符" required="required" maxlength="32">
+											placeholder="必填项,最长32字符" required="required" maxlength="32" v-model="res.nick_name">
 										</div>
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
 												<span class="input-group-text" id="inputGroup-sizing-sm">身高</span>
 											</div>
 											<input type="number" class="form-control" aria-label="身高" aria-describedby="inputGroup-sizing-sm" 
-											placeholder="必填项" required="required" maxlength="3">
+											placeholder="必填项" required="required" maxlength="3" v-model="res.height">
 											<div class="input-group-append">
 												<span class="input-group-text">cm</span>
 											</div>
@@ -121,7 +122,7 @@
 												<span class="input-group-text" id="inputGroup-sizing-sm">体重</span>
 											</div>
 											<input type="number" class="form-control" aria-label="体重" aria-describedby="inputGroup-sizing-sm" 
-											placeholder="必填项" required="required" maxlength="3">
+											placeholder="必填项" required="required" maxlength="3" v-model="res.weight">
 											<div class="input-group-append">
 												<span class="input-group-text">kg</span>
 											</div>
@@ -137,8 +138,8 @@
 											<div class="input-group-prepend">
 												<span class="input-group-text" id="inputGroup-sizing-sm">生活地</span>
 											</div>
-											<select class="form-control custom-select" id="生活地" aria-label="生活地" v-model="conditionalForm.ownness">
-												<option :value="item.value" v-for="item in conditionalData.ownnessList">{{item.text}}</option>
+											<select class="form-control custom-select" id="生活地" aria-label="生活地" v-model="res.living_place">
+												<option :value="item.value" v-for="item in livingPlaceList">{{item.text}}</option>
 											</select>
 										</div>
 										<div class="input-group col-sm">
@@ -146,7 +147,7 @@
 												<span class="input-group-text" id="inputGroup-sizing-sm">职业</span>
 											</div>
 											<input type="text" class="form-control" aria-label="职业" aria-describedby="inputGroup-sizing-sm" 
-											placeholder="必填项,最长45字符" required="required" maxlength="45">
+											placeholder="必填项,最长45字符" required="required" maxlength="45" v-model="res.profession">
 										</div>
 
 										<div class="input-group col-sm">
@@ -154,7 +155,7 @@
 												<span class="input-group-text" id="inputGroup-sizing-sm">收入</span>
 											</div>
 											<input type="number" class="form-control" aria-label="收入" aria-describedby="inputGroup-sizing-sm" 
-											placeholder="必填项" required="required" >
+											placeholder="必填项" required="required" v-model="res.income">
 											<div class="input-group-append">
 												<span class="input-group-text">RMB</span>
 											</div>
@@ -169,14 +170,14 @@
 												<span class="input-group-text" id="inputGroup-sizing-sm">我最喜欢的活动</span>
 											</div>
 											<input type="text" class="form-control" aria-label="我最喜欢的活动" aria-describedby="inputGroup-sizing-sm" 
-											placeholder="必填项,最长128字符,多项使用逗号分割" required="required" maxlength="128">
+											placeholder="必填项,最长128字符,多项使用逗号分割" required="required" maxlength="128" v-model="res.tryst_expect">
 										</div>
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
 												<span class="input-group-text" id="inputGroup-sizing-sm">状态</span>
 											</div>
-											<select class="form-control custom-select" id="状态" v-model="conditionalForm.ownness">
-												<option :value="item.value" v-for="item in conditionalData.ownnessList">{{item.text}}</option>
+											<select class="form-control custom-select" id="状态" v-model="res.marital_status">
+												<option :value="item.value" v-for="item in maritalStatusList">{{item.text}}</option>
 											</select>
 
 										</div>
@@ -191,24 +192,18 @@
 										<tr>
 										  <th scope="col">#</th>
 										  <th scope="col">学校</th>
+										  <th scope="col">专业</th>
 										  <th scope="col">层次</th>
+										  <th scope="col">入学</th>
+										  <th scope="col">毕业</th>
 										</tr>
 									  </thead>
 									  <tbody>
-										<tr>
-										  <th scope="row">1</th>
-										  <td>Mark</td>
-										  <td>Otto</td>
-										</tr>
-										<tr>
-										  <th scope="row">2</th>
-										  <td>Jacob</td>
-										  <td>Thornton</td>
-										</tr>
-										<tr>
-										  <th scope="row">3</th>
-										  <td>Larry</td>
-										  <td>the Bird</td>
+										<tr v-for="item, index in eduList">
+										  <th scope="row">{{index}}</th>
+										  <td>{{item.university}}</td><td>{{item.profession}}</td>
+										  <td>{{item.level}}</td><td>{{item.s_time}}</td>
+										  <td>{{item.e_time}}</td>
 										</tr>
 									  </tbody>
 									</table>
@@ -218,9 +213,9 @@
 												<span class="input-group-text" id="inputGroup-sizing-sm">添加在线学籍认证</span>
 											</div>
 											<input type="text" class="form-control" aria-label="添加在线学籍认证" aria-describedby="inputGroup-sizing-sm" 
-											placeholder="在线验证码" >
+											placeholder="在线验证码" v-model="verify_code">
 											<div class="input-group-append">
-												<button class="btn btn-outline-secondary text-primary" type="button">添加</button>
+												<button class="btn btn-outline-secondary text-primary" type="button" v-on:click="userEduSet()">添加</button>
 											</div>
 										</div>
 
@@ -234,7 +229,7 @@
 							<div class="card-header">
 								<div>
 									<span class="align-middle">个人介绍</span>
-									<button type="button" class="btn btn-success card__span_right">保存</button>
+									<button type="button" class="btn btn-success card__span_right"  v-on:click="userSelfIntrSet()">保存</button>
 								</div>
 							</div>
 							<div class="card-body" id="personalIntroduction">
@@ -248,7 +243,7 @@
 							<div class="card-header">
 								<div>
 									<span class="align-middle">对方要求</span>
-									<button type="button" class="btn btn-success card__span_right">保存</button>
+									<button type="button" class="btn btn-success card__span_right" v-on:click="userOtherIntrSet()">保存</button>
 								</div>
 							</div>
 							<div class="card-body" id="duifangIntroduction">
@@ -256,40 +251,7 @@
 							</div>
 						</div>			
 					</div>
-					<!-- 相册 -->
-					<div class="group-item">
-						<div class="card" style="">
-							<div class="card-header">
-								相册
-							</div>
-							<!-- //  -->
-							<div class="grid row js-masonry " id="imgListDiv" >
-				
-							</div>
 
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item">
-									<div  class="placeholder-10"></div>
-									<div class="row">
-										<div class=" col-sm">
-											<button type="button" class="btn btn-outline-success">批量删除</button>
-										</div>
-										<div class=" col-sm">
-											<input type="file" name="txt_file" id="txt_file" multiple class="file-loading el-col-offset-1" />
-										</div>
-									</div>
-									<div  class="placeholder-10"></div>
-								</li>
-							</ul>
-						</div>
-					</div>
-<!-- 					<div class="group-item">
-						<div class="card" style="">
-							<div class="card-header">
-								视频
-							</div>
-						</div>
-					</div> -->
 					<div  class="placeholder-10"></div>
 				
 				</div>
