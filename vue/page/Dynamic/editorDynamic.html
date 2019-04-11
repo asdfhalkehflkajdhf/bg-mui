@@ -23,6 +23,7 @@
 		<link rel="stylesheet" href="../../res/bootstrap-4.0.0/css/bootstrap.min.css">
 		<script src="../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="../common/background-1.css">
+		<script src="../common/globalVar.js"></script>
 
 		<!-- 自有资源 -->
 		<link rel="stylesheet" type="text/css" href="./css/main.css">
@@ -49,7 +50,8 @@
 								<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="内容"></textarea>
 							</div>
 						</div>
-						<input type="file" name="txt_file" id="txt_file" multiple class="file-loading el-col-offset-1" />
+						<input type="file" name="image_data[]" id="txt_file" multiple class="file-loading el-col-offset-1" />
+						<div  class="placeholder-10"></div>
 					
 						<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="forget()">发送</button>
 					</form>
@@ -61,39 +63,9 @@
 			</div>
 		</div>
 	</body>
+	<script src="../common/globalUpImg.js"></script>
+	
 	<script>
-// 上传初始化
-// 参数 https://blog.csdn.net/u012526194/article/details/69937741/
-var fileUpLoadVar={
-	language: 'zh', //设置语言
-	theme: 'fa',
-	showUpload: true,
-	showCaption: true,//按钮前边的输入框
-	// showPreview: false,
-	dropZoneEnabled: false, //拖拽区
-	browseClass: "btn btn-success",
-	// previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-	overwriteInitial: false,
-	// initialPreviewAsData: true,
-	// deleteUrl:String,//删除图片时的请求路径
-	// deleteExtraData:{token:localToken}, //删除图片时额外传入的参数{}
-	allowedFileExtensions:['jpg','png','gif','jpeg','bmp','mp4'],
-	uploadUrl:'${baseURL}api/personalInfo/userImgUp.php', //上传图片时的请求路径
-	// uploadExtraData:Object,上传图片时额外传入的参数{}
-	maxFileSize:5*1024,//以kb计算
-	maxFileCount:9,
-	previewFileType:['image', 'video'],//预览文件类型,内置
-	uploadAsync:false,// 关闭异步上传
-};
-
-$("#txt_file").fileinput(fileUpLoadVar);
-
-
-// 文件上传方法
-// $("#txt_file").fileinput("upload");
-// 上传成功后处理方法
-$("#txt_file").on("fileuploaded", function(event, data, previewId, index) {
-
-});
+		upImgInit("txt_file", 3);
 	</script>
 </html>

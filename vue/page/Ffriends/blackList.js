@@ -5,7 +5,6 @@ function queryParams(params){
 	// 添加消息类型
 	// params['msgType']=$('#inputGroupSelect01').val();
 	params['token']=localToken;
-
 	return params
 }
 
@@ -38,92 +37,6 @@ function queryParams(params){
     setTimeout(function () {
 
     }, 1000)
-  }
-
-//打开个人信息预览窗口函数
-function openViewFun123(friend_id){
-	//多窗口模式，层叠置顶
-	request_url = '../PersonalInfo/view.html?friend_id='+friend_id;
-	// openMsgWinWidth=window.screen.availWidth;//window.screen.availHeight
-	// openMsgWinHeight=window.screen.availHeight;//window.screen.availWidth
-	openMsgWinWidth=document.documentElement.clientWidth;
-	openMsgWinHeight=document.documentElement.clientHeight;
-	if (openMsgWinWidth>900){
-		openMsgWinWidth=900;
-	}
-	if (openMsgWinHeight>700){
-		openMsgWinHeight=700;
-	}
-
-	var index = layer.open({
-		type: 2 //此处以iframe举例
-		,title: 'message'
-		//,area: ['900px', '700px']
-		,area: [ String(openMsgWinWidth)+'px', String(openMsgWinHeight)+'px' ]
-		,shade: 0
-		,maxmin: true //最大最小化
-		,offset: 'auto'
-		,content: request_url
-// 				,btn: ['全部关闭', '全部关闭'] //只是为了演示  http://www.layui.com/doc/modules/layer.html#btn
-// 				,yes: function(){       //第一个按钮,按钮1的回调是yes，而从按钮2开始，则回调为btn2: function(){}，以此类推。
-// 					layer.msg('全部关闭');
-// 					layer.closeAll();
-// 				}
-// 				,btn2: function(){
-// 				  layer.closeAll();
-// 				}
-// 				,btnAlign: 'l' //按钮排列
-// 
-		,zIndex: layer.zIndex //重点1
-		,success: function(layero){
-		  layer.setTop(layero); //重点2
-		}
-	});
-	// layer 弹出默认全屏
-	// layer.full(index);
-}
-
-//打开消息窗口函数
-function sendMsgFun123(friend_id){
-	//多窗口模式，层叠置顶
-	request_url = '../News/msgWin.html?friend_id='+friend_id;
-	// openMsgWinWidth=window.screen.availWidth;//window.screen.availHeight
-	// openMsgWinHeight=window.screen.availHeight;//window.screen.availWidth
-	openMsgWinWidth=document.documentElement.clientWidth;
-	openMsgWinHeight=document.documentElement.clientHeight;
-	if (openMsgWinWidth>900){
-		openMsgWinWidth=900;
-	}
-	if (openMsgWinHeight>700){
-		openMsgWinHeight=700;
-	}
-
-	var index = layer.open({
-		type: 2 //此处以iframe举例
-		,title: 'message'
-		//,area: ['900px', '700px']
-		,area: [ String(openMsgWinWidth)+'px', String(openMsgWinHeight)+'px' ]
-		,shade: 0
-		,maxmin: true //最大最小化
-		,offset: 'auto'
-		,content: request_url
-// 				,btn: ['全部关闭', '全部关闭'] //只是为了演示  http://www.layui.com/doc/modules/layer.html#btn
-// 				,yes: function(){       //第一个按钮,按钮1的回调是yes，而从按钮2开始，则回调为btn2: function(){}，以此类推。
-// 					layer.msg('全部关闭');
-// 					layer.closeAll();
-// 				}
-// 				,btn2: function(){
-// 				  layer.closeAll();
-// 				}
-// 				,btnAlign: 'l' //按钮排列
-// 
-		,zIndex: layer.zIndex //重点1
-		,success: function(layero){
-		  layer.setTop(layero); //重点2
-		}
-	});
-	// layer 弹出默认全屏
-	// layer.full(index);
 }
 
 function sendDelReq(row){
@@ -184,13 +97,15 @@ var  optEvent={
 
 	},
 	'click .name': function (e, value, row, index) {
-		console.log("打开msgWin",row, value);
-		sendMsgFun123(row.black_uid);
-
+		// console.log("打开msgWin",row, value);
+		// sendMsgFun123(row.black_uid);
+		request_url = '../PersonalInfo/view.html?fid='+row.black_uid;
+		openSubWin(request_url, row.name, true);
 	},
 	'click .uid': function (e, value, row, index) {
 		console.log("打开msgWin",row, value);
-		openViewFun123(row.black_uid);
+		request_url = '../PersonalInfo/view.html?fid='+row.black_uid;
+		openSubWin(request_url, row.name, true);
 	},
 
 }
@@ -215,7 +130,6 @@ function nameFormatter(value, row, index, field){
 	return [
 	  '<a class="name" href="javascript:void(0)" title="msg">',
 		value,
-		'<span class="badge badge-pill badge-danger">4</span>',
 	  '</a> '
 	].join('')
 }

@@ -24,6 +24,7 @@
 		<!-- 背景样式 -->
 		<link rel="stylesheet" type="text/css" href="../common/background-1.css">
 		<script src="../common/globalVar.js"></script>
+		<script src="../common/globalSubWin.js"></script>
 
 		<!-- 自有资源 -->
 		<link rel="stylesheet" type="text/css" href="./css/msgList.css">
@@ -51,10 +52,9 @@
 								<label class="input-group-text" for="inputGroupSelect01">类型</label>
 							</div>
 							<select name="search" class="custom-select" id="inputGroupSelect01">
-								<option value="all" selected>全部</option>
-								<option value="act" >act</option>
-								<option value="info" >info</option>
-								<option value="dym" >dym</option>
+								<option value="info" selected>找朋友</option>
+								<option value="act" >活动</option>
+								<option value="dym" >动态</option>
 							</select>
 						</div>
 					</div>
@@ -66,13 +66,16 @@
 							<!-- 
 data-search="true" 
 data-custom-search="customSearch"
+							data-url="testjson/data1.json"
+
 refresh，图标 使用fa-sync 但是没有了，不显示，改成了fa-refresh
 -->
 					<div class="">
 						<table id="msgTable" 
 							data-toggle="table" 
 							data-thead-classes="thead-light" 
-							data-url="testjson/data1.json"
+							data-ajax="ajaxRequest"
+
 							data-mobile-responsive="true"
 							data-toolbar="#msgToolbar"
 							data-show-refresh="true"
@@ -85,7 +88,7 @@ refresh，图标 使用fa-sync 但是没有了，不显示，改成了fa-refresh
 							<thead>
 								<tr>
 									<th data-field="type">类型</th>
-									<th data-field="uid">uid</th>
+									<th data-field="uid" data-formatter="uidFormatter" data-events="optEvent">uid</th>
 									<th data-field="name" data-formatter="nameFormatter" data-events="optEvent">用户名</th>
 									<th data-field="time" data-sortable="true">时间</th>
 									<th data-field="opt" data-formatter="optFormatter" data-events="optEvent">操作</th>

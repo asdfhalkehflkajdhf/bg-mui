@@ -23,7 +23,8 @@
 		<script src="../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
 		<!-- 背景样式 -->
 		<link rel="stylesheet" type="text/css" href="../common/background-1.css">
-		
+		<script src="../common/globalVar.js"></script>
+
 		<!-- 自有资源 -->
 		<link rel="stylesheet" type="text/css" href="./css/msgWin.css">
 
@@ -35,12 +36,13 @@
 					<div class="card" style="height:100%;" id="msgWin">
 						<div class="card-header" style="height:10%;">
 							<!-- 消息内容窗口导航，关闭，删除，黑名单-->
-							<button type="button" class="btn btn-outline-success">删除</button>
+<!-- 							<button type="button" class="btn btn-outline-success">删除</button>
 							<button type="button" class="btn btn-outline-success">添加到黑名单</button>
-							
+ -->							
 						</div>
 						<div class="card-body" style="height:90%;" id="msgItemList">
 							<!-- 消息内容样式 -->
+<!-- 
 							<div>
 								<p class="text-center" style="color: #C8C8C8;">2019-03-19 12:00</p>
 								<p class="text-left"><span class=" rounded " style="background-color: #E8E8E8;">关闭，删除，添加到黑名单</span></p>
@@ -49,56 +51,27 @@
 								<p class="text-center" style="color: #C8C8C8;">2019-03-19 23:99</p>
 								<p class="text-right"><span class=" rounded " style="background-color: #99CC66;">关闭，删除，添加到黑名单</span></p>
 							</div>
-							<div>
-								<p class="text-center" style="color: #C8C8C8;">2019-03-19 99:44</p>
-								<p class="text-right"><span class=" rounded " style="background-color: #99CC66;">This is some text within a card body.This is some text within a card body.This is some text within a card body.This is some text within a card body.This is some text within a card body.This is some text within a card body.This is some text within a card body.</span></p>
-							</div>
-							<div>
-								<p class="text-center" style="color: #C8C8C8;">2019-03-19 12:00</p>
-								<p class="text-left"><span class=" rounded " style="background-color: #E8E8E8;">关闭，删除，添加到黑名单</span></p>
-							</div>
-							<div>
-								<p class="text-center" style="color: #C8C8C8;">2019-03-19 23:99</p>
-								<p class="text-right"><span class=" rounded " style="background-color: #99CC66;">关闭，删除，添加到黑名单</span></p>
-							</div>
-							<div>
-								<p class="text-center" style="color: #C8C8C8;">2019-03-19 12:00</p>
-								<p class="text-left"><span class=" rounded " style="background-color: #E8E8E8;">关闭，删除，添加到黑名单</span></p>
-							</div>
-							<div>
-								<p class="text-center" style="color: #C8C8C8;">2019-03-19 23:99</p>
-								<p class="text-right"><span class=" rounded " style="background-color: #99CC66;">关闭，删除，添加到黑名单</span></p>
-							</div>
-							<div>
-								<p class="text-center" style="color: #C8C8C8;">2019-03-19 99:44</p>
-								<p class="text-right"><span class=" rounded " style="background-color: #99CC66;">This is some text within a card body.</span></p>
-							</div>
-							<div>
-								<p class="text-center" style="">2019-03-19 12:00</p>
-								<p class="text-left"><span class=" rounded " style="background-color: #E8E8E8;">关闭，删除，添加到黑名单</span></p>
-							</div>
-							<div>
-								<p class="text-center" style="color: #C8C8C8;">2019-03-19 23:99</p>
-								<p class="text-right"><span class=" rounded " style="background-color: #99CC66;">关闭，删除，添加到黑名单</span></p>
-							</div>
+-->
+
 						</div>
 						<div class="card-footer" style="height:10%;">
 							<!-- 消息内容发送 -->
 							<div class="input-group" >
-								<textarea class="form-control" aria-label="With textarea"></textarea>
+								<textarea class="form-control" aria-label="With textarea" v-model="msg"></textarea>
 								<div class="input-group-append">
-									<button class="btn btn-outline-secondary" type="button">发送</span>
+									<button class="btn btn-outline-secondary" type="button" v-on:click="sengMsg()">发送</span>
 								</div>
 							</div>
 						</div>
 					</div>
 	</body>
 	<script type="text/javascript">
+		var localToken = getLocalToken();
 		var msgWin = new Vue({
 			el: "#msgWin",
 			data:{
-				
-				msgLastTime:null
+				msg:"",
+				msgLastTime:""
 			},
 			methods:{
 				// 更新页面显示内容
@@ -119,8 +92,11 @@
 				upMsgWin:function(){
 					var _vue_this = this;
 					//带时间参数,
-					axios.get('testjson/data2.json', {
-						msgLastTime: _vue_this.msgLastTime
+					gAxios.post('api/news/getUserMsgInfo.php', {
+						token: localToken,
+						msgLastTime: _vue_this.msgLastTime,
+						uid:getQueryString('fid'),
+						type:'info'
 					})
 					.then(function (response) {
 						//   // 服务端返回的状态信息
@@ -128,12 +104,12 @@
 							// console.log(1);
 							//   // 服务端返回的数据
 							if(response.data.length==0){
-								layer.msg("没有更多，请修改查找条件！");
+								parent.layer.msg("没有更多，请修改查找条件！");
 								return;
 							};	
 							_vue_this.appendMsgWin(response.data);
 						}else {
-							layer.msg("获取信息失败！"+response.statusText);
+							parent.layer.msg("获取信息失败！"+response.statusText);
 							return;
 						}
 					})
@@ -143,24 +119,34 @@
 				},
 
 				// 发送数据
-				sendMsg:function(){
-					
-					var res={code:0, msg:""};
-					
-					if(res.code){
-						//成功
-						// 清空textarea内容,追加到window
-					}else{
-						//不成功,
-						layer.msg(res.msg);
-					}
-				},
-				delMsg:function(){
-					
-				},
-				appengBlackList:function(){
+				sendMsg(){
+					var _this = this;
+					// post 本地json会失败
+					gAxios.post('api/news/addUserMsg.php', {
+						token: localToken,
+						uid:getQueryString("fid"),
+						msg:_this.msg,
+						type:'info'
+					})
+					.then(function (response) {
+						if(response.status==200){
+							var res=response.data;
+							if(res.code == 0){
+								_this.msg="";
+								_this.appendMsgWin(res.data);
+							}
+							parent.layer.msg(res.msg);
+							
+						}else{
+							parent.layer.msg(response.statusText);
+						}
+					})
+					.catch(function (error) {
+						console.log(error);
+					});
 					
 				}
+
 			},
 			mounted:function(){
 				//请求数据,更新页面,定时器

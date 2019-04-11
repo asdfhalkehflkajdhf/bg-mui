@@ -4,8 +4,7 @@ var localToken = getLocalToken();
 
 // 个人信息
 // 相册，视频，图片为一个表，按页页面分类，个人信息，动态信息，活动信息，资源保存以路径形式存储，时间，uid
-const userInfo = new Vue(
-{
+const userInfo = new Vue({
 	el:"#showPersonalInfo",
 	data:{
 		res:{
@@ -25,6 +24,7 @@ const userInfo = new Vue(
 			find_switch:false
 		},
 		eduList:[],
+		msg:""
 
 	},
 	created:function() {
@@ -55,6 +55,32 @@ const userInfo = new Vue(
 				console.log(error);
 			});
         }
+		sendMsg(){
+            var _this = this;
+			// post 本地json会失败
+			gAxios.post('api/news/addUserMsg.php', {
+				token: localToken,
+				uid:getQueryString("fid"),
+				msg:_this.msg,
+				type:'info'
+			})
+			.then(function (response) {
+				if(response.status==200){
+					var res=response.data;
+					if(res.code == 0){
+						_this.msg="";
+					}
+					parent.layer.msg(res.msg);
+					
+				}else{
+					parent.layer.msg(response.statusText);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+			
+		}
 	}
 
 });
@@ -110,16 +136,6 @@ $(function () {
 		reloadGridItem();
 	});
 
-	function getQueryString(name) { 
-		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
-		var r = window.location.search.substr(1).match(reg); //获取url中"?"符后的字符串并正则匹配
-		var context = ""; 
-		if (r != null) 
-			context = r[2]; 
-		reg = null; 
-		r = null; 
-		return context == null || context == "" || context == "undefined" ? "" : context; 
-	}
 	// console.log(getQueryString("fid"));
 
 	function reloadGridItem(){
@@ -128,7 +144,8 @@ $(function () {
 		// post 本地json会失败
 		gAxios.post('api/personalInfo/userImgGetList.php', {
 				token: localToken,
-				uid:getQueryString("fid")
+				page_id: 1,
+				fid:getQueryString("fid")
 		})
 		.then(function (response) {
 			var res=[];

@@ -93,7 +93,7 @@
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item" v-for="item,index in activeRankList">
 								<span class="btn-outline-success">{{item.region_name}}</button>
-								<a :href="'../Factivities/viewAction.html?id='+item.id" target="_blank">{{item.title}}</a>
+								<a :href="getActionUrlPre(item.id)" target="_blank">{{item.title}}</a>
 								<span class="badge badge-pill badge-success">{{item.eye}}</span>
 
 							</li>
@@ -104,14 +104,14 @@
 						<div class="card-header">
 							公告
 							<span class="card__span_right">
-								<a href="../Other/announcementList.html" target="_blank" title="更多">>></a>
+								<a :href="getAnnouncementUrlPre1()" target="_blank" title="更多">>></a>
 							</span>
 						</div>
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item" v-for="item,index in announcementList">
 								<!-- 带查询参数，下面的结果为 /register?plan=private -->  <!-- 使用js时不能使用router-link -->
 								<!-- <router-link :to="{ path: '../Other/viewAnnouncement.html', query: { id: item.id }}">{{item.title}}</router-link> -->
-								<a :href="'../Other/viewAannouncement.html?id='+item.id" target="_blank">{{item.title}}</a>
+								<a :href="'getAnnouncementUrlPre2(item.id)" target="_blank">{{item.title}}</a>
 							</li>
 						</ul>
 					</div >						

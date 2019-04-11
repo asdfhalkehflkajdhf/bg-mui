@@ -3,6 +3,10 @@ var localToken = getLocalToken();
 const sideEdeg = new Vue({
 	el:"#sideEdeg",
 	data:{
+		actionUrlPre:"../Factivities/viewAction.html?id=",
+		announcementUrlPre1:"",
+		announcementUrlPre2:"../Other/viewAnnouncement.html?id=",
+		
 		activeRankList:[],
 		announcementList:[],
 		friendshipLinkList:[
@@ -37,7 +41,10 @@ const sideEdeg = new Vue({
 		getAnnouncementList:function(status){
 			//发送请求
 			var _vueThis = this;
-			gAxios.post('api/other/getAnnouncementList.php')
+			gAxios.post('api/other/getAnnouncementList.php',{
+				offset:0,
+				num:10
+			})
 			.then(function (response) {
 				if(response.status==200){
 					res=response.data;
@@ -86,6 +93,18 @@ const sideEdeg = new Vue({
 				// parent.layer.msg(error);
 			});
 		},
+		
+		/////////返回链接函数
+		getAnnouncementUrlPre2(id){
+			return this.announcementUrlPre2+id;
+		},
+		getAnnouncementUrlPre1(){
+			return this.announcementUrlPre1;
+		},
+		getActionUrlPre(id){
+			return this.actionUrlPre+id;
+		}
+		
 	},
 	created:function(){
 		// console.log(getinfor);

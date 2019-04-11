@@ -75,9 +75,9 @@
 												<span class="input-group-text" id="inputGroup-instation-sm">站内</span>
 											</div>
 											<input type="" class="form-control" aria-label="站内" aria-describedby="inputGroup-instation-sm" 
-											placeholder="这个联系方式可选项,可以使用站内">
+											placeholder="这个联系方式可选项,可以使用站内" v-model="msg">
 											<div class="input-group-append">
-												<button class="btn btn-outline-secondary" type="button">发送</button>
+												<button class="btn btn-outline-secondary" type="button" v-on:click="sendMsg()">发送</button>
 											</div>
 										</div>
 									</div>

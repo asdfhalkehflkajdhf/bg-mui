@@ -33,9 +33,22 @@ function removeLocalToken(){
 	localStorage.setItem(BoyGTokenKey, "");
 	// localStorage.removeItem('BoyGToken');
 }
-
+////////////////////////////////////////////////////////////
 //基础路径
 var baseURL = "http://127.0.0.1/vue/";
 var gAxios = axios.create({
 	baseURL:"http://127.0.0.1/vue/"
 });
+
+/////////////////////////////////////////////////////////////
+function getQueryString(name) { 
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+	var r = window.location.search.substr(1).match(reg); //获取url中"?"符后的字符串并正则匹配
+	var context = ""; 
+	if (r != null) 
+		context = r[2]; 
+	reg = null; 
+	r = null; 
+	return context == null || context == "" || context == "undefined" ? "" : context; 
+}
+
