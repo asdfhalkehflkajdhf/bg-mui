@@ -23,8 +23,8 @@
 		<link rel="stylesheet" href="../../../res/bootstrap-4.0.0/css/bootstrap.min.css">
 		<script src="../../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="./css/background-2.css">
-		<script src="../../../page/common/globalVar.js"></script>
-		<script src="../../../page/common/globalSubWin.js"></script>
+		<script src="../../../w/common/globalVar.js"></script>
+		<script src="../../../w/common/globalSubWin.js"></script>
 
 
 		<!-- 自有资源 -->
@@ -190,15 +190,15 @@ function userAdd(row){
 			
 		},
 		'click .edit': function (e, value, row, index) {
-			request_url = '../../../page/PersonalInfo/set.html?uid='+row.uid;
+			request_url = '../../../w/PersonalInfo/set.html?uid='+row.uid;
 			openSubWin(request_url, row.name, true);
 		},
 		'click .photo': function (e, value, row, index) {
-			request_url = '../../../page/PersonalInfo/photoAlbum.html?uid='+row.uid;
+			request_url = '../../../w/PersonalInfo/photoAlbum.html?uid='+row.uid;
 			openSubWin(request_url, row.name, true);
 		},
 		'click .eye': function (e, value, row, index) {
-			request_url = '../../../page/PersonalInfo/view.html?fid='+row.uid;
+			request_url = '../../../w/PersonalInfo/view.html?fid='+row.uid;
 			openSubWin(request_url, row.name, true);
 		},		
 	}

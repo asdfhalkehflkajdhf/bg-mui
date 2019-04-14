@@ -2,8 +2,8 @@ var localToken = getLocalToken();
 
 // 编辑框初始化
 var E = window.wangEditor;
-var editor_si = new E('#personalIntroduction');
-var editor_ti = new E('#duifangIntroduction');
+var editor_si = new E('#personalMenu', '#personalIntroduction');
+var editor_ti = new E('#duifangMenu', '#duifangIntroduction');
 editor_si.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
 editor_ti.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
 
@@ -261,7 +261,6 @@ const userInfo = new Vue({
 			.catch(function (error) {
 				console.log(error);
 			});
-
 
 		},
 		userEduSet(){

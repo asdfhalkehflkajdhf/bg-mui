@@ -33,7 +33,7 @@
 		    <div class="wrapper">
 		
 					<div class="group-item">
-						<div class="card" style="">
+						<div class="card" style="" id="ea-base-info">
 							<div class="card-header">
 								基本信息
 							</div>
@@ -82,9 +82,9 @@
 										</div>
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
-												<span class="input-group-text" id="inputGroup-sizing-sm">人数</span>
+												<span class="input-group-text" id="inputGroup-sizing-sm">参加人数</span>
 											</div>
-											<input type="number" class="form-control" aria-label="人数" aria-describedby="inputGroup-sizing-sm" 
+											<input type="number" class="form-control" aria-label="参加人数" aria-describedby="inputGroup-sizing-sm" 
 											placeholder="必填项" required="required" maxlength="2">
 											<div class="input-group-append">
 												<span class="input-group-text">人</span>
@@ -113,7 +113,7 @@
 											<div class="input-group-prepend">
 												<span class="input-group-text">活动首图</span>
 											</div>
-											<img src="css/200x200.svg" class="rounded float-left" alt="..." >
+											<!-- <img src="css/200x200.svg" class="rounded float-left" alt="..." > -->
 											<div class="custom-file">
 												<input type="file" class="custom-file-input" ref="inputer" id="inputGroupFile01" v-on:change="readFile(this);">
 												<label class="custom-file-label" for="inputGroupFile01" id="inputGroupFileLabel">选择文件</label>
@@ -143,7 +143,7 @@
 						<div class="card" style="">
 							<div class="card-header">
 								活动详情 
-								<button type="button" class="btn btn-outline-success text-center" v-on:click="viewActionInfo()">预览</button>
+								<button type="button" class="btn btn-outline-success text-center" onclick="eaBaseInfo.viewActionInfo()">预览</button>
 							</div>
 							<div  class="card-header" id="actionMenu"></div>
 							<div class="card-body" id="actionIntroduction">
@@ -193,8 +193,8 @@
 		
 		editor_si.create();
 		
-		const groupItem = new Vue({
-			el: ".group-item",
+		const eaBaseInfo = new Vue({
+			el: "#ea-base-info",
 			data:{
 				title:"",
 				startTime:"",
@@ -214,6 +214,7 @@
 					var _this = this
 					var inputDOM = this.$refs.inputer;
 					var file = inputDOM.files[0];
+					
 					if(file.size>2*1024*1024){
 						layer.msg("文件不能超过2M");
 						return false;
