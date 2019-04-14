@@ -23,6 +23,10 @@
 		<!-- bootstrap -->
 		<link rel="stylesheet" href="../../../res/bootstrap-4.0.0/css/bootstrap.min.css">
 		<script src="../../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
+
+		<link rel="stylesheet" href="./css/background-2.css">
+		<script src="../../../page/common/globalVar.js"></script>
+
 		<!-- 自有资源 -->
 		<link rel="stylesheet" href="../../../res/bootstrap-table-master/dist/bootstrap-table.min.css">
 		<script src="../../../res/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
@@ -35,39 +39,9 @@
 
 			
 
+		<div class="container">
+			<div class="wrapper">
 
-					<div class="">
-						<table id="msgTable" 
-							data-toggle="table" 
-							data-thead-classes="thead-light" 
-							data-url="testjson/data3.json"
-							data-mobile-responsive="true"
-							data-toolbar="#msgToolbar"
-							data-show-refresh="true"
-							data-show-toggle="true"
-							data-show-fullscreen="true"
-							data-search="true"
-							data-query-params="queryParams"
-							
-							data-pagination="true"
-						>
-							<thead>
-								<tr>
-									<th data-field="id">id</th>
-									<th data-field="jump_addr">跳转地址</th>
-									<th data-field="res_addr">资源地址</th>
-									<th data-field="page_id" >投放页面</th>
-									<th data-field="type_id" >资源类型</th>
-									<th data-field="put_num_total" data-editable="true">要投次数</th>
-									<th data-field="put_num_cur">已投次数</th>
-									<th data-field="stime">开始时间</th>
-									<th data-field="etime">结束时间</th>
-									<th data-field="opt" data-formatter="optFormatter" data-events="optEvent">操作</th>
-									
-								</tr>
-							</thead>
-						</table>
-					</div>
 					<div id="accordion">
 						<div class="card">
 							<div class="card-header" id="headingOne">
@@ -77,132 +51,288 @@
 								</button>
 							  </h5>
 							</div>
-							<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+							<div id="collapseOne" class="collapse card-body" aria-labelledby="headingOne" data-parent="#accordion">
 								<form >
 									<div class="form-group row">
 										<label for="跳转地址" class="col-sm-1 col-form-label">跳转地址</label>
 										<div class="col-sm-5">
-											<input type="text" class="form-control" id="跳转地址" :value="conditionalForm.currentLivingPlace" v-model="conditionalForm.currentLivingPlace">
+											<input type="text" class="form-control" id="跳转地址"  v-model="row.jump_addr" maxlength="256">
 										</div>
 										<label for="资源地址" class="col-sm-1 col-form-label">资源地址</label>
 										<div class="col-sm-5">
-											<input type="text" class="form-control" id="资源地址" :value="conditionalForm.currentLivingPlace" v-model="conditionalForm.currentLivingPlace">
+											<input type="text" class="form-control" id="资源地址"  v-model="row.res_addr" maxlength="256">
 										</div>
 									</div>
 
 									<div class="form-group row">
 										<label for="投放页面" class="col-sm-1 col-form-label">投放页面</label>
 										<div class="col-sm-5">
-											<input type="text" class="form-control" id="投放页面" :value="conditionalForm.currentLivingPlace" v-model="conditionalForm.currentLivingPlace">
+											<select class="form-control" id="投放页面"  v-model="row.page_id">
+												<option :value="item.id" v-for="item in page_list">{{item.desc}}</option>
+											</select>
+										</div>
+										<label for="投放位置" class="col-sm-1 col-form-label">投放位置</label>
+										<div class="col-sm-5">
+											<select class="form-control" id="投放位置"  v-model="row.position_id">
+												<option :value="item.id" v-for="item in position_list">{{item.desc}}</option>
+											</select>
 										</div>
 										<label for="资源类型" class="col-sm-1 col-form-label">资源类型</label>
 										<div class="col-sm-5">
-											<input type="text" class="form-control" id="资源类型" :value="conditionalForm.currentLivingPlace" v-model="conditionalForm.currentLivingPlace">
+											<select class="form-control" id="资源类型"  v-model="row.type_id">
+												<option :value="item.id" v-for="item in type_list">{{item.desc}}</option>
+											</select>
 										</div>
 									</div>
 
 									<div class="form-group row">
 										<label for="要投次数" class="col-sm-1 col-form-label">要投次数</label>
 										<div class="col-sm-3">
-											<input type="text" class="form-control" id="要投次数" :value="conditionalForm.currentLivingPlace" v-model="conditionalForm.currentLivingPlace">
+											<input type="number" class="form-control" id="要投次数"  v-model="row.ads_number_total">
 										</div>
 										<label for="开始时间" class="col-sm-1 col-form-label">开始时间</label>
 										<div class="col-sm-3">
-											<input type="text" class="form-control" id="开始时间" :value="conditionalForm.currentLivingPlace" v-model="conditionalForm.currentLivingPlace">
+											<input type="date" class="form-control" id="开始时间"  v-model="row.ads_start_time">
 										</div>
 										<label for="结束时间" class="col-sm-1 col-form-label">结束时间</label>
 										<div class="col-sm-3">
-											<input type="text" class="form-control" id="结束时间" :value="conditionalForm.currentLivingPlace" v-model="conditionalForm.currentLivingPlace">
+											<input type="date" class="form-control" id="结束时间"  v-model="row.ads_end_time">
 										</div>
 									</div>
-									
+									<div class="form-group row">
+										<label for="描述" class="col-sm-1 col-form-label">描述</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="描述"  v-model="row.desc" maxlength="256">
+										</div>
+									</div>									
 								</form>							
-								<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="upFrom()">提交</button>						
-
+								<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit()">提交</button>						
 							</div>
 						</div>
 					</div>				
+
+
+
+				<table id="msgTable" 
+					data-toggle="table" 
+					data-thead-classes="thead-light" 
+					data-ajax="ajaxRequest"
+					data-mobile-responsive="true"
+					data-toolbar="#msgToolbar"
+					data-show-refresh="true"
+					data-show-toggle="true"
+					data-show-fullscreen="true"
+					data-search="true"
+					data-query-params="queryParams"
+					
+					data-pagination="true"
+				>
+					<thead>
+						<tr>
+							<th data-field="id">id</th>
+							<th data-field="jump_addr" data-formatter="addrFormatter">跳转地址</th>
+							<th data-field="res_addr" data-formatter="addrptFormatter">资源地址</th>
+							<th data-field="page_id" >投放页面</th>
+							<th data-field="type_id" >资源类型</th>
+							<th data-field="ads_number_total" data-editable="true">要投次数</th>
+							<th data-field="ads_number_cur">已投次数</th>
+							<th data-field="ads_start_time">开始时间</th>
+							<th data-field="ads_end_time">结束时间</th>
+							<th data-field="id" data-formatter="optFormatter" data-events="optEvent">操作</th>
+							
+						</tr>
+					</thead>
+				</table>
 	
+			</div>
+		</div>				
 
 	</body>
 <script type="text/javascript">
-		function queryParams(params){
-			//添加新参数,这里直接自定义,不使用控件预定义,太麻烦了,没有使用用例
-			// alert('queryParams: ' + JSON.stringify(params));
-			// console.log($('#inputGroupSelect01').val());
-			// 添加消息类型
-			params['msgType']=$('#inputGroupSelect01').val();
-			// {search: undefined, sort: "time", order: "desc", msgType: "info"}
-			console.log(params);
-			return params
-		}
-		//打开个人信息预览窗口函数
-		function openViewFun123(user_id, friend_id){
-			//多窗口模式，层叠置顶
-			request_url = '../PersonalInfo/view.html?user_id='+user_id+'&friend_id='+friend_id;
-			// openMsgWinWidth=window.screen.availWidth;//window.screen.availHeight
-			// openMsgWinHeight=window.screen.availHeight;//window.screen.availWidth
-			openMsgWinWidth=document.documentElement.clientWidth;
-			openMsgWinHeight=document.documentElement.clientHeight;
-			if (openMsgWinWidth>900){
-				openMsgWinWidth=900;
-			}
-			if (openMsgWinHeight>700){
-				openMsgWinHeight=700;
-			}
-
-			var index = layer.open({
-				type: 2 //此处以iframe举例
-				,title: 'message'
-				//,area: ['900px', '700px']
-				,area: [ String(openMsgWinWidth)+'px', String(openMsgWinHeight)+'px' ]
-				,shade: 0
-				,maxmin: true //最大最小化
-				,offset: 'auto'
-				,content: request_url
-// 				,btn: ['全部关闭', '全部关闭'] //只是为了演示  http://www.layui.com/doc/modules/layer.html#btn
-// 				,yes: function(){       //第一个按钮,按钮1的回调是yes，而从按钮2开始，则回调为btn2: function(){}，以此类推。
-// 					layer.msg('全部关闭');
-// 					layer.closeAll();
-// 				}
-// 				,btn2: function(){
-// 				  layer.closeAll();
-// 				}
-// 				,btnAlign: 'l' //按钮排列
-// 
-				,zIndex: layer.zIndex //重点1
-				,success: function(layero){
-				  layer.setTop(layero); //重点2
+	var localToken = getLocalToken();
+	
+	function adsAdd(row){
+		gAxios.post('api/admin/adsAdd.php', row)
+		.then(function (response) {
+			if(response.status==200){
+				res=response.data;
+				//解析结果
+				if(res.code==0){
+					parent.layer.msg('msg', {icon: 1});
+				}else{
+					parent.layer.msg(res.msg);
 				}
-			});
-			// layer 弹出默认全屏
-			// layer.full(index);
+				
+			}else{
+				parent.layer.msg(response.statusText+response.data.msg);
+			}
+		})
+		.catch(function (error) {
+			console.log(error);
+			// parent.layer.msg(error);
+		});
+	}
+
+	//提交表单
+	const adManagement=new Vue({
+		el:"#accordion",
+		data:{
+			row:{
+				token:localToken,
+				jump_addr:"",
+				res_addr:"",
+				page_id:"",
+				position_id:"",
+				type_id:"",
+				ads_number_total:"",
+				ads_start_time:"",
+				ads_end_time:"",
+				desc:""
+			},
+			page_list:[],
+			position_list:[],
+			type_list:[],
+		},
+		methods:{
+			submit(){
+				adsAdd(this.row);
+			},
+			getPageList(){
+				var _this=this;
+				gAxios.post('api/admin/adsGetPageList.php', {token:localToken})
+				.then(function (response) {
+					if(response.status==200){
+						res=response.data;
+						//解析结果
+						if(res.code==0){
+							_this.page_list=res.data;
+						}else{
+							parent.layer.msg(res.msg);
+						}
+						
+					}else{
+						parent.layer.msg(response.statusText+response.data.msg);
+					}
+				})
+				.catch(function (error) {
+					console.log(error);
+					// parent.layer.msg(error);
+				});
+				
+			},
+			getPositionList(){
+				var _this=this;
+				gAxios.post('api/admin/adsGetPositionList.php', {token:localToken})
+				.then(function (response) {
+					if(response.status==200){
+						res=response.data;
+						//解析结果
+						if(res.code==0){
+							parent.layer.msg('msg', {icon: 1});
+						}else{
+							parent.layer.msg(res.msg);
+						}
+						
+					}else{
+						parent.layer.msg(response.statusText+response.data.msg);
+					}
+				})
+				.catch(function (error) {
+					console.log(error);
+					// parent.layer.msg(error);
+				});
+				
+			},
+			getTypeList(){
+				var _this=this;
+				gAxios.post('api/admin/adsGetTypeList.php', {token:localToken})
+				.then(function (response) {
+					if(response.status==200){
+						res=response.data;
+						//解析结果
+						if(res.code==0){
+							parent.layer.msg('msg', {icon: 1});
+						}else{
+							parent.layer.msg(res.msg);
+						}
+						
+					}else{
+						parent.layer.msg(response.statusText+response.data.msg);
+					}
+				})
+				.catch(function (error) {
+					console.log(error);
+					// parent.layer.msg(error);
+				});
+				
+			}
+		},
+		created:function(){
+			this.getPageList();
+			this.getPositionList();
+			this.getTypeList();
 		}
-		var  optEvent={
+	});
+
+
+	function adsDel(row){
+		gAxios.post('api/admin/adsDel.php', {
+			token:localToken,
+			id:row.id,
+		})
+		.then(function (response) {
+			if(response.status==200){
+				res=response.data;
+				//解析结果
+				if(res.code==0){
+					parent.layer.msg('msg', {icon: 1});
+					// 在页面删除
+					$("#msgTable").bootstrapTable('remove', {
+						field: 'id',
+						values: [row.id]
+					});
+				}else{
+					parent.layer.msg(res.msg);
+				}
+				
+			}else{
+				parent.layer.msg(response.statusText+response.data.msg);
+			}
+		})
+		.catch(function (error) {
+			console.log(error);
+			// parent.layer.msg(error);
+		});
+
+	}
+	
+	function queryParams(params){
+		//添加新参数,这里直接自定义,不使用控件预定义,太麻烦了,没有使用用例
+		// alert('queryParams: ' + JSON.stringify(params));
+		// console.log($('#inputGroupSelect01').val());
+		// 添加消息类型
+		params['token']=localToken;
+		// {search: undefined, sort: "time", order: "desc", msgType: "info"}
+		// console.log(params);
+		return params
+	}
+	
+	var  optEvent={
 // event：jQuery事件。
 // value：字段值。
 // row：行记录数据。
 // index：行索引
 
-			'click .remove': function (e, value, row, index) {
-				// 在服务端删除
-				
-				// 在页面删除
-				$("#msgTable").bootstrapTable('remove', {
-					field: 'id',
-					values: [row.id]
-				});
-			},
- 			'click .name': function (e, value, row, index) {
-				console.log("打开msgWin",row, value);
-				sendMsgFun123(row.uid, 0);
+		'click .remove': function (e, value, row, index) {
+			// 在服务端删除
+			adsDel(row);
+		},
 
-			},
-			
-
-		}
 		
-		function optFormatter(value, row, index, field){
+
+	}
+	
+	function optFormatter(value, row, index, field){
 // value：字段值。
 // row：行记录数据 字典。
 // index：行索引。
@@ -211,21 +341,52 @@
 // 			console.log(row);
 // 			console.log(index);
 // 			console.log(field);
-			return [
-			  '<a class="remove" href="javascript:void(0)" title="删除">',
-			  '	<i class="fa fa-trash-o"></i>',
-			  '</a>'
-			].join('')
+		return [
+		  '<a class="remove" href="javascript:void(0)" title="删除">',
+		  '	<i class="fa fa-trash-o"></i>',
+		  '</a>'
+		].join('')
+	}
+	
+	function addrFormatter(value, row, index, field){
+		return [
+		  '<a class="name" href="',
+		  value,
+		  '" target="_black">',
+		  '</a> '
+		].join('')
+	}
+function ajaxRequest(params) {
+	gAxios.post('api/admin/adsGet.php', params.data)
+	.then(function (response) {
+		if(response.status==200){
+			res=response.data;
+			//解析结果
+			if(res.code==0){
+				
+				params.success({
+				  rows: res.data
+				})
+			}else{
+				parent.layer.msg(res.msg);
+			}
+			
+		}else{
+			parent.layer.msg(response.statusText+response.data.msg);
 		}
-		
-		function nameFormatter(value, row, index, field){
-			return [
-			  '<a class="name" href="javascript:void(0)" title="msg">',
-				value,
-			  '</a> '
-			].join('')
-		}
+	})
+	.catch(function (error) {
+		console.log(error);
+		// parent.layer.msg(error);
+	});
 
+//     // params data you need
+//     console.log(params)
+//     // here we just use setTimeout
+//     setTimeout(function () {
+// 
+//     }, 1000)
+  }
 </script>
 
 </html>

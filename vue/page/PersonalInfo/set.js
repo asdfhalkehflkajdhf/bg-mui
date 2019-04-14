@@ -85,6 +85,7 @@ const userInfo = new Vue({
 			// post 本地json会失败
 			gAxios.post('api/personalInfo/userFindSwitchSet.php', {
 				token: localToken,
+				uid:getQueryString("uid")
 			})
 			.then(function (response) {
 				if(response.status==200){
@@ -104,7 +105,8 @@ const userInfo = new Vue({
 			// post 本地json会失败
 			gAxios.post('api/personalInfo/userContactSet.php', {
 				token: localToken,
-				contact: _this.res.contact
+				contact: _this.res.contact,
+				uid:getQueryString("uid")
 			})
 			.then(function (response) {
 				if(response.status==200){
@@ -203,6 +205,7 @@ const userInfo = new Vue({
 				income:_this.res.income,
 				tryst_expect:_this.res.tryst_expect,
 				marital_status:_this.res.marital_status,
+				uid:getQueryString("uid")
 			})
 			.then(function (response) {
 				if(response.status==200){
@@ -223,7 +226,8 @@ const userInfo = new Vue({
 			// post 本地json会失败
 			gAxios.post('api/personalInfo/userSelfIntrSet.php', {
 				token: localToken,
-				selfIntr: editor_si.txt.html()
+				selfIntr: editor_si.txt.html(),
+				uid:getQueryString("uid")
 			})
 			.then(function (response) {
 				if(response.status==200){
@@ -243,7 +247,8 @@ const userInfo = new Vue({
 			// post 本地json会失败
 			gAxios.post('api/personalInfo/userOtherIntrSet.php', {
 				token: localToken,
-				otherIntr: editor_ti.txt.html()
+				otherIntr: editor_ti.txt.html(),
+				uid:getQueryString("uid")
 			})
 			.then(function (response) {
 				if(response.status==200){
@@ -264,7 +269,8 @@ const userInfo = new Vue({
 			// post 本地json会失败
 			gAxios.post('api/personalInfo/userEduSet.php', {
 				token: localToken,
-				verify_code: _this.verify_code
+				verify_code: _this.verify_code,
+				uid:getQueryString("uid")
 			})
 			.then(function (response) {
 				if(response.status==200){

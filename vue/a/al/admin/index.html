@@ -26,43 +26,13 @@
 		<div class="container">
 			<div class="wrapper">
 				<div class="row">
-					<div class="col-sm-2 ">
+					<div class="col-sm-2 " id="aMenu">
 						<ul class="nav nav-tabs flex-column nav-pills " id="myTab" role="tablist">
-							<li class=" nav-item">
-								<a class="nav-link active" id="statistics-tab" data-toggle="tab" href="#statistics" role="tab" aria-controls="statistics" aria-selected="true">
-									统计信息
+							<li class=" nav-item" v-for="item in menu">
+								<a class="nav-link " v-bind:class='{active: item.isSelect}' :id="item.id" data-toggle="tab" :data-url="item.iframe" :href="'#'+item.ac" role="tab" :aria-controls="item.ac" aria-selected="item.isSelect">
+									{{item.name}}
 								</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" id="addAdmin-tab" data-toggle="tab" href="#addAdmin" role="tab" aria-controls="addAdmin" aria-selected="false">添加管理员</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" id="adManagement-tab" data-toggle="tab" href="#adManagement" role="tab" aria-controls="adManagement" aria-selected="false">广告管理</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" id="announcement-tab" data-toggle="tab" href="#announcement" role="tab" aria-controls="announcement" aria-selected="false">公告管理</a>
-							</li>
-							<li class="divider"></li>
-							<li class="nav-item">
-								<a class="nav-link" id="blackList-tab" data-toggle="tab" href="#blackList" role="tab" aria-controls="blackList" aria-selected="false">黑名单管理</a>
 							</li>							
-							<li class="nav-item">
-								<a class="nav-link" id="friendsLink-tab" data-toggle="tab" href="#friendsLink" role="tab" aria-controls="friendsLink" aria-selected="false">友情链接</a>
-							</li>
-						
-							<li class="divider"></li>
-							<li class="nav-item">
-								<a class="nav-link" id="addUser-tab" data-toggle="tab" href="#addUser" role="tab" aria-controls="addUser" aria-selected="false">添加用户</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" id="userManagement-tab" data-toggle="tab" href="#userManagement" role="tab" aria-controls="userManagement" aria-selected="false">用户管理</a>
-							</li>
-<!-- 							<li class="nav-item">
-								<a class="nav-link" id="addDym-tab" data-toggle="tab" href="#addDym" role="tab" aria-controls="addDym" aria-selected="false">添加动态</a>
-							</li> -->
-							<li class="nav-item">
-								<a class="nav-link" id="resetpw-tab" data-toggle="tab" href="#resetpw" role="tab" aria-controls="resetpw" aria-selected="false">重置密码</a>
-							</li>
 						</ul>
 						
 
@@ -76,69 +46,20 @@
   <div class="tab-pane" id="announcement" role="tabpanel" aria-labelledby="announcement-tab">...</div>
 </div> -->
 						<div class="card">
-							<div class="card-header">
-								全部活动排名
-							</div>
 							<div id="subPage">
 				<!-- 			<iframe id="subPageIframe" src="Ffriends/index.html" 
 							frameborder="0" scrolling="no"  width="100%"  style=" "
 							></iframe> -->
 							</div>
 						</div >
-
-
-
-
-						
 					</div >
 				</div>
 			</div>
 		</div>	
 	</body>
-<script>
-	$(function () {
-		
-		$('#myTab a').on('click', function (e) {
-			e.preventDefault()
-			$(this).tab('show')
-		})
-		
-		// $('#myTab li:last-child a').tab('show');
-		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-			console.log(e.target);
-			console.log(e.relatedTarget);
-			e.target // newly activated tab
-			e.relatedTarget // previous active tab
-		})
-	})
-	
-	
-// 子页面切换
-function subPageSwitch(url){
-	// console.log("subPageSwitch");
-	$("#subPage").empty();
-	html = '<iframe id="subPageIframe" src="'+url+'"frameborder="0" scrolling="no"  width="100%"></iframe>';
-	$("#subPage").append(html);
-}
+	<!-- 动态加载数据 -->
+	<script type="text/javascript" src="index.js"></script>
 
-
-//加载iframe子页面内容
-function reinitIframe(){
-	var iframe = document.getElementById("subPageIframe");
-	var iframeWinDoc = iframe.contentWindow.document;
-	try{
-		var bHeight = iframeWinDoc.body.scrollHeight;
-		var dHeight = iframeWinDoc.documentElement.scrollHeight;
-		// console.log(bHeight,dHeight);
-		var height = Math.min(bHeight, dHeight);
-		iframe.height = height;
-		
-		// 更新当前页面的title
-		// console.log(document.title, iframeWinDoc.title);
-		if(document.title != iframeWinDoc.title)
-			document.title = iframeWinDoc.title;
-	}catch (ex){}
-}
-window.setInterval("reinitIframe()", 500);
-</script>
+	<script>
+	</script>
 </html>

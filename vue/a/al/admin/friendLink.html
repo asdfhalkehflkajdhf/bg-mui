@@ -23,6 +23,10 @@
 		<!-- bootstrap -->
 		<link rel="stylesheet" href="../../../res/bootstrap-4.0.0/css/bootstrap.min.css">
 		<script src="../../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
+		
+		<link rel="stylesheet" href="./css/background-2.css">
+		<script src="../../../page/common/globalVar.js"></script>
+
 		<!-- 自有资源 -->
 		<link rel="stylesheet" href="../../../res/bootstrap-table-master/dist/bootstrap-table.min.css">
 		<script src="../../../res/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
@@ -33,14 +37,44 @@
 	</head>
 	<body>
 
-			
-
-
-					<div class="">
+		<div class="container">
+			<div class="wrapper">
+					<div id="accordion">
+						<div class="card">
+							<div class="card-header" id="headingOne">
+							  <h5 class="mb-0">
+								<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+									添加链接
+								</button>
+							  </h5>
+							</div>
+							<div id="collapseOne" class="collapse card-body" aria-labelledby="headingOne" data-parent="#accordion">
+								<form >
+									<div class="form-group row">
+										<!-- <label for="name" class="col-sm-1 col-form-label">name</label> -->
+										<!-- <div class="col-sm-12"> -->
+											<input type="text" placeholder="站点" class="form-control" id="name"  v-model="row.name" maxlength="32">
+										<!-- </div> -->
+										<!-- <label for="url" class="col-sm-1 col-form-label">url</label> -->
+									</div>
+									<div class="form-group row">
+										<!-- <div class="col-sm-12"> -->
+											<input type="text" placeholder="链接" class="form-control" id="url" v-model="row.url" maxlength="256">
+										<!-- </div> -->
+									</div>
+									<div class="form-group row">
+										<button type="button" class=" btn btn-primary btn-lg btn-block" v-on:click="submit()">提交</button>						
+									</div>
+									
+								</form>
+							</div>
+						</div>
+					</div>
+											
 						<table id="msgTable" 
 							data-toggle="table" 
 							data-thead-classes="thead-light" 
-							data-url="testjson/data5.json"
+					data-ajax="ajaxRequest"
 							data-mobile-responsive="true"
 							data-toolbar="#msgToolbar"
 							data-show-refresh="true"
@@ -54,54 +88,101 @@
 							<thead>
 								<tr>
 									<th data-field="id">id</th>
-									<th data-field="name" data-formatter="nameFormatter" data-events="optEvent">站名</th>
-									<th data-field="url" >链接</th>
+									<th data-field="link_name" data-formatter="nameFormatter">站名</th>
+									<th data-field="link_url" >链接</th>
 									<th data-field="opt" data-formatter="optFormatter" data-events="optEvent">操作</th>
 								</tr>
 							</thead>
 						</table>
-					</div>
-					<div id="accordion">
-						<div class="card">
-							<div class="card-header" id="headingOne">
-							  <h5 class="mb-0">
-								<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-									添加链接
-								</button>
-							  </h5>
-							</div>
-							<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-								<form >
-									<div class="form-group row">
-										<!-- <label for="name" class="col-sm-1 col-form-label">name</label> -->
-										<div class="col-sm-12">
-											<input type="text" placeholder="站点" class="form-control" id="name" :value="conditionalForm.currentLivingPlace" v-model="conditionalForm.currentLivingPlace">
-										</div>
-										<!-- <label for="url" class="col-sm-1 col-form-label">url</label> -->
-										<div class="col-sm-12">
-											<input type="text" placeholder="链接" class="form-control" id="url" :value="conditionalForm.currentLivingPlace" v-model="conditionalForm.currentLivingPlace">
-										</div>
-										<button type="button" class=" btn btn-primary btn-lg btn-block" v-on:click="upFrom()">提交</button>						
-									</div>
-									
-								</form>
-							</div>
-						</div>
-					</div>
+
+			</div>
+		</div>
 	
 
 	</body>
 <script type="text/javascript">
-		function queryParams(params){
-			//添加新参数,这里直接自定义,不使用控件预定义,太麻烦了,没有使用用例
-			// alert('queryParams: ' + JSON.stringify(params));
-			// console.log($('#inputGroupSelect01').val());
-			// 添加消息类型
-			params['msgType']=$('#inputGroupSelect01').val();
-			// {search: undefined, sort: "time", order: "desc", msgType: "info"}
-			console.log(params);
-			return params
+var localToken = getLocalToken();
+function friendsAdd(row){
+	gAxios.post('api/admin/friendsAdd.php', row)
+	.then(function (response) {
+		if(response.status==200){
+			res=response.data;
+			//解析结果
+			if(res.code==0){
+				parent.layer.msg('msg', {icon: 1});
+			}else{
+				parent.layer.msg(res.msg);
+			}
+			
+		}else{
+			parent.layer.msg(response.statusText+response.data.msg);
 		}
+	})
+	.catch(function (error) {
+		console.log(error);
+		// parent.layer.msg(error);
+	});
+}
+
+	//提交表单
+	const friends=new Vue({
+		el:"#accordion",
+		data:{
+			row:{
+				token:localToken,
+				url:"",
+				name:""
+			},
+		},
+		methods:{
+			submit(){
+				friendsAdd(this.row);
+			},
+		}
+	});
+
+
+	function friendsDel(row){
+		gAxios.post('api/admin/friendsDel.php', {
+			token:localToken,
+			id:row.id,
+		})
+		.then(function (response) {
+			if(response.status==200){
+				res=response.data;
+				//解析结果
+				if(res.code==0){
+					parent.layer.msg('msg', {icon: 1});
+					// 在页面删除
+					$("#msgTable").bootstrapTable('remove', {
+						field: 'id',
+						values: [row.id]
+					});
+				}else{
+					parent.layer.msg(res.msg);
+				}
+				
+			}else{
+				parent.layer.msg(response.statusText+response.data.msg);
+			}
+		})
+		.catch(function (error) {
+			console.log(error);
+			// parent.layer.msg(error);
+		});
+
+	}
+	
+	function queryParams(params){
+		//添加新参数,这里直接自定义,不使用控件预定义,太麻烦了,没有使用用例
+		// alert('queryParams: ' + JSON.stringify(params));
+		// console.log($('#inputGroupSelect01').val());
+		// 添加消息类型
+		params['token']=localToken;
+		// {search: undefined, sort: "time", order: "desc", msgType: "info"}
+		// console.log(params);
+		return params
+	}
 		var  optEvent={
 // event：jQuery事件。
 // value：字段值。
@@ -110,12 +191,7 @@
 
 			'click .remove': function (e, value, row, index) {
 				// 在服务端删除
-				
-				// 在页面删除
-				$("#msgTable").bootstrapTable('remove', {
-					field: 'id',
-					values: [row.id]
-				});
+				friendsDel(row);
 			},
 
 			
@@ -142,12 +218,42 @@
 			return [
 			  '<a class="name" href="',
 			  row.url,
-			  '" title="',value,'">',
+			  '" title="',value,'" target="_black">',
 				value,
 			  '</a> '
 			].join('')
 		}
+function ajaxRequest(params) {
+	gAxios.post('api/admin/friendsGet.php', params.data)
+	.then(function (response) {
+		if(response.status==200){
+			res=response.data;
+			//解析结果
+			if(res.code==0){
+				
+				params.success({
+				  rows: res.data
+				})
+			}else{
+				parent.layer.msg(res.msg);
+			}
+			
+		}else{
+			parent.layer.msg(response.statusText+response.data.msg);
+		}
+	})
+	.catch(function (error) {
+		console.log(error);
+		// parent.layer.msg(error);
+	});
 
+//     // params data you need
+//     console.log(params)
+//     // here we just use setTimeout
+//     setTimeout(function () {
+// 
+//     }, 1000)
+  }
 </script>
 
 </html>

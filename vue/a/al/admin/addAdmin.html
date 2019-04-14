@@ -23,6 +23,11 @@
 		<!-- bootstrap -->
 		<link rel="stylesheet" href="../../../res/bootstrap-4.0.0/css/bootstrap.min.css">
 		<script src="../../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
+		
+		<link rel="stylesheet" href="./css/background-2.css">
+		<script src="../../../page/common/globalVar.js"></script>
+		<script src="../../../page/common/globalSubWin.js"></script>
+
 		<!-- 自有资源 -->
 		<link rel="stylesheet" href="../../../res/bootstrap-table-master/dist/bootstrap-table.min.css">
 		<script src="../../../res/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
@@ -33,138 +38,174 @@
 	</head>
 	<body>
 
-			
-
-
-					<div class="">
-						<table id="msgTable" 
-							data-toggle="table" 
-							data-thead-classes="thead-light" 
-							data-url="testjson/data1.json"
-							data-mobile-responsive="true"
-							data-toolbar="#msgToolbar"
-							data-show-refresh="true"
-							data-show-toggle="true"
-							data-show-fullscreen="true"
-							data-search="true"
-							data-query-params="queryParams"
-							
-							data-pagination="true"
-						>
-							<thead>
-								<tr>
-									<th data-field="aid">id</th>
-									<th data-field="uid">uid</th>
-									<th data-field="name" data-formatter="nameFormatter" data-events="optEvent">用户名</th>
-									<th data-field="opt" data-formatter="optFormatter" data-events="optEvent">操作</th>
-								</tr>
-							</thead>
-						</table>
-					</div>
-					<div id="accordion">
-						<div class="card">
-							<div class="card-header" id="headingOne">
-							  <h5 class="mb-0">
-								<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-									添加管理员
-								</button>
-							  </h5>
-							</div>
-							<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-								<form >
-									<div class="form-group row">
-										<!-- <label for="uid" class="col-sm-1 col-form-label">uid</label> -->
-										<div class="col-sm-11">
-											<input type="text" placeholder="用户ID" class="form-control" id="uid" :value="conditionalForm.currentLivingPlace" v-model="conditionalForm.currentLivingPlace">
-										</div>
-										<button type="button" class="col-sm-1 btn btn-primary btn-lg btn-block" v-on:click="upFrom()">提交</button>						
-									</div>
-									
-								</form>
-							</div>
+		<div class="container">
+			<div class="wrapper">
+				
+				<div id="accordion">
+					<div class="card">
+						<div class="card-header" id="headingOne">
+						  <h5 class="mb-0">
+							<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+								添加管理员
+							</button>
+						  </h5>
+						</div>
+						<div id="collapseOne" class="collapse card-body" aria-labelledby="headingOne" data-parent="#accordion">
+							<form >
+								<div class="form-group row">
+									<input type="text" placeholder="用户ID" class="form-control"  v-model="row.uid" maxlength="11">
+								</div>
+								<div class="form-group row">
+									<input type="text" placeholder="用户名" class="form-control"  v-model="row.name" maxlength="32">
+								</div>
+								<div class="form-group row">
+									<input type="number" placeholder="用户权限" class="form-control"  v-model="row.authrity" maxlength="11">
+								</div>
+								<div class="form-group row">
+									<button type="button" class=" btn btn-primary btn-lg btn-block" v-on:click="submit()">提交</button>						
+								</div>
+							</form>
 						</div>
 					</div>
+				</div>
+				
+				<table id="msgTable" 
+					data-toggle="table" 
+					data-thead-classes="thead-light" 
+					data-ajax="ajaxRequest"
+					data-mobile-responsive="true"
+					data-toolbar="#msgToolbar"
+					data-show-refresh="true"
+					data-show-toggle="true"
+					data-show-fullscreen="true"
+					data-search="true"
+					data-query-params="queryParams"
+					
+					data-pagination="true"
+				>
+					<thead>
+						<tr>
+							<th data-field="id">id</th>
+							<th data-field="uid">uid</th>
+							<th data-field="name" data-formatter="nameFormatter" data-events="optEvent">用户名</th>
+							<th data-field="opt" data-formatter="optFormatter" data-events="optEvent">操作</th>
+						</tr>
+					</thead>
+				</table>
+
 	
+			</div>
+		</div>
 
 	</body>
 <script type="text/javascript">
-		function queryParams(params){
-			//添加新参数,这里直接自定义,不使用控件预定义,太麻烦了,没有使用用例
-			// alert('queryParams: ' + JSON.stringify(params));
-			// console.log($('#inputGroupSelect01').val());
-			// 添加消息类型
-			params['msgType']=$('#inputGroupSelect01').val();
-			// {search: undefined, sort: "time", order: "desc", msgType: "info"}
-			console.log(params);
-			return params
-		}
-		//打开个人信息预览窗口函数
-		function openViewFun123(user_id, friend_id){
-			//多窗口模式，层叠置顶
-			request_url = '../PersonalInfo/view.html?user_id='+user_id+'&friend_id='+friend_id;
-			// openMsgWinWidth=window.screen.availWidth;//window.screen.availHeight
-			// openMsgWinHeight=window.screen.availHeight;//window.screen.availWidth
-			openMsgWinWidth=document.documentElement.clientWidth;
-			openMsgWinHeight=document.documentElement.clientHeight;
-			if (openMsgWinWidth>900){
-				openMsgWinWidth=900;
-			}
-			if (openMsgWinHeight>700){
-				openMsgWinHeight=700;
-			}
-
-			var index = layer.open({
-				type: 2 //此处以iframe举例
-				,title: 'message'
-				//,area: ['900px', '700px']
-				,area: [ String(openMsgWinWidth)+'px', String(openMsgWinHeight)+'px' ]
-				,shade: 0
-				,maxmin: true //最大最小化
-				,offset: 'auto'
-				,content: request_url
-// 				,btn: ['全部关闭', '全部关闭'] //只是为了演示  http://www.layui.com/doc/modules/layer.html#btn
-// 				,yes: function(){       //第一个按钮,按钮1的回调是yes，而从按钮2开始，则回调为btn2: function(){}，以此类推。
-// 					layer.msg('全部关闭');
-// 					layer.closeAll();
-// 				}
-// 				,btn2: function(){
-// 				  layer.closeAll();
-// 				}
-// 				,btnAlign: 'l' //按钮排列
-// 
-				,zIndex: layer.zIndex //重点1
-				,success: function(layero){
-				  layer.setTop(layero); //重点2
+	var localToken = getLocalToken();
+	
+	function adminAdd(row){
+		gAxios.post('api/admin/adminInfoAdd.php', {
+			token:localToken,
+			uid:row.uid,
+			name:row.name,
+			authrity:row.authrity
+		})
+		.then(function (response) {
+			if(response.status==200){
+				res=response.data;
+				//解析结果
+				if(res.code==0){
+					parent.layer.msg('msg', {icon: 1});
+				}else{
+					parent.layer.msg(res.msg);
 				}
-			});
-			// layer 弹出默认全屏
-			// layer.full(index);
+				
+			}else{
+				parent.layer.msg(response.statusText+response.data.msg);
+			}
+		})
+		.catch(function (error) {
+			console.log(error);
+			// parent.layer.msg(error);
+		});
+	}
+
+	//提交表单
+	const addAdmin=new Vue({
+		el:"#accordion",
+		data:{
+			row:{
+				uid:"",
+				name:"",
+				authrity:""
+			}
+		},
+		methods:{
+			submit(){
+				adminAdd(this.row);
+			}
 		}
-		var  optEvent={
+	});
+
+
+	function adminDel(row){
+		gAxios.post('api/admin/adminInfoDel.php', {
+			token:localToken,
+			uid:row.id,
+		})
+		.then(function (response) {
+			if(response.status==200){
+				res=response.data;
+				//解析结果
+				if(res.code==0){
+					parent.layer.msg('msg', {icon: 1});
+					// 在页面删除
+					$("#msgTable").bootstrapTable('remove', {
+						field: 'id',
+						values: [row.id]
+					});
+				}else{
+					parent.layer.msg(res.msg);
+				}
+				
+			}else{
+				parent.layer.msg(response.statusText+response.data.msg);
+			}
+		})
+		.catch(function (error) {
+			console.log(error);
+			// parent.layer.msg(error);
+		});
+
+	}
+	
+	function queryParams(params){
+		//添加新参数,这里直接自定义,不使用控件预定义,太麻烦了,没有使用用例
+		// alert('queryParams: ' + JSON.stringify(params));
+		// console.log($('#inputGroupSelect01').val());
+		// 添加消息类型
+		params['token']=localToken;
+		// {search: undefined, sort: "time", order: "desc", msgType: "info"}
+		// console.log(params);
+		return params
+	}
+		
+	var  optEvent={
 // event：jQuery事件。
 // value：字段值。
 // row：行记录数据。
 // index：行索引
 
-			'click .remove': function (e, value, row, index) {
-				// 在服务端删除
-				
-				// 在页面删除
-				$("#msgTable").bootstrapTable('remove', {
-					field: 'id',
-					values: [row.id]
-				});
-			},
- 			'click .name': function (e, value, row, index) {
-				console.log("打开msgWin",row, value);
-				sendMsgFun123(row.uid, 0);
-
-			},
-			
-
-		}
+		'click .remove': function (e, value, row, index) {
+			adminDel(row);
+		},
+		'click .name': function (e, value, row, index) {
+			request_url = '../../../PersonalInfo/view.html?fid='+row.uid;
+			openSubWin(request_url, row.name, true);
+		},
 		
-		function optFormatter(value, row, index, field){
+
+	}
+		
+	function optFormatter(value, row, index, field){
 // value：字段值。
 // row：行记录数据 字典。
 // index：行索引。
@@ -173,20 +214,52 @@
 // 			console.log(row);
 // 			console.log(index);
 // 			console.log(field);
-			return [
-			  '<a class="remove" href="javascript:void(0)" title="删除">',
-			  '	<i class="fa fa-trash-o"></i>',
-			  '</a>'
-			].join('')
+		return [
+		  '<a class="remove" href="javascript:void(0)" title="删除">',
+		  '	<i class="fa fa-trash-o"></i>',
+		  '</a>'
+		].join('')
+	}
+	
+	function nameFormatter(value, row, index, field){
+		return [
+		  '<a class="name" href="javascript:void(0)" title="用户信息">',
+			value,
+		  '</a> '
+		].join('')
+	}
+
+
+function ajaxRequest(params) {
+	gAxios.post('api/admin/adminInfoGet.php', params.data)
+	.then(function (response) {
+		if(response.status==200){
+			res=response.data;
+			//解析结果
+			if(res.code==0){
+				params.success({
+				  rows: res.data
+				})
+			}else{
+				parent.layer.msg(res.msg);
+			}
+			
+		}else{
+			parent.layer.msg(response.statusText+response.data.msg);
 		}
-		
-		function nameFormatter(value, row, index, field){
-			return [
-			  '<a class="name" href="javascript:void(0)" title="msg">',
-				value,
-			  '</a> '
-			].join('')
-		}
+	})
+	.catch(function (error) {
+		console.log(error);
+		// parent.layer.msg(error);
+	});
+
+//     // params data you need
+//     console.log(params)
+//     // here we just use setTimeout
+//     setTimeout(function () {
+// 
+//     }, 1000)
+  }
 
 </script>
 

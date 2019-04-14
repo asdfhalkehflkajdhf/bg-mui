@@ -1,8 +1,7 @@
 var localToken = getLocalToken();
 // 加载轮播图数据
 // 这个是广告，信息分类，轮播图，个人信息页，活动信息页，动态信息页，主要是以图片+跳转链接，显示状态，和计算过程
-const lunBoTuVar = new Vue(
-{
+const lunBoTuVar = new Vue({
 	el:"#lunBoTuDiv",
 	data:{
 		res:[],
@@ -30,7 +29,6 @@ const lunBoTuVar = new Vue(
 			})
 			.catch(function (error) {
 				console.log(error);
-				// parent.layer.msg(error);
 			});
         },
 		upAdsStatusInfo:function(id, herf){
@@ -59,8 +57,6 @@ const lunBoTuVar = new Vue(
 // 	},	
 }
 );
-
-
 
 
 

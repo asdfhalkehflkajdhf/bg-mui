@@ -22,6 +22,11 @@
 		<!-- bootstrap -->
 		<link rel="stylesheet" href="../../../res/bootstrap-4.0.0/css/bootstrap.min.css">
 		<script src="../../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="./css/background-2.css">
+		<script src="../../../page/common/globalVar.js"></script>
+		<script src="../../../page/common/globalSubWin.js"></script>
+
+
 		<!-- 自有资源 -->
 		<link rel="stylesheet" href="../../../res/bootstrap-table-master/dist/bootstrap-table.min.css">
 		<script src="../../../res/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
@@ -31,7 +36,35 @@
 
 	</head>
 	<body>
-					<div class="">
+		<div class="container">
+			<div class="wrapper">
+				<div id="accordion">
+					<div class="card">
+						<div class="card-header" id="headingOne">
+						  <h5 class="mb-0">
+							<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+								添加用户
+							</button>
+						  </h5>
+						</div>
+						<div id="collapseOne" class="collapse card-body" aria-labelledby="headingOne" data-parent="#accordion">
+							<form >
+								<div class="form-group row">
+									<input type="number" placeholder="手机号" class="form-control" id="" v-model="row.phone" value="2" maxlength="11" >
+								</div>
+								<div class="form-group row">
+										<input type="text" placeholder="密码" class="form-control" id="" v-model="row.pw" maxlength="32">
+								</div>
+								<div class="form-group row">
+									<button type="button" class=" btn btn-primary btn-lg btn-block" v-on:click="submit()">提交</button>						
+								</div>
+								
+							</form>
+						</div>
+					</div>
+				</div>
+				
+				
 						<table id="msgTable" 
 							data-toggle="table" 
 							data-thead-classes="thead-light" 
@@ -48,152 +81,129 @@
 						>
 							<thead>
 								<tr>
-									<th data-field="id">id</th>
 									<th data-field="uid">uid</th>
 									<th data-field="name">登陆名</th>
 									<th data-field="pw" >密码</th>
 									<!-- 这个返回个人信息是否添写，动态数，更新时间，活动数，更新时间 -->
 									<th data-field="info" data-formatter="infoFormatter" data-events="optEvent">个人信息</th>
-									<th data-field="dyna" data-formatter="dynamicFormatter" data-events="optEvent">动态</th>
-									<th data-field="acti" data-formatter="actionFormatter" data-events="optEvent">活动</th>
 									<th data-field="opt" data-formatter="optFormatter" data-events="optEvent">操作</th>
 								</tr>
 							</thead>
 						</table>
-					</div>
-					<div id="accordion">
-						<div class="card">
-							<div class="card-header" id="headingOne">
-							  <h5 class="mb-0">
-								<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-									添加用户
-								</button>
-							  </h5>
-							</div>
-							<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-								<form >
-									<div class="form-group row">
-										<!-- <label for="name" class="col-sm-1 col-form-label">name</label> -->
-										<div class="col-sm-12">
-											<input type="text" placeholder="站点" class="form-control" id="name" :value="conditionalForm.currentLivingPlace" v-model="conditionalForm.currentLivingPlace">
-										</div>
-										<!-- <label for="url" class="col-sm-1 col-form-label">url</label> -->
-										<div class="col-sm-12">
-											<input type="text" placeholder="链接" class="form-control" id="url" :value="conditionalForm.currentLivingPlace" v-model="conditionalForm.currentLivingPlace">
-										</div>
-										<button type="button" class=" btn btn-primary btn-lg btn-block" v-on:click="upFrom()">提交</button>						
-									</div>
-									
-								</form>
-							</div>
-						</div>
-					</div>
+
+			</div>
+		</div>
+
 	</body>
 <script type="text/javascript">
-		function queryParams(params){
-			//添加新参数,这里直接自定义,不使用控件预定义,太麻烦了,没有使用用例
-			// alert('queryParams: ' + JSON.stringify(params));
-			// console.log($('#inputGroupSelect01').val());
-			// 添加消息类型
-			params['msgType']=$('#inputGroupSelect01').val();
-			// {search: undefined, sort: "time", order: "desc", msgType: "info"}
-			console.log(params);
-			return params
+var localToken = getLocalToken();
+function userAdd(row){
+	gAxios.post('api/admin/userAdd.php', row)
+	.then(function (response) {
+		if(response.status==200){
+			res=response.data;
+			//解析结果
+			if(res.code==0){
+				parent.layer.msg('msg', {icon: 1});
+			}else{
+				parent.layer.msg(res.msg);
+			}
+			
+		}else{
+			parent.layer.msg(response.statusText+response.data.msg);
 		}
-		//打开个人信息预览窗口函数
-		function openViewFun123(user_id, friend_id){
-			//多窗口模式，层叠置顶
-			request_url = '../../../PersonalInfo/view.html?user_id='+user_id+'&friend_id='+friend_id;
-			// openMsgWinWidth=window.screen.availWidth;//window.screen.availHeight
-			// openMsgWinHeight=window.screen.availHeight;//window.screen.availWidth
-			openMsgWinWidth=document.documentElement.clientWidth;
-			openMsgWinHeight=document.documentElement.clientHeight;
-			if (openMsgWinWidth>900){
-				openMsgWinWidth=900;
-			}
-			if (openMsgWinHeight>700){
-				openMsgWinHeight=700;
-			}
+	})
+	.catch(function (error) {
+		console.log(error);
+		// parent.layer.msg(error);
+	});
+}
 
-			var index = layer.open({
-				type: 2 //此处以iframe举例
-				,title: 'message'
-				//,area: ['900px', '700px']
-				,area: [ String(openMsgWinWidth)+'px', String(openMsgWinHeight)+'px' ]
-				,shade: 0
-				,maxmin: true //最大最小化
-				,offset: 'auto'
-				,content: request_url
-// 				,btn: ['全部关闭', '全部关闭'] //只是为了演示  http://www.layui.com/doc/modules/layer.html#btn
-// 				,yes: function(){       //第一个按钮,按钮1的回调是yes，而从按钮2开始，则回调为btn2: function(){}，以此类推。
-// 					layer.msg('全部关闭');
-// 					layer.closeAll();
-// 				}
-// 				,btn2: function(){
-// 				  layer.closeAll();
-// 				}
-// 				,btnAlign: 'l' //按钮排列
-// 
-				,zIndex: layer.zIndex //重点1
-				,success: function(layero){
-				  layer.setTop(layero); //重点2
+	//提交表单
+	const userManagement=new Vue({
+		el:"#accordion",
+		data:{
+			row:{
+				token:localToken,
+				phone:"",
+				pw:""
+			},
+		},
+		methods:{
+			submit(){
+				userAdd(this.row);
+			},
+		}
+	});
+
+
+	function userDel(row){
+		gAxios.post('api/personalInfo/cancel.php', {
+			token:localToken,
+			uid:row.uid,
+		})
+		.then(function (response) {
+			if(response.status==200){
+				res=response.data;
+				//解析结果
+				if(res.code==0){
+					parent.layer.msg('msg', {icon: 1});
+					// 在页面删除
+					$("#msgTable").bootstrapTable('remove', {
+						field: 'id',
+						values: [row.id]
+					});
+				}else{
+					parent.layer.msg(res.msg);
 				}
-			});
-			// layer 弹出默认全屏
-			// layer.full(index);
-		}
+				
+			}else{
+				parent.layer.msg(response.statusText+response.data.msg);
+			}
+		})
+		.catch(function (error) {
+			console.log(error);
+			// parent.layer.msg(error);
+		});
 
-		var  optEvent={
+	}
+	
+	function queryParams(params){
+		//添加新参数,这里直接自定义,不使用控件预定义,太麻烦了,没有使用用例
+		// alert('queryParams: ' + JSON.stringify(params));
+		// console.log($('#inputGroupSelect01').val());
+		// 添加消息类型
+		params['token']=localToken;
+		// {search: undefined, sort: "time", order: "desc", msgType: "info"}
+		// console.log(params);
+		return params
+	}
+	var  optEvent={
 // event：jQuery事件。
 // value：字段值。
 // row：行记录数据。
 // index：行索引
 
-			'click .remove': function (e, value, row, index) {
-				// 在服务端删除
-				
-				// 在页面删除
-				$("#msgTable").bootstrapTable('remove', {
-					field: 'id',
-					values: [row.id]
-				});
-			},
-			'click .edit': function (e, value, row, index) {
-				openViewFun123(1,2);
-			},
+		'click .remove': function (e, value, row, index) {
+			// 在服务端删除
+			userDel(row);
 			
-			'click .dynamicAdd': function (e, value, row, index) {
-				// 打开动态添加
-				// openViewFun123(1,2);
-			},
-		}
-		
-
-		function dynamicFormatter(value, row, index, field){
-			return [
-				'<a class="dynamicAdd mr-2" href="javascript:void(0)" title="添加动态">',
-				'	<i class="fa fa-plus-square-o"></i>',
-				'</a>',
-			  
-				'<a class="dynamicManage" href="javascript:void(0)" title="动态管理">',
-				'	<i class="fa fa-th-list"></i>',
-				'</a>'
-			  
-			].join('')
-		}
-		function actionFormatter(value, row, index, field){
-			return [
-				'<a class="actionAdd mr-2" href="javascript:void(0)" title="添加活动">',
-				'	<i class="fa fa-plus-square-o"></i>',
-				'</a>',
-			  
-				'<a class="actionManage" href="javascript:void(0)" title="活动管理">',
-				'	<i class="fa fa-th-list"></i>',
-				'</a>'
-			  
-			].join('')
-		}		
-		function optFormatter(value, row, index, field){
+		},
+		'click .edit': function (e, value, row, index) {
+			request_url = '../../../page/PersonalInfo/set.html?uid='+row.uid;
+			openSubWin(request_url, row.name, true);
+		},
+		'click .photo': function (e, value, row, index) {
+			request_url = '../../../page/PersonalInfo/photoAlbum.html?uid='+row.uid;
+			openSubWin(request_url, row.name, true);
+		},
+		'click .eye': function (e, value, row, index) {
+			request_url = '../../../page/PersonalInfo/view.html?fid='+row.uid;
+			openSubWin(request_url, row.name, true);
+		},		
+	}
+	
+	function optFormatter(value, row, index, field){
 // value：字段值。
 // row：行记录数据 字典。
 // index：行索引。
@@ -202,24 +212,27 @@
 // 			console.log(row);
 // 			console.log(index);
 // 			console.log(field);
-			return [
-				'<a class="remove mr-2" href="javascript:void(0)" title="删除">',
-				'	<i class="fa fa-trash-o"></i>',
-				'</a>'
-			  
-			].join('')
-		}
-		
-		function infoFormatter(value, row, index, field){
-			return [
-			  '<a class="edit mr-2" href="javascript:void(0)" title="编辑个人信息">',
-			  '	<i class="fa fa-edit"></i>',
-			  '</a>',
-			  '<a class="edit-eye mr-2" href="javascript:void(0)" title="编辑个人信息">',
-			  '	<i class="fa fa-eye"></i>',
-			  '</a>',
-			].join('')
-		}
+		return [
+			'<a class="remove mr-2" href="javascript:void(0)" title="删除">',
+			'	<i class="fa fa-trash-o"></i>',
+			'</a>'
+		  
+		].join('')
+	}
+	
+	function infoFormatter(value, row, index, field){
+		return [
+		  '<a class="edit mr-2" href="javascript:void(0)" title="编辑个人信息">',
+		  '	<i class="fa fa-edit"></i>',
+		  '</a>',
+		  '<a class="photo mr-2" href="javascript:void(0)" title="编辑相册">',
+		  '	<i class="fa fa-image"></i>',
+		  '</a>',
+			'<a class="eye mr-2" href="javascript:void(0)" title="个人信息预览">',
+		  '	<i class="fa fa-eye"></i>',
+		  '</a>',
+		].join('')
+	}
 
 </script>
 

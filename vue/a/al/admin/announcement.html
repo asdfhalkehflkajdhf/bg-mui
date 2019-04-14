@@ -23,6 +23,10 @@
 		<!-- bootstrap -->
 		<link rel="stylesheet" href="../../../res/bootstrap-4.0.0/css/bootstrap.min.css">
 		<script src="../../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="./css/background-2.css">
+		<script src="../../../page/common/globalVar.js"></script>
+
+
 		<!-- 自有资源 -->
 		<link rel="stylesheet" href="../../../res/bootstrap-table-master/dist/bootstrap-table.min.css">
 		<script src="../../../res/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
@@ -38,12 +42,45 @@
 
 			
 
+		<div class="container">
+			<div class="wrapper">
+					<div id="accordion">
+						<div class="card">
+							<div class="card-header" id="headingOne">
+							  <h5 class="mb-0">
+								<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+									公告添加
+								</button>
+							  </h5>
+							</div>
+							<div id="collapseOne" class="collapse card-body" aria-labelledby="headingOne" data-parent="#accordion">
+								<!-- <div class=""> -->
+									<form >
+										<div class="form-group row">
+											<!-- <label for="标题" class="col-sm-2 col-form-label">标题</label> -->
+											<div class="col-sm-12">
+												<input type="text" placeholder="标题" class="form-control" id="标题" v-model="row.title">
+											</div>
+										</div>
+										<div id="annMenu"></div>
+										<div class="card-body" id="annIntroduction">
+											<!-- 个人介绍 -->
+										</div>
+										<div class="form-group row">
+											<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit()">提交</button>						
+										</div>
+										
+									</form>
+								<!-- </div> -->
+							</div>
+					
+						</div>
+					</div>
 
-					<div class="">
 						<table id="msgTable" 
 							data-toggle="table" 
 							data-thead-classes="thead-light" 
-							data-url="testjson/data4.json"
+					data-ajax="ajaxRequest"
 							data-mobile-responsive="true"
 							data-toolbar="#msgToolbar"
 							data-show-refresh="true"
@@ -57,51 +94,23 @@
 							<thead>
 								<tr>
 									<th data-field="id">id</th>
-									<th data-field="title" data-formatter="titleFormatter" data-events="optEvent">标题</th>
+									<th data-field="title" data-formatter="titleFormatter" >标题</th>
 									<th data-field="ctime">时间</th>
 									<th data-field="opt" data-formatter="optFormatter" data-events="optEvent">操作</th>
 									
 								</tr>
 							</thead>
 						</table>
-					</div>
 					
-					<div id="accordion">
-						<div class="card">
-							<div class="card-header" id="headingOne">
-							  <h5 class="mb-0">
-								<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-									公告添加
-								</button>
-							  </h5>
-							</div>
-							<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-								<div class="card-body">
-									<form >
-										<div class="form-group row">
-											<!-- <label for="标题" class="col-sm-2 col-form-label">标题</label> -->
-											<div class="col-sm-12">
-												<input type="text" placeholder="标题" class="form-control" id="标题" :value="conditionalForm.currentLivingPlace" v-model="conditionalForm.currentLivingPlace">
-											</div>
-										</div>
-										<div id="annMenu"></div>
-										<div class="card-body" id="annIntroduction">
-											<!-- 个人介绍 -->
-										</div>
 
-										<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="upFrom()">提交</button>						
-										
-									</form>
-								</div>
-							</div>
 					
-						</div>
-					</div>
-					
+			</div>
+		</div>
 	
 
 	</body>
 <script type="text/javascript">
+var localToken = getLocalToken();
 // 编辑框初始化
 var E = window.wangEditor;
 var editor_si = new E('#annMenu', '#annIntroduction');
@@ -135,83 +144,106 @@ editor_si.create();
 
 	
 	
-		function queryParams(params){
-			//添加新参数,这里直接自定义,不使用控件预定义,太麻烦了,没有使用用例
-			// alert('queryParams: ' + JSON.stringify(params));
-			// console.log($('#inputGroupSelect01').val());
-			// 添加消息类型
-			params['msgType']=$('#inputGroupSelect01').val();
-			// {search: undefined, sort: "time", order: "desc", msgType: "info"}
-			console.log(params);
-			return params
-		}
-		//打开个人信息预览窗口函数
-		function openViewFun123(user_id, friend_id){
-			//多窗口模式，层叠置顶
-			request_url = '../../../Other/viewAnnouncement.html?user_id='+user_id+'&friend_id='+friend_id;
-			// openMsgWinWidth=window.screen.availWidth;//window.screen.availHeight
-			// openMsgWinHeight=window.screen.availHeight;//window.screen.availWidth
-			openMsgWinWidth=document.documentElement.clientWidth;
-			openMsgWinHeight=document.documentElement.clientHeight;
-			if (openMsgWinWidth>900){
-				openMsgWinWidth=900;
-			}
-			if (openMsgWinHeight>700){
-				openMsgWinHeight=700;
-			}
-
-			var index = layer.open({
-				type: 2 //此处以iframe举例
-				,title: 'message'
-				//,area: ['900px', '700px']
-				,area: [ String(openMsgWinWidth)+'px', String(openMsgWinHeight)+'px' ]
-				,shade: 0
-				,maxmin: true //最大最小化
-				,offset: 'auto'
-				,content: request_url
-// 				,btn: ['全部关闭', '全部关闭'] //只是为了演示  http://www.layui.com/doc/modules/layer.html#btn
-// 				,yes: function(){       //第一个按钮,按钮1的回调是yes，而从按钮2开始，则回调为btn2: function(){}，以此类推。
-// 					layer.msg('全部关闭');
-// 					layer.closeAll();
-// 				}
-// 				,btn2: function(){
-// 				  layer.closeAll();
-// 				}
-// 				,btnAlign: 'l' //按钮排列
-// 
-				,zIndex: layer.zIndex //重点1
-				,success: function(layero){
-				  layer.setTop(layero); //重点2
+	var localToken = getLocalToken();
+	
+	function announcementAdd(row){
+		gAxios.post('api/admin/announcementAdd.php', row)
+		.then(function (response) {
+			if(response.status==200){
+				res=response.data;
+				//解析结果
+				if(res.code==0){
+					parent.layer.msg('msg', {icon: 1});
+				}else{
+					parent.layer.msg(res.msg);
 				}
-			});
-			// layer 弹出默认全屏
-			// layer.full(index);
+				
+			}else{
+				parent.layer.msg(response.statusText+response.data.msg);
+			}
+		})
+		.catch(function (error) {
+			console.log(error);
+			// parent.layer.msg(error);
+		});
+	}
+
+	//提交表单
+	const announcement=new Vue({
+		el:"#accordion",
+		data:{
+			row:{
+				token:localToken,
+				title:"",
+				content:""
+			},
+		},
+		methods:{
+			submit(){
+				this.row.content=editor_si.txt.html();
+				announcementAdd(this.row);
+			},
 		}
-		var  optEvent={
+	});
+
+
+	function announcementDel(row){
+		gAxios.post('api/admin/announcementDel.php', {
+			token:localToken,
+			id:row.id,
+		})
+		.then(function (response) {
+			if(response.status==200){
+				res=response.data;
+				//解析结果
+				if(res.code==0){
+					parent.layer.msg('msg', {icon: 1});
+					// 在页面删除
+					$("#msgTable").bootstrapTable('remove', {
+						field: 'id',
+						values: [row.id]
+					});
+				}else{
+					parent.layer.msg(res.msg);
+				}
+				
+			}else{
+				parent.layer.msg(response.statusText+response.data.msg);
+			}
+		})
+		.catch(function (error) {
+			console.log(error);
+			// parent.layer.msg(error);
+		});
+
+	}
+	
+	function queryParams(params){
+		//添加新参数,这里直接自定义,不使用控件预定义,太麻烦了,没有使用用例
+		// alert('queryParams: ' + JSON.stringify(params));
+		// console.log($('#inputGroupSelect01').val());
+		// 添加消息类型
+		params['token']=localToken;
+		// {search: undefined, sort: "time", order: "desc", msgType: "info"}
+		// console.log(params);
+		return params
+	}
+
+	var  optEvent={
 // event：jQuery事件。
 // value：字段值。
 // row：行记录数据。
 // index：行索引
 
-			'click .remove': function (e, value, row, index) {
-				// 在服务端删除
-				
-				// 在页面删除
-				$("#msgTable").bootstrapTable('remove', {
-					field: 'id',
-					values: [row.id]
-				});
-			},
- 			'click .title': function (e, value, row, index) {
-				console.log("打开msgWin",row, value);
-				openViewFun123(row.uid, 0);
+		'click .remove': function (e, value, row, index) {
+			// 在服务端删除
+			announcementDel(row);
+		},
+	
 
-			},
-			
-
-		}
+	}
 		
-		function optFormatter(value, row, index, field){
+	function optFormatter(value, row, index, field){
 // value：字段值。
 // row：行记录数据 字典。
 // index：行索引。
@@ -229,12 +261,44 @@ editor_si.create();
 		
 		function titleFormatter(value, row, index, field){
 			return [
-			  '<a class="title" href="javascript:void(0)" title="标题">',
-				value,
+			  '<a class="title" href="../../../Other/viewAnnouncement.html?id='+row.id+'" title="标题" target="-black">',
 			  '</a> '
 			].join('')
 		}
 
+
+function ajaxRequest(params) {
+	gAxios.post('api/admin/announcementGet.php', params.data)
+	.then(function (response) {
+		if(response.status==200){
+			res=response.data;
+			//解析结果
+			
+			if(res.code==0){
+				
+				params.success({
+				  rows: res.data
+				})
+			}else{
+				parent.layer.msg(res.msg);
+			}
+			
+		}else{
+			parent.layer.msg(response.statusText+response.data.msg);
+		}
+	})
+	.catch(function (error) {
+		console.log(error);
+		// parent.layer.msg(error);
+	});
+
+//     // params data you need
+//     console.log(params)
+//     // here we just use setTimeout
+//     setTimeout(function () {
+// 
+//     }, 1000)
+  }
 </script>
 
 </html>

@@ -23,6 +23,10 @@
 		<!-- bootstrap -->
 		<link rel="stylesheet" href="../../../res/bootstrap-4.0.0/css/bootstrap.min.css">
 		<script src="../../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="./css/background-2.css">
+		<script src="../../../page/common/globalVar.js"></script>
+
+
 		<!-- 自有资源 -->
 		<!-- awesome图标 -->
 		<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
@@ -32,36 +36,75 @@
 
 			
 
+		<div class="container">
+			<div class="wrapper">
 
-			<div class="card">
-				<div class="card-header" id="headingOne">
-				  <h5 class="mb-0">
-					<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-						重置密码
-					</button>
-				  </h5>
-				</div>
-				<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-					<form >
-						<div class="form-group row">
-							<!-- <label for="uid" class="col-sm-1 col-form-label">uid</label> -->
-							<div class="col-sm-12">
-								<input type="text" placeholder="用户ID" class="form-control" id="uid" :value="conditionalForm.currentLivingPlace" v-model="conditionalForm.currentLivingPlace">
+				<div class="card" id="accordion">
+					<div class="card-header" id="headingOne">
+					  <h5 class="mb-0">
+						<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+							重置密码
+						</button>
+					  </h5>
+					</div>
+					<div id="collapseOne" class="collapse show card-body" aria-labelledby="headingOne" data-parent="#accordion">
+						<form >
+							<div class="form-group row">
+								<!-- <label for="uid" class="col-sm-1 col-form-label">uid</label> -->
+								<input type="number" placeholder="用户ID" class="form-control" id="uid"  v-model="row.uid" maxlength="11">
 							</div>
-							<!-- <label for="pw" class="col-sm-1 col-form-label">pw</label> -->
-							<div class="col-sm-12">
-								<input type="text" placeholder="新密码" class="form-control" id="pw" :value="conditionalForm.currentLivingPlace" v-model="conditionalForm.currentLivingPlace">
+							<div class="form-group row">
+									<input type="text" placeholder="新密码" class="form-control" id="pw" v-model="row.pw" maxlength="32">
 							</div>
-							<button type="button" class=" btn btn-primary btn-lg btn-block" v-on:click="upFrom()">提交</button>						
-						</div>
-						
-					</form>
+							<div class="form-group row">
+								<button type="button" class=" btn btn-primary btn-lg btn-block" v-on:click="submit()">提交</button>						
+							</div>
+							
+						</form>
+					</div>
 				</div>
 			</div>
+		</div>
 	
 
 	</body>
 <script type="text/javascript">
+	var localToken = getLocalToken();
+	//提交表单
+	const resetpw=new Vue({
+		el:"#accordion",
+		data:{
+
+			row:{
+				token:localToken,
+				uid:"",
+				pw:""
+			},
+		},
+		methods:{
+			submit(){
+				gAxios.post('api/admin/resetpw.php', this.row)
+				.then(function (response) {
+					if(response.status==200){
+						res=response.data;
+						//解析结果
+						if(res.code==0){
+							parent.layer.msg(msg, {icon: 1});
+						}else{
+							parent.layer.msg(res.msg);
+						}
+						
+					}else{
+						parent.layer.msg(response.statusText+response.data.msg);
+					}
+				})
+				.catch(function (error) {
+					console.log(error);
+					// parent.layer.msg(error);
+				});
+			}
+		}
+	});
 
 </script>
 

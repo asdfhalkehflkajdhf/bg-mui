@@ -38,8 +38,6 @@
 <body>
 	<div class="container">
 	    <div class="wrapper">
-
-			
 			<!-- 轮播图 ，图片统一大小，设置宽度为父页面比例一样-->
 			<div id="lunBoTuDiv" class="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">
@@ -49,9 +47,12 @@
 				<div class="carousel-inner">
 					<div class="carousel-item " 
 						v-for="item,index in res" v-bind:class="{ active: !index }">
+						
 						<!-- w-100 百分比 -->
 						<img class="d-block w-100" :height="item.height" 
-							:width="item.width" :src="item.src" :alt="item.alt">
+							:width="item.width" :src="item.src" :alt="item.alt" :title="item.title"
+							v-on:click="upAdsStatusInfo(item.id, item.href)" >
+						
 						<div class="carousel-caption d-none d-md-block">
 							<h5>{{item.h5}}</h5>
 							<p>{{item.p}}</p>

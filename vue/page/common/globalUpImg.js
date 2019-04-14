@@ -18,7 +18,7 @@ function upImgInit(objID, pageId, token, mfc){
 		// deleteExtraData:{token:localToken}, //删除图片时额外传入的参数{}
 		allowedFileExtensions:['jpg','png','gif','jpeg','bmp','mp4'],
 		uploadUrl:'${baseURL}api/personalInfo/userImgUp.php', //上传图片时的请求路径
-		uploadExtraData:{token:token, page_id:pageId}, //,上传图片时额外传入的参数{}
+		uploadExtraData:{token:token, page_id:pageId, uid:getQueryString("uid")}, //,上传图片时额外传入的参数{}uid,admin opt
 		maxFileSize:5*1024,//以kb计算
 		maxFileCount:mfc,
 		previewFileType:['image', 'video'],//预览文件类型,内置

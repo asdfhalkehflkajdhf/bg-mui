@@ -1,8 +1,8 @@
+var localToken = getLocalToken();
 
 // 加载轮播图数据
 // 这个是广告，信息分类，轮播图，个人信息页，活动信息页，动态信息页，主要是以图片+跳转链接，显示状态，和计算过程
-const lunBoTuVar = new Vue(
-{
+const lunBoTuVar = new Vue({
 	el:"#lunBoTuDiv",
 	data:{
 		res:[],
@@ -17,21 +17,40 @@ const lunBoTuVar = new Vue(
         getLunBoTuList:function(){
             var _this = this;
 			// post 本地json会失败
-			axios.get('testjson/lunBoTuTest.json', {
-				firstName: 'Fred',
-				lastName: 'Flintstone'
+			// axios.get('testjson/lunBoTuTest.json', {
+			gAxios.post('api/ads/getLunBoTuList.php', {
+				token: localToken
 			})
 			.then(function (response) {
 				if(response.status==200){
-					_this.res=response.data;
+					_this.res=response.data.data;
 				}else{
-					console.log(response.statusText);
+					parent.layer.msg(response.statusText+response.data.msg);
 				}
 			})
 			.catch(function (error) {
 				console.log(error);
 			});
-        }
+		},
+		upAdsStatusInfo:function(id, herf){
+			var _this = this;
+			gAxios.post('api/ads/upAdsStatusInfo.php', {
+				id: id
+			})
+			.then(function (response) {
+				if(response.status==200){
+					// _this.res=response.data.data;
+					window.open(herf);
+				}else{
+					parent.layer.msg(response.statusText+response.data.msg);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+				// parent.layer.msg(error);
+			});
+			
+		}
 	}
 // 	mounted: function(){
 // 		// showData('挂载到dom后',this);
@@ -46,6 +65,7 @@ const formTag = new Vue({
 	data:{
 		conditionalForm:{
 			currentLivingPlace:"不可修改",
+			//活动状态
 			status:1
 		},
 		conditionalData:{

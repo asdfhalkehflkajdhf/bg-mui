@@ -105,18 +105,20 @@
 	
 	<script>
 		
-		const groupItem = new Vue({
+		const viewAction = new Vue({
 			el: ".card",
 			data:{
-				title:"",
-				startTime:"",
-				endTime:"",
-				placeLife:"",
-				number:2,
-				avgSpending:30,
-				actFirstPic:"",
-				actBrief:"",
-				actDetails:""
+				res:{
+					title:"",
+					startTime:"",
+					endTime:"",
+					placeLife:"",
+					number:2,
+					avgSpending:30,
+					actFirstPic:"",
+					actBrief:"",
+					actDetails:"",
+				}
 			},
 			created:function(){
 				
