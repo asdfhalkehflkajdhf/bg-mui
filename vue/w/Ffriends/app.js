@@ -60,105 +60,6 @@ const lunBoTuVar = new Vue({
 
 
 
-// jQuery页面加载后执行的事件(3种方式)
-// 1 $(function () { });
-// 2 $(document).ready(function () { });
-// 3 window.onload = function () { }
-
-
-//JS瀑布流插件masonry动态载入数据
-// $(function () {
-	// 更新list数据
-	$("#getGridItem").on("click",function(){
-		formTag.page++;
-		// console.log(formTag);
-		reloadGridItem();
-	});
-
-	function reloadGridItem(){
-		var $container = $('#imgListDiv');
-	
-		// post 本地json会失败
-		axios.get('testjson/imgtest.json', {
-			token: localToken
-		})
-		.then(function (response) {
-// response{
-//   // 服务端返回的数据
-//   data: {},
-//   // 服务端返回的状态码
-//   status: 200,
-//   // 服务端返回的状态信息
-//   statusText: 'OK',
-//   // 响应头
-//   // 所有的响应头名称都是小写
-//   headers: {},
-//   // axios请求配置
-//   config: {},
-//   // 请求
-//   request: {}
-// }
-			var res=[];
-			if(response.status==200){
-				// console.log(1);
-				res=response.data;
-				
-			}else{
-				parent.layer.msg("获取信息失败！");
-				return;
-			}
-			if(res.length==0){
-				parent.layer.msg("没有更多，请修改查找条件！");
-				return;
-			}
-			//生成item
-			$.each(res, function (i, data) {
-				var $gitem = $(
-					'<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12" >'
-					+'	<div class="card ">'
-					+'		<a target="_blank" href="../PersonalInfo/view.html?uid='+data['uid']+'" >'
-					+'			<img class="card-img-top" src="'+data['src']+'" alt="'+data['alt']+'">'
-					+'		</a>'
-					+'		<div class="card-body">'
-					+'			<div class="card__span">'
-					+'				<span class="card__span_left">'
-					+'					<span class="fa fa-clock-o">'+data['ontime']+'</span>'
-					+'				</span>'
-					+'				<span class="card__span_right"  data-aid="'+data['uid']+'">'
-					+'					<span title="点赞" >'
-					+'							<span class="fa fa-eye ">'+data['eye']+'</span>'
-					+'						<!-- <a href=""><a> -->'
-					+'					</span>'
-					+'				</span>'
-					+'			</div>			'					
-					+'			<!-- <div class="card__link"></div> -->'
-					+'			<hr />'
-					+'			<h2 class="card-title">'+data['nickname']+'</h2>'
-					+'			<p class="card-text">'+data['brief']+'</p>'
-					+'		</div>'
-					+'	</div>'
-					+'</div>'
-				);
-				$container.append($gitem).masonry('appended', $gitem, true);
-			});
-				// // jQuery方式。重新布局，添加元素，另一种方式添加元素，重新布局
-			// https://segmentfault.com/a/1190000007316788
-			$container.imagesLoaded( function() {
-				// new Masonry( document.getElementById('container'),{itemSelector:'.item'} );
-				$container.masonry();
-			});
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
-	}
-	
-	// var $getTempItemListElems=$($("#imgListDivTemp").html());
-	// $("#imgListDivTemp").empty();
-	// $container.append($getTempItemListElems).masonry('appended', $getTempItemListElems,true).masonry();
-// });
-
-
 // 查找时为，一个表结构
 const formTag = new Vue({
 	el:"form",
@@ -264,7 +165,7 @@ const formTag = new Vue({
 		
 	},
 	mounted:function(){
-		reloadGridItem();
+		
 	},
 	watch:{
 		// 监听到了 res 数据发生变化执行arr方法
@@ -279,6 +180,110 @@ const formTag = new Vue({
 		}
     },
 
+});
+
+
+
+//JS瀑布流插件masonry动态载入数据
+// $(function () {
+// 更新list数据
+$("#getGridItem").on("click",function(){
+	formTag.page++;
+	// console.log(formTag);
+	reloadGridItem();
+});
+
+function reloadGridItem(){
+	var $container = $('#imgListDiv');
+
+	// post 本地json会失败
+	// axios.get('testjson/imgtest.json', {
+	gAxios.post('api/friends/getListInfo.php', {
+		token: localToken,
+		page: formTag.page
+	})
+	.then(function (response) {
+// response{
+//   // 服务端返回的数据
+//   data: {},
+//   // 服务端返回的状态码
+//   status: 200,
+//   // 服务端返回的状态信息
+//   statusText: 'OK',
+//   // 响应头
+//   // 所有的响应头名称都是小写
+//   headers: {},
+//   // axios请求配置
+//   config: {},
+//   // 请求
+//   request: {}
+// }
+		var res=[];
+		if(response.status==200){
+			// console.log(1);
+			res=response.data.data;
+			
+		}else{
+			parent.layer.msg("获取信息失败！");
+			return;
+		}
+
+		if(res.length==0){
+			parent.layer.msg("没有更多，请修改查找条件！");
+			return;
+		}
+		//生成item
+		$.each(res, function (i, data) {
+			var $gitem = $(
+				'<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12" >'
+				+'	<div class="card ">'
+				+'		<a target="_blank" href="../PersonalInfo/view.html?fid='+data['uid']+'" >'
+				+'			<img class="card-img-top" src="'+data['src']+'" alt="'+data['alt']+'">'
+				+'		</a>'
+				+'		<div class="card-body">'
+				+'			<div class="card__span">'
+				+'				<span class="card__span_left">'
+				+'					<span class="fa fa-clock-o" title="上次登陆时间">'+data['ontime']+'</span>'
+				+'				</span>'
+				+'				<span class="card__span_right"  data-aid="'+data['uid']+'">'
+				+'					<span title="点赞" >'
+				+'							<span class="fa fa-eye ">'+data['eye']+'</span>'
+				+'						<!-- <a href=""><a> -->'
+				+'					</span>'
+				+'				</span>'
+				+'			</div>			'					
+				+'			<!-- <div class="card__link"></div> -->'
+				+'			<hr />'
+				+'			<h3 class="card-title">'+data['nickname']+'</h3>'
+				+'			<p class="card-text">'+data['tryst_expect']+'</p>'
+				+'		</div>'
+				+'	</div>'
+				+'</div>'
+			);
+			$container.append($gitem).masonry('appended', $gitem, true);
+		});
+			// // jQuery方式。重新布局，添加元素，另一种方式添加元素，重新布局
+		// https://segmentfault.com/a/1190000007316788
+		$container.imagesLoaded( function() {
+			// new Masonry( document.getElementById('container'),{itemSelector:'.item'} );
+			$container.masonry();
+		});
+	})
+	.catch(function (error) {
+		console.log(error);
+	});
+}
+	
+	// var $getTempItemListElems=$($("#imgListDivTemp").html());
+	// $("#imgListDivTemp").empty();
+	// $container.append($getTempItemListElems).masonry('appended', $getTempItemListElems,true).masonry();
+// });
+// jQuery页面加载后执行的事件(3种方式)
+// 1 $(function () { });
+// 2 $(document).ready(function () { });
+// 3 window.onload = function () { }
+$(function () { 
+	reloadGridItem();
 });
 
 

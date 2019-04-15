@@ -98,12 +98,14 @@
 								<div class="form-group row">
 									<label for="生活地" class="col-sm-1 col-form-label">生活地</label>
 									<div class="col-sm-5">
-										<input type="text" readonly class="form-control" id="生活地" :value="conditionalForm.currentLivingPlace" v-model="conditionalForm.currentLivingPlace">
-									</div>
+										<select class="custom-select" id="生活地" v-model="conditionalForm.living">
+											<option v-for="item in conditionalData.livingList">{{item.text}}</option>
+										</select>
+									</div>									
 									
-									<label for="状态" class="col-sm-1 col-form-label">状态</label>
+									<label for="活动状态" class="col-sm-1 col-form-label">活动状态</label>
 									<div class="col-sm-5 ">
-										<select class="custom-select" id="状态" v-model="conditionalForm.status">
+										<select class="custom-select" id="活动状态" v-model="conditionalForm.status">
 											<option :value="item.value" v-for="item in conditionalData.statusList">{{item.text}}</option>
 										</select>
 									</div>

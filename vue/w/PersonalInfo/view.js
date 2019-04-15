@@ -54,7 +54,7 @@ const userInfo = new Vue({
 			.catch(function (error) {
 				console.log(error);
 			});
-        }
+        },
 		sendMsg(){
             var _this = this;
 			// post 本地json会失败
@@ -159,7 +159,7 @@ $(function () {
 					$.each(res.data, function (i, data) {
 						var $gitem = $(
 							'<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12" >'
-							+'		<img class="" src="'+data['src']+'" imgShowRul="'+data['src']+'" alt="'+data['alt']+'">'
+							+'		<img class="" src="'+data['src']+'" imgShowRul="'+data['thumb_src']+'" alt="'+data['alt']+'">'
 							+'</div>'
 						);
 						$container.append($gitem).masonry('appended', $gitem, true);

@@ -66,21 +66,22 @@ const formTag = new Vue({
 		conditionalForm:{
 			currentLivingPlace:"不可修改",
 			//活动状态
-			status:1
+			status:1,
+			uid:-1
 		},
 		conditionalData:{
 			statusList:[
-				{value:1,text:"全部"},
-				{value:2,text:"进行中"},
-				{value:3,text:"已结束"},
-				{value:3,text:"参加过的"},
-
+// 				{value:1,text:"全部"},
+// 				{value:2,text:"进行中"},
+// 				{value:3,text:"已结束"},
+// 				{value:3,text:"参加过的"},
 			]
-		}
+		},
+		page:0
 		
 	},
 	created:function(){
-		
+		this.getFrom();
 	},
 	methods:{
 		//检查表单
@@ -88,11 +89,54 @@ const formTag = new Vue({
 			
 		},
 		//获取表单		getFrom(){
-			
+			var _vueThis = this;
+			gAxios.post('api/activities/getSearchCondition.php', {
+				token: localToken,
+			})
+			.then(function (response) {
+				var res=[];
+				if(response.status==200){
+					// console.log(1);
+					res=response.data;
+					_vueThis.conditionalForm=res['data']['conditionalForm'];
+					_vueThis.conditionalData=res['data']['conditionalData'];
+
+				}else{
+					parent.layer.msg("获取信息失败！");
+					return;
+				}
+
+			})
+			.catch(function (error) {
+				// parent.layer.msg(error);
+			});
+
 		},
 		//更新表单
 		upFrom(){
-			console.log(this.conditionalForm);
+			var _vueThis = this;
+			// 初始化page信息
+			_vueThis.page=0;
+			gAxios.post('api/activities/putSearchCondition.php', {
+				token: localToken,
+				data: _vueThis.conditionalForm
+			})
+			.then(function (response) {
+				var res=[];
+				if(response.status==200){
+					res=response.data;
+					parent.layer.msg(res['msg']);
+					console.log(res);
+				}else{
+					parent.layer.msg("获取信息失败！");
+					return;
+				}
+			
+			})
+			.catch(function (error) {
+				console.log(error);
+				// parent.layer.msg(error);
+			});
 		}
 	}
 });
@@ -159,16 +203,20 @@ const imgListVar = new Vue({
 //JS瀑布流插件masonry动态载入数据
 $(function () {
 	$("#getGridItem").on("click",function(){
+		formTag.page++;
+		// console.log(formTag);
 		reloadGridItem();
 	});
+
 
 	function reloadGridItem(){
 		var $container = $('#imgListDiv');
 	
 		// post 本地json会失败
-		axios.get('testjson/imgtest.json', {
-			firstName: 'Fred',
-			lastName: 'Flintstone'
+		// axios.get('testjson/imgtest.json', {
+		gAxios.post('api/activities/getListInfo.php', {
+			token: localToken,
+			page: formTag.page
 		})
 		.then(function (response) {
 // {
@@ -189,7 +237,7 @@ $(function () {
 			var res=[];
 			if(response.status==200){
 				// console.log(1);
-				res=response.data;
+				res=response.data.data;
 			}else{
 				layer.msg("获取信息失败！");
 				return;
@@ -203,7 +251,7 @@ $(function () {
 				var $gitem = $(
 					'<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12" >'
 					+'	<div class="card ">'
-					+'		<a target="_blank" href="./viewAction.html?uid='+data['uid']+'" >'
+					+'		<a target="_blank" href="./viewAction.html?fid='+data['id']+'" >'
 					+'			<img class="card-img-top" src="'+data['src']+'" alt="'+data['alt']+'">'
 					+'		</a>'
 					+'		<div class="card-body">'
@@ -212,7 +260,7 @@ $(function () {
 					+'					<span class="btn btn-outline-success" id="">北京</span>'
 					+'					<span class="btn bg-secondary text-white " id="">进行中</span>'
 					+'				</span>'
-					+'				<span class="btn card__span_right"  data-aid="'+data['uid']+'">'
+					+'				<span class="btn card__span_right"  data-aid="'+data['id']+'">'
 					+'					<span title="点赞" >'
 					+'							<span class="fa fa-eye ">'+data['eye']+'</span>'
 					+'						<!-- <a href=""><a> -->'
@@ -225,7 +273,7 @@ $(function () {
 					+'				<span class="card__span_left">'
 					+'					<span class="fa fa-clock-o">s:'+data['ontime']+'</span>'
 					+'				</span>'
-					+'				<span class="card__span_right"  data-aid="'+data['uid']+'">'
+					+'				<span class="card__span_right"  data-aid="'+data['id']+'">'
 					+'					<span class="fa fa-clock-o">e:'+data['ontime']+'</span>'
 					+'				</span>'
 					+'			</div>			'					
