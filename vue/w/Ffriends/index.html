@@ -90,7 +90,9 @@
 									<label for="生活地" class="col-sm-1 col-form-label">生活地</label>
 									<div class="col-sm-5">
 										<select class="custom-select" id="生活地" v-model="conditionalForm.living">
-											<option v-for="item in conditionalData.livingList">{{item.text}}</option>
+											<optgroup :label="item.text" v-for="item in conditionalData.livingList">
+												<option :value="city.value" v-for="city in item.data">{{city.text}}</option>
+											</optgroup>
 										</select>
 									</div>									
 									<label for="性别" class="col-sm-1 col-form-label">性别</label>

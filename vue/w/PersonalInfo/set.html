@@ -123,29 +123,31 @@
 
 									</li>
 									<li class="list-group-item">
-										
+									
 										<div class="row">
 											<div class="input-group col-sm">
 												<div class="input-group-prepend">
-													<span class="input-group-text" id="inputGroup-sizing-sm">生活地</span>
+													<span class="input-group-text" id="inputGroup-living-sm">生活地</span>
 												</div>
 												<select class="form-control custom-select" id="生活地" aria-label="生活地" v-model="res.living_place">
-													<option :value="item.value" v-for="item in livingPlaceList">{{item.text}}</option>
+													<optgroup :label="item.text" v-for="item in livingPlaceList">
+														<option :value="city.value" v-for="city in item.data">{{city.text}}</option>
+													</optgroup>
 												</select>
 											</div>
 											<div class="input-group col-sm">
 												<div class="input-group-prepend">
-													<span class="input-group-text" id="inputGroup-sizing-sm">职业</span>
+													<span class="input-group-text" id="inputGroup-perfession-sm">职业</span>
 												</div>
-												<input type="text" class="form-control" aria-label="职业" aria-describedby="inputGroup-sizing-sm" 
+												<input type="text" class="form-control" aria-label="职业" aria-describedby="inputGroup-perfession-sm" 
 												placeholder="必填项,最长45字符" required="required" maxlength="45" v-model="res.profession">
 											</div>
 
 											<div class="input-group col-sm">
 												<div class="input-group-prepend">
-													<span class="input-group-text" id="inputGroup-sizing-sm">收入</span>
+													<span class="input-group-text" id="inputGroup-income-sm">收入</span>
 												</div>
-												<input type="number" class="form-control" aria-label="收入" aria-describedby="inputGroup-sizing-sm" 
+												<input type="number" class="form-control" aria-label="收入" aria-describedby="inputGroup-income-sm" 
 												placeholder="必填项" required="required" v-model="res.income">
 												<div class="input-group-append">
 													<span class="input-group-text">RMB</span>
@@ -158,14 +160,14 @@
 										<div class="row">
 											<div class="input-group col-sm">
 												<div class="input-group-prepend">
-													<span class="input-group-text" id="inputGroup-sizing-sm">我最喜欢的活动</span>
+													<span class="input-group-text" id="inputGroup-tryst-sm">我最喜欢的活动</span>
 												</div>
-												<input type="text" class="form-control" aria-label="我最喜欢的活动" aria-describedby="inputGroup-sizing-sm" 
+												<input type="text" class="form-control" aria-label="我最喜欢的活动" aria-describedby="inputGroup-tryst-sm" 
 												placeholder="必填项,最长128字符,多项使用逗号分割" required="required" maxlength="128" v-model="res.tryst_expect">
 											</div>
 											<div class="input-group col-sm">
 												<div class="input-group-prepend">
-													<span class="input-group-text" id="inputGroup-sizing-sm">状态</span>
+													<span class="input-group-text" id="inputGroup-status-sm">状态</span>
 												</div>
 												<select class="form-control custom-select" id="状态" v-model="res.marital_status">
 													<option :value="item.value" v-for="item in maritalStatusList">{{item.text}}</option>
@@ -201,9 +203,9 @@
 										<div class="row">
 											<div class="input-group col-sm">
 												<div class="input-group-prepend">
-													<span class="input-group-text" id="inputGroup-sizing-sm">添加在线学籍认证</span>
+													<span class="input-group-text" id="inputGroup-edu-sm">添加在线学籍认证</span>
 												</div>
-												<input type="text" class="form-control" aria-label="添加在线学籍认证" aria-describedby="inputGroup-sizing-sm" 
+												<input type="text" class="form-control" aria-label="添加在线学籍认证" aria-describedby="inputGroup-edu-sm" 
 												placeholder="在线验证码" v-model="verify_code">
 												<div class="input-group-append">
 													<button class="btn btn-outline-secondary text-primary" type="button" v-on:click="userEduSet()">添加</button>

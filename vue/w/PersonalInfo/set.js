@@ -124,9 +124,9 @@ const userInfo = new Vue({
 		//获取user info		getUserInfo(){
             var _this = this;
 			// post 本地json会失败
-			gAxios.post('api/personalInfo/userinfoGet.php', {
+			gAxios.post('api/personalInfo/userInfoGet.php', {
 				token: localToken,
-				uid:setLocalID()
+				uid:getLocalID()
 			})
 			.then(function (response) {
 				if(response.status==200){
