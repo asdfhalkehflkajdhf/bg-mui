@@ -23,6 +23,7 @@
 		<script src="../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
 		<!-- 背景样式 -->
 		<link rel="stylesheet" type="text/css" href="../common/background-1.css">
+		<script src="../common/globalVar.js"></script>
 		
 		<!-- 自有资源 -->
 		<link rel="stylesheet" type="text/css" href="./css/index.css">
@@ -34,85 +35,60 @@
 		<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
 	</head>
 	<body>
+		<!-- //这个页面使用layer open打开，是给用户看的。 -->
 		<div class="container">
-		    <div class="wrapper">
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item " onclick="alert(1)'">
-						<div class="row">
-							<div class="col-md-2">
-								<!-- <div class=""> -->
-								<ul class="pictures pictures-4">
-									<li class=""><img onclick="viewImgList()" class="rounded " data-original="../../api/common/PHPaliyun-oss-sdk/example.jpg" src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="Cuo Na Lake"></li>
-									<li class=""><img class="rounded " data-original="../../api/common/PHPaliyun-oss-sdk/example.jpg" src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="Tibetan Plateau"></li>
-									<!-- <li><img class="rounded " src="../Ffriends/images/item-2.jpg" alt="Card image cap"></li> -->
-									<li class=""><img class="rounded " data-original="../../api/common/PHPaliyun-oss-sdk/example.jpg" src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="Jokhang Temple"></li>
-									<li class=""><img class="rounded " data-original="../../api/common/PHPaliyun-oss-sdk/example.jpg" src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="Potala Palace 1"></li>
-									<!-- <li><img data-original="../docs/images/tibet-5.jpg" src="../docs/images/thumbnails/tibet-5.jpg" alt="Potala Palace 2"></li> -->
-									<!-- <li><img data-original="../docs/images/tibet-6.jpg" src="../docs/images/thumbnails/tibet-6.jpg" alt="Potala Palace 3"></li> -->
-									<!-- <li><img data-original="../docs/images/tibet-7.jpg" src="../docs/images/thumbnails/tibet-7.jpg" alt="Lhasa River"></li> -->
-									<!-- <li><img data-original="../docs/images/tibet-8.jpg" src="../docs/images/thumbnails/tibet-8.jpg" alt="Namtso 1"></li> -->
-									<!-- <li><img data-original="../docs/images/tibet-9.jpg" src="../docs/images/thumbnails/tibet-9.jpg" alt="Namtso 2"></li> -->
-								</ul>
-								<!-- </div> -->
-								<!-- <img src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="..." class="rounded"> -->
-							</div>
-							
-							<div class="col-md-10">
-								
-								<div class="p-2 ml-2">
-									<span class="btn btn-outline-success" id="">nickname</span>
-									<span class="card__span_right">
-										<span class="btn btn-outline-success " id="">删除</span>
-									</span>
-								</div>
-								<div class="p-2 ml-2" style="font-size: 15px;">
-									mwp内容
-								</div>
-								<div class="p-2 ml-2">
-									<span class="text-success">时间：2019-03-03 20:22</span>
-								</div>
+			<div class="wrapper" >
+		
+						<div id="app">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item " v-for="item, index in dynamicList">
+									<div class="row">
+										<div class="col-md-2">
+											<!-- <div class=""> -->
+											<ul class="pictures" v-bind:class="{pictures-5: item.imgObj.data.length>4 ,pictures-4:item.imgObj.data.length<5}">
+												<li class="" v-for="imgItem in item.imgObj.data">
+													<img v-on:click="viewImg(item.imgObj)" class="rounded" :src="imgItem.thumb" :alt="imgItem.alt" >
+												</li>
+											</ul>
+											<!-- </div> -->
+											<!-- <img src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="..." class="rounded"> -->
+										</div>
+										
+										<div class="col-md-10">
+											<div class="p-2 ml-2">
+												<span class="btn btn-outline-success" id="">{{item.nickname}}</span>
+												<span class="card__span_right">
+													<span class="btn btn-outline-success" v-on:click="delDynamic(index)">删除</span>
+												</span>
+											</div>
+											<div class="p-2 ml-2" style="font-size: 15px;">
+												{{item.content}}
+											</div>
+											<div class="p-2 ml-2">
+												<span class="text-success">时间：{{item.ctime}}</span>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+
+
+						<!-- 查找更多 -->
+						<div class="card">
+							<div class="card-header" >
+								<h5 class="mb-0 text-center">
+								<button class="btn btn-link " id="getGridItem" onclick="">
+									查找更多
+								</button>
+								</h5>
 							</div>
 						</div>
-					</li>
-					<li class="list-group-item ">
-						<div class="row">
-							<div class="col-md-2">
-								<!-- <div class=""> -->
-								<ul class="pictures pictures-5" >
-									<li class=""><img onclick="viewImgList()" class="rounded " data-original="../../api/common/PHPaliyun-oss-sdk/example.jpg" src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="Cuo Na Lake"></li>
-									<li class=""><img class="rounded " data-original="../../api/common/PHPaliyun-oss-sdk/example.jpg" src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="Tibetan Plateau"></li>
-									<!-- <li><img class="rounded " src="../Ffriends/images/item-2.jpg" alt="Card image cap"></li> -->
-									<li class=""><img class="rounded " data-original="../../api/common/PHPaliyun-oss-sdk/example.jpg" src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="Jokhang Temple"></li>
-									<li class=""><img class="rounded " data-original="../../api/common/PHPaliyun-oss-sdk/example.jpg" src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="Potala Palace 1"></li>
-									<li><img data-original="../../api/common/PHPaliyun-oss-sdk/example.jpg" src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="Potala Palace 2"></li>
-									<!-- <li><img data-original="../docs/images/tibet-6.jpg" src="../docs/images/thumbnails/tibet-6.jpg" alt="Potala Palace 3"></li> -->
-									<!-- <li><img data-original="../docs/images/tibet-7.jpg" src="../docs/images/thumbnails/tibet-7.jpg" alt="Lhasa River"></li> -->
-									<!-- <li><img data-original="../docs/images/tibet-8.jpg" src="../docs/images/thumbnails/tibet-8.jpg" alt="Namtso 1"></li> -->
-									<!-- <li><img data-original="../docs/images/tibet-9.jpg" src="../docs/images/thumbnails/tibet-9.jpg" alt="Namtso 2"></li> -->
-								</ul>
-								<!-- </div> -->
-								<!-- <img src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="..." class="rounded"> -->
-							</div>
-							
-							<div class="col-md-10">
-								
-								<div class="p-2 ml-2">
-									<span class="btn btn-outline-success" id="">nickname</span>
-									<span class="card__span_right">
-										<span class="btn btn-outline-success " id="">删除</span>
-									</span>
-								</div>
-								<div class="p-2 ml-2" style="font-size: 15px;">
-									mwp内容
-								</div>
-								<div class="p-2 ml-2">
-									<span class="text-success">时间：2019-03-03 20:22</span>
-								</div>
-							</div>
-						</div>
-					</li>
-				</ul>
+						
 			</div>
 		</div>
 	</body>
+<!-- 动态加载数据 -->
+<script type="text/javascript" src="manageDynamic.js"></script>
+
 </html>

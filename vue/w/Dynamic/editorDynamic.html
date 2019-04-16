@@ -44,10 +44,10 @@
 				<div class="card">
 					<h2 class="text-center">新动态</h2>
 					<form>
-						<div class="form-group row">
+						<div class="form-group row" id="app">
 							<!-- <label for="内容" class="col-sm-2 col-form-label">内容</label> -->
 							<div class="col-sm-12">
-								<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="内容"></textarea>
+								<textarea class="form-control" id="textarea1" maxlength="1024" rows="3" placeholder="内容,1-1024" v-model="content"></textarea>
 							</div>
 						</div>
 						<input type="file" name="image_data[]" id="txt_file" multiple class="file-loading el-col-offset-1" />
@@ -66,6 +66,65 @@
 	<script src="../common/globalUpImg.js"></script>
 	
 	<script>
-		upImgInit("txt_file", 3);
+		
+		var localToken = getLocalToken();
+		//使用page_id 3,  未开启上传功能
+		upImgInit("txt_file", 3, localToken, false);
+		
+		
+		const editorDynamic = new Vue({
+			el:"#app",
+			data:{
+				list:[],
+				content:""		
+			},
+			methods:{
+				imgUpEventFunc(event, data, previewId, index){
+					
+				},
+				addList(obj){
+					this.list = obj;
+				},
+				upImg(){
+					upImgEvent("txt_file", imgUpEventFunc);
+				},
+				clean(){
+					this.content="";
+					
+				},
+				submit(){
+					var _vueThis=this;
+					gAxios.post('api/dynamic/dynamicAdd.php', {
+						token: localToken,
+						content: _vueThis.content,
+						list:JSON.stringify(_vueThis.list)
+					})
+					.then(function (response) {
+						var res=[];
+						if(response.status==200){
+							res=response.data;
+							if(res.code==0){
+								if(res.data.length>0){
+									Vue.set(_vueThis.dynamicList,_vueThis.dynamicList.length,res.data);
+								}
+								
+								// _vueThis.dynamicList.push(res.data);
+								// console.log(_vueThis.dynamicList);
+							}else{
+								parent.layer.msg(res.msg);
+							}
+						}else{
+							parent.layer.msg("获取信息失败！");
+						}
+						
+					})
+					.catch(function (error) {
+						// parent.layer.msg(error);
+					});
+				}
+					
+			}
+		})
+		
 	</script>
 </html>

@@ -88,7 +88,8 @@
 			console.log(event, data, previewId, index);
 		}
 		
-		upImgInit("txt_file", 1, localToken);
+		//使用page_id 1,  开启上传功能
+		upImgInit("txt_file", 1, localToken, true);
 		upImgEvent("txt_file", eventFunc);
 		// jQuery页面加载后执行的事件(3种方式)
 		// 1 $(function () { });

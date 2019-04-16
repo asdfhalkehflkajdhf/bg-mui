@@ -1,4 +1,4 @@
-function upImgInit(objID, pageId, token, mfc){
+function upImgInit(objID, pageId, token, isUpload, mfc){
 	if(!mfc){mfc=9;} 
 	// 上传初始化
 	//			// vue 不能包含 bootstrap fileinput ,否则bootstrap fileinput会冲突
@@ -6,7 +6,7 @@ function upImgInit(objID, pageId, token, mfc){
 	var fileUpLoadVar={
 		language: 'zh', //设置语言
 		theme: 'fa',
-		showUpload: true,
+		showUpload: isUpload,
 		showCaption: true,//按钮前边的输入框
 		// showPreview: false,
 		dropZoneEnabled: false, //拖拽区
@@ -32,7 +32,7 @@ function upImgInit(objID, pageId, token, mfc){
 
 function upImgEvent(objID, eventFunc){
 	// 文件上传方法
-	// $("#"+objID).fileinput("upload");
+	$("#"+objID).fileinput("upload");
 	// 上传成功后处理方法
 	$("#"+objID).on("fileuploaded", function(event, data, previewId, index) {
 		if(eventFunc){
@@ -46,6 +46,10 @@ function upImgEvent(objID, eventFunc){
 	})
 }
 
+function upImgClean(objID){
+	$("#"+objID).fileinput('destroy');
+	// $("#"+objID).fileinput('reset/clear');
+}
 
 
 

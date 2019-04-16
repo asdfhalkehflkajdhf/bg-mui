@@ -4,7 +4,7 @@ const sideEdeg = new Vue({
 	el:"#sideEdeg",
 	data:{
 		actionUrlPre:"../Factivities/viewAction.html?id=",
-		announcementUrlPre1:"",
+		announcementUrlPre1:"../Otherannouncement.html",
 		announcementUrlPre2:"../Other/viewAnnouncement.html?id=",
 		
 		activeRankList:[],
@@ -108,9 +108,15 @@ const sideEdeg = new Vue({
 	},
 	created:function(){
 		// console.log(getinfor);
+// 		this.getActiveRankList();
+// 		this.getAnnouncementList();
+// 		this.getFriendshipLinkList();
+	},
+	mounted:function(){
+		// console.log(getinfor);
 		this.getActiveRankList();
 		this.getAnnouncementList();
 		this.getFriendshipLinkList();
-	}
+	},
 
 });
