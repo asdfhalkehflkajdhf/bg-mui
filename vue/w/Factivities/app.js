@@ -251,7 +251,7 @@ $(function () {
 				var $gitem = $(
 					'<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12" >'
 					+'	<div class="card ">'
-					+'		<a target="_blank" href="./viewAction.html?fid='+data['id']+'" >'
+					+'		<a target="_blank" href="./viewAction.html?id='+data['id']+'" >'
 					+'			<img class="card-img-top" src="'+data['src']+'" alt="'+data['alt']+'">'
 					+'		</a>'
 					+'		<div class="card-body">'

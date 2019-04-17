@@ -23,6 +23,8 @@
 		<link rel="stylesheet" href="../../res/bootstrap-4.0.0/css/bootstrap.min.css">
 		<script src="../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="../common/background-1.css">
+		<script src="../common/globalVar.js"></script>
+		<script src="../common/globalSubWin.js"></script>
 
 		<!-- 自有资源 -->
 		<link rel="stylesheet" type="text/css" href="./css/main.css">
@@ -32,68 +34,148 @@
 		<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
 	</head>
 	<body>
-		
-		
-		
-			<ul class="list-group list-group-flush">
-				<li class="list-group-item " id="">
-					<div class="row">
-						<div class="col-md-2">
-							<img src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="..." class="rounded">
-						</div>
-						
-						<div class="col-md-10">
+		<div class="container ">
+		    <div class="wrapper">
+
+				<ul class="list-group list-group-flush" id="app">
+					<li class="list-group-item " v-for="item, idx in actionList">
+						<div class="row">
+							<div class="col-md-2">
+								<img :src="item.activity_img" alt="..." class="rounded">
+							</div>
 							
-							<div class="p-2">
-								<span class="btn btn-outline-success" id="">北京</span>
-								<span class="btn-outline-dark" id="">北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天</span>
-								<span class="card__span_right">
-									<span class="btn btn-outline-success " onclick="">编辑</span>
-									<span class="btn btn-outline-success " onclick="">删除</span>
-								</span>
-							</div>
-							<div class="p-3 mb-2 " style="font-size: 15px;">
-								北邮咖啡馆聊天北邮咖北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天
-							</div>
-							<div class="p-2">
-								<span class="text-success">开始时间：</span>
-								<span class="layui-badge layui-bg-green">结束时间：'+result['e_time']+'</span>
-								<span class="text-muted">结束时间：'+result['e_time']+'</span>
+							<div class="col-md-10">
+								<div class="p-2">
+									<span class="btn btn-outline-success">{{item.region_name}}</span>
+									<span class="btn-outline-dark" v-on:click="viewAction(idx)">{{item.title}}</span>
+									<span class="card__span_right">
+										<span class="btn btn-outline-success " v-on:click="editAction(idx)">编辑</span>
+										<span class="btn btn-outline-success " v-on:click="delAction(idx)">删除</span>
+									</span>
+								</div>
+								<div class="p-3 mb-2 " style="font-size: 15px;">
+									{{item.activity_summary}}
+								</div>
+								<div class="p-2">
+									<span class="text-success fa fa-clock-o" title="开始时间">{{item.s_time}}</span>
+									<span class="text-success fa fa-clock-o" title="结束时间">{{item.e_time}}</span>
+									<span class="fa fa-eye card__span_right">{{item.eye}}</span>
+								</div>
 							</div>
 						</div>
+					</li>
+				</ul>
+				<!-- 查找更多 -->
+				<div class="card">
+					<div class="card-header" >
+						<h5 class="mb-0 text-center">
+						<button class="btn btn-link " id="getGridItem" onclick="">
+							查找更多
+						</button>
+						</h5>
 					</div>
-				</li>
-				<li class="list-group-item ">
-					<div class="row">
-						<div class="col-md-2">
-							
-							<img src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="..." class="rounded " onclick="viewAction()">
-							
-						</div>
-						
-						<div class="col-md-10">
-							
-							<div class="p-2">
-								<span class="btn btn-outline-success" id="">北京</span>
-								<span class="btn-outline-dark" id="">北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天</span>
-								<span class="card__span_right">
-									<span class="btn btn-outline-success " id="">编辑</span>
-									<span class="btn btn-outline-success" id="">删除</span>
-								</span>
-							</div>
-							<div class="p-3 mb-2 " style="font-size: 15px;">
-								北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天北邮咖啡馆聊天
-							</div>
-							<div class="p-2">
-								<span class="text-success">开始时间：</span>
-								<span class="layui-badge layui-bg-green">结束时间：'+result['e_time']+'</span>
-								<span class="text-muted">结束时间：'+result['e_time']+'</span>
-							</div>
-						</div>
-					</div>
-				</li>
-			</ul>
-		
+				</div>
+			</div>
+		</div>
 		
 	</body>
+	<script>
+		var localToken = getLocalToken();
+		
+
+		const manageAction = new Vue({
+			el: "#app",
+			data:{
+				actionList:[
+					// 	id
+					// title
+					// s_time
+					// e_time
+					// region_name
+					// activity_stats
+					// up
+					// eye
+					// activity_img
+					// activity_summary
+					
+				],
+				page:0
+			},
+			created:function(){
+				this.getActionList();
+			},
+			methods:{
+				getActionList(){
+					var _this = this;
+					// post 本地json会失败
+					// axios.get('testjson/lunBoTuTest.json', {
+					gAxios.post('api/activities/getListInfo.php', {
+						token: localToken,
+						page:_this.page
+					})
+					.then(function (response) {
+						if(response.status==200){
+							var res = response.data;
+							if(res.code=0){
+								actionList.push(res.data);
+							}else{
+								parent.layer.msg(res.msg);
+							}
+						}else{
+							parent.layer.msg(response.statusText+response.data.msg);
+						}
+					})
+					.catch(function (error) {
+						console.log(error);
+					});
+					
+				},
+				delAction(idx){
+					var _this = this;
+					var item = _this.actionList[idx];
+					// post 本地json会失败
+					// axios.get('testjson/lunBoTuTest.json', {
+					gAxios.post('api/activities/delActionById.php', {
+						token: localToken,
+						aid:item.id
+					})
+					.then(function (response) {
+						if(response.status==200){
+							_this.actionList.splice(idx,1);
+							parent.layer.msg(response.data.msg);
+						}else{
+							parent.layer.msg(response.statusText+response.data.msg);
+						}
+					})
+					.catch(function (error) {
+						console.log(error);
+					});
+					
+				},
+				editAction(idx){
+					var item = _this.actionList[idx];
+					var url='editorAction.html?id='+item.id;
+					var title = "编辑活动";
+					openSubWin(url, title, true);
+					
+				},
+				viewAction(idx){
+					var item = _this.actionList[idx];
+					var url='viewAction.html?id='+item.id;
+					var title = "活动";
+					openSubWin(url, title, true);
+				}
+				
+			}
+		})
+	
+
+$(function () {
+	$("#getGridItem").on("click",function(){
+		manageAction.page++;
+		manageAction.getActionList();
+	});
+})		
+	</script>
+
 </html>

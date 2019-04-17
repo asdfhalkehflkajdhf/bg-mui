@@ -19,6 +19,8 @@
 		<link rel="stylesheet" href="../../res/bootstrap-4.0.0/css/bootstrap.min.css">
 		<script src="../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="../common/background-1.css">
+		<script src="../common/globalVar.js"></script>
+		<script src="lzwjs.js"></script>
 		
 		<!-- 自有资源 -->
 		<link rel="stylesheet" type="text/css" href="./css/main.css">
@@ -35,17 +37,17 @@
 					<div class="group-item">
 						<div class="card" style="" id="ea-base-info">
 							<div class="card-header">
-								基本信息
+								<span  class="btn" >基本信息</span>
 							</div>
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">
 									<div class="row">
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
-												<span class="input-group-text" id="inputGroup-sizing-sm">标题</span>
+												<span class="input-group-text" id="inputGroup-title-sm">标题</span>
 											</div>
-											<input type="text" class="form-control" aria-label="标题" aria-describedby="inputGroup-sizing-sm" 
-											placeholder="必填项,最长128字符" required="required" maxlength="128">
+											<input type="text" class="form-control" aria-label="标题" aria-describedby="inputGroup-title-sm" 
+											placeholder="必填项,最长128字符" required="required" maxlength="128" v-model="res.title">
 										</div>
 									</div>
 								</li>
@@ -54,38 +56,24 @@
 									<div class="row">
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
-												<span class="input-group-text" id="inputGroup-sizing-sm">开始时间</span>
+												<span class="input-group-text" id="inputGroup-stime-sm">开始时间</span>
 											</div>
-											<input type="date" class="form-control" aria-label="开始时间" aria-describedby="inputGroup-sizing-sm" 
-											placeholder="必填项,最长32字符" required="required" >
+											<input type="date" class="form-control" aria-label="开始时间" aria-describedby="inputGroup-stime-sm" 
+											placeholder="必填项,最长32字符" required="required" v-model="res.startTime">
 										</div>
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
-												<span class="input-group-text" id="inputGroup-sizing-sm">结束时间</span>
+												<span class="input-group-text" id="inputGroup-etime-sm">结束时间</span>
 											</div>
-											<input type="date" class="form-control" aria-label="结束时间" aria-describedby="inputGroup-sizing-sm" 
-											placeholder="必填项" required="required" >
-										</div>
-									</div>
-
-
-								</li>
-								<li class="list-group-item">
-									
-									<div class="row">
-										<div class="input-group col-sm">
-											<div class="input-group-prepend">
-												<span class="input-group-text" id="inputGroup-sizing-sm">生活地</span>
-											</div>
-											<input type="text" class="form-control" aria-label="生活地" aria-describedby="inputGroup-sizing-sm" 
-											placeholder="必填项" required="required" readonly="readonly" >
+											<input type="date" class="form-control" aria-label="结束时间" aria-describedby="inputGroup-etime-sm" 
+											placeholder="必填项" required="required" v-model="res.endTime">
 										</div>
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
-												<span class="input-group-text" id="inputGroup-sizing-sm">参加人数</span>
+												<span class="input-group-text" id="inputGroup-num-sm">参加人数</span>
 											</div>
-											<input type="number" class="form-control" aria-label="参加人数" aria-describedby="inputGroup-sizing-sm" 
-											placeholder="必填项" required="required" maxlength="2">
+											<input type="number" class="form-control" aria-label="参加人数" aria-describedby="inputGroup-num-sm" 
+											placeholder="必填项" required="required" maxlength="2"  v-model="res.number">
 											<div class="input-group-append">
 												<span class="input-group-text">人</span>
 											</div>
@@ -93,17 +81,19 @@
 
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
-												<span class="input-group-text" id="inputGroup-sizing-sm">平均开支</span>
+												<span class="input-group-text" id="inputGroup-avgSpending-sm">平均开支</span>
 											</div>
-											<input type="number" class="form-control" aria-label="平均开支" aria-describedby="inputGroup-sizing-sm" 
-											placeholder="必填项" required="required" >
+											<input type="number" class="form-control" aria-label="平均开支" aria-describedby="inputGroup-avgSpending-sm" 
+											placeholder="必填项" required="required" maxlength="4" v-model="res.avgSpending">
 											<div class="input-group-append">
 												<span class="input-group-text">RMB</span>
 											</div>
 										</div>
-
 									</div>
+
+
 								</li>
+
 								<li class="list-group-item">
 									<div class="row">
 										<!-- <div class="input-group col-sm">
@@ -129,10 +119,10 @@
 									<div class="row">
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
-												<span class="input-group-text" id="inputGroup-sizing-sm">活动简介</span>
+												<span class="input-group-text" id="inputGroup-actBrief-sm">活动简介</span>
 											</div>
-											<input type="text" class="form-control" aria-label="活动简介" aria-describedby="inputGroup-sizing-sm" 
-											placeholder="必填项,最长128字符" required="required" maxlength="128">
+											<input type="text" class="form-control" aria-label="活动简介" aria-describedby="inputGroup-actBrief-sm" 
+											placeholder="必填项,最长128字符" required="required" maxlength="128" v-model="res.actBrief">
 										</div>
 
 									</div>
@@ -142,8 +132,9 @@
 						</div>
 						<div class="card" style="">
 							<div class="card-header">
-								活动详情 
-								<button type="button" class="btn btn-outline-success text-center" onclick="eaBaseInfo.viewActionInfo()">预览</button>
+								<span  class="btn" >活动详情</span>
+								 
+								<span  class="btn btn-outline-success card__span_right" onclick="eaBaseInfo.viewActionInfo()">预览</span>
 							</div>
 							<div  class="card-header" id="actionMenu"></div>
 							<div class="card-body" id="actionIntroduction">
@@ -163,119 +154,7 @@
 		
 	</body>
 	
-	<script>
-		// 编辑框初始化
-		var E = window.wangEditor;
-		var editor_si = new E('#actionMenu','#actionIntroduction');
-		editor_si.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
-		editor_si.customConfig.uploadImgMaxSize = 3 * 1024 * 1024 // 将图片大小限制为 3M
-		// editor_si.customConfig.uploadImgMaxLength = 1 // 限制一次最多上传 5 张图片
-
-		// 创建编辑器之后，使用editor.txt.html(...)设置编辑器内容
-		var editorMenus=[
-		    'head',  // 标题
-		    'bold',  // 粗体
-		    'fontSize',  // 字号
-		    // 'fontName',  // 字体
-		    // 'italic',  // 斜体
-		    'foreColor',  // 文字颜色
-		    'backColor',  // 背景颜色
-		    // 'link',  // 插入链接
-		    'list',  // 列表
-		    'justify',  // 对齐方式
-		    'quote',  // 引用
-		    // 'emoticon',  // 表情
-		    'image',  // 插入图片
-		    // 'table',  // 表格
-		];
-		// 自定义菜单配置
-		editor_si.customConfig.menus =editorMenus;
-		
-		editor_si.create();
-		
-		const eaBaseInfo = new Vue({
-			el: "#ea-base-info",
-			data:{
-				title:"",
-				startTime:"",
-				endTime:"",
-				placeLife:"",
-				number:2,
-				avgSpending:30,
-				actFirstPic:"",
-				actBrief:"",
-				actDetails:""
-			},
-			created:function(){
-				
-			},
-			methods:{
-				readFile(obj){
-					var _this = this
-					var inputDOM = this.$refs.inputer;
-					var file = inputDOM.files[0];
-					
-					if(file.size>2*1024*1024){
-						layer.msg("文件不能超过2M");
-						return false;
-					}
-					//这里我们判断下类型如果不是图片就返回 去掉就可以上传任意文件 
-					if(!/image\/\w+/.test(file.type)){ 
-						layer.msg("请确保文件为图像类型");
-						return false; 
-					}
-					$("#inputGroupFileLabel").html(inputDOM.value);
-					var reader = new FileReader(); 
-					reader.readAsDataURL(file);
-					reader.onload = function(e){
-						_this.actFirstPic = this.result;
-						// console.log(this.result);
-						// result.innerHTML = '<img src="'+this.result+'" alt=""/>'; 
-						// img_area.innerHTML = '<div class="sitetip">图片img标签展示：</div><img src="'+this.result+'" alt=""/>'; 
-					} 
-				},
-				viewFirstPic(){
-
-					if(this.actFirstPic.length==0){
-						layer.msg("请先选择图片");
-						return false;
-					}
-					
-					var imgJson = {
-					  "title": "", //相册标题
-					  "id": 0, //相册id
-					  "start": 0, //初始显示的图片序号，默认0
-					  "data": [   //相册包含的图片，数组格式
-						{
-						  "alt": "",
-						  "pid": 666, //图片id
-						  "src": this.actFirstPic, //原图地址
-						  "thumb": this.actFirstPic //缩略图地址
-						}
-					  ]
-					};
-					
-					layer.photos({
-						photos: imgJson
-						//,anim: 2 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
-					}); 
-				},
-				viewActionInfo(){
-					layer.open({
-						type: 1
-						,title: '预览'
-						,shade: false
-						,area: ['100%', '100%']
-						,scrollbar: false
-						,content: '<div class="detail-body" style="margin:20px;">'+ editor_si.txt.html() +'</div>'
-					});
-				}
-				
-			}
-		})
-	
-
-		
-	</script>
+	<script type="text/javascript" src="editorAction.js"></script>
+	<script></script>
 	
 </html>

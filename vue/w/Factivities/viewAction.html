@@ -19,6 +19,7 @@
 		<link rel="stylesheet" href="../../res/bootstrap-4.0.0/css/bootstrap.min.css">
 		<script src="../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="../common/background-1.css">
+		<script src="../common/globalVar.js"></script>
 		
 		<!-- 自有资源 -->
 		<link rel="stylesheet" type="text/css" href="./css/main.css">
@@ -32,23 +33,24 @@
 		<div class="container ">
 		    <div class="wrapper">
 		
-					<div class="card">
+					<div class="card" id="app">
 						<div class="card-body">
 							<h2>
-								北邮咖啡馆聊天
+								{{res.title}}
 							</h2>
 							<div class="card__span">
 								<span class="card__span_left">
-									<span class="btn btn-outline-success" id="">北京</span>
-									<span class="btn bg-secondary text-white " id="">进行中</span>
+									<span class="btn btn-outline-success" id="">{{res.placeLife}}</span>
+									<span class="btn bg-success text-white " v-if="res.activity_stats">进行中</span>
+									<span class="btn bg-secondary text-white " v-else>结束</span>
+
 								</span>'
 								<span class="btn card__span_right"  data-aid="'+data['uid']+'">
-									<span class="btn btn-link">请求信息</span>
-									<span class="btn btn-link">活动发布者信息</span>
-									<span title="点赞" >
-											<span class="fa fa-eye ">'+data['eye']+'</span>
-										<!-- <a href=""><a> -->
-									</span>
+									<span class="btn btn-outline-success" v-on:click="sendReqInfo()" v-if="res.login_stats">请求信息</span>
+									<span class="btn btn-outline-success"  v-else="">请登陆后联系作者</span>
+									<span  v-if="res.login_stats"><a class="btn btn-outline-success" :herf="'../PersonalInfo/view.html'+res.uid">作者</a></span>
+									<span class="fa fa-eye ">{{res.eye}}</span>
+
 								</span>
 							</div>
 						</div>
@@ -58,41 +60,42 @@
 						<div class="card-body ">
 							<div class="row">
 								<div class="col-md-2">
-									<img src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="..." class="rounded " onclick="viewAction()">
+									<img :src="res.actFirstPic" alt="..." class="rounded ">
 								</div>
 								<div class="col-md-10">
-									<div>开始时间：2019-01-08</div>
-									<div>开始时间：2019-01-08</div>
+									<div>开始时间：{{res.startTime}}</div>
+									<div>开始时间：{{res.endTime}}</div>
 									<div>花费说明：</div>
 									<blockquote class="blockquote">
-										每人(100)￥,一次参加(2)人。具体安排听组织人的，可通同时有好多人进行。注意出行安全和现场信息核对。
+										每人平均花费({{res.avgSpending}})￥,一次参加({{res.number}})人。具体安排听组织者的，可通同时有好多人进行。注意出行安全和现场信息核对。
 									</blockquote>
 									<div>简单介绍：</div>
-									<div>北邮集合，咖啡，自习室，电影院，回北邮（或直接去地铁口）解散</div>
+									<div>{{res.actBrief}}</div>
 								</div>
 							</div>								
 						</div>
 						<div class="card-header" style="">
-							参加人
+							关注情况:{{attentionPeopleCount}}人
 						</div>
 						<div class="card-body ">
-							<div>当前参加：</div>
-							<ul class="list-inline">
-								<li class="list-inline-item">Lorem ipsum</li>
-								<li class="list-inline-item">Phasellus iaculis</li>
-								<li class="list-inline-item">Nulla volutpat</li>
+							<div>当前关注：{{curAttentionPeople.length}}人</div>
+							<ul class="list-inline" >
+								<li class="list-inline-item" v-for="item in curAttentionPeople">
+									<a :href="'../PersionalInfo/view.html?fid='+item.uid" target="_blank">{{item.name}}</a>
+								</li>
 							</ul>
-							<div>所有参加：</div>
+							<div>之前关注：{{befAttentionPeople.length}}人</div>
 							<ul class="list-inline">
-								<li class="list-inline-item">Lorem ipsum</li>
-								<li class="list-inline-item">Phasellus iaculis</li>
-								<li class="list-inline-item">Nulla volutpat</li>
+								<li class="list-inline-item" v-for="item in befAttentionPeople">
+									<a :href="'../PersionalInfo/view.html?fid='+item.uid" target="_blank">{{item.name}}</a>
+								</li>
 							</ul>
 						</div>
 						<div class="card-header" style="">
 							详细情况
 						</div>
 						<div class="card-body ">
+							{{res.actDetails}}
 						</div>	
 						
 					</div>
@@ -104,40 +107,112 @@
 	</body>
 	
 	<script>
-		
+		var localToken = getLocalToken();
 		const viewAction = new Vue({
-			el: ".card",
+			el: "#app",
 			data:{
 				res:{
+					aid:"",
+					uid:"",
 					title:"",
+					placeLife:"当地",
+					activity_stats:true,
+					eye:"",
+					up:'',
+					login_stats:false,
+					actFirstPic:"",
 					startTime:"",
 					endTime:"",
-					placeLife:"",
 					number:2,
 					avgSpending:30,
-					actFirstPic:"",
 					actBrief:"",
+
 					actDetails:"",
-				}
+				},
+				
+				curAttentionPeople:[
+					// {uid:"",name:""}
+				],
+				befAttentionPeople:[
+					
+				],
+				attentionPeopleCount:0
 			},
 			created:function(){
-				
+				this.getActionInfo();
+				this.getAttentionInfo();
 			},
 			methods:{
-				readFile(obj){
+				setAttention(item, index){
+					if(item.cur_attend_status){
+						this.curAttentionPeople.push(item);
+					}else{
+						this.befAttentionPeople.push(item);
+					}
 				},
-				viewFirstPic(){
-
-				},
-				viewActionInfo(){
-					layer.open({
-						type: 1
-						,title: '预览'
-						,shade: false
-						,area: ['100%', '100%']
-						,scrollbar: false
-						,content: '<div class="detail-body" style="margin:20px;">'+ editor_si.txt.html() +'</div>'
+				getAttentionInfo(){
+					var _this = this;
+					// post 本地json会失败
+					// axios.get('testjson/lunBoTuTest.json', {
+					gAxios.post('api/activities/getAttentionInfo.php', {
+						token: localToken,
+						aid:getQueryString('id')
+					})
+					.then(function (response) {
+						if(response.status==200){
+							_this.attentionPeopleCount = response.data.data.length;
+							response.data.data.forEach(_this.setAttention);
+							
+						}else{
+							parent.layer.msg(response.statusText+response.data.msg);
+						}
+					})
+					.catch(function (error) {
+						console.log(error);
 					});
+					
+				},
+				getActionInfo(){
+					var _this = this;
+					// post 本地json会失败
+					// axios.get('testjson/lunBoTuTest.json', {
+					gAxios.post('api/activities/getActionInfo.php', {
+						token: localToken,
+						aid:getQueryString('id')
+					})
+					.then(function (response) {
+						if(response.status==200){
+							_this.res=response.data.data;
+						}else{
+							parent.layer.msg(response.statusText+response.data.msg);
+						}
+					})
+					.catch(function (error) {
+						console.log(error);
+					});
+					
+				},
+				sendReqInfo(){
+					var _this = this;
+					// post 本地json会失败
+					// axios.get('testjson/lunBoTuTest.json', {
+					gAxios.post('api/activities/sendReqInfo.php', {
+						token: localToken,
+						aid:_this.res.aid,
+						auth_id:_this.res.uid,
+						type:'act'
+					})
+					.then(function (response) {
+						if(response.status==200){
+							parent.layer.msg(response.data.msg)
+						}else{
+							parent.layer.msg(response.statusText+response.data.msg);
+						}
+					})
+					.catch(function (error) {
+						console.log(error);
+					});
+
 				}
 				
 			}
