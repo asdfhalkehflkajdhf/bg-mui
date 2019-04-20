@@ -29,8 +29,8 @@
 					<div class="col-sm-2 " id="aMenu">
 						<ul class="nav nav-tabs flex-column nav-pills " id="myTab" role="tablist">
 							<li class=" nav-item" v-for="item in menu">
-								<a class="nav-link " v-bind:class='{active: item.isSelect}' :id="item.id" data-toggle="tab" :data-url="item.iframe" :href="'#'+item.ac" role="tab" :aria-controls="item.ac" aria-selected="item.isSelect">
-									{{item.name}}
+								<a class="nav-link " v-bind:class='{active: item.isSelect}' :id="item.id" data-toggle="tab" :data-url="item.iframe" :href="'#'+item.ac" role="tab" :aria-controls="item.ac" aria-selected="item.isSelect" v-text="item.name">
+									<!-- {{item.name}} -->
 								</a>
 							</li>							
 						</ul>

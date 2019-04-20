@@ -1,5 +1,5 @@
 
-const navMenuRight = new Vue({
+var navMenuRight = new Vue({
 	el:"#navMenuRight",
 	data:{
 		navListRight:[
@@ -48,7 +48,7 @@ const navMenuRight = new Vue({
 		},
 
 		checkLoginStatus:function(){
-			var BoyGToken = window.sessionStorage.getItem("BoyGToken");
+			var BoyGToken = getLocalToken();
 			if(BoyGToken){
 				this.setLanding(true);
 			}else{
@@ -59,7 +59,9 @@ const navMenuRight = new Vue({
 			this.landing=status;
 			// 关闭模态
 			$("#loginModal").modal('hide');
-
+		},
+		getLanding:function(){
+			return this.landing;
 		}
 	},
 	created:function(){
@@ -86,7 +88,7 @@ const navMenuLeft = new Vue({
 	methods:{
 		modActionStatus:function(curNavItemIndex, event){
 			//切换标签状态
-			console.log(curNavItemIndex);
+			// console.log(curNavItemIndex);
 			curNavItem = this.nvaListLeft[curNavItemIndex];
 			this.preNavItem.isActive=false;
 			curNavItem.isActive=true;
@@ -112,7 +114,7 @@ const navMenuLeft = new Vue({
 }
 );	
 
-var loginModal=new Vue({
+const loginModal=new Vue({
 	el:"#loginModal",
 	data:{
 		loginForm:{

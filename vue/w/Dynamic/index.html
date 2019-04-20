@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">  
+		<meta charset="UTF-8">
 		<!-- //允许网页宽度自动调整 -->
 		<!-- //https://www.cnblogs.com/MissZhao/p/5773091.html -->
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>BoyG-动态</title>
-		
+
 		<!-- // jquery -->
 		<script src="../../res/js/jquery-3.3.1.min.js" type="text/javascript"></script>
 		<!-- // axios 请求接口 -->
-		<script src="../../res/axios-0.19.0/axios.min.js"  type="text/javascript"></script>
+		<script src="../../res/axios-0.19.0/axios.min.js" type="text/javascript"></script>
 		<!-- // vue库 -->
 		<script src="../../res/vue-2.6.7/vue.min.js" type="text/javascript"></script>
 		<!-- // layer 弹出层 -->
@@ -36,61 +36,44 @@
 		<!-- //这个页面使用layer open打开，是给用户看的。 -->
 		<div class="container">
 			<div class="wrapper" >
-		
-			<!-- //导航菜单 -->
-			<div class="card">
-				<div class="card-header" id="headingOne">
-					<div class="btn-group text-right" role="group">
-						<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle " 
-								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							动态管理
-						</button>
-						<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-							<a class="dropdown-item" href="#" onclick="openSubWin('manageDynamic.html','动态管理',true)">我的动态</a>
-							<a class="dropdown-item" href="#" onclick="openSubWin('editorDynamic.html','发布动态',true)">发布动态</a>
+
+				<!-- //导航菜单 -->
+				<div class="card">
+					<div class="card-header" id="headingOne">
+						<div class="btn-group text-right" role="group">
+							<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle " 
+								data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false" 
+								v-if="landing">
+								动态管理
+							</button>
+							<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+								<a class="dropdown-item" href="#" onclick="openSubWin('manageDynamic.html','动态管理',true)">我的动态</a>
+								<a class="dropdown-item" href="#" onclick="openSubWin('editorDynamic.html','发布动态',true)">发布动态</a>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<!-- // 点位符 -->
-			<div class="placeholder-10"></div>
-						
+
+				<!-- // 点位符 -->
+				<div class="placeholder-10"></div>
 
 				<div class="row">
-					<div class="col-sm-8 " >
+					<div class="col-sm-8 ">
 						<div id="app">
-							<div id="">
-								<div class="card" v-for="item in dynamicList">
-									<div class="card-body">
-										<span class="card__span_left font-weight-bold" style="font-size: 15px;">{{item.nickname}}</span>
-										<span class="card__span_right">{{item.ctime}}</span>
-										
-										<div style="font-size: 20px;">
-											{{item.content}}
-										</div>
-									</div>
-									<div class="card-body" >
-										<ul class="pictures " v-bind:class="{pictures-5: item.imgObj.data.length>4 ,pictures-4:item.imgObj.data.length<5}" style="text-align:center;" >
-											<li class="" v-for="imgItem in item.imgObj.data">
-												<img v-on:click="viewImg(item.imgObj)" class="rounded" :src="imgItem.thumb" :alt="imgItem.alt" >
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
 						</div>
 
 						<!-- 查找更多 -->
 						<div class="card">
-							<div class="card-header" >
+							<div class="card-header">
 								<h5 class="mb-0 text-center">
-								<button class="btn btn-link " id="getGridItem" onclick="">
-									查找更多
-								</button>
+									<button class="btn btn-link " id="getGridItem" onclick="">
+										查找更多
+									</button>
 								</h5>
 							</div>
 						</div>
-						
+
 					</div>
 					<div class="col-sm-4 sideEdge" id="sideEdeg">
 						<div class="card">
@@ -99,13 +82,15 @@
 							</div>
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item" v-for="item,index in activeRankList">
-									<span class="btn-outline-success">{{item.region_name}}</button>
-									<a :href="getActionUrlPre(item.id)" target="_blank">{{item.title}}</a>
-									<span class="badge badge-pill badge-success">{{item.eye}}</span>
-
+									<span class="text-success" v-text="item.region_name">
+										<!-- {{item.region_name}} --></span>
+									<a :href="getActionUrlPre(item.id)" target="_blank" v-text="item.title">
+										<!-- {{item.title}} --></a>
+									<span class="badge badge-pill badge-success" v-text="item.eye">
+										<!-- {{item.eye}} --></span>
 								</li>
 							</ul>
-						</div >
+						</div>
 						<div class="placeholder-10"></div>
 						<div class="card">
 							<div class="card-header">
@@ -116,29 +101,33 @@
 							</div>
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item" v-for="item,index in announcementList">
-									<a :href="getAnnouncementUrlPre2(item.id)" target="_blank">{{item.title}}</a>
+									<a :href="getAnnouncementUrlPre2(item.id)" target="_blank" v-text="item.title">
+										<!-- {{item.title}} --></a>
 								</li>
 							</ul>
-						</div >
+						</div>
 						<div class="placeholder-10"></div>
 						<div class="card">
 							<div class="card-header">
 								<a href="#" data-toggle="modal" data-target="#connectModal" title="查看联系方式">友情链接</a>
 							</div>
-							<div class="modal fade" id="connectModal" tabindex="-1" role="dialog" aria-labelledby="connectModalLabel" aria-hidden="true">
+							<div class="modal fade" id="connectModal" tabindex="-1" role="dialog" aria-labelledby="connectModalLabel"
+							 aria-hidden="true">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<div class="modal-body">
 											<!-- 登陆模态框 -->
 											<h2 class="text-center">联系方式</h2>
-											<p>群1：666809502 
-											<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=20a735e8c3475f517c537748009c3a49cb494a9955def3b6d9028c8e50580ea7" title="qq群1"><i class="fa fa-qq fa-fw"></i></a>
+											<p>群1：666809502
+												<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=20a735e8c3475f517c537748009c3a49cb494a9955def3b6d9028c8e50580ea7"
+												 title="qq群1"><i class="fa fa-qq fa-fw"></i></a>
 											</p>
-											<p>群2：720321749 
-											<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=93ac2c61a7c52b8b731c0d84a491371e146c6bcf74d79d92f76c8f429a9425c0" title="qq群2"><i class="fa fa-qq fa-fw"></i></a>
+											<p>群2：720321749
+												<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=93ac2c61a7c52b8b731c0d84a491371e146c6bcf74d79d92f76c8f429a9425c0"
+												 title="qq群2"><i class="fa fa-qq fa-fw"></i></a>
 											</p>
 											<p>邮箱：
-											<a target="_blank" href="mailto:liuzhuchen@163.com" title="邮件liuzhuchen@163.com"><i class="fa fa-envelope-o fa-fw"></i></a>
+												<a target="_blank" href="mailto:liuzhuchen@163.com" title="邮件liuzhuchen@163.com"><i class="fa fa-envelope-o fa-fw"></i></a>
 											</p>
 										</div>
 									</div>
@@ -149,21 +138,22 @@
 									<a href="#" data-toggle="modal" data-target="#connectModal" title="查看联系方式">联系方式</a>
 								</li>
 								<li class="list-group-item" v-for="item,index in friendshipLinkList">
-									<a :href="item.url" target="_blank">{{item.name}}</a>
+									<a :href="item.url" target="_blank" v-text="item.name">
+										<!-- {{item.name}} --></a>
 								</li>
 							</ul>
-						</div >
-					</div >
+						</div>
+					</div>
 				</div>
-			
+
 
 			</div>
-		</div>	
+		</div>
 
 
 	</body>
-<!-- 动态加载数据 -->
-<script type="text/javascript" src="app.js"></script>
-<script type="text/javascript" src="../PersonalInfo/sideEdge.js"></script>
+	<!-- 动态加载数据 -->
+	<script type="text/javascript" src="app.js"></script>
+	<script type="text/javascript" src="../PersonalInfo/sideEdge.js"></script>
 
 </html>

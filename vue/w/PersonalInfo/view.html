@@ -49,8 +49,8 @@
 						<div class="card" style="">
 							<div class="card-header">
 								<div>
-								uid:{{res.uid}}
-								<span class="fa fa-eye card__span_right" title="观看人数">{{res.eye}}</span>
+								uid:<span v-text="res.uid"></span>
+								<span class="fa fa-eye card__span_right" title="观看人数" v-text="res.eye"></span>
 								</div>
 							</div>
 							<div class="card-header">
@@ -109,7 +109,7 @@
 											<input type="number" class="form-control" aria-label="身高" aria-describedby="inputGroup-sizing-sm" 
 											style="background-color:white;border:0;" readonly="readonly" :value="res.height">
 											<div class="input-group-append">
-												<span class="input-group-text">cm</span>
+												<span class="input-group-text" style="width:40px;">cm</span>
 											</div>
 										</div>
 										<div class="input-group col-sm">
@@ -119,7 +119,7 @@
 											<input type="number" class="form-control" aria-label="体重" aria-describedby="inputGroup-sizing-sm" 
 											style="background-color:white;border:0;" readonly="readonly" :value="res.weight">
 											<div class="input-group-append">
-												<span class="input-group-text">kg</span>
+												<span class="input-group-text" style="width:40px;">Kg</span>
 											</div>
 										</div>
 									</div>
@@ -151,7 +151,7 @@
 											<input type="number" class="form-control" aria-label="收入" aria-describedby="inputGroup-sizing-sm" 
 											style="background-color:white;border:0;" readonly="readonly" :value="res.income">
 											<div class="input-group-append">
-												<span class="input-group-text">RMB</span>
+												<span class="input-group-text" style="width:40px;">RMB</span>
 											</div>
 										</div>
 
@@ -161,7 +161,7 @@
 									<div class="row">
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
-												<span class="input-group-text" id="inputGroup-sizing-sm">我最喜欢的活动</span>
+												<span class="input-group-text" id="inputGroup-sizing-sm">喜欢的活动</span>
 											</div>
 											<input type="text" class="form-control" aria-label="我最喜欢的活动" aria-describedby="inputGroup-sizing-sm" 
 											style="background-color:white;border:0;" readonly="readonly" :value="res.tryst_expect">
@@ -193,10 +193,10 @@
 									  </thead>
 									  <tbody>
 										<tr v-for="item, index in eduList">
-										  <th scope="row">{{index}}</th>
-										  <td>{{item.university}}</td><td>{{item.profession}}</td>
-										  <td>{{item.level}}</td><td>{{item.s_time}}</td>
-										  <td>{{item.e_time}}</td>
+										  <th scope="row" v-text="index"></th>
+										  <td v-text="item.university"></td><td v-text="item.profession"></td>
+										  <td v-text="item.level"></td><td v-text="item.s_time"></td>
+										  <td v-text="item.e_time"></td>
 										</tr>
 									  </tbody>
 									</table>
@@ -210,8 +210,8 @@
 							<div class="card-header">
 								个人介绍
 							</div>
-							<div class="card-body" id="personalIntroduction">
-								{{res.selfIntr}}
+							<div class="card-body" id="personalIntroduction" v-html="res.selfIntr">
+								
 							</div>
 
 						</div>				
@@ -221,8 +221,8 @@
 							<div class="card-header">
 								对方要求
 							</div>
-							<div class="card-body" id="duifangIntroduction">
-								{{res.otehrIntr}}
+							<div class="card-body" id="duifangIntroduction" v-html="res.otherIntr">
+								
 							</div>
 						</div>			
 					</div>

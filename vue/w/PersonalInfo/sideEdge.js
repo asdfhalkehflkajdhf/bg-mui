@@ -4,7 +4,7 @@ const sideEdeg = new Vue({
 	el:"#sideEdeg",
 	data:{
 		actionUrlPre:"../Factivities/viewAction.html?id=",
-		announcementUrlPre1:"../Otherannouncement.html",
+		announcementUrlPre1:"../Other/announcementList.html",
 		announcementUrlPre2:"../Other/viewAnnouncement.html?id=",
 		
 		activeRankList:[],

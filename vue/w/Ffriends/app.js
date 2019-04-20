@@ -62,7 +62,7 @@ const lunBoTuVar = new Vue({
 
 // 查找时为，一个表结构
 const formTag = new Vue({
-	el:"form",
+	el:"#accordion",
 	data:{
 		conditionalForm:{
 // 			currentLivingPlace:"不可修改",
@@ -101,7 +101,9 @@ const formTag = new Vue({
 // 				{value:4,text:"全部3"},
 // 			]
 		},
-		page:0
+		page:0,
+		landing:parent.navMenuRight.getLanding()==null?false:parent.navMenuRight.getLanding()
+		// landing:parent.navMenuRight.getLanding()
 		
 	},
 	created:function(){
@@ -254,8 +256,8 @@ function reloadGridItem(){
 				+'			</div>			'					
 				+'			<!-- <div class="card__link"></div> -->'
 				+'			<hr />'
-				+'			<h3 class="card-title">'+data['nickname']+'</h3>'
-				+'			<p class="card-text">'+data['tryst_expect']+'</p>'
+				+'			<h3 class="card-title" title="昵称">'+data['nickname']+'</h3>'
+				+'			<p class="card-text title="喜欢的活动">'+data['tryst_expect']+'</p>'
 				+'		</div>'
 				+'	</div>'
 				+'</div>'

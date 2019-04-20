@@ -61,13 +61,14 @@ const lunBoTuVar = new Vue({
 
 // 查找时为，一个表结构
 const formTag = new Vue({
-	el:"form",
+	el:"#accordion",
 	data:{
 		conditionalForm:{
-			currentLivingPlace:"不可修改",
+			living:"",
 			//活动状态
 			status:1,
-			uid:-1
+			uid:-1,
+			floadTime:"null",
 		},
 		conditionalData:{
 			statusList:[
@@ -77,8 +78,8 @@ const formTag = new Vue({
 // 				{value:3,text:"参加过的"},
 			]
 		},
-		page:0
-		
+		page: 0,
+		landing: parent.navMenuRight.getLanding()
 	},
 	created:function(){
 		this.getFrom();
@@ -242,26 +243,29 @@ $(function () {
 				layer.msg("获取信息失败！");
 				return;
 			}
+			
 			if(res.length==0){
 				layer.msg("没有更多，请修改查找条件！");
 				return;
 			}
 			//生成item
 			$.each(res, function (i, data) {
+				// {"id":"00000000003","title":"test","s_time":"2019-04-19","e_time":"2019-04-28","region_name":"\u6d4b\u8bd5","activity_stats":"1","up":"0","eye":"0","activity_img":"1","activity_summary":"test"},
 				var $gitem = $(
 					'<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12" >'
 					+'	<div class="card ">'
 					+'		<a target="_blank" href="./viewAction.html?id='+data['id']+'" >'
-					+'			<img class="card-img-top" src="'+data['src']+'" alt="'+data['alt']+'">'
+					+'			<img class="card-img-top" src="'+data['activity_img']+'">'
 					+'		</a>'
 					+'		<div class="card-body">'
 					+'			<div class="card__span">'
 					+'				<span class="card__span_left">'
-					+'					<span class="btn btn-outline-success" id="">北京</span>'
-					+'					<span class="btn bg-secondary text-white " id="">进行中</span>'
+					+'					<span class="btn btn-outline-success" id="">'+data['region_name']+'</span>'
+					+ (data['activity_stats']=='1'?'<span class="btn bg-success text-white " >进行中</span>':'<span class="btn bg-secondary text-white" >结束</span>')
+	
 					+'				</span>'
 					+'				<span class="btn card__span_right"  data-aid="'+data['id']+'">'
-					+'					<span title="点赞" >'
+					+'					<span title="浏览" >'
 					+'							<span class="fa fa-eye ">'+data['eye']+'</span>'
 					+'						<!-- <a href=""><a> -->'
 					+'					</span>'
@@ -271,16 +275,16 @@ $(function () {
 					+'			<hr />'
 					+'			<div class="card__span">'
 					+'				<span class="card__span_left">'
-					+'					<span class="fa fa-clock-o">s:'+data['ontime']+'</span>'
+					+'					<span class="fa fa-clock-o" title="开始时间">'+data['s_time']+'</span>'
 					+'				</span>'
-					+'				<span class="card__span_right"  data-aid="'+data['id']+'">'
-					+'					<span class="fa fa-clock-o">e:'+data['ontime']+'</span>'
+					+'				<span class="card__span_right">'
+					+'					<span class="fa fa-clock-o" title="结束时间">'+data['e_time']+'</span>'
 					+'				</span>'
 					+'			</div>			'					
 					+'			<!-- <div class="card__link"></div> -->'
 					+'			<hr />'
-					+'			<h2 class="card-title">'+data['nickname']+'</h2>'
-					+'			<p class="card-text">'+data['brief']+'</p>'
+					+'			<h2 class="card-title">'+data['title']+'</h2>'
+					+'			<p class="card-text">'+data['activity_summary']+'</p>'
 					+'		</div>'
 					+'	</div>'
 					+'</div>'

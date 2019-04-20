@@ -27,25 +27,21 @@
 		
 	</head>
 	<body>
-		<div class="content">
-			<div class="wrapper">
-			</div>
-			
-		</div>
-		
+
 		<!-- //这个页面使用layer open打开，是给用户看的。 -->
 		<div class="container">
 			<div class="wrapper" >
+				<div  class="placeholder-20"></div>
 				<div class="row">
 					<div class="col-sm-8 " id="app">
 							<div class="card">
 								<div class="card-header">
-									<h2 class="text-center">{{res.title}}</h2>
+									<h2 class="text-center" v-text="res.title"></h2>
 								</div>
 								<div class="card-body" id="app">
-									<div>时间：{{res.ctime}}</div>
+									<div>时间：<span v-text="res.ctime"></span></div>
 									
-									<div>{{res.content}}</div>
+									<div v-text="res.content"></div>
 								</div>
 							</div>
 
@@ -57,9 +53,9 @@
 							</div>
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item" v-for="item,index in activeRankList">
-									<span class="btn-outline-success">{{item.region_name}}</button>
-									<a :href="getActionUrlPre(item.id)" target="_blank">{{item.title}}</a>
-									<span class="badge badge-pill badge-success">{{item.eye}}</span>
+									<span class="text-success" v-text="item.region_name"></span>
+									<a :href="getActionUrlPre(item.id)" target="_blank" v-text="item.title"></a>
+									<span class="badge badge-pill badge-success" v-text="item.eye"></span>
 
 								</li>
 							</ul>
@@ -107,12 +103,14 @@
 									<a href="#" data-toggle="modal" data-target="#connectModal" title="查看联系方式">联系方式</a>
 								</li>
 								<li class="list-group-item" v-for="item,index in friendshipLinkList">
-									<a :href="item.url" target="_blank">{{item.name}}</a>
+									<a :href="item.url" target="_blank" v-text="item.name"></a>
 								</li>
 							</ul>
 						</div >
 					</div >
 				</div>
+				<div  class="placeholder-20"></div>
+
 			</div>
 		</div>	
 

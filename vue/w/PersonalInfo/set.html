@@ -131,7 +131,7 @@
 												</div>
 												<select class="form-control custom-select" id="生活地" aria-label="生活地" v-model="res.living_place">
 													<optgroup :label="item.text" v-for="item in livingPlaceList">
-														<option :value="city.value" v-for="city in item.data">{{city.text}}</option>
+														<option :value="city.value" v-for="city in item.data" v-text="city.text"></option>
 													</optgroup>
 												</select>
 											</div>
@@ -170,7 +170,7 @@
 													<span class="input-group-text" id="inputGroup-status-sm">状态</span>
 												</div>
 												<select class="form-control custom-select" id="状态" v-model="res.marital_status">
-													<option :value="item.value" v-for="item in maritalStatusList">{{item.text}}</option>
+													<option :value="item.value" v-for="item in maritalStatusList" v-text="item.text"></option>
 												</select>
 
 											</div>
@@ -193,10 +193,10 @@
 										  </thead>
 										  <tbody>
 											<tr v-for="item, index in eduList">
-											  <th scope="row">{{index}}</th>
-											  <td>{{item.university}}</td><td>{{item.profession}}</td>
-											  <td>{{item.level}}</td><td>{{item.s_time}}</td>
-											  <td>{{item.e_time}}</td>
+											<th scope="row" v-text="index"></th>
+											<td v-text="item.university"></td><td v-text="item.profession"></td>
+											<td v-text="item.level"></td><td v-text="item.s_time"></td>
+											<td v-text="item.e_time"></td>
 											</tr>
 										  </tbody>
 										</table>

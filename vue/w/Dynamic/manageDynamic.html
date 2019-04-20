@@ -56,16 +56,16 @@
 										
 										<div class="col-md-10">
 											<div class="p-2 ml-2">
-												<span class="btn btn-outline-success" id="">{{item.nickname}}</span>
+												<span class="btn btn-outline-success" id="" v-text="item.nickname"></span>
 												<span class="card__span_right">
 													<span class="btn btn-outline-success" v-on:click="delDynamic(index)">删除</span>
 												</span>
 											</div>
-											<div class="p-2 ml-2" style="font-size: 15px;">
-												{{item.content}}
+											<div class="p-2 ml-2" style="font-size: 15px;" v-text="item.content">
+												<!-- {{item.content}} -->
 											</div>
 											<div class="p-2 ml-2">
-												<span class="text-success">时间：{{item.ctime}}</span>
+												<span class="text-success" v-text="'时间：'+item.ctime"></span>
 											</div>
 										</div>
 									</div>

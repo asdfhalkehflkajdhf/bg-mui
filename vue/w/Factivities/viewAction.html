@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>BoyG-活动编辑</title>
+		<title>BoyG-活动详情</title>
 		<!-- // jquery -->
 		<script src="../../res/js/jquery-3.3.1.min.js" type="text/javascript"></script>
 		<!-- // axios 请求接口 -->
@@ -32,24 +32,24 @@
 		
 		<div class="container ">
 		    <div class="wrapper">
+					<div  class="placeholder-20"></div>
 		
 					<div class="card" id="app">
 						<div class="card-body">
-							<h2>
-								{{res.title}}
+							<h2 v-text="res.title">
+								<!-- {{res.title}} -->
 							</h2>
 							<div class="card__span">
 								<span class="card__span_left">
-									<span class="btn btn-outline-success" id="">{{res.placeLife}}</span>
+									<span class="btn btn-outline-success" id="" v-text="res.placeLife"><!-- {{res.placeLife}} --></span>
 									<span class="btn bg-success text-white " v-if="res.activity_stats">进行中</span>
 									<span class="btn bg-secondary text-white " v-else>结束</span>
-
 								</span>'
 								<span class="btn card__span_right"  data-aid="'+data['uid']+'">
 									<span class="btn btn-outline-success" v-on:click="sendReqInfo()" v-if="res.login_stats">请求信息</span>
 									<span class="btn btn-outline-success"  v-else="">请登陆后联系作者</span>
 									<span  v-if="res.login_stats"><a class="btn btn-outline-success" :herf="'../PersonalInfo/view.html'+res.uid">作者</a></span>
-									<span class="fa fa-eye ">{{res.eye}}</span>
+									<span class="fa fa-eye " v-text="res.eye"></span>
 
 								</span>
 							</div>
@@ -63,44 +63,49 @@
 									<img :src="res.actFirstPic" alt="..." class="rounded ">
 								</div>
 								<div class="col-md-10">
-									<div>开始时间：{{res.startTime}}</div>
-									<div>开始时间：{{res.endTime}}</div>
-									<div>花费说明：</div>
+									<div><strong>开始时间</strong>：<span v-text="res.startTime"></span></div>
+									<div><strong>结束时间</strong>：<span v-text="res.endTime"></span></div>
+									<div><strong>花费说明</strong>：</div>
 									<blockquote class="blockquote">
-										每人平均花费({{res.avgSpending}})￥,一次参加({{res.number}})人。具体安排听组织者的，可通同时有好多人进行。注意出行安全和现场信息核对。
+										<p>每人平均花费(<span v-text="res.avgSpending"></span>)￥,一次参加(<span v-text="res.number"></span>)人。具体安排听组织者的，可通同时有好多人进行。注意出行安全和现场信息核对。</p>
 									</blockquote>
-									<div>简单介绍：</div>
-									<div>{{res.actBrief}}</div>
+									<div><strong>简单介绍</strong>：</div>
+									<blockquote v-text="res.actBrief">
+										
+									</blockquote>
+									
+									<div>
+										<strong>关注情况</strong>:<span v-text="attentionPeopleCount"></span>人
+									</div>
+									<blockquote class="">
+										<div>当前关注：<span v-text="curAttentionPeople.length"></span>人</div>
+										<ul class="list-inline" >
+											<li class="list-inline-item" v-for="item in curAttentionPeople">
+												<a :href="'../PersonalInfo/view.html?fid='+item.uid" target="_blank" v-text="item.name"></a>
+											</li>
+										</ul>
+										<div>之前关注：<span v-text="befAttentionPeople.length"></span>人</div>
+										<ul class="list-inline">
+											<li class="list-inline-item" v-for="item in befAttentionPeople">
+												<a :href="'../PersonalInfo/view.html?fid='+item.uid" target="_blank" v-text="item.name"></a>
+											</li>
+										</ul>
+									</blockquote>
 								</div>
 							</div>								
 						</div>
-						<div class="card-header" style="">
-							关注情况:{{attentionPeopleCount}}人
-						</div>
-						<div class="card-body ">
-							<div>当前关注：{{curAttentionPeople.length}}人</div>
-							<ul class="list-inline" >
-								<li class="list-inline-item" v-for="item in curAttentionPeople">
-									<a :href="'../PersionalInfo/view.html?fid='+item.uid" target="_blank">{{item.name}}</a>
-								</li>
-							</ul>
-							<div>之前关注：{{befAttentionPeople.length}}人</div>
-							<ul class="list-inline">
-								<li class="list-inline-item" v-for="item in befAttentionPeople">
-									<a :href="'../PersionalInfo/view.html?fid='+item.uid" target="_blank">{{item.name}}</a>
-								</li>
-							</ul>
-						</div>
+
 						<div class="card-header" style="">
 							详细情况
 						</div>
-						<div class="card-body ">
-							{{res.actDetails}}
+						<div class="card-body " v-text="res.actDetails">
+							
 						</div>	
 						
 					</div>
 	
 					
+					<div  class="placeholder-20"></div>
 			</div>
 		</div>
 		

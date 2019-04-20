@@ -47,9 +47,7 @@
 				<li class="nav-item " v-for="item,index in nvaListLeft" 
 				v-bind:class='{active: item.isActive}'
 				v-on:click="modActionStatus(index)">
-					<a class="nav-link " :href="item.url" >
-						{{item.name}}
-						<!-- {{item}} -->
+					<a class="nav-link " :href="item.url"  v-text="item.name">
 					</a>
 				</li>
 				<!-- 一级菜单 -->

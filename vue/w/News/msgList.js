@@ -170,13 +170,15 @@ function ajaxRequest(params) {
 		if(response.status==200){
 			res=response.data;
 			//解析结果
-			if(res.code==0){
-				params.success({
-				  rows: res.data
-				})
-			}else{
-				parent.layer.msg(res.msg);
-			}
+			params.success({
+				rows: res.data
+			})
+			parent.layer.msg(res.msg);
+			
+// 			if(res.code==0){
+// 			}else{
+// 				parent.layer.msg(res.msg);
+// 			}
 			
 		}else{
 			parent.layer.msg(response.statusText+response.data.msg);

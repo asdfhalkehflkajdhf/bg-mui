@@ -20,7 +20,7 @@ const userInfo = new Vue({
 			tryst_expect:"",
 			marital_status:"",
 			selfIntr:"",
-			otehrIntr:"",
+			otherIntr:"",
 			find_switch:false
 		},
 		eduList:[],

@@ -46,20 +46,20 @@
 							
 							<div class="col-md-10">
 								<div class="p-2">
-									<span class="btn btn-outline-success">{{item.region_name}}</span>
-									<span class="btn-outline-dark" v-on:click="viewAction(idx)">{{item.title}}</span>
+									<span class="btn btn-outline-success" v-text="item.region_name"></span>
+									<span class="btn-outline-dark" v-on:click="viewAction(idx)" v-text="item.title"></span>
 									<span class="card__span_right">
 										<span class="btn btn-outline-success " v-on:click="editAction(idx)">编辑</span>
 										<span class="btn btn-outline-success " v-on:click="delAction(idx)">删除</span>
 									</span>
 								</div>
-								<div class="p-3 mb-2 " style="font-size: 15px;">
-									{{item.activity_summary}}
+								<div class="p-3 mb-2 " style="font-size: 15px;" v-text="item.activity_summary">
+									
 								</div>
 								<div class="p-2">
-									<span class="text-success fa fa-clock-o" title="开始时间">{{item.s_time}}</span>
-									<span class="text-success fa fa-clock-o" title="结束时间">{{item.e_time}}</span>
-									<span class="fa fa-eye card__span_right">{{item.eye}}</span>
+									<span class="text-success fa fa-clock-o" title="开始时间" v-text="item.s_time"></span>
+									<span class="text-success fa fa-clock-o" title="结束时间" v-text="item.e_time"></span>
+									<span class="fa fa-eye card__span_right" v-text="item.eye"></span>
 								</div>
 							</div>
 						</div>

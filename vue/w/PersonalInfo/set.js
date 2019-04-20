@@ -1,43 +1,9 @@
 var localToken = getLocalToken();
 
 // 编辑框初始化
-var E = window.wangEditor;
-var editor_si = new E('#personalMenu', '#personalIntroduction');
-var editor_ti = new E('#duifangMenu', '#duifangIntroduction');
-editor_si.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
-editor_ti.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
-
-editor_si.customConfig.uploadImgMaxSize = 3 * 1024 * 1024 // 将图片大小限制为 3M
-// editor_si.customConfig.uploadImgMaxLength = 1 // 限制一次最多上传 5 张图片
-
-editor_ti.customConfig.uploadImgMaxSize = 3 * 1024 * 1024 // 将图片大小限制为 3M
-// editor_ti.customConfig.uploadImgMaxLength = 1 // 限制一次最多上传 5 张图片
-
-
-// 创建编辑器之后，使用editor.txt.html(...)设置编辑器内容
-var editorMenus=[
-    'head',  // 标题
-    'bold',  // 粗体
-    'fontSize',  // 字号
-    // 'fontName',  // 字体
-    // 'italic',  // 斜体
-    'foreColor',  // 文字颜色
-    'backColor',  // 背景颜色
-    // 'link',  // 插入链接
-    'list',  // 列表
-    'justify',  // 对齐方式
-    'quote',  // 引用
-    // 'emoticon',  // 表情
-    'image',  // 插入图片
-    // 'table',  // 表格
-];
-// 自定义菜单配置
-editor_si.customConfig.menus =editorMenus;
-editor_ti.customConfig.menus =editorMenus;
-
-editor_si.create();
-editor_ti.create();
-
+// 编辑框初始化
+var editor_si = wangEditorInit('personalMenu','personalIntroduction', localToken, 1);
+var editor_ti = wangEditorInit('duifangMenu','duifangIntroduction', localToken, 1);
 
 
 // 查找时为，一个表结构
@@ -59,6 +25,7 @@ const userInfo = new Vue({
 			marital_status:"",
 			selfIntr:"",
 			otehrIntr:"",
+			res_list:[]
 		},
 		eduList:[],
 		
@@ -223,11 +190,13 @@ const userInfo = new Vue({
 		},
 		userSelfIntrSet(){
             var _this = this;
-			// post 本地json会失败
+			
+			_this.res.res_list.push(editor_si.upImgResList);
 			gAxios.post('api/personalInfo/userSelfIntrSet.php', {
 				token: localToken,
 				selfIntr: editor_si.txt.html(),
-				uid:getQueryString("uid")
+				uid:getQueryString("uid"),
+				res_list:_this.res.res_list;
 			})
 			.then(function (response) {
 				if(response.status==200){
@@ -244,11 +213,12 @@ const userInfo = new Vue({
 		},
 		userOtherIntrSet(){
             var _this = this;
-			// post 本地json会失败
+			_this.res.res_list.push(editor_si.upImgResList);
 			gAxios.post('api/personalInfo/userOtherIntrSet.php', {
 				token: localToken,
 				otherIntr: editor_ti.txt.html(),
-				uid:getQueryString("uid")
+				uid:getQueryString("uid"),
+				res_list:_this.res.res_list;
 			})
 			.then(function (response) {
 				if(response.status==200){

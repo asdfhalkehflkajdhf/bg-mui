@@ -53,8 +53,8 @@
 							v-on:click="upAdsStatusInfo(item.id, item.href)" >
 						
 						<div class="carousel-caption d-none d-md-block">
-							<h5>{{item.h5}}</h5>
-							<p>{{item.p}}</p>
+							<h5 v-text="item.h5"></h5>
+							<p v-text="item.p"></p>
 						</div>
 					</div>
 				</div>
@@ -74,9 +74,13 @@
 				<div class="card">
 					<div class="card-header" id="headingOne">
 						<h5 class="mb-0 text-center">
-						<button class="btn btn-primary " data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-							设置查找条件
-						</button>
+							<button class="btn btn-primary" 
+							data-toggle="collapse" data-target="#collapseOne" 
+							aria-expanded="true" aria-controls="collapseOne" 
+							v-show="landing">
+								设置查找条件
+							</button>
+
 						</h5>
 					</div>
 
@@ -91,14 +95,14 @@
 									<div class="col-sm-5">
 										<select class="custom-select" id="生活地" v-model="conditionalForm.living">
 											<optgroup :label="item.text" v-for="item in conditionalData.livingList">
-												<option :value="city.value" v-for="city in item.data">{{city.text}}</option>
+												<option :value="city.value" v-for="city in item.data" v-text="city.text"></option>
 											</optgroup>
 										</select>
 									</div>									
 									<label for="性别" class="col-sm-1 col-form-label">性别</label>
 									<div class="col-sm-5 ">
 										<select class="custom-select" id="性别" v-model="conditionalForm.sex">
-											<option :value="item.value" v-for="item in conditionalData.sexList">{{item.text}}</option>
+											<option :value="item.value" v-for="item in conditionalData.sexList" v-text="item.text"></option>
 										</select>
 									</div>
 								</div>
@@ -125,7 +129,7 @@
 									<label for="学历" class="col-sm-1 col-form-label">学历</label>
 									<div class="col-sm-5">
 										<select class="custom-select" id="学历" v-model="conditionalForm.edu">
-											<option :value="item.value" v-for="item in conditionalData.eduList">{{item.text}}</option>
+											<option :value="item.value" v-for="item in conditionalData.eduList" v-text="item.text"></option>
 										</select>
 									</div>
 								
@@ -143,7 +147,7 @@
 									<label for="状态" class="col-sm-1 col-form-label">状态</label>
 									<div class="col-sm-5">
 										<select class="custom-select" id="状态" v-model="conditionalForm.ownness">
-											<option :value="item.value" v-for="item in conditionalData.ownnessList">{{item.text}}</option>
+											<option :value="item.value" v-for="item in conditionalData.ownnessList" v-text="item.text"></option>
 										</select>
 									</div>
 								</div>

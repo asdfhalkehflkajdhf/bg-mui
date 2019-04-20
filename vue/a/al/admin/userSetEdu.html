@@ -55,7 +55,7 @@
 										<span class="input-group-text" id="inputGroup-jg-sm">籍贯</span>
 									</div>
 									<select class="form-control custom-select" id="籍贯" aria-label="籍贯" v-model="row.user_domicile_place_id">
-										<option :value="item.value" v-for="item in livingPlaceList">{{item.text}}</option>
+										<option :value="item.value" v-for="item in livingPlaceList" v-text="item.text"></option>
 									</select>
 								</div>
 
@@ -64,7 +64,7 @@
 										<span class="input-group-text" id="inputGroup-sex-sm">性别</span>
 									</div>
 									<select class="custom-select" id="性别" v-model="row.sex">
-										<option :value="item.value" v-for="item in sexList">{{item.text}}</option>
+										<option :value="item.value" v-for="item in sexList" v-text="item.text"></option>
 									</select>
 								</div>
 							</div>
@@ -88,7 +88,7 @@
 										<span class="input-group-text" id="inputGroup-e-sm">学历</span>
 									</div>
 									<select class="custom-select" id="学历" v-model="row.education">
-										<option :value="item.value" v-for="item in eduList">{{item.text}}</option>
+										<option :value="item.value" v-for="item in eduList" v-text="item.text"></option>
 									</select>
 
 								</div>

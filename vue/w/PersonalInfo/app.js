@@ -25,10 +25,16 @@ const personalInfo = new Vue({
 	},
 	methods:{
 		openSubPage:function(obj){
+			
+			//过滤无效参数
 			if(obj.title.length==0){
 				return;
 			}
-			
+			//过滤登陆开关
+			if(!parent.navMenuRight.getLanding()){
+				parent.layer.msg("请先登陆！");
+				return;
+			}
 			openSubWin(obj.url, obj.title, true);
 		}
 	},
