@@ -25,6 +25,7 @@
 		<script src="../../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="./css/background-2.css">
 		<script src="../../../w/common/globalVar.js"></script>
+		<!-- <script src="../../../w/common/globalWangEditor.js"></script> -->
 
 
 		<!-- 自有资源 -->
@@ -67,7 +68,7 @@
 											<!-- 个人介绍 -->
 										</div>
 										<div class="form-group row">
-											<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit()">提交</button>						
+											<button type="button" class="btn btn-primary btn-lg btn-block" onclick="announcement.submit()">提交</button>						
 										</div>
 										
 									</form>
@@ -114,7 +115,6 @@ var localToken = getLocalToken();
 // 编辑框初始化
 var E = window.wangEditor;
 var editor_si = new E('#annMenu', '#annIntroduction');
-editor_si.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
 
 editor_si.customConfig.uploadImgMaxSize = 3 * 1024 * 1024 // 将图片大小限制为 3M
 // editor_si.customConfig.uploadImgMaxLength = 1 // 限制一次最多上传 5 张图片
@@ -144,106 +144,100 @@ editor_si.create();
 
 	
 	
-	var localToken = getLocalToken();
-	
-	function announcementAdd(row){
-		gAxios.post('api/admin/announcementAdd.php', row)
-		.then(function (response) {
-			if(response.status==200){
-				res=response.data;
-				//解析结果
-				if(res.code==0){
-					parent.layer.msg('msg', {icon: 1});
-				}else{
-					parent.layer.msg(res.msg);
-				}
-				
-			}else{
-				parent.layer.msg(response.statusText+response.data.msg);
-			}
-		})
-		.catch(function (error) {
-			console.log(error);
-			// parent.layer.msg(error);
-		});
-	}
+var localToken = getLocalToken();
 
-	//提交表单
-	const announcement=new Vue({
-		el:"#accordion",
-		data:{
-			row:{
-				token:localToken,
-				title:"",
-				content:""
-			},
-		},
-		methods:{
-			submit(){
-				this.row.content=editor_si.txt.html();
-				announcementAdd(this.row);
-			},
+function announcementAdd(row){
+	gAxios.post('api/admin/announcementAdd.php', row)
+	.then(function (response) {
+		if(response.status==200){
+			res=response.data;
+			//解析结果
+			layerMsg(res.msg, res.code);
+
+			
+		}else{
+			layerMsg(response.statusText);
 		}
+	})
+	.catch(function (error) {
+		console.log(error);
+	});
+}
+
+//提交表单
+const announcement=new Vue({
+	el:"#标题",
+	data:{
+		row:{
+			token:localToken,
+			title:"",
+			content:""
+		},
+	},
+	methods:{
+		submit(){
+			this.row.content=editor_si.txt.html();
+			announcementAdd(this.row);
+		},
+	}
+});
+
+
+function announcementDel(row){
+	gAxios.post('api/admin/announcementDel.php', {
+		token:localToken,
+		id:row.id,
+	})
+	.then(function (response) {
+		if(response.status==200){
+			res=response.data;
+			//解析结果
+			if(res.code==0){
+				// 在页面删除
+				$("#msgTable").bootstrapTable('remove', {
+					field: 'id',
+					values: [row.id]
+				});
+			}
+			layerMsg(res.msg, res.code);
+
+			
+		}else{
+			layerMsg(response.statusText);
+		}
+	})
+	.catch(function (error) {
+		console.log(error);
 	});
 
-
-	function announcementDel(row){
-		gAxios.post('api/admin/announcementDel.php', {
-			token:localToken,
-			id:row.id,
-		})
-		.then(function (response) {
-			if(response.status==200){
-				res=response.data;
-				//解析结果
-				if(res.code==0){
-					parent.layer.msg('msg', {icon: 1});
-					// 在页面删除
-					$("#msgTable").bootstrapTable('remove', {
-						field: 'id',
-						values: [row.id]
-					});
-				}else{
-					parent.layer.msg(res.msg);
-				}
-				
-			}else{
-				parent.layer.msg(response.statusText+response.data.msg);
-			}
-		})
-		.catch(function (error) {
-			console.log(error);
-			// parent.layer.msg(error);
-		});
-
-	}
+}
 	
-	function queryParams(params){
-		//添加新参数,这里直接自定义,不使用控件预定义,太麻烦了,没有使用用例
-		// alert('queryParams: ' + JSON.stringify(params));
-		// console.log($('#inputGroupSelect01').val());
-		// 添加消息类型
-		params['token']=localToken;
-		// {search: undefined, sort: "time", order: "desc", msgType: "info"}
-		// console.log(params);
-		return params
-	}
+function queryParams(params){
+	//添加新参数,这里直接自定义,不使用控件预定义,太麻烦了,没有使用用例
+	// alert('queryParams: ' + JSON.stringify(params));
+	// console.log($('#inputGroupSelect01').val());
+	// 添加消息类型
+	params['token']=localToken;
+	// {search: undefined, sort: "time", order: "desc", msgType: "info"}
+	// console.log(params);
+	return params
+}
 
-	var  optEvent={
+var  optEvent={
 // event：jQuery事件。
 // value：字段值。
 // row：行记录数据。
 // index：行索引
 
-		'click .remove': function (e, value, row, index) {
-			// 在服务端删除
-			announcementDel(row);
-		},
-	
+	'click .remove': function (e, value, row, index) {
+		// 在服务端删除
+		announcementDel(row);
+	},
 
-	}
-		
-	function optFormatter(value, row, index, field){
+
+}
+	
+function optFormatter(value, row, index, field){
 // value：字段值。
 // row：行记录数据 字典。
 // index：行索引。
@@ -252,19 +246,18 @@ editor_si.create();
 // 			console.log(row);
 // 			console.log(index);
 // 			console.log(field);
-			return [
-			  '<a class="remove" href="javascript:void(0)" title="删除">',
-			  '	<i class="fa fa-trash-o"></i>',
-			  '</a>'
-			].join('')
-		}
-		
-		function titleFormatter(value, row, index, field){
-			return [
-			  '<a class="title" href="../../../Other/viewAnnouncement.html?id='+row.id+'" title="标题" target="-black">',
-			  '</a> '
-			].join('')
-		}
+	return [
+	  '<a class="remove" href="javascript:void(0)" title="删除">',
+	  '	<i class="fa fa-trash-o"></i>',
+	  '</a>'
+	].join('')
+}
+
+function titleFormatter(value, row, index, field){
+	return [
+	  '<a class="title" href="../../../w/Other/viewAnnouncement.html?id='+row.id+'" title="标题" target="-black">'+value+'</a> '
+	].join('')
+}
 
 
 function ajaxRequest(params) {
@@ -280,24 +273,17 @@ function ajaxRequest(params) {
 				  rows: res.data
 				})
 			}else{
-				parent.layer.msg(res.msg);
+				layerMsg(res.msg, res.code);
 			}
 			
 		}else{
-			parent.layer.msg(response.statusText+response.data.msg);
+			layerMsg(response.statusText);
 		}
 	})
 	.catch(function (error) {
 		console.log(error);
-		// parent.layer.msg(error);
 	});
 
-//     // params data you need
-//     console.log(params)
-//     // here we just use setTimeout
-//     setTimeout(function () {
-// 
-//     }, 1000)
   }
 </script>
 

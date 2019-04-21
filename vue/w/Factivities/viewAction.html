@@ -48,7 +48,7 @@
 								<span class="btn card__span_right"  data-aid="'+data['uid']+'">
 									<span class="btn btn-outline-success" v-on:click="sendReqInfo()" v-if="res.login_stats">请求信息</span>
 									<span class="btn btn-outline-success"  v-else="">请登陆后联系作者</span>
-									<span  v-if="res.login_stats"><a class="btn btn-outline-success" :herf="'../PersonalInfo/view.html'+res.uid">作者</a></span>
+									<span  v-if="res.login_stats"><a class="btn btn-outline-success" :href="'../PersonalInfo/view.html?fid='+res.uid" target="_blank">作者</a></span>
 									<span class="fa fa-eye " v-text="res.eye"></span>
 
 								</span>
@@ -98,7 +98,7 @@
 						<div class="card-header" style="">
 							详细情况
 						</div>
-						<div class="card-body " v-text="res.actDetails">
+						<div class="card-body " v-html="res.actDetails">
 							
 						</div>	
 						
@@ -169,7 +169,7 @@
 							response.data.data.forEach(_this.setAttention);
 							
 						}else{
-							parent.layer.msg(response.statusText+response.data.msg);
+							layerMsg(response.statusText);
 						}
 					})
 					.catch(function (error) {
@@ -189,7 +189,7 @@
 						if(response.status==200){
 							_this.res=response.data.data;
 						}else{
-							parent.layer.msg(response.statusText+response.data.msg);
+							layerMsg(response.statusText);
 						}
 					})
 					.catch(function (error) {
@@ -209,9 +209,10 @@
 					})
 					.then(function (response) {
 						if(response.status==200){
-							parent.layer.msg(response.data.msg)
+							let res = response.data;
+							layerMsg(res.msg, res.code);
 						}else{
-							parent.layer.msg(response.statusText+response.data.msg);
+							layerMsg(response.statusText);
 						}
 					})
 					.catch(function (error) {

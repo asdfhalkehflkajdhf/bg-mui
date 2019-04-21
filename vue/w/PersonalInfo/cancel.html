@@ -89,15 +89,15 @@
 								// {code:0,msg:""}
 								_vueThis.cancelForm.email=res.data;
 							}else{
-								parent.layer.msg(res.msg);								
+								layerMsg(res.msg, res.code);
 							}
 						}else{
-							parent.layer.msg(response.statusText+response.data.msg);
+							layerMsg(response.statusText);
 						}
 					})
 					.catch(function (error) {
 						console.log(error);
-						// parent.layer.msg(error);
+						
 					});
 					
 				},
@@ -111,17 +111,17 @@
 							//解析结果
 							if(res.code == 0){
 								// {code:0,msg:""}
-								parent.layer.msg(res.msg);
+								layerMsg(res.msg, res.code);
 								//强制刷新页面
 								window.location.reload();
 							}
 						}else{
-							parent.layer.msg(response.statusText+response.data.msg);
+							layerMsg(response.statusText);
 						}
 					})
 					.catch(function (error) {
 						console.log(error);
-						// parent.layer.msg(error);
+						
 					});
 					
 				},
@@ -132,14 +132,14 @@
 						if(response.status==200){
 							res=response.data;
 							//解析结果
-							parent.layer.msg(res.msg);
+							layerMsg(res.msg, res.code);
 						}else{
-							parent.layer.msg(response.statusText+res.msg);
+							layerMsg(response.statusText);
 						}
 					})
 					.catch(function (error) {
 						console.log(error);
-						// parent.layer.msg(error);
+						
 					});
 
 				}

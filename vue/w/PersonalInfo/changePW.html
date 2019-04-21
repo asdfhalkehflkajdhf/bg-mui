@@ -83,14 +83,14 @@
 			methods:{
 				checkForm:function(){
 					if( this.changePWForm.newPw1!=this.changePWForm.newPw2 ){
-						parent.layer.msg("新密码两次输入不对");
+						layerMsg("新密码两次输入不对");
 						return false;
 					}
 					if(this.changePWForm.newPw1.length==0 or 
 					this.changePWForm.newPw2.length==0 or 
 					this.changePWForm.srcPw.length==0
 					){
-						parent.layer.msg("输入不能为空");
+						layerMsg("输入不能为空");
 						return false;
 					}
 					
@@ -111,15 +111,15 @@
 						if(response.status==200){
 							res=response.data;
 							//解析结果
-							parent.layer.msg(res.msg);								
+							layerMsg(res.msg, res.code);							
 							
 						}else{
-							parent.layer.msg(response.statusText+response.data.msg);
+							layerMsg(response.statusText);
 						}
 					})
 					.catch(function (error) {
 						console.log(error);
-						// parent.layer.msg(error);
+						
 					});
 
 				},

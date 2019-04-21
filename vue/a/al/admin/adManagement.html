@@ -121,14 +121,14 @@
 						<tr>
 							<th data-field="id">id</th>
 							<th data-field="jump_addr" data-formatter="addrFormatter">跳转地址</th>
-							<th data-field="res_addr" data-formatter="addrptFormatter">资源地址</th>
+							<th data-field="res_addr" data-formatter="addrFormatter">资源地址</th>
 							<th data-field="page_id">投放页面</th>
 							<th data-field="type_id">资源类型</th>
-							<th data-field="ads_number_total" data-editable="true">要投次数</th>
+							<th data-field="ads_number_total" >要投次数</th>
 							<th data-field="ads_number_cur">已投次数</th>
 							<th data-field="ads_start_time">开始时间</th>
 							<th data-field="ads_end_time">结束时间</th>
-							<th data-field="id" data-formatter="optFormatter" data-events="optEvent">操作</th>
+							<th data-field="opt" data-formatter="optFormatter" data-events="optEvent">操作</th>
 
 						</tr>
 					</thead>
@@ -147,21 +147,15 @@
 					if (response.status == 200) {
 						res = response.data;
 						//解析结果
-						if (res.code == 0) {
-							parent.layer.msg('msg', {
-								icon: 1
-							});
-						} else {
-							parent.layer.msg(res.msg);
-						}
+						layerMsg(res.msg, res.code);
+
 
 					} else {
-						parent.layer.msg(response.statusText + response.data.msg);
+						layerMsg(response.statusText);
 					}
 				})
 				.catch(function(error) {
 					console.log(error);
-					// parent.layer.msg(error);
 				});
 		}
 
@@ -198,19 +192,15 @@
 							if (response.status == 200) {
 								res = response.data;
 								//解析结果
-								if (res.code == 0) {
-									_this.page_list = res.data;
-								} else {
-									parent.layer.msg(res.msg);
-								}
+								layerMsg(res.msg, res.code);
+
 
 							} else {
-								parent.layer.msg(response.statusText + response.data.msg);
+								layerMsg(response.statusText);
 							}
 						})
 						.catch(function(error) {
 							console.log(error);
-							// parent.layer.msg(error);
 						});
 
 				},
@@ -224,20 +214,16 @@
 								res = response.data;
 								//解析结果
 								if (res.code == 0) {
-									parent.layer.msg('msg', {
-										icon: 1
-									});
-								} else {
-									parent.layer.msg(res.msg);
+									_this.position_list=res.data;
 								}
+								layerMsg(res.msg, res.code);
 
 							} else {
-								parent.layer.msg(response.statusText + response.data.msg);
+								layerMsg(response.statusText);
 							}
 						})
 						.catch(function(error) {
 							console.log(error);
-							// parent.layer.msg(error);
 						});
 
 				},
@@ -251,20 +237,16 @@
 								res = response.data;
 								//解析结果
 								if (res.code == 0) {
-									parent.layer.msg('msg', {
-										icon: 1
-									});
-								} else {
-									parent.layer.msg(res.msg);
+									_this.type_list=res.data;
 								}
+								layerMsg(res.msg, res.code);
 
 							} else {
-								parent.layer.msg(response.statusText + response.data.msg);
+								layerMsg(response.statusText);
 							}
 						})
 						.catch(function(error) {
 							console.log(error);
-							// parent.layer.msg(error);
 						});
 
 				}
@@ -287,25 +269,20 @@
 						res = response.data;
 						//解析结果
 						if (res.code == 0) {
-							parent.layer.msg('msg', {
-								icon: 1
-							});
 							// 在页面删除
 							$("#msgTable").bootstrapTable('remove', {
 								field: 'id',
 								values: [row.id]
 							});
-						} else {
-							parent.layer.msg(res.msg);
-						}
+						} 
+						layerMsg(res.msg, res.code);
 
 					} else {
-						parent.layer.msg(response.statusText + response.data.msg);
+						layerMsg(response.statusText);
 					}
 				})
 				.catch(function(error) {
 					console.log(error);
-					// parent.layer.msg(error);
 				});
 
 		}
@@ -354,10 +331,7 @@
 
 		function addrFormatter(value, row, index, field) {
 			return [
-				'<a class="name" href="',
-				value,
-				'" target="_black">',
-				'</a> '
+				'<a class="name" href="'+value+'" target="_black">'+"url"+'</a>'
 			].join('')
 		}
 
@@ -369,29 +343,17 @@
 						params.success({
 							rows: res.data
 						})
-						parent.layer.msg(res.msg);
-						//解析结果
-// 						if (res.code == 0) {
-// 
-// 						} else {
-// 							parent.layer.msg(res.msg);
-// 						}
-// 
+						layerMsg(res.msg, res.code);
+
 					} else {
-						parent.layer.msg(response.statusText + response.data.msg);
+						layerMsg(response.statusText);
 					}
 				})
 				.catch(function(error) {
 					console.log(error);
-					// parent.layer.msg(error);
+					
 				});
 
-			//     // params data you need
-			//     console.log(params)
-			//     // here we just use setTimeout
-			//     setTimeout(function () {
-			// 
-			//     }, 1000)
 		}
 	</script>
 

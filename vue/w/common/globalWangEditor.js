@@ -42,12 +42,13 @@ function wangEditorImg(editor, token, page_id, imgSize){
 		error: function (xhr, editor) {
 			// 图片上传出错时触发
 			// xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
-			parent.layer.msg("上传失败！")
+			layerMsg("上传失败！", 2);
+			
 		},
 		timeout: function (xhr, editor) {
 			// 图片上传超时时触发
 			// xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
-			parent.layer.msg("上传超时！")
+			layerMsg("上传超时！", 2);
 		},
 
 		// 如果服务器端返回的不是 {errno:0, data: [...]} 这种格式，可使用该配置

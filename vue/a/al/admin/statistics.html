@@ -179,9 +179,8 @@
                         ]
                     })
 					
-					// parent.layer.msg(res.msg);
 				}else{
-					parent.layer.msg(response.statusText);
+					layerMsg(response.statusText, 2);
 				}
 			})
 			.catch(function (error) {

@@ -99,7 +99,9 @@
 	</body>
 	
 <script>
-		//提交表单
+var localToken = getLocalToken();
+
+	//提交表单
 	const gBlackManagement=new Vue({
 		el:"#accordion",
 		data:{
@@ -120,19 +122,15 @@
 					if(response.status==200){
 						res=response.data;
 						//解析结果
-						if(res.code==0){
-							parent.layer.msg(msg, {icon: 1});
-						}else{
-							parent.layer.msg(res.msg);
-						}
-						
+						layerMsg(res.msg, res.code);
+					
 					}else{
-						parent.layer.msg(response.statusText+response.data.msg);
+						layerMsg(response.statusText);
 					}
 				})
 				.catch(function (error) {
 					console.log(error);
-					// parent.layer.msg(error);
+					
 				});
 			},
 			submit2(){
@@ -141,19 +139,15 @@
 					if(response.status==200){
 						res=response.data;
 						//解析结果
-						if(res.code==0){
-							parent.layer.msg('msg', {icon: 1});
-						}else{
-							parent.layer.msg(res.msg);
-						}
+						layerMsg(res.msg, res.code);
+
 						
 					}else{
-						parent.layer.msg(response.statusText+response.data.msg);
+						layerMsg(response.statusText);
 					}
 				})
 				.catch(function (error) {
 					console.log(error);
-					// parent.layer.msg(error);
 				});
 			},
 		}

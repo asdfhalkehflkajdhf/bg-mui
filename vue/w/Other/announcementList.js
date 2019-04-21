@@ -21,15 +21,15 @@ const announcementList = new Vue({
 						// {code:0,msg:""}
 						_vueThis.res=res.data;
 					}else{
-						parent.layer.msg(res.msg);
+						layerMsg(res.msg, res.code);
 					}
 				}else{
-					parent.layer.msg(response.statusText+response.data.msg);
+					layerMsg(response.statusText);
 				}
 			})
 			.catch(function (error) {
 				console.log(error);
-				// parent.layer.msg(error);
+				
 			});
 			
 		}

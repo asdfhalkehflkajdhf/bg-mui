@@ -19,16 +19,16 @@ function queryParams(params){
 				  rows: res.data
 				})
 			}else{
-				parent.layer.msg(res.msg);
+				layerMsg(res.msg, res.code);
 			}
 			
 		}else{
-			parent.layer.msg(response.statusText+response.data.msg);
+			layerMsg(response.statusText);
 		}
 	})
 	.catch(function (error) {
 		console.log(error);
-		// parent.layer.msg(error);
+		
 	});
 
     // params data you need
@@ -49,23 +49,22 @@ function sendDelReq(row){
 			res=response.data;
 			//解析结果
 			if(res.code==0){
-				parent.layer.msg('msg', {icon: 1});
+				
 				// 在页面删除
 				$("#msgTable").bootstrapTable('remove', {
 					field: 'id',
 					values: [row.id]
 				});
-			}else{
-			parent.layer.msg(res.msg);
 			}
+			layerMsg(res.msg, res.code);
 			
 		}else{
-			parent.layer.msg(response.statusText+response.data.msg);
+			layerMsg(response.statusText);
 		}
 	})
 	.catch(function (error) {
 		console.log(error);
-		// parent.layer.msg(error);
+		
 	});
 }
 
@@ -83,27 +82,20 @@ var  optEvent={
 				btn: ['是','不是'] //按钮
 			}, function(){
 				//按钮btn1
+				// 发起请求
 				sendDelReq(row);
 				
-				// 发起请求
-				// parent.layer.msg('msg', {icon: 1});
 			}, function(){
 				//按钮btn2
-// 				parent.layer.msg('保存冷静', {
-// 					time: 2000, //2s后自动关闭
-// 				});
 			}	
 		);		
 
 	},
 	'click .name': function (e, value, row, index) {
-		// console.log("打开msgWin",row, value);
-		// sendMsgFun123(row.black_uid);
 		request_url = '../PersonalInfo/view.html?fid='+row.black_uid;
 		openSubWin(request_url, row.name, true);
 	},
 	'click .uid': function (e, value, row, index) {
-		console.log("打开msgWin",row, value);
 		request_url = '../PersonalInfo/view.html?fid='+row.black_uid;
 		openSubWin(request_url, row.name, true);
 	},

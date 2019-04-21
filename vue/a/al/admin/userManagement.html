@@ -68,7 +68,7 @@
 						<table id="msgTable" 
 							data-toggle="table" 
 							data-thead-classes="thead-light" 
-							data-url="testjson/data6.json"
+					data-ajax="ajaxRequest"
 							data-mobile-responsive="true"
 							data-toolbar="#msgToolbar"
 							data-show-refresh="true"
@@ -101,21 +101,15 @@ function userAdd(row){
 	gAxios.post('api/admin/userAdd.php', row)
 	.then(function (response) {
 		if(response.status==200){
-			res=response.data;
 			//解析结果
-			if(res.code==0){
-				parent.layer.msg('msg', {icon: 1});
-			}else{
-				parent.layer.msg(res.msg);
-			}
-			
+			res=response.data;
+			layerMsg(res.msg, res.code);
 		}else{
-			parent.layer.msg(response.statusText+response.data.msg);
+			layerMsg(response.statusText, 2);
 		}
 	})
 	.catch(function (error) {
 		console.log(error);
-		// parent.layer.msg(error);
 	});
 }
 
@@ -147,42 +141,35 @@ function userAdd(row){
 				res=response.data;
 				//解析结果
 				if(res.code==0){
-					parent.layer.msg('msg', {icon: 1});
 					// 在页面删除
 					$("#msgTable").bootstrapTable('remove', {
 						field: 'id',
 						values: [row.id]
 					});
-				}else{
-					parent.layer.msg(res.msg);
 				}
+				layerMsg(res.msg, res.code);
 				
 			}else{
-				parent.layer.msg(response.statusText+response.data.msg);
+				layerMsg(response.statusText, 2);				
 			}
 		})
 		.catch(function (error) {
 			console.log(error);
-			// parent.layer.msg(error);
 		});
 
 	}
 	
 	function queryParams(params){
 		//添加新参数,这里直接自定义,不使用控件预定义,太麻烦了,没有使用用例
-		// alert('queryParams: ' + JSON.stringify(params));
-		// console.log($('#inputGroupSelect01').val());
-		// 添加消息类型
 		params['token']=localToken;
-		// {search: undefined, sort: "time", order: "desc", msgType: "info"}
-		// console.log(params);
 		return params
 	}
+	
 	var  optEvent={
-// event：jQuery事件。
-// value：字段值。
-// row：行记录数据。
-// index：行索引
+		// event：jQuery事件。
+		// value：字段值。
+		// row：行记录数据。
+		// index：行索引
 
 		'click .remove': function (e, value, row, index) {
 			// 在服务端删除
@@ -204,14 +191,14 @@ function userAdd(row){
 	}
 	
 	function optFormatter(value, row, index, field){
-// value：字段值。
-// row：行记录数据 字典。
-// index：行索引。
-// field：行字段name。
-// 			console.log(value);
-// 			console.log(row);
-// 			console.log(index);
-// 			console.log(field);
+		// value：字段值。
+		// row：行记录数据 字典。
+		// index：行索引。
+		// field：行字段name。
+		// 			console.log(value);
+		// 			console.log(row);
+		// 			console.log(index);
+		// 			console.log(field);
 		return [
 			'<a class="remove mr-2" href="javascript:void(0)" title="删除">',
 			'	<i class="fa fa-trash-o"></i>',
@@ -233,7 +220,26 @@ function userAdd(row){
 		  '</a>',
 		].join('')
 	}
+function ajaxRequest(params) {
+	gAxios.post('api/admin/userGet.php', params.data)
+	.then(function (response) {
+		if(response.status==200){
+			res=response.data;
+			//解析结果
+			params.success({
+			  rows: res.data
+			});
+			layerMsg(res.msg, res.code);
 
+		}else{
+			layerMsg(response.statusText, 2);
+		}
+	})
+	.catch(function (error) {
+		console.log(error);
+	});
+
+}
 </script>
 
 </html>

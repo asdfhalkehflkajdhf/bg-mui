@@ -144,19 +144,13 @@
 					if(response.status==200){
 						res=response.data;
 						//解析结果
-						if(res.code==0){
-							parent.layer.msg(msg, {icon: 1});
-						}else{
-							parent.layer.msg(res.msg);
-						}
-						
+						layerMsg(res.msg, res.code);
 					}else{
-						parent.layer.msg(response.statusText+response.data.msg);
+						layerMsg(response.statusText, 2);
 					}
 				})
 				.catch(function (error) {
 					console.log(error);
-					// parent.layer.msg(error);
 				});
 			},
 			userLivingPlaceGet(){
@@ -171,10 +165,10 @@
 						if(res.code==0){
 							_this.livingPlaceList=res.data;
 						}else{
-							parent.layer.msg(res.msg);
+							layerMsg(res.msg, res.code);
 						}
 					}else{
-						parent.layer.msg(response.statusText);
+						layerMsg(response.statusText, 2);
 					}
 				})
 				.catch(function (error) {
@@ -194,12 +188,11 @@
 						if(res.code==0){
 							_this.sexList=res.data.sexList;
 							_this.eduList=res.data.eduList;
-
 						}else{
-							parent.layer.msg(res.msg);
+							layerMsg(res.msg, res.code);
 						}
 					}else{
-						parent.layer.msg(response.statusText);
+						layerMsg(response.statusText, 2);
 					}
 				})
 				.catch(function (error) {

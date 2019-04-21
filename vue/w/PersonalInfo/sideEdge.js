@@ -26,15 +26,15 @@ const sideEdeg = new Vue({
 						// {code:0,msg:""}
 						_vueThis.activeRankList=res.data;
 					}else{
-						parent.layer.msg(res.msg);
+						layerMsg(res.msg, res.code);
 					}
 				}else{
-					parent.layer.msg(response.statusText+response.data.msg);
+					layerMsg(response.statusText);
 				}
 			})
 			.catch(function (error) {
 				console.log(error);
-				// parent.layer.msg(error);
+				
 			});
 
 		},
@@ -52,15 +52,15 @@ const sideEdeg = new Vue({
 					if(res.code == 0){
 						_vueThis.announcementList=res.data;
 					}else{
-						parent.layer.msg(res.msg);
+						layerMsg(res.msg, res.code);
 					}
 				}else{
-					parent.layer.msg(response.statusText+response.data.msg);
+					layerMsg(response.statusText);
 				}
 			})
 			.catch(function (error) {
 				console.log(error);
-				// parent.layer.msg(error);
+				
 			});
 		},
 		getFriendshipLinkList:function(){
@@ -82,15 +82,15 @@ const sideEdeg = new Vue({
 						}
 						
 					}else{
-						parent.layer.msg(res.msg);
+						layerMsg(res.msg, res.code);
 					}
 				}else{
-					parent.layer.msg(response.statusText+response.data.msg);
+					layerMsg(response.statusText);
 				}
 			})
 			.catch(function (error) {
 				console.log(error);
-				// parent.layer.msg(error);
+				
 			});
 		},
 		

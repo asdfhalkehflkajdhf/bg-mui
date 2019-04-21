@@ -100,15 +100,15 @@
 								// {code:0,msg:""}
 								_vueThis.boundEmailForm.email=res.data;
 							}else{
-								parent.layer.msg(res.msg);								
+								layerMsg(res.msg, res.code);							
 							}
 						}else{
-							parent.layer.msg(response.statusText+response.data.msg);
+							layerMsg(response.statusText);
 						}
 					})
 					.catch(function (error) {
 						console.log(error);
-						// parent.layer.msg(error);
+						
 					});
 					
 				},
@@ -120,14 +120,14 @@
 						if(response.status==200){
 							res=response.data;
 							//解析结果
-							parent.layer.msg(res.msg);
+							layerMsg(res.msg, res.code);
 						}else{
-							parent.layer.msg(response.statusText+res.msg);
+							layerMsg(response.statusText);
 						}
 					})
 					.catch(function (error) {
 						console.log(error);
-						// parent.layer.msg(error);
+						
 					});
 					
 				},
@@ -138,14 +138,14 @@
 						if(response.status==200){
 							res=response.data;
 							//解析结果
-							parent.layer.msg(res.msg);
+							layerMsg(res.msg, res.code);
 						}else{
-							parent.layer.msg(response.statusText+res.msg);
+							layerMsg(response.statusText);
 						}
 					})
 					.catch(function (error) {
 						console.log(error);
-						// parent.layer.msg(error);
+						
 					});
 				}
 			}

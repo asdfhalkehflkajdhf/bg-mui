@@ -45,10 +45,10 @@ const userInfo = new Vue({
 						_this.res=res.data.res;
 						_this.eduList=res.data.eduList;
 					}else{
-						parent.layer.msg(res.msg);
+						layerMsg(res.msg, res.code);
 					}
 				}else{
-					parent.layer.msg(response.statusText);
+					layerMsg(response.statusText);
 				}
 			})
 			.catch(function (error) {
@@ -70,10 +70,10 @@ const userInfo = new Vue({
 					if(res.code == 0){
 						_this.msg="";
 					}
-					parent.layer.msg(res.msg);
+					layerMsg(res.msg, res.code);
 					
 				}else{
-					parent.layer.msg(response.statusText);
+					layerMsg(response.statusText);
 				}
 			})
 			.catch(function (error) {
@@ -153,7 +153,7 @@ $(function () {
 				// console.log(1);
 				res=response.data;
 				if(res.code!=0){
-					parent.layer.msg(res.msg);
+					layerMsg(res.msg, res.code);
 				}else{
 					//生成item
 					$.each(res.data, function (i, data) {
@@ -172,7 +172,7 @@ $(function () {
 					});					
 				}
 			}else{
-				parent.layer.msg(response.statusText);
+				layerMsg(response.statusText);
 			}
 			
 		})

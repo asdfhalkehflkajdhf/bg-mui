@@ -80,8 +80,8 @@
 					$.each(msgItem, function (i, data) {
 						var $gitem = $(
 							'<div>'
-							+'	<p class="text-center msg-time-backcolor">'+data['time']+'</p>'
-							+'	<p class="text-'+data['origin']+'"><span class="msg-text-backcolor-'+data['origin']+' rounded">'+data['content']+'</span></p>'
+							+'	<p class="text-center msg-time-backcolor">'+data.time+'</p>'
+							+'	<p class="text-'+data['origin']+'"><span class="msg-text-backcolor-'+data.origin+' rounded">'+data.content+'</span></p>'
 							+'</div>'
 						);
 						$container.append($gitem);
@@ -104,12 +104,12 @@
 							// console.log(1);
 							//   // 服务端返回的数据
 							if(response.data.length==0){
-								parent.layer.msg("没有更多，请修改查找条件！");
+								layerMsg("没有更多，请修改查找条件！");
 								return;
 							};	
 							_vue_this.appendMsgWin(response.data);
 						}else {
-							parent.layer.msg("获取信息失败！"+response.statusText);
+							layerMsg("获取信息失败！"+response.statusText);
 							return;
 						}
 					})
@@ -135,10 +135,10 @@
 								_this.msg="";
 								_this.appendMsgWin(res.data);
 							}
-							parent.layer.msg(res.msg);
+							layerMsg(res.msg, res.code);
 							
 						}else{
-							parent.layer.msg(response.statusText);
+							layerMsg(response.statusText);
 						}
 					})
 					.catch(function (error) {

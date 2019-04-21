@@ -52,3 +52,21 @@ function getQueryString(name) {
 	return context == null || context == "" || context == "undefined" ? "" : context; 
 }
 
+////////////////////////////////////////////////////////////
+function layerMsg(msg, code){
+	if(!code){code=2;}
+	
+	//0
+	let icon_id=1;
+	if(code >2){
+		icon_id=7;
+	}else if(code ==2){
+		icon_id=2;
+	}else{
+		icon_id=1;
+	}
+	// 2错误
+	
+	// 7警告
+	parent.layer.msg(msg, {icon:icon_id});
+}

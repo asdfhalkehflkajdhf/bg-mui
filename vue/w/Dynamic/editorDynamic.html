@@ -111,15 +111,15 @@
 								// _vueThis.dynamicList.push(res.data);
 								// console.log(_vueThis.dynamicList);
 							}else{
-								parent.layer.msg(res.msg);
+								layerMsg(res.msg, res.code);
 							}
 						}else{
-							parent.layer.msg("获取信息失败！");
+							layerMsg("获取信息失败！", 2);
 						}
 						
 					})
 					.catch(function (error) {
-						// parent.layer.msg(error);
+						console.log(error);
 					});
 				}
 					

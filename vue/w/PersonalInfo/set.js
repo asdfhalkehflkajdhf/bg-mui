@@ -57,9 +57,9 @@ const userInfo = new Vue({
 			.then(function (response) {
 				if(response.status==200){
 					var res=response.data;
-					parent.layer.msg(res.msg);
+					layerMsg(res.msg, res.code);
 				}else{
-					parent.layer.msg(response.statusText);
+					layerMsg(response.statusText);
 				}
 			})
 			.catch(function (error) {
@@ -78,9 +78,9 @@ const userInfo = new Vue({
 			.then(function (response) {
 				if(response.status==200){
 					var res=response.data;
-					parent.layer.msg(res.msg);
+					layerMsg(res.msg, res.code);
 				}else{
-					parent.layer.msg(response.statusText);
+					layerMsg(response.statusText);
 				}
 			})
 			.catch(function (error) {
@@ -88,7 +88,8 @@ const userInfo = new Vue({
 			});
 
 		},
-		//获取user info		getUserInfo(){
+		//获取user info
+		getUserInfo(){
             var _this = this;
 			// post 本地json会失败
 			gAxios.post('api/personalInfo/userInfoGet.php', {
@@ -102,10 +103,10 @@ const userInfo = new Vue({
 						_this.res=res.data.res;
 						_this.eduList=res.data.eduList;
 					}else{
-						parent.layer.msg(res.msg);
+						layerMsg(res.msg, res.code);
 					}
 				}else{
-					parent.layer.msg(response.statusText);
+					layerMsg(response.statusText);
 				}
 			})
 			.catch(function (error) {
@@ -124,10 +125,10 @@ const userInfo = new Vue({
 					if(res.code==0){
 						_this.livingPlaceList=res.data;
 					}else{
-						parent.layer.msg(res.msg);
+						layerMsg(res.msg, res.code);
 					}
 				}else{
-					parent.layer.msg(response.statusText);
+					layerMsg(response.statusText);
 				}
 			})
 			.catch(function (error) {
@@ -147,10 +148,10 @@ const userInfo = new Vue({
 					if(res.code==0){
 						_this.maritalStatusList=res.data;
 					}else{
-						parent.layer.msg(res.msg);
+						layerMsg(res.msg, res.code);
 					}
 				}else{
-					parent.layer.msg(response.statusText);
+					layerMsg(response.statusText);
 				}
 			})
 			.catch(function (error) {
@@ -177,9 +178,9 @@ const userInfo = new Vue({
 			.then(function (response) {
 				if(response.status==200){
 					var res=response.data;
-					parent.layer.msg(res.msg);
+					layerMsg(res.msg, res.code);
 				}else{
-					parent.layer.msg(response.statusText);
+					layerMsg(response.statusText);
 				}
 			})
 			.catch(function (error) {
@@ -196,14 +197,14 @@ const userInfo = new Vue({
 				token: localToken,
 				selfIntr: editor_si.txt.html(),
 				uid:getQueryString("uid"),
-				res_list:_this.res.res_list;
+				res_list:_this.res.res_list
 			})
 			.then(function (response) {
 				if(response.status==200){
 					var res=response.data;
-					parent.layer.msg(res.msg);
+					layerMsg(res.msg, res.code);
 				}else{
-					parent.layer.msg(response.statusText);
+					layerMsg(response.statusText);
 				}
 			})
 			.catch(function (error) {
@@ -223,9 +224,9 @@ const userInfo = new Vue({
 			.then(function (response) {
 				if(response.status==200){
 					var res=response.data;
-					parent.layer.msg(res.msg);
+					layerMsg(res.msg, res.code);
 				}else{
-					parent.layer.msg(response.statusText);
+					layerMsg(response.statusText);
 				}
 			})
 			.catch(function (error) {
@@ -247,9 +248,9 @@ const userInfo = new Vue({
 					if(res.code==0){
 						_this.verify_code="";
 					}
-					parent.layer.msg(res.msg);
+					layerMsg(res.msg, res.code);
 				}else{
-					parent.layer.msg(response.statusText);
+					layerMsg(response.statusText);
 				}
 			})
 			.catch(function (error) {

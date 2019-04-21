@@ -41,7 +41,7 @@
 								<div class="card-body" id="app">
 									<div>时间：<span v-text="res.ctime"></span></div>
 									
-									<div v-text="res.content"></div>
+									<div v-html="res.content"></div>
 								</div>
 							</div>
 
@@ -142,15 +142,15 @@
 								// {code:0,msg:""}
 								_vueThis.res=res.data;
 							}else{
-								parent.layer.msg(res.msg);
+								layerMsg(res.msg, res.code);
 							}
 						}else{
-							parent.layer.msg(response.statusText+response.data.msg);
+							layerMsg(response.statusText);
 						}
 					})
 					.catch(function (error) {
 						console.log(error);
-						// parent.layer.msg(error);
+						
 					});
 				}
 			},

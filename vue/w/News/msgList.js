@@ -24,23 +24,21 @@ function removeRecard(row){
 			res=response.data;
 			//解析结果
 			if(res.code==0){
-				parent.layer.msg('msg', {icon: 1});
 				// 在页面删除
 				$("#msgTable").bootstrapTable('remove', {
 					field: 'id',
 					values: [row.id]
 				});
-			}else{
-				parent.layer.msg(res.msg);
 			}
+			layerMsg(res.msg, res.code);
 			
 		}else{
-			parent.layer.msg(response.statusText+response.data.msg);
+			layerMsg(response.statusText);
 		}
 	})
 	.catch(function (error) {
 		console.log(error);
-		// parent.layer.msg(error);
+		
 	});
 
 }
@@ -57,19 +55,15 @@ function blackListAdd(row){
 		if(response.status==200){
 			res=response.data;
 			//解析结果
-			if(res.code==0){
-				parent.layer.msg('msg', {icon: 1});
-			}else{
-			parent.layer.msg(res.msg);
-			}
+			layerMsg(res.msg, res.code);
 			
 		}else{
-			parent.layer.msg(response.statusText+response.data.msg);
+			layerMsg(response.statusText);
 		}
 	})
 	.catch(function (error) {
 		console.log(error);
-		// parent.layer.msg(error);
+		
 	});
 
 }
@@ -173,20 +167,16 @@ function ajaxRequest(params) {
 			params.success({
 				rows: res.data
 			})
-			parent.layer.msg(res.msg);
+			layerMsg(res.msg, res.code);
 			
-// 			if(res.code==0){
-// 			}else{
-// 				parent.layer.msg(res.msg);
-// 			}
 			
 		}else{
-			parent.layer.msg(response.statusText+response.data.msg);
+			layerMsg(response.statusText);
 		}
 	})
 	.catch(function (error) {
 		console.log(error);
-		// parent.layer.msg(error);
+		
 	});
 
 //     // params data you need

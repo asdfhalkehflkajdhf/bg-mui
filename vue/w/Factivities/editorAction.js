@@ -119,7 +119,7 @@ const eaBaseInfo = new Vue({
 					_this.nolzw_etails = lzw_decompress(_this.res.actDetails);
 
 				}else{
-					parent.layer.msg(response.statusText+response.data.msg);
+					layerMsg(response.statusText);
 				}
 			})
 			.catch(function(error) {
@@ -144,7 +144,7 @@ const eaBaseInfo = new Vue({
 				if(response.status==200){
 					_this.res=response.data.data;
 				}else{
-					parent.layer.msg(response.statusText+response.data.msg);
+					layerMsg(response.statusText);
 				}
 			})
 			.catch(function(error) {

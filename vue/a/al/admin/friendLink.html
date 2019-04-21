@@ -88,8 +88,7 @@
 							<thead>
 								<tr>
 									<th data-field="id">id</th>
-									<th data-field="link_name" data-formatter="nameFormatter">站名</th>
-									<th data-field="link_url" >链接</th>
+									<th data-field="link_name" data-formatter="nameFormatter">站点</th>
 									<th data-field="opt" data-formatter="optFormatter" data-events="optEvent">操作</th>
 								</tr>
 							</thead>
@@ -108,19 +107,15 @@ function friendsAdd(row){
 		if(response.status==200){
 			res=response.data;
 			//解析结果
-			if(res.code==0){
-				parent.layer.msg('msg', {icon: 1});
-			}else{
-				parent.layer.msg(res.msg);
-			}
+			layerMsg(res.msg, res.code);
+
 			
 		}else{
-			parent.layer.msg(response.statusText+response.data.msg);
+			layerMsg(response.statusText);
 		}
 	})
 	.catch(function (error) {
 		console.log(error);
-		// parent.layer.msg(error);
 	});
 }
 
@@ -152,53 +147,51 @@ function friendsAdd(row){
 				res=response.data;
 				//解析结果
 				if(res.code==0){
-					parent.layer.msg('msg', {icon: 1});
+					
 					// 在页面删除
 					$("#msgTable").bootstrapTable('remove', {
 						field: 'id',
 						values: [row.id]
 					});
-				}else{
-					parent.layer.msg(res.msg);
 				}
+				layerMsg(res.msg, res.code);
 				
 			}else{
-				parent.layer.msg(response.statusText+response.data.msg);
+				layerMsg(response.statusText);
 			}
 		})
 		.catch(function (error) {
 			console.log(error);
-			// parent.layer.msg(error);
 		});
 
 	}
 	
-	function queryParams(params){
-		//添加新参数,这里直接自定义,不使用控件预定义,太麻烦了,没有使用用例
-		// alert('queryParams: ' + JSON.stringify(params));
-		// console.log($('#inputGroupSelect01').val());
-		// 添加消息类型
-		params['token']=localToken;
-		// {search: undefined, sort: "time", order: "desc", msgType: "info"}
-		// console.log(params);
-		return params
-	}
-		var  optEvent={
+function queryParams(params){
+	//添加新参数,这里直接自定义,不使用控件预定义,太麻烦了,没有使用用例
+	// alert('queryParams: ' + JSON.stringify(params));
+	// console.log($('#inputGroupSelect01').val());
+	// 添加消息类型
+	params['token']=localToken;
+	// {search: undefined, sort: "time", order: "desc", msgType: "info"}
+	// console.log(params);
+	return params
+}
+
+var  optEvent={
 // event：jQuery事件。
 // value：字段值。
 // row：行记录数据。
 // index：行索引
 
-			'click .remove': function (e, value, row, index) {
-				// 在服务端删除
-				friendsDel(row);
-			},
+	'click .remove': function (e, value, row, index) {
+		// 在服务端删除
+		friendsDel(row);
+	},
 
-			
 
-		}
+}
 		
-		function optFormatter(value, row, index, field){
+function optFormatter(value, row, index, field){
 // value：字段值。
 // row：行记录数据 字典。
 // index：行索引。
@@ -207,22 +200,18 @@ function friendsAdd(row){
 // 			console.log(row);
 // 			console.log(index);
 // 			console.log(field);
-			return [
-			  '<a class="remove" href="javascript:void(0)" title="删除">',
-			  '	<i class="fa fa-trash-o"></i>',
-			  '</a>'
-			].join('')
-		}
+	return [
+	  '<a class="remove" href="javascript:void(0)" title="删除">',
+	  '	<i class="fa fa-trash-o"></i>',
+	  '</a>'
+	].join('')
+}
 		
-		function nameFormatter(value, row, index, field){
-			return [
-			  '<a class="name" href="',
-			  row.url,
-			  '" title="',value,'" target="_black">',
-				value,
-			  '</a> '
-			].join('')
-		}
+function nameFormatter(value, row, index, field){
+	return [
+	  '<a class="name" href="'+row.link_url+'" title="'+value+'" target="_black">'+value+'</a>'
+	].join('')
+}
 function ajaxRequest(params) {
 	gAxios.post('api/admin/friendsGet.php', params.data)
 	.then(function (response) {
@@ -230,29 +219,23 @@ function ajaxRequest(params) {
 			res=response.data;
 			//解析结果
 			if(res.code==0){
-				
 				params.success({
 				  rows: res.data
 				})
 			}else{
-				parent.layer.msg(res.msg);
+				layerMsg(res.msg, res.code);
+				
 			}
 			
 		}else{
-			parent.layer.msg(response.statusText+response.data.msg);
+			layerMsg(response.statusText);
 		}
 	})
 	.catch(function (error) {
 		console.log(error);
-		// parent.layer.msg(error);
 	});
 
-//     // params data you need
-//     console.log(params)
-//     // here we just use setTimeout
-//     setTimeout(function () {
-// 
-//     }, 1000)
+
   }
 </script>
 

@@ -116,13 +116,10 @@
 					.then(function (response) {
 						if(response.status==200){
 							var res = response.data;
-							if(res.code=0){
-								actionList.push(res.data);
-							}else{
-								parent.layer.msg(res.msg);
-							}
+							layerMsg(res.msg, res.code);
+
 						}else{
-							parent.layer.msg(response.statusText+response.data.msg);
+							layerMsg(response.statusText);
 						}
 					})
 					.catch(function (error) {
@@ -142,9 +139,10 @@
 					.then(function (response) {
 						if(response.status==200){
 							_this.actionList.splice(idx,1);
-							parent.layer.msg(response.data.msg);
+							let res = response.data;
+							layerMsg(res.msg, res.code);
 						}else{
-							parent.layer.msg(response.statusText+response.data.msg);
+							layerMsg(response.statusText);
 						}
 					})
 					.catch(function (error) {

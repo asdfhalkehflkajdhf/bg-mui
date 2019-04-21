@@ -32,7 +32,7 @@ const personalInfo = new Vue({
 			}
 			//过滤登陆开关
 			if(!parent.navMenuRight.getLanding()){
-				parent.layer.msg("请先登陆！");
+				layerMsg("请先登陆！");
 				return;
 			}
 			openSubWin(obj.url, obj.title, true);

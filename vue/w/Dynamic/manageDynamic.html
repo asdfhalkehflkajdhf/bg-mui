@@ -38,52 +38,23 @@
 		<!-- //这个页面使用layer open打开，是给用户看的。 -->
 		<div class="container">
 			<div class="wrapper" >
-		
-						<div id="app">
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item " v-for="item, index in dynamicList">
-									<div class="row">
-										<div class="col-md-2">
-											<!-- <div class=""> -->
-											<ul class="pictures" v-bind:class="{pictures-5: item.imgObj.data.length>4 ,pictures-4:item.imgObj.data.length<5}">
-												<li class="" v-for="imgItem in item.imgObj.data">
-													<img v-on:click="viewImg(item.imgObj)" class="rounded" :src="imgItem.thumb" :alt="imgItem.alt" >
-												</li>
-											</ul>
-											<!-- </div> -->
-											<!-- <img src="../../api/common/PHPaliyun-oss-sdk/example.jpg" alt="..." class="rounded"> -->
-										</div>
-										
-										<div class="col-md-10">
-											<div class="p-2 ml-2">
-												<span class="btn btn-outline-success" id="" v-text="item.nickname"></span>
-												<span class="card__span_right">
-													<span class="btn btn-outline-success" v-on:click="delDynamic(index)">删除</span>
-												</span>
-											</div>
-											<div class="p-2 ml-2" style="font-size: 15px;" v-text="item.content">
-												<!-- {{item.content}} -->
-											</div>
-											<div class="p-2 ml-2">
-												<span class="text-success" v-text="'时间：'+item.ctime"></span>
-											</div>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</div>
+				<div id="">
+					<ul class="list-group list-group-flush" id="app">
+					</ul>
+				</div>
+				
 
 
-						<!-- 查找更多 -->
-						<div class="card">
-							<div class="card-header" >
-								<h5 class="mb-0 text-center">
-								<button class="btn btn-link " id="getGridItem" onclick="">
-									查找更多
-								</button>
-								</h5>
-							</div>
-						</div>
+				<!-- 查找更多 -->
+				<div class="card">
+					<div class="card-header" >
+						<h5 class="mb-0 text-center">
+						<button class="btn btn-link " id="getGridItem" onclick="">
+							查找更多
+						</button>
+						</h5>
+					</div>
+				</div>
 						
 			</div>
 		</div>

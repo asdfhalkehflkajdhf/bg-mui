@@ -87,6 +87,7 @@
 						<tr>
 							<th data-field="id">id</th>
 							<th data-field="uid">uid</th>
+							<th data-field="authrity">权限</th>
 							<th data-field="name" data-formatter="nameFormatter" data-events="optEvent">用户名</th>
 							<th data-field="opt" data-formatter="optFormatter" data-events="optEvent">操作</th>
 						</tr>
@@ -112,19 +113,14 @@
 			if(response.status==200){
 				res=response.data;
 				//解析结果
-				if(res.code==0){
-					parent.layer.msg('msg', {icon: 1});
-				}else{
-					parent.layer.msg(res.msg);
-				}
+				layerMsg(res.msg, res.code);
 				
 			}else{
-				parent.layer.msg(response.statusText+response.data.msg);
+				layerMsg(response.statusText);
 			}
 		})
 		.catch(function (error) {
 			console.log(error);
-			// parent.layer.msg(error);
 		});
 	}
 
@@ -149,30 +145,29 @@
 	function adminDel(row){
 		gAxios.post('api/admin/adminInfoDel.php', {
 			token:localToken,
-			uid:row.id,
+			id:row.id,
 		})
 		.then(function (response) {
 			if(response.status==200){
 				res=response.data;
 				//解析结果
 				if(res.code==0){
-					parent.layer.msg('msg', {icon: 1});
 					// 在页面删除
 					$("#msgTable").bootstrapTable('remove', {
 						field: 'id',
 						values: [row.id]
 					});
-				}else{
-					parent.layer.msg(res.msg);
 				}
+				layerMsg(res.msg, res.code);
+
 				
 			}else{
-				parent.layer.msg(response.statusText+response.data.msg);
+				// 警告
+				layerMsg(response.statusText);
 			}
 		})
 		.catch(function (error) {
 			console.log(error);
-			// parent.layer.msg(error);
 		});
 
 	}
@@ -197,10 +192,10 @@
 		'click .remove': function (e, value, row, index) {
 			adminDel(row);
 		},
-		'click .name': function (e, value, row, index) {
-			request_url = '../../../PersonalInfo/view.html?fid='+row.uid;
-			openSubWin(request_url, row.name, true);
-		},
+// 		'click .name': function (e, value, row, index) {
+// 			request_url = '../../../w/PersonalInfo/view.html?fid='+row.uid;
+// 			openSubWin(request_url, row.name, true);
+// 		},
 		
 
 	}
@@ -223,7 +218,7 @@
 	
 	function nameFormatter(value, row, index, field){
 		return [
-		  '<a class="name" href="javascript:void(0)" title="用户信息">',
+		  '<a class="name" href="../../../w/PersonalInfo/view.html?fid='+row.uid+'" target="_black" title="用户信息">',
 			value,
 		  '</a> '
 		].join('')
@@ -241,24 +236,18 @@ function ajaxRequest(params) {
 				  rows: res.data
 				})
 			}else{
-				parent.layer.msg(res.msg);
+				layerMsg(res.msg, res.code);
 			}
 			
 		}else{
-			parent.layer.msg(response.statusText+response.data.msg);
+			layerMsg(response.statusText);
 		}
 	})
 	.catch(function (error) {
 		console.log(error);
-		// parent.layer.msg(error);
 	});
 
-//     // params data you need
-//     console.log(params)
-//     // here we just use setTimeout
-//     setTimeout(function () {
-// 
-//     }, 1000)
+
   }
 
 </script>
