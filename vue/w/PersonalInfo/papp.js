@@ -1,3 +1,4 @@
+parent.navMenuRight.upLoginStatus();
 var localToken = getLocalToken();
 
 const personalInfo = new Vue({

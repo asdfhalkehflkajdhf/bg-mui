@@ -5,7 +5,7 @@ function setLocalID(id){
 }
 function getLocalID(){
 	var BoyGIDVal = localStorage.getItem(BoyGIDKey);
-// 	console.log(BoyGIDVal);
+	// console.log(BoyGIDVal);
 	if(BoyGIDVal == null){
 		setLocalID("");
 		return "";
@@ -17,15 +17,18 @@ function getLocalID(){
 
 var BoyGTokenKey='BoyGToken';
 function setLocalToken(token){
+	// console.log("set",token);
 	localStorage.setItem(BoyGTokenKey, token);
 }
 function getLocalToken(){
 	var BoyGTokenVal = localStorage.getItem(BoyGTokenKey);
-// 	console.log(BoyGTokenVal);
+	// console.log("get",BoyGTokenVal);
 	if(BoyGTokenVal == null){
+		// console.log("get BoyGToken is null");
 		setLocalToken("");
 		return "";
 	}else{
+		// console.log("get BoyGToken is :", BoyGTokenVal);
 		return BoyGTokenVal;
 	}
 }
@@ -54,7 +57,7 @@ function getQueryString(name) {
 
 ////////////////////////////////////////////////////////////
 function layerMsg(msg, code){
-	if(!code){code=2;}
+	if(!code){code=7;}
 	
 	//0
 	let icon_id=1;
@@ -62,6 +65,11 @@ function layerMsg(msg, code){
 		icon_id=7;
 	}else if(code ==2){
 		icon_id=2;
+// 		setLocalToken("");
+// 		if(parent.navMenuRight){
+// 			parent.navMenuRight.logout();
+// 		}
+
 	}else{
 		icon_id=1;
 	}

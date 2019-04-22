@@ -1,3 +1,4 @@
+parent.navMenuRight.upLoginStatus();
 var localToken = getLocalToken();
 
 // 编辑框初始化

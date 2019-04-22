@@ -1,3 +1,4 @@
+parent.navMenuRight.upLoginStatus();
 var localToken = getLocalToken();
 
 // 加载轮播图数据
@@ -224,12 +225,12 @@ $(function () {
 				formTag.fload_time=response.data.first_load_time;
 				res=response.data.data;
 			}else{
-				layer.msg("获取信息失败！");
+				layerMsg("获取信息失败！", 7);
 				return;
 			}
 
 			if(res.length==0){
-				layer.msg("没有更多，请修改查找条件！");
+				layerMsg("没有更多，请修改查找条件！", 7);
 				return;
 			}
 			//生成item

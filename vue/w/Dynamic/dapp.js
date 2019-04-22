@@ -1,3 +1,4 @@
+parent.navMenuRight.upLoginStatus();
 var localToken = getLocalToken();
 
 
@@ -67,12 +68,12 @@ $(function () {
 				res=response.data.data;
 				dynamicList.upVar(response.data.floadTime, res);
 			}else{
-				layer.msg("获取信息失败！");
+				layerMsg("获取信息失败！", 7);
 				return;
 			}
 			
 			if(res.length==0){
-				layer.msg("没有更多！");
+				layerMsg("没有更多！", 7);
 				return;
 			}
 			//生成item

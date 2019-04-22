@@ -1,3 +1,4 @@
+parent.navMenuRight.upLoginStatus();
 var localToken = getLocalToken();
 
 
@@ -9,7 +10,6 @@ $('#inputGroupSelect01').on('change', function(){
 	// 这里设置不起作用,只好在queryParams里设置
 	$("#msgTable").bootstrapTable('refreshOptions', {})
 })
-
 
 
 
@@ -99,9 +99,7 @@ var  optEvent={
 				
 			}, function(){
 				//按钮btn2
-				layer.msg('保存冷静', {
-					time: 2000, //2s后自动关闭
-				});
+				layerMsg('保存冷静', 7);
 			}	
 		);
 	},

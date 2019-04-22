@@ -45,12 +45,12 @@ const eaBaseInfo = new Vue({
 			var file = inputDOM.files[0];
 			
 			if(file.size>2*1024*1024){
-				layer.msg("文件不能超过2M");
+				layerMsg("文件不能超过2M", 7);
 				return false;
 			}
 			//这里我们判断下类型如果不是图片就返回 去掉就可以上传任意文件 
 			if(!/image\/\w+/.test(file.type)){ 
-				layer.msg("请确保文件为图像类型");
+				layerMsg("请确保文件为图像类型", 7);
 				return false; 
 			}
 			$("#inputGroupFileLabel").html(inputDOM.value);
@@ -69,7 +69,7 @@ const eaBaseInfo = new Vue({
 		viewFirstPic(){
 			if(this.nolzw_first_pic.length==0)
 			{
-				layer.msg("请先选择图片");
+				layerMsg("请先选择图片", 7);
 				return false;
 			}
 			

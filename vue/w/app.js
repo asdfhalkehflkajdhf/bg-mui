@@ -26,13 +26,21 @@ const navMenuLeft = new Vue({
 			//加载子页面
 			subPageSwitch(curNavItem.ifm_url);
 		},
-		modMenuStatus(){
-			// 保持最小个数为5个
-			if(this.nvaListLeft.length>5){
-				this.nvaListLeft.splice(this.nvaListLeft.length-1,1);
+		modMenuStatus(obj){
+			if(!obj){
+				// 保持最小个数为5个, nvaListLeft的初始个数
+				if(this.nvaListLeft.length>5){
+					this.nvaListLeft.splice(this.nvaListLeft.length-1,1);
+				}	
+			}else{
+				// 保持最小个数为5个, nvaListLeft的初始个数
+				if(this.nvaListLeft.length<=5){
+					this.nvaListLeft.push(obj);
+				}				
 			}
 			
 		},
+
 	},
 	mounted: function(){
 		// 初始化子页面
@@ -44,7 +52,7 @@ const navMenuLeft = new Vue({
 		// 加载完成数据这后执行，注意，不同于jq和js onload
 	},
 	created:function(){
-		getLocalToken();
+		// 加载页面之前
 	}
 	
 });	
@@ -97,15 +105,51 @@ var navMenuRight = new Vue({
 			
 		},
 
-		checkLoginStatus:function(){
-			var BoyGToken = getLocalToken();
-			if(BoyGToken){
-				this.setLanding(true);
-			}else{
-				this.setLanding(false);
-			}
+		upLoginStatus:function(){
+			//发送请求
+			var _vueThis = this;
+			gAxios.post('api/auth/getLoginStatus.php', {
+				token: getLocalToken(),
+			})
+			.then(function (response) {
+				if(response.status==200){
+					res=response.data;
+					//解析结果
+					if(res.code != 0){
+						//修改导航栏状态
+						_vueThis.setLanding(false);
+						
+						// 保存状态//删除本地token
+						setLocalID(-1);
+						setLocalToken("");
+					}else{
+						//修改导航栏状态
+						_vueThis.setLanding(true);
+						
+						// 保存状态//删除本地token
+						setLocalID(res.data.id);
+						// setLocalToken("");
+						
+					}
+					if(res.data.isa){
+						//修改菜单显示状态
+						navMenuLeft.modMenuStatus(res.data.nav);
+					}
+					
+				}else{
+					layerMsg(response.statusText);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+				
+			});
+
 		},
 		setLanding:function(status){
+			if(this.landing == status){
+				return;
+			}
 			this.landing=status;
 			// 关闭模态
 			$("#loginModal").modal('hide');
@@ -115,8 +159,7 @@ var navMenuRight = new Vue({
 		}
 	},
 	created:function(){
-		// console.log(getinfor);
-		this.checkLoginStatus();
+		this.upLoginStatus();
 	}
 
 });
@@ -150,6 +193,8 @@ const loginModal=new Vue({
 					res=response.data;
 					//解析结果
 					if(res.code == 0){
+						//修改导航栏状态
+						navMenuRight.setLanding(true);
 						if(res.data.isa==1){
 							// navMenuLeft.nvaListLeft.push(res.data.nav);
 							Vue.set(navMenuLeft.nvaListLeft, navMenuLeft.nvaListLeft.length, res.data.nav);
@@ -158,10 +203,7 @@ const loginModal=new Vue({
 						// 保存状态
 						setLocalID(res.data.id);
 						setLocalToken(res.data.token);
-						
-						//修改导航栏状态
-						navMenuRight.setLanding(true);
-						
+					
 						
 					}else{
 						layerMsg(res.msg, res.code);
