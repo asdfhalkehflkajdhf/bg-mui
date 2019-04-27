@@ -1,4 +1,4 @@
-parent.navMenuRight.upLoginStatus();
+//新页面不需要navMenuRight parent.navMenuRight.upLoginStatus();
 var localToken = getLocalToken();
 
 

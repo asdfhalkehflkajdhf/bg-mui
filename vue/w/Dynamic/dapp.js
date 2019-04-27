@@ -16,7 +16,8 @@ const dynamicList = new Vue({
 		viewImg(idx, imgId){
 			//获取当前img 上一级上一级下的所有img 对象
 			// 这里的数据使用从服务器获取的直接进行设置,使用uid进行查找
-			var imgJson = this.dynamicList[idx][0].imgObj;
+		
+			var imgJson = this.dynamicList[idx].imgObj;
 			imgJson.start=imgId;//初始显示的图片序号，默认0
 			layer.photos({
 				photos: imgJson
@@ -26,12 +27,15 @@ const dynamicList = new Vue({
 		viewUid(obj){
 			let url  = $(obj).data("url");
 			let name = $(obj).val();
-			console.log(url, name);
+
 			openSubWin(url, name, true);			
 		},
 		upVar(floadTime, data){
-			this.floadTime = floadTime;
-			this.dynamicList.push(data);
+			let _this = this;
+			_this.floadTime = floadTime;
+			$.each(data, function(i,item){
+				_this.dynamicList.push(item);
+			})
 		}
 	},
 
@@ -43,16 +47,19 @@ const dynamicList = new Vue({
 // 3 window.onload = function () { }
 
 
-//JS瀑布流插件masonry动态载入数据
-$("#getGridItem").on("click",function(){
-	dynamicList.page++;
-	reloadGridItem();
-});
+
 
 
 $(function () {
+	//JS瀑布流插件masonry动态载入数据
+	$("#getGridItem").on("click",function(){
+		dynamicList.page++;
+		reloadGridItem();
+	});
 	function reloadGridItem(){
 		var $container = $('#app');
+		// 保存追加之前的最大ID
+		
 	
 		// post 本地json会失败
 		// axios.get('testjson/imgtest.json', {
@@ -62,9 +69,9 @@ $(function () {
 			floadTime: dynamicList.floadTime
 		})
 		.then(function (response) {
+			let dynamicListLen = dynamicList.dynamicList.length;
 			var res=[];
 			if(response.status==200){
-				// console.log(1);
 				res=response.data.data;
 				dynamicList.upVar(response.data.floadTime, res);
 			}else{
@@ -76,20 +83,21 @@ $(function () {
 				layerMsg("没有更多！", 7);
 				return;
 			}
+			
 			//生成item
 			$.each(res, function (i1, data) {
-				
 				
 				let picturesClass='pictures-5';
 				if(data.imgObj.data.length<5){
 					picturesClass='pictures-4';
 				};
-				var idx = dynamicList.dynamicList.length+i1-1;
+				var idx = dynamicListLen+i1;
 				var liList="";
+				
 				$.each(data.imgObj.data, function (i2, data){
 					liList+='<li><img onclick="dynamicList.viewImg('+idx+', '+i2+')" class="rounded" src="'+data.thumb+'" alt="'+data.alt+'"></li>';
 				});
-				
+
 				let $gitem = $(
 					'<div class="card">'
 					+'	<div class="card-body">'

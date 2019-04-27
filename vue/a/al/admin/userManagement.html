@@ -185,8 +185,8 @@ function userAdd(row){
 			openSubWin(request_url, row.name, true);
 		},
 		'click .eye': function (e, value, row, index) {
-			request_url = '../../../w/PersonalInfo/view.html?fid='+row.uid;
-			openSubWin(request_url, row.name, true);
+			// request_url = '../../../w/PersonalInfo/view.html?fid='+row.uid;
+			// openSubWin(request_url, row.name, true);
 		},		
 	}
 	
@@ -208,6 +208,7 @@ function userAdd(row){
 	}
 	
 	function infoFormatter(value, row, index, field){
+		request_url = '../../../w/PersonalInfo/view.html?fid='+row.uid;
 		return [
 		  '<a class="edit mr-2" href="javascript:void(0)" title="编辑个人信息">',
 		  '	<i class="fa fa-edit"></i>',
@@ -215,7 +216,7 @@ function userAdd(row){
 		  '<a class="photo mr-2" href="javascript:void(0)" title="编辑相册">',
 		  '	<i class="fa fa-image"></i>',
 		  '</a>',
-			'<a class="eye mr-2" href="javascript:void(0)" title="个人信息预览">',
+			'<a class="eye mr-2" href="'+request_url+'" target="_black" title="个人信息预览">',
 		  '	<i class="fa fa-eye"></i>',
 		  '</a>',
 		].join('')

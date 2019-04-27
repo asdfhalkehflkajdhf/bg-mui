@@ -38,7 +38,7 @@
 		    <div class="wrapper">
 
 				<ul class="list-group list-group-flush" id="app">
-					<li class="list-group-item " v-for="item, idx in actionList">
+					<li class="list-group-item " :id="'act-'+idx" v-for="item, idx in actionList">
 						<div class="row">
 							<div class="col-md-2">
 								<img :src="item.activity_img" alt="..." class="rounded">
@@ -80,7 +80,7 @@
 		
 	</body>
 	<script>
-		parent.navMenuRight.upLoginStatus();
+
 		var localToken = getLocalToken();
 		
 
@@ -104,6 +104,7 @@
 			},
 			created:function(){
 				this.getActionList();
+				
 			},
 			methods:{
 				getActionList(){
@@ -112,12 +113,20 @@
 					// axios.get('testjson/lunBoTuTest.json', {
 					gAxios.post('api/activities/getListInfo.php', {
 						token: localToken,
-						page:_this.page
+						page: _this.page,
+						first_load_time: "null"
 					})
 					.then(function (response) {
 						if(response.status==200){
 							var res = response.data;
-							layerMsg(res.msg, res.code);
+							if(res.code==0){
+								if(res.data.length){
+									_this.actionList = _this.actionList.concat(res.data);
+								}else{
+									layerMsg("没有更多！", 7);
+								}
+							}
+							// layerMsg(res.msg, res.code);
 
 						}else{
 							layerMsg(response.statusText);
@@ -139,9 +148,13 @@
 					})
 					.then(function (response) {
 						if(response.status==200){
-							_this.actionList.splice(idx,1);
+							// _this.actionList.splice(idx,1);
 							let res = response.data;
-							layerMsg(res.msg, res.code);
+							if(res.code==0){
+								$('#act-'+idx).remove();
+							}else{
+								layerMsg(res.msg, res.code);
+							}
 						}else{
 							layerMsg(response.statusText);
 						}
@@ -152,14 +165,14 @@
 					
 				},
 				editAction(idx){
-					var item = _this.actionList[idx];
+					var item = this.actionList[idx];
 					var url='editorAction.html?id='+item.id;
 					var title = "编辑活动";
 					openSubWin(url, title, true);
 					
 				},
 				viewAction(idx){
-					var item = _this.actionList[idx];
+					var item = this.actionList[idx];
 					var url='viewAction.html?id='+item.id;
 					var title = "活动";
 					openSubWin(url, title, true);

@@ -1,0 +1,19 @@
+#preview {
+    display: inline-block;
+    width: 2.56rem;
+    height: 2.56rem;
+    position: relative;
+    background-image: url(img/iconfont-tianjia.png);
+    background-repeat: no-repeat;
+    background-size:cover ;
+}            
+#file {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+    z-index: 5;
+}

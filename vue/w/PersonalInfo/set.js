@@ -1,4 +1,4 @@
-parent.navMenuRight.upLoginStatus();
+
 var localToken = getLocalToken();
 
 // 编辑框初始化
@@ -193,7 +193,7 @@ const userInfo = new Vue({
 		userSelfIntrSet(){
             var _this = this;
 			
-			_this.res.res_list.push(editor_si.upImgResList);
+			_this.res.res_list = _this.res.res_list.concat(editor_si.upImgResList);
 			gAxios.post('api/personalInfo/userSelfIntrSet.php', {
 				token: localToken,
 				selfIntr: editor_si.txt.html(),
@@ -215,12 +215,12 @@ const userInfo = new Vue({
 		},
 		userOtherIntrSet(){
             var _this = this;
-			_this.res.res_list.push(editor_si.upImgResList);
+			_this.res.res_list = _this.res.res_list.concat(editor_si.upImgResList);
 			gAxios.post('api/personalInfo/userOtherIntrSet.php', {
 				token: localToken,
 				otherIntr: editor_ti.txt.html(),
 				uid:getQueryString("uid"),
-				res_list:_this.res.res_list;
+				res_list:_this.res.res_list
 			})
 			.then(function (response) {
 				if(response.status==200){

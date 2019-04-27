@@ -2,7 +2,7 @@
 
 
 
-function wangEditorImg(editor, token, page_id, imgSize){
+function wangEditorImg(editor, token, uid, page_id, imgSize){
 	editor.customConfig.uploadImgMaxSize = imgSize * 1024 * 1024 // 将图片大小限制为 3M
 	editor.customConfig.uploadImgMaxLength = 9 // 限制一次最多上传 5 张图片 默认为 10000 张（即不限制）
 	editor.customConfig.uploadImgServer = baseURL+'api/personalInfo/userImgUp.php'
@@ -14,7 +14,8 @@ function wangEditorImg(editor, token, page_id, imgSize){
 		// 如果版本 <=v3.1.0 ，属性值会自动进行 encode ，此处无需 encode
 		// 如果版本 >=v3.1.1 ，属性值不会自动 encode ，如有需要自己手动 encode
 		token: token,
-		page_id: page_id
+		page_id: page_id,
+		uid: uid
 	};
 	// 将 timeout 时间改为 3s
 	editor.customConfig.uploadImgTimeout = 3000;
@@ -77,11 +78,14 @@ function wangEditorImg(editor, token, page_id, imgSize){
 			
 			$.each(result.data.ok, function(i,item){
 				// 插入图片
-				insertImg(result.msg[item].src);
+				insertImg(result.data.msg[item].src);
 				// 保存图片id
-				editor.upImgResList.push(result.msg[item].imgId);
+				editor.upImgResList.push(result.data.msg[item].imgId);
 				// editor
 			});   
+
+			layerMsg("上传成功 "+result.data.ok.length+" 个; 失败 "+result.data.error.length+" 个.", 0);
+			
 			
 		}
 		

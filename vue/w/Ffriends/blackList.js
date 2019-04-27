@@ -1,4 +1,4 @@
-parent.navMenuRight.upLoginStatus();
+
 var localToken = getLocalToken();
 
 function queryParams(params){
@@ -93,12 +93,12 @@ var  optEvent={
 
 	},
 	'click .name': function (e, value, row, index) {
-		request_url = '../PersonalInfo/view.html?fid='+row.black_uid;
-		openSubWin(request_url, row.name, true);
+		// request_url = '../PersonalInfo/view.html?fid='+row.black_uid;
+		// openSubWin(request_url, row.name, true);
 	},
 	'click .uid': function (e, value, row, index) {
-		request_url = '../PersonalInfo/view.html?fid='+row.black_uid;
-		openSubWin(request_url, row.name, true);
+		// request_url = '../PersonalInfo/view.html?fid='+row.black_uid;
+		// openSubWin(request_url, row.name, true);
 	},
 
 }
@@ -120,15 +120,17 @@ function optFormatter(value, row, index, field){
 }
 
 function nameFormatter(value, row, index, field){
+	request_url = '../PersonalInfo/view.html?fid='+row.black_uid;
 	return [
-	  '<a class="name" href="javascript:void(0)" title="msg">',
+	  '<a class="name" href="'+request_url+'" target="_black" title="msg">',
 		value,
 	  '</a> '
 	].join('')
 }
 function uidFormatter(value, row, index, field){
+	request_url = '../PersonalInfo/view.html?fid='+row.black_uid;
 	return [
-	  '<a class="uid" href="javascript:void(0)" title="uid">',
+	  '<a class="uid" href="'+request_url+'" target="_black" title="uid">',
 		value,
 	  '</a> '
 	].join('')

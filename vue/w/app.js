@@ -44,7 +44,7 @@ const navMenuLeft = new Vue({
 	},
 	mounted: function(){
 		// 初始化子页面
-		this.preNavItem=this.nvaListLeft[0];
+		this.preNavItem=this.nvaListLeft[4];
 		//首次加载子页面
 		subPageSwitch(this.preNavItem.ifm_url);
 		// showData('挂载到dom后',this);
@@ -60,20 +60,20 @@ const navMenuLeft = new Vue({
 var navMenuRight = new Vue({
 	el:"#navMenuRight",
 	data:{
-		navListRight:[
-			{name:"登陆/注册",url:"#", landing:false}
-			,{name:"退出",url:"#", landing:true}
-		],
+		// navListRight:[
+		// 	{name:"登陆/注册",url:"#", landing:false}
+		// 	,{name:"退出",url:"#", landing:true}
+		// ],
 		//登陆状态
 		landing:false,
-		uid:-1
+		uid:getLocalID()
 	},
 	methods:{
 		logout:function(){
 			//发送请求
 			var _vueThis = this;
 			gAxios.post('api/auth/logout.php', {
-				token: localToken,
+				token: getLocalToken(),
 				uid: _vueThis.uid
 			})
 			.then(function (response) {
@@ -91,6 +91,9 @@ var navMenuRight = new Vue({
 						navMenuLeft.modMenuStatus();
 						//修改导航栏状态
 						_vueThis.setLanding(false);
+						
+						// 刷新子页面
+						subPageSwitch(navMenuLeft.preNavItem.ifm_url);
 												
 					}
 					layerMsg(res.msg, res.code);
@@ -196,7 +199,6 @@ const loginModal=new Vue({
 						//修改导航栏状态
 						navMenuRight.setLanding(true);
 						if(res.data.isa==1){
-							// navMenuLeft.nvaListLeft.push(res.data.nav);
 							Vue.set(navMenuLeft.nvaListLeft, navMenuLeft.nvaListLeft.length, res.data.nav);
 						}
 						//
@@ -204,6 +206,8 @@ const loginModal=new Vue({
 						setLocalID(res.data.id);
 						setLocalToken(res.data.token);
 					
+						// 刷新子页面
+						subPageSwitch(navMenuLeft.preNavItem.ifm_url);
 						
 					}else{
 						layerMsg(res.msg, res.code);

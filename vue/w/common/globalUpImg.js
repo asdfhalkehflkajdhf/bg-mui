@@ -1,4 +1,4 @@
-function upImgInit(objID, pageId, token, isUpload, mfc){
+function upImgInit(objID, pageId, token, uid, isUpload, eventFunc, mfc){
 	if(!mfc){mfc=9;} 
 	// 上传初始化
 	//			// vue 不能包含 bootstrap fileinput ,否则bootstrap fileinput会冲突
@@ -17,8 +17,8 @@ function upImgInit(objID, pageId, token, isUpload, mfc){
 		// deleteUrl:String,//删除图片时的请求路径
 		// deleteExtraData:{token:localToken}, //删除图片时额外传入的参数{}
 		allowedFileExtensions:['jpg','png','gif','jpeg','bmp','mp4'],
-		uploadUrl:'${baseURL}api/personalInfo/userImgUp.php', //上传图片时的请求路径
-		uploadExtraData:{token:token, page_id:pageId, uid:getQueryString("uid")}, //,上传图片时额外传入的参数{}uid,admin opt
+		uploadUrl:baseURL+'api/personalInfo/userImgUp.php', //上传图片时的请求路径
+		uploadExtraData:{token:token, page_id:pageId, uid:uid}, //,上传图片时额外传入的参数{}uid,admin opt
 		maxFileSize:5*1024,//以kb计算
 		maxFileCount:mfc,
 		previewFileType:['image', 'video'],//预览文件类型,内置
@@ -26,15 +26,13 @@ function upImgInit(objID, pageId, token, isUpload, mfc){
 		msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
 	};
 	
-	$("#"+objID).fileinput(fileUpLoadVar);
-	
-}
-
-function upImgEvent(objID, eventFunc){
-	// 文件上传方法
-	$("#"+objID).fileinput("upload");
-	// 上传成功后处理方法
-	$("#"+objID).on("fileuploaded", function(event, data, previewId, index) {
+	$("#"+objID).fileinput(fileUpLoadVar)
+	.on("fileuploaded", function(event, data, previewId, index) {
+		console.log(event);
+		console.log(data);
+		 console.log(previewId);
+		  console.log(index);
+		  
 		if(eventFunc){
 			eventFunc(event, data, previewId, index);
 		}
@@ -43,7 +41,15 @@ function upImgEvent(objID, eventFunc){
 		console.log('文件上传失败！',data);
 		console.log('文件上传失败！',msg);
   
-	})
+	});
+	
+}
+
+function upImgEvent(objID, eventFunc){
+	// 文件上传方法
+	$("#"+objID).fileinput("upload");
+	// 上传成功后处理方法
+	
 }
 
 function upImgClean(objID){
@@ -51,5 +57,8 @@ function upImgClean(objID){
 	// $("#"+objID).fileinput('reset/clear');
 }
 
-
+function upImgObjGet(objID){
+	return $("#"+objID)[0].files;
+	// $("#"+objID).fileinput('reset/clear');
+}
 

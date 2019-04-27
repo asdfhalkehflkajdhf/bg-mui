@@ -57,23 +57,21 @@ function getQueryString(name) {
 
 ////////////////////////////////////////////////////////////
 function layerMsg(msg, code){
+	/*
+	code 0,1,2,....
+	icon_id: 1,2,3,..
+	*/
+   
+	//没有定义的情况：7
 	if(!code){code=7;}
 	
-	//0
+	// icon_id 默认为1，表示成功
 	let icon_id=1;
 	if(code >2){
 		icon_id=7;
-	}else if(code ==2){
+	}else if(code ==1 || code ==2){
 		icon_id=2;
-// 		setLocalToken("");
-// 		if(parent.navMenuRight){
-// 			parent.navMenuRight.logout();
-// 		}
-
-	}else{
-		icon_id=1;
 	}
-	// 2错误
 	
 	// 7警告
 	parent.layer.msg(msg, {icon:icon_id});

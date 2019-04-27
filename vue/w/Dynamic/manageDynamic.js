@@ -1,4 +1,4 @@
-parent.navMenuRight.upLoginStatus();
+
 var localToken = getLocalToken();
 
 
@@ -20,13 +20,17 @@ const managedynamic = new Vue({
 			}); 		
 		},
 		upVar( data){
-			this.dynamicList.push(data);
+			let _this = this;
+			$.each(data, function(i,item){
+				_this.dynamicList.push(item);
+			})
+			
 		},
 
-		delDynamic(idx){
-			var objId='dyn-'+idx;
+		delDynamic(objId, idx){
+			
 			var _vueThis=this;
-			var item = _vueThis.dynamicList[idx][0];
+			var item = _vueThis.dynamicList[idx];
 			
 			gAxios.post('api/dynamic/dynamicDel.php', {
 				dyn_id: item.id,
@@ -82,6 +86,7 @@ $(function () {
 		})
 		.then(function (response) {
 			var res=[];
+			let dynamicListLen =  managedynamic.dynamicList.length;
 			if(response.status==200){
 				// console.log(1);
 				res=response.data.data;
@@ -102,14 +107,14 @@ $(function () {
 				if(data.imgObj.data.length<5){
 					picturesClass='pictures-4';
 				};
-				var idx = managedynamic.dynamicList.length+i1-1;
+				var idx =dynamicListLen + i1;
 				var liList="";
 				$.each(data.imgObj.data, function (i2, data){
 					liList+='<li><img onclick="managedynamic.viewImg('+idx+', '+i2+')" class="rounded" src="'+data.thumb+'" alt="'+data.alt+'"></li>';
 				});
-				
+				let dynid="dyn-"+idx;
 				let $gitem = $(
-					'<li class="list-group-item " id="dyn-'+idx+'">'
+					'<li class="list-group-item " id="'+dynid+'">'
 					+'	<div class="row">'
 					+'		<div class="col-md-2">'
 					+'			<ul class="pictures '+picturesClass+'">'
@@ -120,7 +125,7 @@ $(function () {
 					+'			<div class="p-2 ml-2">'
 					+'				<span class="btn text-success">'+data.nickname+'</span>'
 					+'				<span class="card__span_right">'
-					+'					<span class="btn btn-outline-success" onclick="managedynamic.delDynamic('+idx+')">删除</span>'
+					+'					<span class="btn btn-outline-success" onclick="managedynamic.delDynamic(\''+dynid+'\', '+idx+')">删除</span>'
 					+'				</span>'
 					+'			</div>'
 					+'			<div class="p-2 ml-2" style="font-size: 15px;">'

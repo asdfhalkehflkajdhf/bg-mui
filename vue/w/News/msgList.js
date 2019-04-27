@@ -75,9 +75,8 @@ var  optEvent={
 // index：行索引
 	'click .uid': function (e, value, row, index) {
 		// console.log("打开msgWin",row, value);
-			
-		request_url = '../PersonalInfo/view.html?fid='+row.uid;
-		openSubWin(request_url, row.name, true);
+		// request_url = '../PersonalInfo/view.html?fid='+row.uid;
+		// openSubWin(request_url, row.name, true);
 	},
 	'click .name': function (e, value, row, index) {
 		// console.log("打开msgWin",row, value);
@@ -113,8 +112,10 @@ var  optEvent={
 }
 
 function uidFormatter(value, row, index, field){
+			request_url = '../PersonalInfo/view.html?fid='+row.uid;
+	
 	return [
-	  '<a class="uid" href="javascript:void(0)" title="用户唯一id">',
+	  '<a class="uid" href="'+request_url+'" target="_black" title="用户唯一id">',
 		value,
 	  '</a> '
 	].join('')

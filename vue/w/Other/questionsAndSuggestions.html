@@ -63,7 +63,7 @@
 		</div>
 	</body>
 	<script>
-		parent.navMenuRight.upLoginStatus();
+
 		var localToken = getLocalToken();
 		
 		const suggestForm = new Vue({
@@ -84,7 +84,7 @@
 			methods:{
 				checkForm:function(){
 
-					if(this.suggestForm.title.length==0 or 
+					if(this.suggestForm.title.length==0 || 
 					this.suggestForm.content.length==0 
 					){
 						layerMsg("输入不能为空");

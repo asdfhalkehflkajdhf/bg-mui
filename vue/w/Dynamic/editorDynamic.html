@@ -28,12 +28,8 @@
 		<!-- 自有资源 -->
 		<link rel="stylesheet" type="text/css" href="./css/main.css">
 		<!--图片上传插件-->
-		<script type="text/javascript" src="../../res/bootstrap-fileinput-4.5.2/js/fileinput.min.js"></script>
-		<script type="text/javascript" src="../../res/bootstrap-fileinput-4.5.2/js/locales/zh.js"></script>
-		<link rel="stylesheet" href="../../res/bootstrap-fileinput-4.5.2/css/fileinput.min.css">
-		<script src="../../res/bootstrap-fileinput-4.5.2/themes/fa/theme.js" type="text/javascript"></script>
-		<script src="../../res/bootstrap-fileinput-4.5.2/themes/explorer-fa/theme.js" type="text/javascript"></script>
-		<link href="../../res/bootstrap-fileinput-4.5.2/themes/explorer-fa/theme.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="css/imgup.css" type="text/css" rel="stylesheet"/>
+
 		<!-- awesome图标 -->
 		<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
 
@@ -47,13 +43,35 @@
 						<div class="form-group row" id="app">
 							<!-- <label for="内容" class="col-sm-2 col-form-label">内容</label> -->
 							<div class="col-sm-12">
-								<textarea class="form-control" id="textarea1" maxlength="1024" rows="3" placeholder="内容,1-1024" v-model="content"></textarea>
+								<textarea class="form-control" id="textarea1" maxlength="1024" rows="3" placeholder="内容,0-1024" v-model="content"></textarea>
 							</div>
 						</div>
-						<input type="file" name="image_data[]" id="txt_file" multiple class="file-loading el-col-offset-1" />
+						
+						<div class="card-body">
+							<div class=" img-section">
+								<div class="z_photo upimg-div clear row" >
+									   <!--<section class="up-section fl">
+											<span class="up-span"></span>
+											<img src="img/buyerCenter/a7.png" class="close-upimg">
+											<img src="img/buyerCenter/3c.png" class="type-upimg" alt="添加标签">
+											<img src="img/test2.jpg" class="up-img">
+											<p class="img-namep"></p>
+											<input id="taglocation" name="taglocation" value="" type="hidden">
+											<input id="tags" name="tags" value="" type="hidden">
+										</section>-->
+										 <div class="z_file fl">
+											<img src="img/a11.png" class="add-img">
+											<input type="file" name="file" id="file" class="file" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" multiple />
+										 </div>
+								 </div>
+							 </div>
+						</div>
+
+
+						<!-- <input type="file" name="file" id="txt_file" multiple class="file-loading el-col-offset-1" /> -->
 						<div  class="placeholder-10"></div>
 					
-						<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="forget()">发送</button>
+						<button type="button" class="btn btn-primary btn-lg btn-block" onclick="editorDynamic.submit()">发送</button>
 					</form>
 					
 				</div>
@@ -63,14 +81,15 @@
 			</div>
 		</div>
 	</body>
+	<script src="imgup.js"></script>
+
+
 	<script src="../common/globalUpImg.js"></script>
 	
 	<script>
-		parent.navMenuRight.upLoginStatus();		
+
 		var localToken = getLocalToken();
-		//使用page_id 3,  未开启上传功能
-		upImgInit("txt_file", 3, localToken, false);
-		
+
 		
 		const editorDynamic = new Vue({
 			el:"#app",
@@ -79,21 +98,9 @@
 				content:""		
 			},
 			methods:{
-				imgUpEventFunc(event, data, previewId, index){
-					
-				},
-				addList(obj){
-					this.list = obj;
-				},
-				upImg(){
-					upImgEvent("txt_file", imgUpEventFunc);
-				},
-				clean(){
-					this.content="";
-					
-				},
-				submit(){
+				upDyn(){
 					var _vueThis=this;
+					
 					gAxios.post('api/dynamic/dynamicAdd.php', {
 						token: localToken,
 						content: _vueThis.content,
@@ -103,24 +110,98 @@
 						var res=[];
 						if(response.status==200){
 							res=response.data;
+							layerMsg(res.msg, res.code);
 							if(res.code==0){
-								if(res.data.length>0){
-									Vue.set(_vueThis.dynamicList,_vueThis.dynamicList.length,res.data);
-								}
-								
-								// _vueThis.dynamicList.push(res.data);
-								// console.log(_vueThis.dynamicList);
-							}else{
-								layerMsg(res.msg, res.code);
+								cleanFileList();
 							}
 						}else{
-							layerMsg("获取信息失败！", 2);
+							layerMsg("添加失败！", 2);
 						}
 						
 					})
 					.catch(function (error) {
 						console.log(error);
 					});
+					
+				},
+				upImg(){
+					var _vueThis=this;
+					let fileList = getFileList();
+					// 上传图片
+					if(fileList.length<1){
+						_vueThis.upDyn();
+						return;
+					}
+					
+					// FormData 对象
+					var formFile = new FormData();
+					formFile.append("token", localToken);  // 可以增加表单数据
+					formFile.append("uid", getLocalID());  // 可以增加表单数据
+					formFile.append("page_id", 3);  // 可以增加表单数据
+					$.each(fileList, function(i, file){
+						formFile.append("file[]", file); //加入文件对象
+					});
+					
+					
+					
+					
+					// 发起上传请求
+					gAxios.post('api/personalInfo/userImgUp.php',formFile)
+					.then(function (response) {
+						if(response.status==200){
+							let res=response.data;
+							if(res.code){
+								layerMsg(res.msg, res.code);
+							}else{
+								//
+								let msg="图片上传";
+								if(res.data.ok.length>0){
+									// 有上传成功，更新res_list
+									$.each(res.data.ok, function(i, name){
+										_vueThis.list.push(res.data.msg[name].imgId);
+									})
+									msg+="成功"+res.data.ok.length+"张!"
+									if(res.data.error.length>0){
+										msg+="失败"+res.data.error.length+"张!"
+										layerMsg(msg);
+									}else{
+										layerMsg(msg,0);
+									}
+									
+									_vueThis.upDyn();
+								}else{
+									// 上传失败
+									msg+="失败"+res.data.error.length+"张!"
+									layerMsg(msg, 2);
+								}
+								
+							}
+						}else{
+							layerMsg(response.statusText);
+						}
+					})
+					.catch(function(error) {
+						console.log(error);
+					});
+					
+					
+					//发起请求
+				},
+
+				submit(){
+					var _vueThis=this;
+					
+					let fileList = getFileList();
+					
+					// check from
+					if(fileList.length<1 && _vueThis.content.length<1){
+						layerMsg("内容为空！", 2);
+						return false;
+					}
+
+					// 开始上传
+					this.upImg();
+					
 				}
 					
 			}
