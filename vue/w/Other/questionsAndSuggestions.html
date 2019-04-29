@@ -107,7 +107,10 @@
 							res=response.data;
 							//解析结果
 							layerMsg(res.msg, res.code);	
-							
+							if(res.code==0){
+								_vueThis.suggestForm.title="";
+								_vueThis.suggestForm.content="";
+							}
 						}else{
 							layerMsg(response.statusText);
 						}

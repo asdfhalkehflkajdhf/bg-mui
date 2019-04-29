@@ -1,3 +1,4 @@
+
 var localToken = getLocalToken();
 // 编辑框初始化,活动页，2
 var editor_si = wangEditorInit('actionMenu','actionIntroduction', localToken, getLocalID(), 2);
@@ -208,7 +209,8 @@ const eaBaseInfo = new Vue({
 			// a获取活动id
 			_this.res.aid = getQueryString('id');
 			//添加新的图片数据
-			_this.res.res_list = _this.res.res_list.concat(editor_si.upImgResList);
+			_this.res.res_list = $.merge(_this.res.res_list, editor_si.upImgResList);
+			// _this.res.res_list = _this.res.res_list.concat(editor_si.upImgResList);
 			
 			console.log(_this.res);
 			gAxios.post('api/activities/putActionInfo.php', {

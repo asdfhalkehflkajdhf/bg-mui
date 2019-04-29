@@ -67,13 +67,14 @@ $(function(){
 			 var $span = $("<span class='up-span'>");
 			     $span.appendTo($section);
 			
-			var $img0 = $("<i class='fa fa-trash-o fa-lg close-upimg'></i>").on("click",function(event){
+			var $img0 = $("<i class='fa fa-trash-o fa-3x close-upimg' style='color:white'></i>").on("click",function(event){
 					event.preventDefault();
 					event.stopPropagation();
 					let delParent = $(this).parent();
 					let filename = $(this).parent().find('.img-name-p').text();
 					
-					layer.confirm('您确定要删除？', {
+					top.layer.confirm('您确定要删除？', {
+						title: false, //不显示标题栏,
 						btn: ['确定','取消'] //按钮
 					}, function(index, layero){
 						var numUp = delParent.siblings().length;

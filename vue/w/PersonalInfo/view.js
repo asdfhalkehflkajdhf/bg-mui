@@ -1,4 +1,4 @@
-//新页面不需要navMenuRight parent.navMenuRight.upLoginStatus();
+
 var localToken = getLocalToken();
 
 
@@ -34,7 +34,7 @@ const userInfo = new Vue({
 		getUserInfo:function(){
             var _this = this;
 			// post 本地json会失败
-			gAxios.post('api/personalInfo/userinfoGet.php', {
+			gAxios.post('api/personalInfo/userInfoGet.php', {
 				token: localToken,
 				uid:getQueryString("fid")
 			})

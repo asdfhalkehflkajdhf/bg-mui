@@ -23,6 +23,7 @@
 		<script src="../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="../common/background-1.css">
 		<script src="../common/globalVar.js"></script>
+		<script src="../common/globalWangEditor.js"></script>
 		
 		<!-- 自有资源 -->
 		<link rel="stylesheet" type="text/css" href="./css/set.css">
@@ -129,7 +130,7 @@
 												<div class="input-group-prepend">
 													<span class="input-group-text" id="inputGroup-living-sm">生活地</span>
 												</div>
-												<select class="form-control custom-select" id="生活地" aria-label="生活地" v-model="res.living_place">
+												<select class="form-control custom-select" id="生活地" aria-label="生活地" v-model="res.user_living_place_id">
 													<optgroup :label="item.text" v-for="item in livingPlaceList">
 														<option :value="city.value" v-for="city in item.data" v-text="city.text"></option>
 													</optgroup>
@@ -169,7 +170,7 @@
 												<div class="input-group-prepend">
 													<span class="input-group-text" id="inputGroup-status-sm">状态</span>
 												</div>
-												<select class="form-control custom-select" id="状态" v-model="res.marital_status">
+												<select class="form-control custom-select" id="状态" v-model="res.user_marital_status_id">
 													<option :value="item.value" v-for="item in maritalStatusList" v-text="item.text"></option>
 												</select>
 

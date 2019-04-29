@@ -30,12 +30,7 @@
 		<script src="../../res/js/masonry.pkgd.min.js"></script>
 		<script src="../../res/js/imagesloaded.pkgd.min.js"></script>
 		<!--图片上传插件-->
-		<script type="text/javascript" src="../../res/bootstrap-fileinput-4.5.2/js/fileinput.min.js"></script>
-		<script type="text/javascript" src="../../res/bootstrap-fileinput-4.5.2/js/locales/zh.js"></script>
-		<link rel="stylesheet" href="../../res/bootstrap-fileinput-4.5.2/css/fileinput.min.css">
-		<script src="../../res/bootstrap-fileinput-4.5.2/themes/fa/theme.js" type="text/javascript"></script>
-		<script src="../../res/bootstrap-fileinput-4.5.2/themes/explorer-fa/theme.js" type="text/javascript"></script>
-		<link href="../../res/bootstrap-fileinput-4.5.2/themes/explorer-fa/theme.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="../common/upImg/imgup.css" type="text/css" rel="stylesheet"/>
 		<!-- awesome图标 -->
 		<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
 	</head>
@@ -48,19 +43,37 @@
 					<div class="group-item">
 						<div class="card" style="">
 							<div class="card-header">
-								<span class="align-middle">相册</span>
+								<!-- <h2 class="text-center">相册</h2> -->
+								<span class="text-center">相册</span>
 								<button type="button" class="btn btn-outline-success card__span_right" onclick="photoAlbum.userImgDel()">批量删除</button>
 							</div>
 			
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item">
-									<div  class="placeholder-10"></div>
-									<input type="file" name="image_data[]" id="txt_file" multiple class="file-loading el-col-offset-1" />
-									<div  class="placeholder-10"></div>
-								</li>
-							</ul>
+							<form>
+								<div class="card-body">
+									<div class=" img-section">
+										<div class="z_photo upimg-div clear row" >
+											   <!--<section class="up-section fl">
+													<span class="up-span"></span>
+													<img src="img/buyerCenter/a7.png" class="close-upimg">
+													<img src="img/buyerCenter/3c.png" class="type-upimg" alt="添加标签">
+													<img src="img/test2.jpg" class="up-img">
+													<p class="img-namep"></p>
+													<input id="taglocation" name="taglocation" value="" type="hidden">
+													<input id="tags" name="tags" value="" type="hidden">
+												</section>-->
+												 <div class="z_file fl">
+													<img src="../common/upImg/img/a11.png" class="add-img">
+													<input type="file" name="file" id="file" class="file" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" multiple />
+												 </div>
+										 </div>
+									 </div>
+								</div>
+								<!-- <input type="file" name="file" id="txt_file" multiple class="file-loading el-col-offset-1" /> -->
+								<button type="button" class="btn btn-primary btn-lg btn-block" onclick="upImg()">上传</button>
+							</form>
 														
 							<!-- //  -->
+							<div  class="placeholder-10"></div>
 							<div class="grid row js-masonry " id="imgListDiv" ></div>
 
 						</div>
@@ -79,57 +92,54 @@
 		</div>
 	</body>
 	<!-- 动态加载数据 -->
-	<script src="../common/globalUpImg.js"></script>
+	<script src="../common/upImg/imgup.js"></script>
 
 	<script type="text/javascript" >
 
 		var localToken = getLocalToken();
 		
-		function eventFunc(event, data, previewId, index){
-			console.log(event, data, previewId, index);
-		}
 		
-		//使用page_id 1,  开启上传功能, 获取get参数
-		upImgInit("txt_file", 1, localToken, getQueryString('uid'), true);
-		upImgEvent("txt_file", eventFunc);
+
 		// jQuery页面加载后执行的事件(3种方式)
 		// 1 $(function () { });
 		// 2 $(document).ready(function () { });
 		// 3 window.onload = function () { }
 
 		//////////////////////////////////////////////////////////////
-		function reloadGridItem(obj=null){
-			
-			function addItem(data){
-				var $container = $('#imgListDiv');
-				//生成item
-				$.each(data, function (i, data) {
-					var $gitem = $(
-						'<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12" id="'+data['id']+'">'
-						+'	<div class="card ">'
-						+'			<img class="card-img-top" src="'+data['src']+'" imgShowRul="'+data['src']+'" alt="'+data['alt']+'">'
-						+'		<div class="">'
-						+'				<input type="checkbox" name="imgCheckBox" class="card__span_left  align-middle" value="'+data['id']+'">'
-						+'				<button type="button" class="btn btn-link card__span_right " onclick="a.userImgDelById('+data['id']+')">删除</button>'
-						+'		</div>'
-						+'	</div>'
-						+'</div>'
-					);
-					
-					$container.append($gitem).masonry('appended', $gitem, true);
-				});
-					// // jQuery方式。重新布局，添加元素，另一种方式添加元素，重新布局
-				// https://segmentfault.com/a/1190000007316788
-				$container.imagesLoaded( function() {
-					$container.masonry({
-						itemSelector: '.grid-item',
-						// gutterWidth: 20,
-						isAnimated: true
-					});
-				});
-				
+		function addItem(data){
+			if(!data || data.length<1){
+				return;
 			}
+			var $container = $('#imgListDiv');
+			//生成item
+			$.each(data, function(i, item){
+				var $gitem=$(
+					'<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12" id="'+item['id']+'">'
+					+'	<div class="card ">'
+					+'			<img class="card-img-top" src="'+item['src']+'" imgShowRul="'+item['src']+'" alt="'+item['alt']+'">'
+					+'		<div class="">'
+					+'				<input type="checkbox" name="imgCheckBox" class="card__span_left  align-middle" value="'+item['id']+'">'
+					+'				<button type="button" class="btn btn-link card__span_right " onclick="photoAlbum.userImgDelById(\''+item['id']+'\')">删除</button>'
+					+'		</div>'
+					+'	</div>'
+					+'</div>'
+				);
+				$container.append($gitem).masonry('appended', $gitem, true);
+			});
+				// // jQuery方式。重新布局，添加元素，另一种方式添加元素，重新布局
+			// https://segmentfault.com/a/1190000007316788
+			$container.imagesLoaded( function(){
+				$container.masonry({
+					itemSelector: '.grid-item',
+					// gutterWidth: 20,
+					isAnimated: true
+				});
+			});
 			
+		}
+		
+		function reloadGridItem(obj=null){
+
 			if(obj!=null){
 				addItem(obj);
 				return true;
@@ -160,7 +170,68 @@
 			});
 		}
 
-
+		function upImg(){
+			let fileList = getFileList();
+			// 上传图片
+			if(fileList.length<1){
+				layerMsg("图片个数为空！", 2);
+				return;
+			}
+			
+			// FormData 对象
+			var formFile = new FormData();
+			formFile.append("token", localToken);  // 可以增加表单数据
+			formFile.append("uid", getLocalID());  // 可以增加表单数据
+			formFile.append("page_id", 1);  // 可以增加表单数据
+			$.each(fileList, function(i, file){
+				formFile.append("file[]", file); //加入文件对象
+			});
+						
+			// 发起上传请求
+			gAxios.post('api/personalInfo/userImgUp.php',formFile)
+			.then(function (response) {
+				if(response.status==200){
+					let res=response.data;
+					if(res.code){
+						layerMsg(res.msg, res.code);
+					}else{
+						//
+						let upOkList=[];
+						let msg="图片上传";
+						if(res.data.ok.length>0){
+							// 有上传成功，更新res_list
+							$.each(res.data.ok, function(i, name){
+								let item={id:res.data.msg[name].imgId, src:res.data.msg[name].src, alt:""};
+								upOkList.push(item);
+							});
+							// 追加列表
+							addItem(upOkList);
+							// 清空上传的内容
+							cleanFileList();
+							msg+="成功"+res.data.ok.length+"张!";
+							if(res.data.error.length>0){
+								msg+="失败"+res.data.error.length+"张!";
+								layerMsg(msg);
+							}else{
+								layerMsg(msg,0);
+							}
+							
+						}else{
+							// 上传失败
+							msg+="失败"+res.data.error.length+"张!";
+							layerMsg(msg, 2);
+						}
+						
+					}
+				}else{
+					layerMsg(response.statusText);
+				}
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+			
+		}
 		/////////////////////////////////////////////////////////////
 
 		//JS瀑布流插件masonry动态载入数据
@@ -176,21 +247,19 @@
 			// el:"#photoAlbum",
 			// vue 不能包含 bootstrap fileinput ,否则bootstrap fileinput会冲突
 			methods:{
-				userImgDel(){
-					// 移除被点击的item
-					var _this = this;
-					
-					// post 本地json会失败
+				delRequest(delIdList){
+					let _this = this;
 					gAxios.post('api/personalInfo/userImgDel.php', {
 						token: localToken,
-						idList: _this.getItemIdList()
+						idList: delIdList,
+						uid: getQueryString("fid")
 					})
 					.then(function (response) {
 						if(response.status==200){
 							var res=response.data;
 							if(res.code==0){
 								// 页面删除成功的item
-								removeItemById(res.data);
+								_this.removeItemById(res.data);
 							}
 							layerMsg(res.msg, res.code);
 						}else{
@@ -200,43 +269,19 @@
 					.catch(function (error) {
 						console.log(error);
 					});
-				
-				
 					
 				},
-				userImgDelById(id){
+				userImgDel(){
 					// 移除被点击的item
-					var _this = this;
-					// post 本地json会失败
-					gAxios.post('api/personalInfo/userImgDel.php', {
-						token: localToken,
-						idList: [id]
-					})
-					.then(function (response) {
-						if(response.status==200){
-							var res=response.data;
-							if(res.code==0){
-								// 页面删除成功的item
-								removeItemById(res.data);
-							}
-							layerMsg(res.msg, res.code);
-						}else{
-							layerMsg(response.statusText);
-						}
-					})
-					.catch(function (error) {
-						console.log(error);
-					});
-				
-					
+					this.delRequest(this.getItemIdList());
+				},
+				userImgDelById(id){
+					this.delRequest([id]);
 				},
 				removeItemById(idList){
 					// 删除item
-					for(id in idList){
-						$('#imgListDiv').masonry( 'remove', $('#'+id) )
-						// $grid.masonry( 'remove', this )
-						// 对剩余元素执行重排
-						.masonry('layout');			
+					for(idx in idList){
+						$('#imgListDiv').masonry( 'remove', $("#"+idList[idx]) ).masonry('layout');	
 					}
 				},
 				getItemIdList(){

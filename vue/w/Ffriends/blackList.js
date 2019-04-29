@@ -77,16 +77,16 @@ var  optEvent={
 
 	'click .remove': function (e, value, row, index) {
 		// 在服务端删除
-		parent.layer.confirm('您是否要把对方从黑名单移除？', 
+		top.layer.confirm('您是否要把对方从黑名单移除？', 
 			{
 				title: false, //不显示标题栏,
 				btn: ['是','不是'] //按钮
-			}, function(){
+			}, function(index, layero){
 				//按钮btn1
 				// 发起请求
 				sendDelReq(row);
-				
-			}, function(){
+				layer.close(index);
+			}, function(index){
 				//按钮btn2
 			}	
 		);		

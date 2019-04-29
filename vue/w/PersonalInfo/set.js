@@ -12,7 +12,7 @@ const userInfo = new Vue({
 	el:"#setPersonalInfo",
 	data:{
 		res:{
-			find_switch:false,
+			find_switch:1,
 			uid:'',
 			eye:'',
 			contact:"",
@@ -20,10 +20,12 @@ const userInfo = new Vue({
 			height:"",
 			weight:"",
 			living_place:"",
+			user_living_place_id:"",
 			profession:"",
 			income:"",
 			tryst_expect:"",
 			marital_status:"",
+			user_marital_status_id:"",
 			selfIntr:"",
 			otehrIntr:"",
 			res_list:[]
@@ -42,18 +44,18 @@ const userInfo = new Vue({
 		
 	},
 	mounted:function(){
-		editor_si.txt.html(this.res.selfIntr);
-		editor_ti.txt.html(this.res.otherIntr);
+
 	},
 	methods:{
 		//查找开关
 		up_find_switch(){
-			this.res.find_switch = !this.res.find_switch;
-            var _this = this;
-			// post 本地json会失败
+			var _this = this;
+			
+			_this.res.find_switch = _this.res.find_switch?0:1;
 			gAxios.post('api/personalInfo/userFindSwitchSet.php', {
 				token: localToken,
-				uid:getQueryString("uid")
+				uid:getQueryString("fid"),
+				switch: _this.res.find_switch
 			})
 			.then(function (response) {
 				if(response.status==200){
@@ -74,7 +76,7 @@ const userInfo = new Vue({
 			gAxios.post('api/personalInfo/userContactSet.php', {
 				token: localToken,
 				contact: _this.res.contact,
-				uid:getQueryString("uid")
+				uid:getQueryString("fid")
 			})
 			.then(function (response) {
 				if(response.status==200){
@@ -92,10 +94,10 @@ const userInfo = new Vue({
 		//获取user info
 		getUserInfo(){
             var _this = this;
-			// post 本地json会失败
+			// admin need opt,uid user get url param
 			gAxios.post('api/personalInfo/userInfoGet.php', {
 				token: localToken,
-				uid:getLocalID()
+				uid:getQueryString("fid")
 			})
 			.then(function (response) {
 				if(response.status==200){
@@ -103,6 +105,8 @@ const userInfo = new Vue({
 					if(res.code == 0){
 						_this.res=res.data.res;
 						_this.eduList=res.data.eduList;
+						editor_si.txt.html(_this.res.selfIntr);
+						editor_ti.txt.html(_this.res.otherIntr);
 					}else{
 						layerMsg(res.msg, res.code);
 					}
@@ -163,18 +167,19 @@ const userInfo = new Vue({
 		
 		userBaseSet(){
 			var _this = this;
-			// post 本地json会失败
+			
+			// console.log(_this.res);
 			gAxios.post('api/personalInfo/userBaseSet.php', {
 				token: localToken,
 				nick_name:_this.res.nick_name,
 				height:_this.res.height,
 				weight:_this.res.weight,
-				living_place:_this.res.living_place,
+				living_place:_this.res.user_living_place_id,
 				profession:_this.res.profession,
 				income:_this.res.income,
 				tryst_expect:_this.res.tryst_expect,
-				marital_status:_this.res.marital_status,
-				uid:getQueryString("uid")
+				marital_status:_this.res.user_marital_status_id,
+				uid:getQueryString("fid")
 			})
 			.then(function (response) {
 				if(response.status==200){
@@ -187,17 +192,14 @@ const userInfo = new Vue({
 			.catch(function (error) {
 				console.log(error);
 			});
-
-			
 		},
 		userSelfIntrSet(){
             var _this = this;
-			
-			_this.res.res_list = _this.res.res_list.concat(editor_si.upImgResList);
+			_this.res.res_list = $.merge(_this.res.res_list, editor_si.upImgResList);
 			gAxios.post('api/personalInfo/userSelfIntrSet.php', {
 				token: localToken,
-				selfIntr: editor_si.txt.html(),
-				uid:getQueryString("uid"),
+				self_intr: editor_si.txt.html(),
+				uid:getQueryString("fid"),
 				res_list:_this.res.res_list
 			})
 			.then(function (response) {
@@ -215,11 +217,11 @@ const userInfo = new Vue({
 		},
 		userOtherIntrSet(){
             var _this = this;
-			_this.res.res_list = _this.res.res_list.concat(editor_si.upImgResList);
+			_this.res.res_list = $.merge(_this.res.res_list, editor_ti.upImgResList);		
 			gAxios.post('api/personalInfo/userOtherIntrSet.php', {
 				token: localToken,
-				otherIntr: editor_ti.txt.html(),
-				uid:getQueryString("uid"),
+				other_intr: editor_ti.txt.html(),
+				uid:getQueryString("fid"),
 				res_list:_this.res.res_list
 			})
 			.then(function (response) {
@@ -233,7 +235,6 @@ const userInfo = new Vue({
 			.catch(function (error) {
 				console.log(error);
 			});
-
 		},
 		userEduSet(){
             var _this = this;
@@ -241,13 +242,14 @@ const userInfo = new Vue({
 			gAxios.post('api/personalInfo/userEduSet.php', {
 				token: localToken,
 				verify_code: _this.verify_code,
-				uid:getQueryString("uid")
+				uid:getQueryString("fid")
 			})
 			.then(function (response) {
 				if(response.status==200){
 					var res=response.data;
 					if(res.code==0){
 						_this.verify_code="";
+						_this.eduList.push(res.data);
 					}
 					layerMsg(res.msg, res.code);
 				}else{

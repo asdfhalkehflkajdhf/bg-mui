@@ -1,4 +1,4 @@
-parent.navMenuRight.upLoginStatus();
+
 var localToken = getLocalToken();
 
 
@@ -84,21 +84,22 @@ var  optEvent={
 		openSubWin(request_url, row.name );
 	},
 	'click .blacklist': function (e, value, row, index) {
-		layer.confirm('您是否要把对方添加到黑名单？', 
+		top.layer.confirm('您是否要把对方添加到黑名单？', 
 			{
 				title: false, //不显示标题栏,
 				btn: ['是','不是'] //按钮
-			}, function(){
+			}, function(index, layero){
 				//按钮btn1
 				// 发起请求
 				// 在服务端删除
 				removeRecard(row);
 				// 在服务端添加黑名单
 				blackListAdd(row);
-				
-			}, function(){
+				layer.close(index);
+			}, function(index){
 				//按钮btn2
 				layerMsg('保存冷静', 7);
+				layer.close(index);
 			}	
 		);
 	},

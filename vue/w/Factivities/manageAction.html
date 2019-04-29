@@ -36,7 +36,11 @@
 	<body>
 		<div class="container ">
 		    <div class="wrapper">
-
+				<!-- 头部 -->
+				<div class="card">
+					<h2 class="text-center">活动管理</h2>
+				</div>
+				<!-- 数据列表 -->
 				<ul class="list-group list-group-flush" id="app">
 					<li class="list-group-item " :id="'act-'+idx" v-for="item, idx in actionList">
 						<div class="row">
@@ -121,7 +125,7 @@
 							var res = response.data;
 							if(res.code==0){
 								if(res.data.length){
-									_this.actionList = _this.actionList.concat(res.data);
+									_this.actionList = $.merge(_this.actionList, res.data);
 								}else{
 									layerMsg("没有更多！", 7);
 								}

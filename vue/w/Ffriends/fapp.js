@@ -1,4 +1,4 @@
-parent.navMenuRight.upLoginStatus();
+
 var localToken = getLocalToken();
 
 // 加载轮播图数据

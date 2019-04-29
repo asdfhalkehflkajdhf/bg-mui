@@ -74,5 +74,14 @@ function layerMsg(msg, code){
 	}
 	
 	// 7警告
-	parent.layer.msg(msg, {icon:icon_id});
+	// parent.layer.msg(msg, {icon:icon_id});
+	// 显示在顶层窗口
+	top.layer.msg(msg, {icon:icon_id});
+}
+
+
+
+//更新登陆状态信息
+if(top.navMenuRight){
+	top.navMenuRight.upLoginStatus();	
 }

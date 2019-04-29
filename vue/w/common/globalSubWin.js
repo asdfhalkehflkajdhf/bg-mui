@@ -20,7 +20,9 @@ function openSubWin(url, title, full){
 
 	var index = layer.open({
 		type: 2 //此处以iframe举例
-		,title: title
+		,title: false //不显示标题栏,
+		,scrollbar: false
+		// ,title: title
 		//,area: ['900px', '700px']
 		,area: [ String(openMsgWinWidth)+'px', String(openMsgWinHeight)+'px' ]
 		,shade: 0

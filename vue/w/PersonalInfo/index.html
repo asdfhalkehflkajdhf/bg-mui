@@ -39,9 +39,7 @@
 					<ul class="nav list-group list-group-flush">
 						<!-- //个人记录管理 -->
 						<li class="list-group-item nav-item" v-for="item in res">
-							<a class="nav-link" href="#" v-on:click="openSubPage(item)" v-text="item.title">
-								
-							</a>
+							<a class="nav-link" href="#" v-on:click="openSubPage(item)" v-text="item.title" v-if="item.show"></a>
 						</li>
 					</ul>
 				</div>

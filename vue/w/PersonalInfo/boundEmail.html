@@ -29,36 +29,32 @@
 					<div id="collapseOne" class="collapse show" data-parent="#accordion">
 						<h2 class="text-center">绑定</h2>
 
-						<form>
-							<div class="form-group row">
-								<!-- <label for="邮箱" class="col-sm-2 col-form-label">邮箱</label> -->
-								<div class="col-sm-12">
-								<input type="email" class="form-control" placeholder="邮箱" v-model="boundEmailForm.email" readonly="readonly">
-								</div>
+						<div class="form-group row">
+							<!-- <label for="邮箱" class="col-sm-2 col-form-label">邮箱</label> -->
+							<div class="col-sm-12">
+							<input type="email" class="form-control" placeholder="邮箱" v-model="boundEmailForm.email" readonly="readonly">
 							</div>
-						</form>	
+						</div>
 						<div style="text-align: right;">
 							<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo">修改</button>
 						</div>
 					</div>
 					<div id="collapseTwo" class="collapse" data-parent="#accordion">
 						<h2 class="text-center">绑定</h2>
-						<form>
-							<div class="form-group row">
-								<!-- <label for="邮箱" class="col-sm-2 col-form-label">邮箱</label> -->
-								<div class="col-sm-12">
-								<input type="email" class="form-control"  placeholder="邮箱" v-model="boundEmailForm.email"  >
-								</div>
+						<div class="form-group row">
+							<!-- <label for="邮箱" class="col-sm-2 col-form-label">邮箱</label> -->
+							<div class="col-sm-12">
+							<input type="email" class="form-control"  placeholder="邮箱" v-model="boundEmailForm.newEmail"  >
 							</div>
-							<div class="form-group row">
-								<!-- <label for="checkCode" class="col-sm-2 col-2 col-form-label">验证码</label> -->
-								<div class="col-sm-8 col-8">
-								<input type="text" class="form-control"  placeholder="验证码" v-model="boundEmailForm.checkCode" maxlength="16">
-								</div>
-								<button type="button" class="btn btn-link col-sm-4 col-4" v-on:click="getCheckCodePhone()">获取验证码</button>
+						</div>
+						<div class="form-group row">
+							<!-- <label for="checkCode" class="col-sm-2 col-2 col-form-label">验证码</label> -->
+							<div class="col-sm-8 col-8">
+							<input type="text" class="form-control"  placeholder="验证码" v-model="boundEmailForm.checkCode" maxlength="16">
 							</div>
-							<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="boundEmail()">发送</button>
-						</form>	
+							<button type="button" class="btn btn-link col-sm-4 col-4" v-on:click="getCheckCodeEmail()">获取验证码</button>
+						</div>
+						<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="boundEmail()">发送</button>
 					</div>
 				</div>
 
@@ -70,12 +66,13 @@
 	<script>
 
 		var localToken = getLocalToken();
-		const form = new Vue({
-			el:"form",
+		const boundEmail = new Vue({
+			el:"#accordion",
 			data:{
 				boundEmailForm:{
 					token:localToken,
 					email:"",
+					newEmail:"",
 					checkCode:""
 				}
 			},
@@ -114,28 +111,49 @@
 					
 				},
 				
+				checkForm:function(){
+					if(this.boundEmailForm.newEmail.length<1){
+						layerMsg("邮箱不能为空！");
+						return false;
+					}else if(this.boundEmailForm.newEmail == this.boundEmailForm.email){
+						layerMsg("同原来邮箱一样！");
+						return false;						
+					}
+					return true;
+				},
 				boundEmail:function(){
 					var _vueThis = this;
+					if(!_vueThis.checkForm()){
+						return false;
+					};
 					gAxios.post('api/personalInfo/emailSet.php', _vueThis.boundEmailForm)
 					.then(function (response) {
 						if(response.status==200){
 							res=response.data;
 							//解析结果
 							layerMsg(res.msg, res.code);
+							if(res.code==0){
+								_vueThis.boundEmailForm.checkCode="";
+							}
 						}else{
 							layerMsg(response.statusText);
 						}
 					})
 					.catch(function (error) {
 						console.log(error);
-						
 					});
 					
 				},
-				getCheckCodePhone:function(){
+				getCheckCodeEmail:function(){
 					var _vueThis = this;
+					if(!_vueThis.checkForm()){
+						return false;
+					};
+					
+					var index = layer.load(1, { shade: [0.1,'#fff']}); //0.1透明度的白色背景
 					gAxios.post('api/personalInfo/emailCodeSend.php', _vueThis.boundEmailForm)
 					.then(function (response) {
+						layer.close(index);
 						if(response.status==200){
 							res=response.data;
 							//解析结果
@@ -145,6 +163,7 @@
 						}
 					})
 					.catch(function (error) {
+						layer.close(index);
 						console.log(error);
 						
 					});

@@ -26,6 +26,9 @@
 		    <div class="wrapper">
 		
 				<div class="row card">
+					<div class="card">
+						<h2 class="text-center">修改密码</h2>
+					</div>
 					<form>
 						<div style="height: 10px;"></div>
 						<div class="input-group col-sm">
@@ -62,7 +65,7 @@
 	</body>
 	
 	<script>
-		parent.navMenuRight.upLoginStatus();
+
 		var localToken = getLocalToken();
 		
 		const changeForm = new Vue({
@@ -105,15 +108,18 @@
 						return false;
 					}
 					
-					gAxios.post('api/personalInfo/changePW.php', {
-						token:localToken
-					})
+					gAxios.post('api/personalInfo/changePW.php', _vueThis.changePWForm)
 					.then(function (response) {
 						if(response.status==200){
 							res=response.data;
 							//解析结果
-							layerMsg(res.msg, res.code);							
-							
+							layerMsg(res.msg, res.code);
+							// 初始化输入参数
+							if(res.code == 0){
+								_vueThis.changePWForm.newPw1="";
+								_vueThis.changePWForm.newPw2="";
+								_vueThis.changePWForm.srcPw="";
+							}
 						}else{
 							layerMsg(response.statusText);
 						}

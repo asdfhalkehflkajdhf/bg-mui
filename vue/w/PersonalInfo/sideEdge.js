@@ -1,4 +1,4 @@
-parent.navMenuRight.upLoginStatus();
+
 var localToken = getLocalToken();
 
 const sideEdeg = new Vue({
