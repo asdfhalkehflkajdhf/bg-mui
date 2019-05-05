@@ -125,7 +125,7 @@ function nameFormatter(value, row, index, field){
 	return [
 	  '<a class="name" href="javascript:void(0)" title="用户名，消息数">',
 		value,
-		'<span class="badge badge-pill badge-danger">'+row.noRead+'</span>',
+		row.noRead==0?"":'<span class="badge badge-pill badge-danger">'+row.noRead+'</span>',
 	  '</a> '
 	].join('')
 }

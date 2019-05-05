@@ -3,8 +3,8 @@ var localToken = getLocalToken();
 
 // 编辑框初始化
 // 编辑框初始化
-var editor_si = wangEditorInit('personalMenu','personalIntroduction', localToken, 1);
-var editor_ti = wangEditorInit('duifangMenu','duifangIntroduction', localToken, 1);
+var editor_si = wangEditorInit('personalMenu','personalIntroduction', localToken, getQueryString("fid"), 1);
+var editor_ti = wangEditorInit('duifangMenu','duifangIntroduction', localToken, getQueryString("fid"), 1);
 
 
 // 查找时为，一个表结构

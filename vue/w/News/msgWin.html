@@ -59,7 +59,7 @@
 							<div class="input-group" >
 								<textarea class="form-control" aria-label="With textarea" v-model="msg"></textarea>
 								<div class="input-group-append">
-									<button class="btn btn-outline-secondary" type="button" v-on:click="sengMsg()">发送</span>
+									<button class="btn btn-outline-secondary" type="button" v-on:click="sendMsg()">发送</span>
 								</div>
 							</div>
 						</div>
@@ -72,7 +72,8 @@
 			el: "#msgWin",
 			data:{
 				msg:"",
-				msgLastTime:""
+				msgLastTime:"",
+				intervalid1:-1
 			},
 			methods:{
 				// 更新页面显示内容
@@ -81,8 +82,8 @@
 					$.each(msgItem, function (i, data) {
 						var $gitem = $(
 							'<div>'
-							+'	<p class="text-center msg-time-backcolor">'+data.time+'</p>'
-							+'	<p class="text-'+data['origin']+'"><span class="msg-text-backcolor-'+data.origin+' rounded">'+data.content+'</span></p>'
+							+'	<p class="text-center msg-time-backcolor">'+data.ctime+'</p>'
+							+'	<p class="text-'+data.origin+'"><span class="msg-text-backcolor-'+data.origin+' rounded">'+data.content+'</span></p>'
 							+'</div>'
 						);
 						$container.append($gitem);
@@ -102,13 +103,19 @@
 					.then(function (response) {
 						//   // 服务端返回的状态信息
 						if(response.status==200){
-							// console.log(1);
+							let res = response.data;
+							// 更新上次的获取数据时间
+							_vue_this.msgLastTime = res.msgLastTime;
 							//   // 服务端返回的数据
-							if(response.data.length==0){
-								layerMsg("没有更多，请修改查找条件！");
+							if(res.data.length==0){
+								if(res.code){
+									layerMsg(res.msg, res.code);
+								}
 								return;
-							};	
-							_vue_this.appendMsgWin(response.data);
+							}else{
+								_vue_this.appendMsgWin(res.data);
+							};
+							
 						}else {
 							layerMsg("获取信息失败！"+response.statusText);
 							return;
@@ -120,7 +127,7 @@
 				},
 
 				// 发送数据
-				sendMsg(){
+				sendMsg:function(){
 					var _this = this;
 					// post 本地json会失败
 					gAxios.post('api/news/addUserMsg.php', {
@@ -149,9 +156,14 @@
 				}
 
 			},
+			created:function(){
+				// this.upMsgWin();
+			},
 			mounted:function(){
-				//请求数据,更新页面,定时器
-				this.intervalid1 =setInterval(this.upMsgWin(), 1000);
+				// 请求数据,更新页面,定时器
+				this.intervalid1 =setInterval(() => {
+					this.upMsgWin()
+				}, 3000);
 			},
 			beforeDestroy:function(){
 				clearInterval(this.intervalid1);

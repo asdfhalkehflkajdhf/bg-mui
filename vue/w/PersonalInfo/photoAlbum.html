@@ -148,7 +148,7 @@
 			// post 本地json会失败
 			gAxios.post('api/personalInfo/userImgGetList.php', {
 				token: localToken,
-				fid: getLocalID(),
+				fid: getQueryString("fid"),
 				page_id: 1
 			})
 			.then(function (response) {
@@ -181,7 +181,7 @@
 			// FormData 对象
 			var formFile = new FormData();
 			formFile.append("token", localToken);  // 可以增加表单数据
-			formFile.append("uid", getLocalID());  // 可以增加表单数据
+			formFile.append("uid", getQueryString("fid"));  // 可以增加表单数据
 			formFile.append("page_id", 1);  // 可以增加表单数据
 			$.each(fileList, function(i, file){
 				formFile.append("file[]", file); //加入文件对象

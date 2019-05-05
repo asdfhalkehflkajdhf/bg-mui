@@ -97,21 +97,6 @@
 	</body>
 <script type="text/javascript">
 var localToken = getLocalToken();
-function userAdd(row){
-	gAxios.post('api/admin/userAdd.php', row)
-	.then(function (response) {
-		if(response.status==200){
-			//解析结果
-			res=response.data;
-			layerMsg(res.msg, res.code);
-		}else{
-			layerMsg(response.statusText, 2);
-		}
-	})
-	.catch(function (error) {
-		console.log(error);
-	});
-}
 
 	//提交表单
 	const userManagement=new Vue({
@@ -124,14 +109,36 @@ function userAdd(row){
 			},
 		},
 		methods:{
+			userAdd(){
+				let _this = this;
+
+				gAxios.post('api/admin/userAdd.php', _this.row)
+				.then(function (response) {
+					if(response.status==200){
+						//解析结果
+						res=response.data;
+						layerMsg(res.msg, res.code);
+						if(res.code == 0){
+							_this.row.phone="";
+							_this.row.pw="";
+						}
+					}else{
+						layerMsg(response.statusText, 2);
+					}
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+			},
 			submit(){
-				userAdd(this.row);
+				this.userAdd();
 			},
 		}
 	});
 
 
 	function userDel(row){
+		var index = layer.load(1, { shade: [0.1,'#fff']}); //0.1透明度的白色背景
 		gAxios.post('api/personalInfo/cancel.php', {
 			token:localToken,
 			uid:row.uid,
@@ -152,9 +159,11 @@ function userAdd(row){
 			}else{
 				layerMsg(response.statusText, 2);				
 			}
+			layer.close(index);
 		})
 		.catch(function (error) {
 			console.log(error);
+			layer.close(index);
 		});
 
 	}
@@ -177,11 +186,15 @@ function userAdd(row){
 			
 		},
 		'click .edit': function (e, value, row, index) {
-			request_url = '../../../w/PersonalInfo/set.html?uid='+row.uid;
+			request_url = '../../../w/PersonalInfo/set.html?fid='+row.uid;
 			openSubWin(request_url, row.name, true);
 		},
 		'click .photo': function (e, value, row, index) {
-			request_url = '../../../w/PersonalInfo/photoAlbum.html?uid='+row.uid;
+			request_url = '../../../w/PersonalInfo/photoAlbum.html?fid='+row.uid;
+			openSubWin(request_url, row.name, true);
+		},
+		'click .edu': function (e, value, row, index) {
+			request_url = 'userSetEdu.html?fid='+row.uid;
 			openSubWin(request_url, row.name, true);
 		},
 		'click .eye': function (e, value, row, index) {
@@ -198,10 +211,10 @@ function userAdd(row){
 		// 			console.log(value);
 		// 			console.log(row);
 		// 			console.log(index);
-		// 			console.log(field);
+		// 			console.log(field); fa-2x
 		return [
 			'<a class="remove mr-2" href="javascript:void(0)" title="删除">',
-			'	<i class="fa fa-trash-o"></i>',
+			'	<i class="fa fa-trash-o fa-1g"></i>',
 			'</a>'
 		  
 		].join('')
@@ -215,6 +228,9 @@ function userAdd(row){
 		  '</a>',
 		  '<a class="photo mr-2" href="javascript:void(0)" title="编辑相册">',
 		  '	<i class="fa fa-image"></i>',
+		  '</a>',
+		  '<a class="edu mr-2" href="javascript:void(0)" title="学历信息">',
+		  '	<i class="fa fa-graduation-cap"></i>',
 		  '</a>',
 			'<a class="eye mr-2" href="'+request_url+'" target="_black" title="个人信息预览">',
 		  '	<i class="fa fa-eye"></i>',

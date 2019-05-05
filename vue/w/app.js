@@ -44,7 +44,7 @@ const navMenuLeft = new Vue({
 	},
 	mounted: function(){
 		// 初始化子页面
-		this.preNavItem=this.nvaListLeft[4];
+		this.preNavItem=this.nvaListLeft[0];
 		//首次加载子页面
 		subPageSwitch(this.preNavItem.ifm_url);
 		// showData('挂载到dom后',this);

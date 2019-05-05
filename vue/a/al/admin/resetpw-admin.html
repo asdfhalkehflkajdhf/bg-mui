@@ -83,13 +83,17 @@
 		},
 		methods:{
 			submit(){
+				let _this = this;
 				gAxios.post('api/admin/resetpw.php', this.row)
 				.then(function (response) {
 					if(response.status==200){
 						res=response.data;
 						//解析结果
 						layerMsg(res.msg, res.code);
-						
+						if(res.code == 0){
+							_this.row.uid="";
+							_this.row.pw="";
+						}
 					}else{
 						layerMsg(response.statusText, 2);
 					}

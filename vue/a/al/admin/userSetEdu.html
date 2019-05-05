@@ -98,7 +98,7 @@
 										<span class="input-group-text" id="inputGroup-e-sm">入学时间</span>
 									</div>
 
-									<input type="date" placeholder="入学时间" class="form-control " id="入学时间" v-model="row.profession" >
+									<input type="date" placeholder="入学时间" class="form-control " id="入学时间" v-model="row.enty_time" >
 								</div>
 								
 							</div>
@@ -124,7 +124,7 @@
 
 			row:{
 				token:localToken,
-				uid:getQueryString("uid"),
+				uid:getQueryString("fid"),
 				user_domicile_place_id:"",
 				sex:"",
 				school:"",

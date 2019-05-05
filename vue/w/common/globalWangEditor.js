@@ -93,13 +93,13 @@ function wangEditorImg(editor, token, uid, page_id, imgSize){
 }
 
 
-function wangEditorInit(menu_id, body_id, token, page_id, imgSize=3){
+function wangEditorInit(menu_id, body_id, token, uid, page_id, imgSize=3){
 	// 编辑框初始化
 	var E = window.wangEditor;
 	var editor = new E('#'+menu_id,'#'+body_id);
 	// editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
 	// 图片上传设置
-	wangEditorImg(editor, token, page_id, imgSize);
+	wangEditorImg(editor, token, uid, page_id, imgSize);
 	
 	// 创建编辑器之后，使用editor.txt.html(...)设置编辑器内容
 	var editorMenus=[

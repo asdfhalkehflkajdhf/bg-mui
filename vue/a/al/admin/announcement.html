@@ -168,12 +168,14 @@ const announcement=new Vue({
 		row:{
 			token:localToken,
 			title:"",
-			content:""
+			content:"",
+			res_list:[]
 		},
 	},
 	methods:{
 		submit(){
 			this.row.content=editor_si.txt.html();
+			this.row.res_list = editor_si.upImgResList;
 			announcementAdd(this.row);
 		},
 	}
