@@ -223,6 +223,7 @@ const loginModal=new Vue({
 		},
 		regist:function(){
 			var _vueThis = this;
+			var index = layer.load(1, { shade: [0.1,'#fff']}); //0.1透明度的白色背景
 			gAxios.post('api/auth/regist.php', _vueThis.registForm)
 			.then(function (response) {
 				if(response.status==200){
@@ -232,14 +233,17 @@ const loginModal=new Vue({
 				}else{
 					layerMsg(response.statusText);
 				}
+				layer.close(index);
 			})
 			.catch(function (error) {
+				layer.close(index);
 				console.log(error);
 				
 			});
 		},
 		forget:function(){
 			var _vueThis = this;
+			var index = layer.load(1, { shade: [0.1,'#fff']}); //0.1透明度的白色背景
 			gAxios.post('api/auth/forget.php', _vueThis.forgetForm)
 			.then(function (response) {
 				if(response.status==200){
@@ -249,17 +253,19 @@ const loginModal=new Vue({
 				}else{
 					layerMsg(response.statusText);
 				}
+				layer.close(index);
 			})
 			.catch(function (error) {
 				console.log(error);
-				
+				layer.close(index);
 			});
 
 		},
 		getCheckCode:function(){
 			
 			var _vueThis = this;
-			gAxios.post('api/auth/sendCode.php', _vueThis.loginForm)
+			var index = layer.load(1, { shade: [0.1,'#fff']}); //0.1透明度的白色背景
+			gAxios.post('api/auth/sendCode.php', _vueThis.registForm)
 			.then(function (response) {
 				if(response.status==200){
 					res=response.data;
@@ -269,10 +275,11 @@ const loginModal=new Vue({
 				}else{
 					layerMsg(response.statusText+res.msg);
 				}
+				layer.close(index);
 			})
 			.catch(function (error) {
 				console.log(error);
-				
+				layer.close(index);
 			});
 		}
 	}
