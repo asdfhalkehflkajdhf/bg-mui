@@ -58,3 +58,14 @@ img{
 .placeholder-10{
 	height: 10px;
 }
+
+
+/* // 底部内容隐藏*/
+.footer {
+	display: block;
+}
+@media screen and (max-width: 400px) {
+	.footer {
+		display: none;
+	}
+}

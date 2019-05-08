@@ -76,12 +76,7 @@ const sideEdeg = new Vue({
 					res=response.data;
 					//解析结果
 					if(res.code == 0){
-						if(res.data.length==0){
-							var itemLen = _vueThis.friendshipLinkList.length
-							Vue.set(_vueThis.friendshipLinkList,itemLen,res.data);
-							// _vueThis.friendshipLinkList=res.data;
-						}
-						
+						_vueThis.friendshipLinkList=res.data;
 					}else{
 						layerMsg(res.msg, res.code);
 					}
@@ -109,15 +104,12 @@ const sideEdeg = new Vue({
 	},
 	created:function(){
 		// console.log(getinfor);
-// 		this.getActiveRankList();
-// 		this.getAnnouncementList();
-// 		this.getFriendshipLinkList();
-	},
-	mounted:function(){
-		// console.log(getinfor);
 		this.getActiveRankList();
 		this.getAnnouncementList();
 		this.getFriendshipLinkList();
+	},
+	mounted:function(){
+
 	},
 
 });

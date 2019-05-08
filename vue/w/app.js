@@ -167,7 +167,53 @@ var navMenuRight = new Vue({
 
 });
 
+const footer = new Vue({
+	el:"#footer",
+	data:{
+		friendshipLinkList:[
+			// {id:-1,name:'联系方式',url:"../Other/contact.html"},
+		],
+		curYear:0
+	},
+	methods:{
+		getFriendshipLinkList:function(){
+			//发送请求
+			var _vueThis = this;
+			gAxios.post('api/other/getFriendshipLinkList.php', {
+				token: localToken,
+				uid: _vueThis.uid
+			})
+			.then(function (response) {
+				if(response.status==200){
+					res=response.data;
+					//解析结果
+					if(res.code == 0){
+						_vueThis.friendshipLinkList=res.data;
+					}else{
+						layerMsg(res.msg, res.code);
+					}
+				}else{
+					layerMsg(response.statusText);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+				
+			});
+		},
+		
+		
+	},
+	created:function(){
+		let myDate = new Date();
+		this.curYear = myDate.getFullYear(); 
+		this.getFriendshipLinkList();
+	},
+	mounted:function(){
 
+	},
+
+});
 
 const loginModal=new Vue({
 	el:"#loginModal",

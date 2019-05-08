@@ -25,7 +25,7 @@
 		<script src="../../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="./css/background-2.css">
 		<script src="../../../w/common/globalVar.js"></script>
-		<!-- <script src="../../../w/common/globalWangEditor.js"></script> -->
+		<script src="../../../w/common/globalWangEditor.js"></script>
 
 
 		<!-- 自有资源 -->
@@ -113,34 +113,7 @@
 <script type="text/javascript">
 var localToken = getLocalToken();
 // 编辑框初始化
-var E = window.wangEditor;
-var editor_si = new E('#annMenu', '#annIntroduction');
-
-editor_si.customConfig.uploadImgMaxSize = 3 * 1024 * 1024 // 将图片大小限制为 3M
-// editor_si.customConfig.uploadImgMaxLength = 1 // 限制一次最多上传 5 张图片
-
-
-// 创建编辑器之后，使用editor.txt.html(...)设置编辑器内容
-var editorMenus=[
-    'head',  // 标题
-    'bold',  // 粗体
-    'fontSize',  // 字号
-    // 'fontName',  // 字体
-    // 'italic',  // 斜体
-    'foreColor',  // 文字颜色
-    'backColor',  // 背景颜色
-    // 'link',  // 插入链接
-    'list',  // 列表
-    'justify',  // 对齐方式
-    'quote',  // 引用
-    // 'emoticon',  // 表情
-    'image',  // 插入图片
-    // 'table',  // 表格
-];
-// 自定义菜单配置
-editor_si.customConfig.menus =editorMenus;
-
-editor_si.create();
+var editor_si = wangEditorInit('annMenu','annIntroduction', localToken, "00000000000", 4);
 
 
 function announcementAdd(row){
