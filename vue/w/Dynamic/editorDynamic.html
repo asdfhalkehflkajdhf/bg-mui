@@ -100,13 +100,14 @@
 			methods:{
 				upDyn(){
 					var _vueThis=this;
-					
+					var index = layer.load(1, { shade: [0.1,'#fff']}); //0.1透明度的白色背景
 					gAxios.post('api/dynamic/dynamicAdd.php', {
 						token: localToken,
 						content: _vueThis.content,
 						list:JSON.stringify(_vueThis.list)
 					})
 					.then(function (response) {
+					    layer.close(index);
 						var res=[];
 						if(response.status==200){
 							res=response.data;
@@ -121,6 +122,7 @@
 					})
 					.catch(function (error) {
 						console.log(error);
+						layer.close(index);
 					});
 					
 				},
@@ -143,11 +145,12 @@
 					});
 					
 					
-					
+					var index = layer.load(1, { shade: [0.1,'#fff']}); //0.1透明度的白色背景
 					
 					// 发起上传请求
 					gAxios.post('api/personalInfo/userImgUp.php',formFile)
 					.then(function (response) {
+					    layer.close(index);
 						if(response.status==200){
 							let res=response.data;
 							if(res.code){
@@ -182,6 +185,7 @@
 					})
 					.catch(function(error) {
 						console.log(error);
+						layer.close(index);
 					});
 					
 					

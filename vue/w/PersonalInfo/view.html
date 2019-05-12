@@ -97,16 +97,23 @@
 									<div class="row">
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
-												<span class="input-group-text" id="inputGroup-sizing-sm">昵称</span>
+												<span class="input-group-text" id="inputGroup-nick_name-sm">昵称</span>
 											</div>
-											<input type="text" class="form-control" aria-label="昵称" aria-describedby="inputGroup-sizing-sm" 
+											<input type="text" class="form-control" aria-label="昵称" aria-describedby="inputGroup-nick_name-sm" 
 											style="background-color:white;border:0;" readonly="readonly" :value="res.nick_name">
 										</div>
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
-												<span class="input-group-text" id="inputGroup-sizing-sm">身高</span>
+												<span class="input-group-text" id="inputGroup-age-sm">年龄</span>
 											</div>
-											<input type="number" class="form-control" aria-label="身高" aria-describedby="inputGroup-sizing-sm" 
+											<input type="text" class="form-control" aria-label="年龄" aria-describedby="inputGroup-age-sm" 
+											style="background-color:white;border:0;" readonly="readonly" :value="res.age">
+										</div>
+										<div class="input-group col-sm">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="inputGroup-height-sm">身高</span>
+											</div>
+											<input type="number" class="form-control" aria-label="身高" aria-describedby="inputGroup-height-sm" 
 											style="background-color:white;border:0;" readonly="readonly" :value="res.height">
 											<div class="input-group-append">
 												<span class="input-group-text" style="width:40px;">cm</span>
@@ -114,9 +121,9 @@
 										</div>
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
-												<span class="input-group-text" id="inputGroup-sizing-sm">体重</span>
+												<span class="input-group-text" id="inputGroup-weight-sm">体重</span>
 											</div>
-											<input type="number" class="form-control" aria-label="体重" aria-describedby="inputGroup-sizing-sm" 
+											<input type="number" class="form-control" aria-label="体重" aria-describedby="inputGroup-weight-sm" 
 											style="background-color:white;border:0;" readonly="readonly" :value="res.weight">
 											<div class="input-group-append">
 												<span class="input-group-text" style="width:40px;">Kg</span>
@@ -131,24 +138,24 @@
 									<div class="row">
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
-												<span class="input-group-text" id="inputGroup-sizing-sm">生活地</span>
+												<span class="input-group-text" id="inputGroup-living-sm">生活地</span>
 											</div>
-											<input type="text" class="form-control" aria-label="生活地" aria-describedby="inputGroup-sizing-sm" 
+											<input type="text" class="form-control" aria-label="生活地" aria-describedby="inputGroup-living-sm" 
 											style="background-color:white;border:0;" readonly="readonly" :value="res.living_place">
 										</div>
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
-												<span class="input-group-text" id="inputGroup-sizing-sm">职业</span>
+												<span class="input-group-text" id="inputGroup-prof-sm">职业</span>
 											</div>
-											<input type="text" class="form-control" aria-label="职业" aria-describedby="inputGroup-sizing-sm" 
+											<input type="text" class="form-control" aria-label="职业" aria-describedby="inputGroup-prof-sm" 
 											style="background-color:white;border:0;" readonly="readonly" :value="res.profession">
 										</div>
 
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
-												<span class="input-group-text" id="inputGroup-sizing-sm">收入</span>
+												<span class="input-group-text" id="inputGroup-income-sm">收入</span>
 											</div>
-											<input type="number" class="form-control" aria-label="收入" aria-describedby="inputGroup-sizing-sm" 
+											<input type="number" class="form-control" aria-label="收入" aria-describedby="inputGroup-income-sm" 
 											style="background-color:white;border:0;" readonly="readonly" :value="res.income">
 											<div class="input-group-append">
 												<span class="input-group-text" style="width:40px;">RMB</span>
@@ -161,16 +168,16 @@
 									<div class="row">
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
-												<span class="input-group-text" id="inputGroup-sizing-sm">喜欢的活动</span>
+												<span class="input-group-text" id="inputGroup-tryst-sm">喜欢的活动</span>
 											</div>
-											<input type="text" class="form-control" aria-label="我最喜欢的活动" aria-describedby="inputGroup-sizing-sm" 
+											<input type="text" class="form-control" aria-label="我最喜欢的活动" aria-describedby="inputGroup-tryst-sm" 
 											style="background-color:white;border:0;" readonly="readonly" :value="res.tryst_expect">
 										</div>
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
-												<span class="input-group-text" id="inputGroup-sizing-sm">状态</span>
+												<span class="input-group-text" id="inputGroup-marital_status-sm">状态</span>
 											</div>
-											<input type="text" class="form-control" aria-label="状态" aria-describedby="inputGroup-sizing-sm" 
+											<input type="text" class="form-control" aria-label="状态" aria-describedby="inputGroup-marital_status-sm" 
 											style="background-color:white;border:0;" readonly="readonly" :value="res.marital_status">
 
 										</div>

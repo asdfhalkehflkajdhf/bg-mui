@@ -45,7 +45,7 @@ function removeRecard(row){
 
 function blackListAdd(row){
 	gAxios.post('api/friends/blackListAdd.php', {
-		mid:row.id,
+		
 		token:localToken,
 		buid:row.uid,
 		uid:getLocalID(),

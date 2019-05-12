@@ -42,7 +42,7 @@
 				</div>
 				<!-- 数据列表 -->
 				<ul class="list-group list-group-flush" id="app">
-					<li class="list-group-item " :id="'act-'+idx" v-for="item, idx in actionList">
+<!-- 					<li class="list-group-item " :id="'act-'+idx" v-for="item, idx in actionList">
 						<div class="row">
 							<div class="col-md-2">
 								<img :src="item.activity_img" alt="..." class="rounded">
@@ -67,7 +67,7 @@
 								</div>
 							</div>
 						</div>
-					</li>
+					</li> -->
 				</ul>
 				<!-- 查找更多 -->
 				<div class="card">
@@ -85,112 +85,167 @@
 	</body>
 	<script>
 
-		var localToken = getLocalToken();
-		
-
-		const manageAction = new Vue({
-			el: "#app",
-			data:{
-				actionList:[
-					// 	id
-					// title
-					// s_time
-					// e_time
-					// region_name
-					// activity_stats
-					// up
-					// eye
-					// activity_img
-					// activity_summary
-					
-				],
-				page:0
-			},
-			created:function(){
-				this.getActionList();
-				
-			},
-			methods:{
-				getActionList(){
-					var _this = this;
-					// post 本地json会失败
-					// axios.get('testjson/lunBoTuTest.json', {
-					gAxios.post('api/activities/getListInfo.php', {
-						token: localToken,
-						page: _this.page,
-						first_load_time: "null"
-					})
-					.then(function (response) {
-						if(response.status==200){
-							var res = response.data;
-							if(res.code==0){
-								if(res.data.length){
-									_this.actionList = $.merge(_this.actionList, res.data);
-								}else{
-									layerMsg("没有更多！", 7);
-								}
-							}
-							// layerMsg(res.msg, res.code);
-
-						}else{
-							layerMsg(response.statusText);
-						}
-					})
-					.catch(function (error) {
-						console.log(error);
-					});
-					
-				},
-				delAction(idx){
-					var _this = this;
-					var item = _this.actionList[idx];
-					// post 本地json会失败
-					// axios.get('testjson/lunBoTuTest.json', {
-					gAxios.post('api/activities/delActionById.php', {
-						token: localToken,
-						aid:item.id
-					})
-					.then(function (response) {
-						if(response.status==200){
-							// _this.actionList.splice(idx,1);
-							let res = response.data;
-							if(res.code==0){
-								$('#act-'+idx).remove();
-							}else{
-								layerMsg(res.msg, res.code);
-							}
-						}else{
-							layerMsg(response.statusText);
-						}
-					})
-					.catch(function (error) {
-						console.log(error);
-					});
-					
-				},
-				editAction(idx){
-					var item = this.actionList[idx];
-					var url='editorAction.html?id='+item.id;
-					var title = "编辑活动";
-					openSubWin(url, title, true);
-					
-				},
-				viewAction(idx){
-					var item = this.actionList[idx];
-					var url='viewAction.html?id='+item.id;
-					var title = "活动";
-					openSubWin(url, title, true);
-				}
-				
-			}
-		})
+	var localToken = getLocalToken();
 	
+
+	const manageAction = new Vue({
+		el: "#app",
+		data:{
+			actionList:[
+				// 	id
+				// title
+				// s_time
+				// e_time
+				// region_name
+				// activity_stats
+				// up
+				// eye
+				// activity_img
+				// activity_summary
+				
+			],
+			page:0
+		},
+		created:function(){
+
+		},
+		methods:{
+			upVar( data){
+				let _this = this;
+				$.each(data, function(i,item){
+					_this.actionList.push(item);
+				})
+				
+			},
+			delAction(idx){
+				var _this = this;
+				var item = _this.actionList[idx];
+				// post 本地json会失败
+				// axios.get('testjson/lunBoTuTest.json', {
+				gAxios.post('api/activities/delActionById.php', {
+					token: localToken,
+					aid:item.id
+				})
+				.then(function (response) {
+					if(response.status==200){
+						// _this.actionList.splice(idx,1);
+						let res = response.data;
+						if(res.code==0){
+							$('#act-'+idx).remove();
+						}else{
+							layerMsg(res.msg, res.code);
+						}
+					}else{
+						layerMsg(response.statusText);
+					}
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+				
+			},
+			editAction(idx){
+				var item = this.actionList[idx];
+				console.log(item);
+				var url='editorAction.html?id='+item.id;
+				var title = "编辑活动";
+				openSubWin(url, title, true);
+				
+			},
+			viewAction(idx){
+				var item = this.actionList[idx];
+				var url='viewAction.html?id='+item.id;
+				var title = "活动";
+				openSubWin(url, title, true);
+			}
+			
+		}
+	})
+
 
 $(function () {
 	$("#getGridItem").on("click",function(){
-		manageAction.page++;
-		manageAction.getActionList();
+		reloadGridItem();
 	});
+	
+	function addActItem(dataArray){
+		
+		var $container = $('#app');
+		let actListLen =  manageAction.actionList.length;
+		//生成item
+		$.each(dataArray, function (i1, item) {
+			
+			var idx =actListLen + i1;
+			let actid="act-"+idx;
+			let $gitem = $(
+				'	<li class="list-group-item " id="'+actid+'">'
+				+'		<div class="row">'
+				+'			<div class="col-md-2">'
+				+'				<img src="'+item.activity_img+'" alt="..." class="rounded">'
+				+'			</div>'
+				+'			'
+				+'			<div class="col-md-10">'
+				+'				<div class="p-2">'
+				+'					<span class="btn btn-outline-success" >'+item.region_name+'</span>'
+				+'					<span class="btn-outline-dark" onclick="manageAction.viewAction('+idx+')" >'+item.title+'</span>'
+				+'					<span class="card__span_right">'
+				+'						<span class="btn btn-outline-success " onclick="manageAction.editAction('+idx+')">编辑</span>'
+				+'						<span class="btn btn-outline-success " onclick="manageAction.delAction('+idx+')">删除</span>'
+				+'					</span>'
+				+'				</div>'
+				+'				<div class="p-3 mb-2 " style="font-size: 15px;" >'+item.activity_summary+'>'
+				+'					'
+				+'				</div>'
+				+'				<div class="p-2">'
+				+'					<span class="text-success fa fa-clock-o" title="开始时间" >'+item.s_time+'</span>'
+				+'					<span class="text-success fa fa-clock-o" title="结束时间" >'+item.e_time+'</span>'
+				+'					<span class="fa fa-eye card__span_right" >'+item.eye+'</span>'
+				+'				</div>'
+				+'			</div>'
+				+'		</div>'
+				+'	</li>'	
+			
+			);
+			$container.append($gitem);
+		});
+	};
+	
+	function reloadGridItem(){
+		var _this = this;
+		// post 本地json会失败
+		// axios.get('testjson/lunBoTuTest.json', {
+		gAxios.post('api/activities/getListInfo.php', {
+			token: localToken,
+			page: manageAction.page++,
+			first_load_time: "null"
+		})
+		.then(function (response) {
+			if(response.status==200){
+				var res = response.data;
+				if(res.code==0){
+					if(res.data.length){
+						//先渲染数据
+						addActItem(res.data);
+						//再追加数据,
+						manageAction.upVar(res.data);
+					}else{
+						layerMsg("没有更多！", 7);
+					}
+				}
+				// layerMsg(res.msg, res.code);
+		
+			}else{
+				layerMsg(response.statusText);
+			}
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+	}
+	
+	reloadGridItem();
+	
+	
 })		
 	</script>
 

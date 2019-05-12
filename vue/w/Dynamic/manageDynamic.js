@@ -74,7 +74,6 @@ const managedynamic = new Vue({
 //JS瀑布流插件masonry动态载入数据
 $(function () {
 	$("#getGridItem").on("click",function(){
-		managedynamic.page++;
 		reloadGridItem();
 	});
 
@@ -82,7 +81,7 @@ $(function () {
 		var $container = $('#app');
 		gAxios.post('api/dynamic/getListInfoMySelf.php', {
 			token: localToken,
-			page: managedynamic.page
+			page: managedynamic.page++
 		})
 		.then(function (response) {
 			var res=[];

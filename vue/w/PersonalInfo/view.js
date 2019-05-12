@@ -21,7 +21,8 @@ const userInfo = new Vue({
 			marital_status:"",
 			selfIntr:"",
 			otherIntr:"",
-			find_switch:false
+			find_switch:false,
+			age:0
 		},
 		eduList:[],
 		msg:""

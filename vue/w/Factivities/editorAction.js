@@ -198,6 +198,7 @@ const eaBaseInfo = new Vue({
 		putActionInfo(){
 			var _this = this;
 			_this.res.actDetails = editor_si.txt.html();
+			var index = layer.load(1, { shade: [0.1,'#fff']}); //0.1透明度的白色背景
 
 			if(!this.checkForm()){
 				return false;
@@ -218,15 +219,18 @@ const eaBaseInfo = new Vue({
 				data:_this.res
 			})
 			.then(function (response) {
+        layer.close(index);
 				if(response.status==200){
 					var res=response.data;
 					layerMsg(res.msg, res.code);
 				}else{
 					layerMsg(response.statusText);
 				}
+				
 			})
 			.catch(function(error) {
 				console.log(error);
+				layer.close(index);
 			});
 		}
 		
