@@ -17,7 +17,7 @@ function removeRecard(row){
 	gAxios.post('api/news/delUserMsg.php', {
 		token:localToken,
 		uid:row.uid,
-		type:'info'
+		type:$('#inputGroupSelect01').val()
 	})
 	.then(function (response) {
 		if(response.status==200){
@@ -80,7 +80,7 @@ var  optEvent={
 	},
 	'click .name': function (e, value, row, index) {
 		// console.log("打开msgWin",row, value);
-		request_url = 'msgWin.html?fid='+row.uid;
+		request_url = 'msgWin.html?fid='+row.uid+'&type='+$('#inputGroupSelect01').val();
 		openSubWin(request_url, row.name );
 	},
 	'click .blacklist': function (e, value, row, index) {

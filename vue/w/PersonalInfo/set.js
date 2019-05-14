@@ -198,7 +198,7 @@ const userInfo = new Vue({
 			_this.res.res_list = $.merge(_this.res.res_list, editor_si.upImgResList);
 			gAxios.post('api/personalInfo/userSelfIntrSet.php', {
 				token: localToken,
-				self_intr: editor_si.txt.html(),
+				intr: editor_si.txt.html(),
 				uid:getQueryString("fid"),
 				res_list:_this.res.res_list
 			})
@@ -220,7 +220,7 @@ const userInfo = new Vue({
 			_this.res.res_list = $.merge(_this.res.res_list, editor_ti.upImgResList);		
 			gAxios.post('api/personalInfo/userOtherIntrSet.php', {
 				token: localToken,
-				other_intr: editor_ti.txt.html(),
+				intr: editor_ti.txt.html(),
 				uid:getQueryString("fid"),
 				res_list:_this.res.res_list
 			})
