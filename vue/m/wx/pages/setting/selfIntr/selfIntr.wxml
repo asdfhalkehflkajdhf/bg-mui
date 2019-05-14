@@ -1,0 +1,9 @@
+<!--pages/setting/selfIntr/selfIntr.wxml-->
+<!-- <import src="/common/editor/editor.wxml" /> -->
+<!-- 除了component，微信小程序中还有另一种组件化你的方式template模板，这两者之间的区别是，template主要是展示，方法则需要在调用的页面中定义。而component组件则有自己的业务逻辑，可以看做一个独立的page页面。简单来说，如果只是展示，使用template就足够了，如果涉及到的业务逻辑交互比较多，那就最好使用component组件了。 -->
+<!-- "editor": "/common/editor/editor" -->
+<!-- <template is="editor" data="{{title: 'editor'}}"/> -->
+
+<!-- <template name="editor"> -->
+
+<selfEidtor apiPath="{{apiPath}}"></selfEidtor>

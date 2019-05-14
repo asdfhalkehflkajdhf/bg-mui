@@ -1,0 +1,33 @@
+/* pages/dynamic/dynamic.wxss */
+nav-page,
+.nav-page,
+.nav-page__bd{
+    height: 100%;
+}
+.nav-page__bd{
+    padding-bottom: 0;
+}
+.nav-weui-tab__content{
+    padding-top: 10px;
+    text-align: center;
+}
+
+.button-sp-area{
+    margin: 0 auto;
+    padding-top: 15px;
+    width: 60%;
+}
+
+/* ///图片显示布局 */
+.grid-placeholder{
+margin: 10px;    
+}
+
+.grid-img{
+    padding: 0 2px;
+    /*这里把参数写死*/
+    width: 80px;
+    height: 80px;
+}
+
+

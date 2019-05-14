@@ -1,0 +1,83 @@
+<!--pages/friendView/friendView.wxml-->
+<!-- <import src="/common/wxParse/wxParse.wxml"/> -->
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-article">
+            <view class="weui-article__h1">{{res.nick_name}}</view>
+            <view class=".item-text-2">
+                <text class="">uid:{{res.uid}}</text>
+                <text class="fa fa-eye">{{res.eye}}</text>
+            </view>
+            <view class="weui-article__section">
+                <view class="weui-article__section">
+                    <view class="weui-article__h3">联系方式</view>
+                    <view class="weui-article__p">
+                        <view class="weui-cells__title" >站外</view>
+                        <view class="weui-cells weui-cells_after-title">
+                            <view class="weui-cell weui-cell_input" wx:if="{{res.login_stats}}">
+                                {{res.contact}}
+                            </view>
+                            <button class="weui-btn mini-btn" type="primary" size="mini" 
+                                bindtap='gotoLoginPage' 
+                                wx:if="{{res.login_stats==false}}">{{res.contact}}</button>
+                        </view>
+                        <view class="weui-cells__title" wx:if="{{res.login_stats}}">站内</view>
+                        <view class="weui-cells weui-cells_after-title" wx:if="{{res.login_stats}}">
+                            <view class="weui-cell weui-cell_input">
+                                <view class="weui-cell__bd">
+                                    <input class="weui-input" placeholder="请输入" bindinput="bindmsgInput" />
+                                </view>
+                                <view class="weui-cell__ft">
+                                    <button class="weui-btn mini-btn" type="primary" size="mini" bindtap='sendMsg'>发送</button>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+
+                <view class="weui-article__section">
+                    <view class="weui-article__h3">基本信息</view>
+                    <view class="weui-article__p">
+                        你好，我今年{{rs.age}}，{{rs.age}}，身高有{{res.height}}cm，体重{{res.weight}}Kg，目前在{{res.living_place}}从事{{res.profession}}行业类型的工作，收入大该有{{res.income}}元，生活平常经常{{res.tryst_expect}}。
+                    </view>
+                </view>
+                <!-- 学校 -->
+                <view class="weui-article__section">
+                    <view class="weui-article__h3">学校</view>
+                    <view class="weui-article__p" wx:for="{{eduList}}" wx:key="{{item.id}}">
+                        {{item.level}}是从{{item.s_time}}到{{item.e_time}}，在{{item.university}}学的{{item.profession}}专业。
+                    </view>
+                </view>
+                <!-- 我详细内容 -->
+                <view class="weui-article__section">
+                    <view class="weui-article__h3">我详细内容</view>
+                    <view class="weui-article__p" >
+                        
+                        <!-- //这里data中article为bindName -->
+                        <!-- <template is="wxParse" data="{{wxParseData:selfIntr.nodes}}"/> -->
+                        <rich-text nodes="{{res.selfIntr}}"></rich-text>
+                    </view>
+                </view>
+                <!-- 我理想的 -->
+                <view class="weui-article__section">
+                    <view class="weui-article__h3">我理想的</view>
+                    <view class="weui-article__p">
+                        <!-- <template is="wxParse" data="{{wxParseData:otherIntr.nodes}}"/> -->
+                        <rich-text nodes="{{res.otherIntr}}"></rich-text>
+                    </view>
+                </view>
+                
+                <!-- //相册 -->
+                <view class="weui-article__section">
+                    <view class="weui-article__h3">相册</view>
+                    <!-- <view class="weui-article__p"> -->
+                        <image class="" style="width: 100%;" mode='widthFix' src="{{item.src}}" wx:for="{{imgList}}"  wx:key="{{item.id}}"></image>
+                    <!-- </view> -->
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+

@@ -1,0 +1,84 @@
+<!--pages/setting/setting.wxml-->
+
+<view>
+    <view class="button-sp-area">
+        <button class="weui-btn" type="primary" plain="true" bindtap='logIn' wx:if="{{landing==false}}">登陆</button>
+        <button class="weui-btn" type="primary" plain="true" bindtap='logOut' wx:else>退出</button>
+    </view>
+</view>
+
+<!-- /////////////// -->
+<!-- <view wx:if="{{landing}}"> -->
+<view>
+    <view class="weui-cells__title"></view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_switch">
+            <view class="weui-cell__bd">被查找</view>
+            <view class="weui-cell__ft">
+                <switch checked bindchange="switchChange"/>
+            </view>
+        </view>
+    </view>
+
+    <view class="weui-cells__title"></view>
+    <view class="weui-cells weui-cells_after-title">
+        <navigator url="contact/contact" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">联系方式</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="baseInfo/baseInfo" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">基本信息</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="edu/edu" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">学校管理</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="photo/photo" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">相册上传</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="selfIntr/selfIntr" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">个人介绍</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="otherIntr/otherIntr" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">对方要求</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+    </view>
+
+
+    <view class="weui-cells__title"></view>
+    <view class="weui-cells weui-cells_after-title">
+        <navigator url="blackList/blackList" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">黑名单管理</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="qa/qa" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">问题建议</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+    </view>
+
+
+    <view class="weui-cells__title"></view>
+    <view class="weui-cells weui-cells_after-title">
+        <navigator url="changePW/changePW" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">修改密码</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="bindEmail/bindEmail" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">绑定邮箱</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+    </view>
+</view>
+
+<view class="weui-cells__title"></view>
+<view class="weui-cells weui-cells_after-title">
+    <navigator url="/pages/about/about" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">关于我们</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+</view>

@@ -1,0 +1,19 @@
+/* pages/login/login.wxss */
+/* pages/login/login.wxss */
+.container{
+    padding: 10px;
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+ }
+
+.input-lable {
+    width: 70px;
+}
+.input-border {
+    border-left:1px solid #DCDCDC;
+    padding-left: 10px
+}
+.tab-link{
+    margin-right:5px;
+    color: #0066cc;
+}

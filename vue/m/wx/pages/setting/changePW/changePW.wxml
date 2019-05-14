@@ -1,0 +1,37 @@
+<!--pages/setting/changePW/changePW.wxml-->
+<view class="container">
+    <form bindsubmit="changePW">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">原密码：</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" type="text" name="srcPw" bindinput='bindSrcPwInput' placeholder="原密码"/>
+            </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">新密码：</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" type="text" name="newPw1" bindinput='bindNewPw1Input' placeholder="新密码"/>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">新密码：</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" type="text" name="newPw2" bindinput='bindNewPw2Input' placeholder="确认"/>
+            </view>
+        </view>
+
+
+        <view class="weui-btn-area">
+            <button type="primary" form-type="submit">绑定</button>
+        </view>
+ 
+    </form>
+</view>
+

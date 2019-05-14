@@ -1,0 +1,26 @@
+<!--pages/setting/blackList/blackList.wxml-->
+<!--pages/msg/msg.wxml-->
+<view class="nav-page">
+    <view class="nav-page__bd">
+        <view class="weui-cells weui-cells_after-title">
+        <!-- bindlongpress="delMsgItem"  -->
+            <view bindtap="delItem" 
+                data-uid="{{item.black_uid}}" data-id="{{item.id}}" data-idx="{{index}}"
+                class="weui-cell weui-cell_access" hover-class="weui-cell_active"
+                wx:for="{{msgInfoList}}" wx:key="item.black_uid">
+                <view class="weui-cell__bd">
+                    <view>{{item.name}}</view>
+                </view>
+                <view class="weui-cell__ft ">
+                    <!-- <view class='reddot' wx:if="{{item.noRead}}">{{item.noRead}}</view> -->
+                    <text>{{item.ctime}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+
+
+

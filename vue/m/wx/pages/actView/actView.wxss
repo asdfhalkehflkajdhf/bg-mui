@@ -1,0 +1,13 @@
+/* pages/actView/actView.wxss */
+@import "/font-awesome.wxss";
+
+
+
+.textBtn{
+    /* // #3cc51f //#0bb20c  #1aad19 #09bb07 */
+    border-color:#09bb07;
+    border-width: 2px;
+
+    color:#09bb07;
+    margin-right: 10px;
+}

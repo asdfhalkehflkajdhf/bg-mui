@@ -1,0 +1,101 @@
+<view>
+    <swiper
+        indicator-dots="true"
+        autoplay="true"
+        circular="true"
+        interval="2000"
+        duration="500"
+        previous-margin="0px"
+        next-margin="0px">
+        <!-- <block > -->
+            <swiper-item  wx:for="{{lunBoTuList}}" wx:key="{{id}}">
+                <image src="{{item.src}}" mode='widthFix' class="swiper-item" bindtap='upAdsStatusInfo' data-idx="{{index}}"/>
+            
+            </swiper-item>
+        <!-- </block> -->
+    </swiper>
+</view>
+
+
+<view class="nav-page">
+    <view class="nav-page__bd">
+        <view class="weui-tab">
+            <view class="weui-navbar">
+                <block wx:for="{{tabs}}" wx:key="*this">
+                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{item}}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+            </view>
+            <view class="weui-tab__panel">
+                <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+                
+                  <view class="weui-panel weui-panel_access">
+                    <view class="weui-panel__bd">
+                        <view class="weui-media-box weui-media-box_text" wx:for="{{actList}}" wx:key="*this">
+                            <image class="" style="width: 100%;" mode="widthFix" src="{{item.activity_img}}" bindtap='gotoActView' data-id="{{item.id}}"></image>
+                            <view class=".item-text-2">
+                                <text>
+                                    <text class="textBtn">{{item.region_name}}</text>
+                                    <text class="textBtn" wx:if="{{item.activity_stats=='1'}}">进行中</text>
+                                    <text class="textBtn" style='color:#9b9b9b;' wx:else>结束</text>
+                                </text>
+                                <text class="fa fa-eye">{{item.eye}}</text>
+                            </view>
+
+
+                            <view class="weui-media-box__title weui-media-box__title_in-text">{{item.title}}</view>
+                            <view class="weui-media-box__desc">{{item.activity_summary}}</view>
+                        </view>
+
+                    </view>
+                    <view class="weui-panel__ft nav-weui-tab__content">
+                        <view class="weui-cell weui-cell_access weui-cell_link">
+                            <view class="weui-cell__bd" bindtap='reloadGridItem'>查看更多</view>
+                        </view>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="nav-weui-tab__content" hidden="{{activeIndex != 1}}">
+                    
+                    <view class="weui-cells__title"></view>
+                    <view class="weui-cells weui-cells_after-title">
+                        
+                        <view class="weui-cell weui-cell_input">
+                            <view class="weui-cell__hd">
+                                <view class="weui-label">生活地</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                                <picker mode="multiSelector"
+                                    bindchange="bindRegionChange"
+                                    bindcolumnchange="bindRegionColumnChange" 
+                                    value="{{regionIdx}}" 
+                                    range="{{livingTextList}}" >
+                                    <view class="weui-input">{{livingTextList[0][regionIdx[0]]}}-{{livingTextList[1][regionIdx[1]]}}</view>
+                                </picker>
+                            </view>
+                        </view>
+
+                        <view class="weui-cell weui-cell_input ">
+                            <view class="weui-cell__hd">
+                                <view class="weui-label">活动状态</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                                <picker bindchange="bindActStatusChange" value="{{statusIdx}}" range="{{conditionalData.statusTextList}}" >
+                                    <view class="weui-input">{{conditionalData.statusTextList[statusIdx]}}</view>
+                                </picker>
+                            </view>
+                        </view>
+                        <view class="button-sp-area">
+                            <button class="weui-btn" type="primary" plain="true" bindtap='upFrom'>保存</button>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+  
+

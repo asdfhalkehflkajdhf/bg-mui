@@ -1,0 +1,21 @@
+/* pages/msg/msg.wxss */
+nav-page,
+.nav-page,
+.nav-page__bd{
+    height: 100%;
+}
+.nav-page__bd{
+    padding-bottom: 0;
+}
+.nav-weui-tab__content{
+    padding-top: 10px;
+    text-align: center;
+}
+
+.reddot {
+    min-width: 20px;
+    border-radius: 50px;
+    background: red;
+    text-align: center;
+    color: white;
+}

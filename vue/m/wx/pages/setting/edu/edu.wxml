@@ -1,0 +1,52 @@
+<!--pages/setting/edu/edu.wxml-->
+<view class="weui-cell weui-cell_input weui-cell_vcode">
+    <view class="weui-cell__bd">
+        <input class="weui-input" bindblur='bindVCodeInput' placeholder="在线学籍验证码" />
+    </view>
+    <view class="weui-cell__ft">
+        <view class="weui-vcode-btn" bindtap='userEduSet'>添加</view>
+    </view>
+</view>
+<view class="weui-cells weui-cells_after-title" wx:for="{{eduList}}" wx:key="*this">
+    <view class="weui-cells__title"></view>
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view>学校：</view>
+        </view>
+        <view class="weui-cell__bd">
+            <view>{{item.university}}</view>
+        </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view>专业：</view>
+        </view>
+        <view class="weui-cell__bd">
+            <view>{{item.profession}}</view>
+        </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view>层次：</view>
+        </view>
+        <view class="weui-cell__bd">
+            <view>{{item.level}}</view>
+        </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view>入学：</view>
+        </view>
+        <view class="weui-cell__bd">
+            <view>{{item.s_time}}</view>
+        </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view>毕业：</view>
+        </view>
+        <view class="weui-cell__bd">
+            <view>{{item.e_time}}</view>
+        </view>
+    </view>
+</view>

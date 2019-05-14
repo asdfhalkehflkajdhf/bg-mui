@@ -1,0 +1,101 @@
+<view class="nav-page">
+    <view class="nav-page__bd">
+        <view class="weui-tab">
+            <view class="weui-navbar">
+                <block wx:for="{{tabs}}" wx:key="*this">
+                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{item}}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+            </view>
+            <view class="weui-tab__panel">
+                <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+                <!-- //动态 -->
+                  <view class="weui-panel weui-panel_access">
+                    <view class="weui-panel__bd">
+                        <view class="weui-media-box weui-media-box_text" wx:for="{{dynamicList}}" wx:key="*this" wx:for-index="dlIdx">
+                            <!-- //昵称 -->
+                            <view class="weui-flex item-text-2" >
+                                <view class='weui-flex__item'>
+                                    <button class="weui-btn mini-btn " 
+                                        type="primary" plain="true" size="mini"
+                                        bindtap='gotoFriendView' data-uid='{{item.uid}}' >
+                                        {{item.nickname}}</button>
+                                </view>
+                                <view class="weui-media-box__desc">{{item.ctime}}</view>
+                            </view>
+                            <!-- //内容 -->
+                            <view class="" wx:if="{{item.content!=null}}">{{item.content}}</view>
+                            <!-- //图片 -->
+                            <view class='grid-placeholder'>
+                                <view class="weui-flex">
+                                    <view class="weui-flex__item" >
+                                        <image class="grid-img" mode="center" 
+                                        bindtap='viewImg' data-dlIdx="{{dlIdx}}" data-imgidx="{{imgidx}}"
+                                        wx:for="{{item.imgObj.data}}" wx:key="*this" 
+                                        wx:for-item="imgObj" wx:for-index="imgidx"
+                                        src="{{imgObj.thumb}}"></image>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="weui-panel__ft">
+                        <view class="weui-cell weui-cell_access weui-cell_link nav-weui-tab__content">
+                            <view class="weui-cell__bd" bindtap='reloadGridItem'>查看更多</view>
+                        </view>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+                <!-- //新加 -->
+                    <!-- <imgUpView> -->
+                    <!-- </imgUpView> -->
+                    <view class="weui-cells weui-cells_after-title">
+                        <view class="weui-cell">
+                            <view class="weui-cell__bd">
+                                <textarea class="weui-textarea" placeholder="请输入内容" style="height: 5em" bindinput="bindContentInput" maxlength='1000'/>
+                                <view class="weui-textarea-counter">{{content.length}}/1000</view>
+                            </view>
+                        </view>
+                    </view>
+
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-cells">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <view class="weui-uploader">
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files nav-weui-tab__content" id="uploaderFiles">
+                                <block wx:for="{{list}}" wx:key="*this">
+                                    <view class="weui-uploader__file" bindtap="previewImage" bindlongpress="delImage" id="{{item}}" data-idx="{{index}}">
+                                        <image class="weui-uploader__img"  src="{{item}}" mode="aspectFill" />
+                                    </view>
+                                </block>
+
+
+                            </view>
+                            <view class="weui-uploader__input-box" wx:if="{{list.length<9}}">
+                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+                    <view class="button-sp-area">
+                        <button class="weui-btn" type="primary" plain="true" bindtap='upFrom'>发表</button>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+

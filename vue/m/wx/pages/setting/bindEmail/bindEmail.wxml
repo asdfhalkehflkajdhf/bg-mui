@@ -1,0 +1,31 @@
+<!--pages/setBindEmail/setBindEmail.wxml-->
+<view class="container">
+    <form bindsubmit="formSubmit">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">邮箱：</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" type="email" name="email" bindblur='bindEmailInput' placeholder="邮箱"/>
+            </view>
+        </view>
+
+
+        <view class="weui-cell weui-cell_input weui-cell_vcode">
+            <view class="weui-cell__hd">
+                <view class="weui-label">验证码：</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" type="text" name="checkCode" placeholder="验证码" />
+            </view>
+            <view class="weui-cell__ft">
+                <view class="weui-vcode-btn" bindtap='getCheckCodeEmail' >获取验证码</view>
+            </view>
+        </view>
+
+        <view class="weui-btn-area">
+            <button type="primary" form-type="submit">绑定</button>
+        </view>
+ 
+    </form>
+</view>

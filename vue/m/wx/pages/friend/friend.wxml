@@ -1,0 +1,156 @@
+<!--pages/friend/friend.wxml-->
+<view>
+    <swiper
+        indicator-dots="true"
+        autoplay="true"
+        circular="true"
+        interval="2000"
+        duration="500"
+        previous-margin="0px"
+        next-margin="0px">
+        <!-- <block > -->
+            <swiper-item  wx:for="{{lunBoTuList}}" wx:key="{{id}}">
+                <image src="{{item.src}}" mode='widthFix' class="swiper-item" bindtap='upAdsStatusInfo' data-idx="{{index}}"/>
+            </swiper-item>
+        <!-- </block> -->
+    </swiper>
+</view>
+
+<view class="nav-page">
+    <view class="nav-page__bd">
+        <view class="weui-tab">
+            <view class="weui-navbar">
+                <block wx:for="{{tabs}}" wx:key="*this">
+                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{item}}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+            </view>
+            <view class="weui-tab__panel">
+                <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+                
+                  <view class="weui-panel weui-panel_access">
+                    <view class="weui-panel__bd">
+
+                        <view class="weui-media-box weui-media-box_text" wx:for="{{friendList}}" wx:key="*this">
+                            <navigator url="../friendView/friendView?fid={{item.uid}}" open-type="navigate">
+                                <image class="" style="width: 100%;" mode="widthFix" src="{{item.src}}" 
+                                    bindtap='gotoFriendView' data-uid="{{item.uid}}"></image>
+                            </navigator>
+
+                            <view class="item-text-2">
+                                <text class="fa fa-clock-o">{{item.ontime}}</text>
+                                <text class="fa fa-eye">{{item.eye}}</text>
+                            </view>
+                            <view class="weui-media-box__title weui-media-box__title_in-text">{{item.nickname}}</view>
+                            <view class="weui-media-box__desc">{{item.tryst_expect}}</view>
+                        </view>
+
+                    </view>
+                    <view class="weui-panel__ft nav-weui-tab__content">
+                        <view class="weui-cell weui-cell_access weui-cell_link">
+                            <view class="weui-cell__bd" bindtap='reloadGridItem'>查看更多</view>
+                        </view>
+                    </view>
+                  </view>
+                </view>
+                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+                    <view class="weui-cells__title"></view>
+                    <view class="weui-cells weui-cells_after-title">
+                        
+                        <view class="weui-cell weui-cell_input">
+                            <view class="weui-cell__hd">
+                                <view class="weui-label">生活地</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                                <picker mode="multiSelector"
+                                    bindchange="bindRegionChange"
+                                    bindcolumnchange="bindRegionColumnChange" 
+                                    value="{{regionIdx}}" 
+                                    range="{{livingTextList}}" >
+                                    <view class="weui-input">{{livingTextList[0][regionIdx[0]]}}-{{livingTextList[1][regionIdx[1]]}}</view>
+                                </picker>
+                            </view>
+                        </view>
+                        <view class="weui-cell weui-cell_input ">
+                            <view class="weui-cell__hd">
+                                <view class="weui-label">性别</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                                <picker bindchange="bindSexChange" value="{{sexIdx}}" range="{{conditionalData.sexTextList}}" >
+                                    <view class="weui-input">{{conditionalData.sexList[sexIdx].text}}</view>
+                                </picker>
+                                <!-- <input class="weui-input" placeholder="请输入手机号" /> -->
+                            </view>
+                            <!-- <view class="weui-cell__ft">
+                                <view class="weui-vcode-btn">获取验证码</view>
+                            </view> -->
+                        </view>
+                        <view class="weui-cell weui-cell_input">
+                            <view class="weui-cell__hd">
+                                <view class="weui-label">年龄</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                                <picker mode="multiSelector" value="{{ageIdx}}" 
+                                    bindchange="bindAgeChange" 
+                                    bindcolumnchange="bindAgeColumnChange" 
+                                    range="{{conditionalData.ageList}}">
+                                    <view class="weui-input">
+                                    {{conditionalData.ageList[0][ageIdx[0]]}}-{{conditionalData.ageList[1][ageIdx[1]]}}</view>
+                                </picker>
+                            </view>
+                        </view>
+                        <view class="weui-cell weui-cell_input">
+                            <view class="weui-cell__hd">
+                                <view class="weui-label">身高</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                                <picker mode="multiSelector" value="{{heightIdx}}" 
+                                    bindchange="bindHeightChange" 
+                                    bindcolumnchange="bindHeightColumnChange" 
+                                    range="{{conditionalData.heightList}}">
+                                    <view class="weui-input">
+                                    {{conditionalData.heightList[0][heightIdx[0]]}}-{{conditionalData.heightList[1][heightIdx[1]]}}</view>
+                                </picker>
+                            </view>
+                        </view>
+                        <!-- // 学历 -->
+                        <view class="weui-cell weui-cell_input ">
+                            <view class="weui-cell__hd">
+                                <view class="weui-label">学历</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                                <picker bindchange="bindEduChange" value="{{eduIdx}}" range="{{conditionalData.eduTextList}}" >
+                                    <view class="weui-input">{{conditionalData.eduList[eduIdx].text}}</view>
+                                </picker>
+                            </view>                            
+                        </view>
+                        <view class="weui-cell weui-cell_input ">
+                            <view class="weui-cell__hd">
+                                <view class="weui-label">收入</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                                <input class="weui-input" type='number' bindinput="bindIncomeInput" placeholder="收入" value='{{conditionalForm.income}}' />
+                            </view>
+                        </view>
+                        <view class="weui-cell weui-cell_input ">
+                            <view class="weui-cell__hd">
+                                <view class="weui-label">状态</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                                <picker bindchange="bindMStatusChange" value="{{mStatusIdx}}" range="{{conditionalData.mStatusTextList}}" >
+                                    <view class="weui-input">{{conditionalData.mStatusTextList[mStatusIdx]}}</view>
+                                </picker>
+                            </view>
+                        </view>
+                        <view class="button-sp-area">
+                            <button class="weui-btn" type="primary" plain="true" bindtap='upFrom'>保存</button>
+                        </view>
+                    </view>
+
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

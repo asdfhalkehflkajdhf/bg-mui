@@ -1,0 +1,23 @@
+<!--pages/setting/qa/qa.wxml-->
+<form bindsubmit="">
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+                <input class="weui-input" type='text' name="title" bindblur='bindTitleInput' placeholder="请输入标题" />
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells__title"></view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="请输入内容" style="height: 5em" bindinput="bindContentInput" maxlength='1000'/>
+                <view class="weui-textarea-counter">{{content.length}}/1000</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" bindtap='suggest' >确定</button>
+    </view>
+</form>

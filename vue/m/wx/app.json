@@ -1,0 +1,70 @@
+{
+    "pages": [
+        
+        "pages/friend/friend",
+        "pages/act/act",
+        "pages/dynamic/dynamic",
+        "pages/msg/msg",
+        "pages/setting/setting",
+        "pages/friendView/friendView",
+        "pages/webView/webView",
+        "pages/actView/actView",
+        "pages/login/login",
+        "pages/about/about",
+        "pages/setting/bindEmail/bindEmail",
+        "pages/setting/changePW/changePW",
+        "pages/setting/blackList/blackList",
+        "pages/setting/qa/qa",
+        "pages/setting/otherIntr/otherIntr",
+        "pages/setting/contact/contact",
+        "pages/setting/baseInfo/baseInfo",
+        "pages/setting/edu/edu",
+        "pages/setting/photo/photo",
+        "pages/msg/win/win",
+        "pages/setting/selfIntr/selfIntr"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "WeChat",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "position": "bottom",
+        "color": "black",
+        "selectedColor": "green",
+        "list": [
+            {
+                "pagePath": "pages/friend/friend",
+                "text": "找朋友",
+                "iconPath": "res/img/tabBar/f2-f.png",
+                "selectedIconPath": "res/img/tabBar/f2-t.png"
+            },
+            {
+                "pagePath": "pages/act/act",
+                "text": "找活动",
+                "iconPath": "res/img/tabBar/a3-f.png",
+                "selectedIconPath": "res/img/tabBar/a3-t.png"
+            },
+            {
+                "pagePath": "pages/dynamic/dynamic",
+                "text": "动态",
+                "iconPath": "res/img/tabBar/d1-f.png",
+                "selectedIconPath": "res/img/tabBar/d1-t.png"
+            },
+            {
+                "pagePath": "pages/msg/msg",
+                "text": "消息",
+                "iconPath": "res/img/tabBar/m2-f.png",
+                "selectedIconPath": "res/img/tabBar/m2-t.png"
+            },
+            {
+                "pagePath": "pages/setting/setting",
+                "text": "我的",
+                "iconPath": "res/img/tabBar/s2-f.png",
+                "selectedIconPath": "res/img/tabBar/s2-t.png"
+            }
+        ]
+    },
+    "sitemapLocation": "sitemap.json"
+}

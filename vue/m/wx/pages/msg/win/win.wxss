@@ -1,0 +1,136 @@
+/* pages/msg/win/win.wxss */
+
+
+/* body */
+page {
+  background-color: #f7f7f7;
+}
+
+.time {
+    border-radius: 10px;
+    text-align: center;
+    padding: 1px 5px 1px 5px;
+    font-size: 26rpx;
+    background-color: #E8E8E8;
+}
+
+/* 聊天记录内容 */
+.news {
+  margin-top: 10px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+/* 聊天 位置*/
+.news_block_right {
+    float: right;
+    position: relative;
+    right: 40rpx;
+}
+
+.news_block_left {
+    float: left;
+    position: relative;
+    left: 5rpx;
+}
+
+/*内容显示*/
+.news_text {
+    border-radius: 7px;
+    padding: 0px 10px 0px 10px;
+    text-align: left;
+}
+.text_border_right {
+    border-color: transparent transparent transparent #95d4ff;
+    background-color: #95d4ff;
+}
+
+.text_border_left {
+    border-color: transparent #95d4ff transparent transparent;
+    background-color: white;
+}
+
+
+
+.historycon {
+  height: 90%;
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  margin-top: 100rpx;
+  border-top: 0px;
+}
+.hei{
+  margin-top: 50px;
+  height: 20rpx;
+}
+.history {
+  height: 100%;
+  margin-top: 15px;
+  margin: 10px;
+  font-size: 14px;
+  line-height: 40px;
+  word-break: break-all;
+}
+
+
+/* 头部消息*/
+.winTop {
+    background-color: white;
+    width: 100%;
+    position: fixed;
+    top: 0rpx;
+    display: flex;
+    flex-direction: row;
+    z-index: 100;
+}
+
+.win-title{
+    margin: 10px 10px 5px 10px;
+    color: #0066cc;
+}
+/* 底部消息发送 */
+.sendmessage {
+  background-color: #E8E8E8;
+  width: 100%;
+  position: fixed;
+  bottom: 0rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.sendmessage button {
+    /* 位置 相对位置，右下角*/
+    position:absolute;
+    bottom: 10px;
+    right:5px;
+
+    /* 按钮格式 */
+    width: 15%;
+    height: 30px;
+    /* 文本样式 */
+    padding: 0 1px;
+    
+    /* background: #fff; */
+    /* color: #000; */
+    /* line-height: 40px; */
+    /* font-size: 14px; */
+}
+.editor-container {
+    /* 位置 */
+    /* 上 右 下 左 */
+    margin: 10px 10px 10px 5px;
+
+    /* 框样式 */
+    border-radius: 10px;
+    box-sizing: border-box;
+    width: 80%;
+    min-height: 25px;
+    height: auto;
+    background: #fff;
+    
+    /* 文本样式 */
+    padding: 5px 5px 5px 5px;
+    /* font-size: 16px; */
+    /* line-height: 1.5; */
+}

@@ -1,0 +1,110 @@
+<!--pages/login/login.wxml-->
+<!--pages/login/login.wxml-->
+<view class="container">
+    <form bindsubmit="formLogin" wx:if="{{formShow[0]}}">
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label input-lable">手机号</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input input-border" focus='{true}' type="number" name="userName"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label input-lable">密　码</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input input-border" type="password" name="userPassword" />
+                </view>
+                <!-- <view class="weui-cell__ft">
+                    <view class="weui-vcode-btn">获取验证码</view>
+                </view> -->
+            </view>
+        </view>
+
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" plain="true" >登陆</button>
+        </view>
+    
+        <view class="row" style='margin-top:20px;'>
+            <text class='tab-link' bindtap='changeFormShow' data-idx="1">注册</text>
+            <text class='tab-link' bindtap='changeFormShow' data-idx="2">忘记密码</text>
+        </view>
+    </form>
+
+    <form bindsubmit="formRegist" wx:if="{{formShow[1]}}">
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label input-lable">手机号</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input input-border" type="number" name="userName"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label input-lable">密　码</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input input-border" type="password" name="userPassword" />
+                </view>
+                <!-- <view class="weui-cell__ft">
+                    <view class="weui-vcode-btn">获取验证码</view>
+                </view> -->
+            </view>
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label input-lable">验证码</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input input-border" type="text" name="checkCode" />
+                </view>
+                <view class="weui-cell__ft">
+                    <view class="weui-vcode-btn">获取</view>
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" plain="true" >注册</button>
+        </view>
+    
+        <view class="row" style='margin-top:20px;'>
+            <text class='tab-link' bindtap='changeFormShow' data-idx="0">登陆</text>
+            <text class='tab-link' bindtap='changeFormShow' data-idx="2">忘记密码</text>
+        </view>
+    </form>
+
+    <form bindsubmit="formForget" wx:if="{{formShow[2]}}">
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label input-lable">手机号</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input input-border" type="number" name="userName"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label input-lable">邮　箱</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input input-border" type="email" name="userEmail" />
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" plain="true" >提交</button>
+        </view>
+    
+        <view class="row" style='margin-top:20px;'>
+            <text class='tab-link' bindtap='changeFormShow' data-idx="0">登陆</text>
+            <text class='tab-link' bindtap='changeFormShow' data-idx="1">注册</text>
+        </view>
+    </form>
+</view>

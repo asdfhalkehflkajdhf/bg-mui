@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "selfEidtor": "/common/editor/editor"
+    },
+  
+    "navigationBarTitleText": ""
+}

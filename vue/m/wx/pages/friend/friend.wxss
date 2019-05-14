@@ -1,0 +1,25 @@
+/* pages/friend/friend.wxss */
+@import "/font-awesome.wxss";
+.swiper-item{
+  display: block;
+  height: 150px;
+}
+
+nav-page,
+.nav-page,
+.nav-page__bd{
+    height: 100%;
+}
+.nav-page__bd{
+    padding-bottom: 0;
+}
+.nav-weui-tab__content{
+    padding-top: 10px;
+    text-align: center;
+}
+
+.button-sp-area{
+    margin: 0 auto;
+    padding-top: 15px;
+    width: 60%;
+}

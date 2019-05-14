@@ -1,0 +1,56 @@
+<!--pages/msg/msg.wxml-->
+<view class="nav-page">
+    <view class="nav-page__bd">
+        <view class="weui-tab">
+            <view class="weui-navbar">
+                <block wx:for="{{tabs}}" wx:key="*this">
+                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{item}}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+            </view>
+            <view class="weui-tab__panel">
+                <view class="" hidden="{{activeIndex != 0}}">
+                    <view class="weui-cells weui-cells_after-title">
+                    <!-- bindlongpress="delMsgItem"  -->
+                        <navigator bindlongtap="delMsgItem" 
+                            data-uid="{{item.uid}}" data-idx="{{index}}" data-name="{{item.name}}"
+                            url="win/win?fid=0&type={{types[activeIndex]}}&name=item.name"
+                            class="weui-cell weui-cell_access" hover-class="weui-cell_active"
+                            wx:for="{{msgInfoList}}" wx:key="item.uid">
+                            <view class="weui-cell__bd">
+                                <view>{{item.name}}</view>
+                            </view>
+                            <view class="weui-cell__ft ">
+                                <view class='reddot' wx:if="{{item.noRead}}">{{item.noRead}}</view>
+                                <!-- <text>{{item.time}}</text> -->
+                            </view>
+                        </navigator>
+                    </view>
+                </view>
+
+                <view class="" hidden="{{activeIndex != 1}}">
+                    <!-- bindlongpress="delMsgItem"  -->
+                        <navigator bindlongtap="delMsgItem" 
+                            data-uid="{{item.uid}}" data-idx="{{index}}" data-name="{{item.name}}"
+                            url="win/win?fid=0&type={{types[activeIndex]}}&name=item.name" 
+                            class="weui-cell weui-cell_access" hover-class="weui-cell_active"
+                            wx:for="{{msgActList}}" wx:key="item.uid">
+                            <view class="weui-cell__bd">
+                                <view>{{item.name}}</view>
+                            </view>
+                            <view class="weui-cell__ft ">
+                                <view class='reddot' wx:if="{{item.noRead}}">{{item.noRead}}</view>
+                                <!-- <text>{{item.time}}</text> -->
+                            </view>
+                        </navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+
+

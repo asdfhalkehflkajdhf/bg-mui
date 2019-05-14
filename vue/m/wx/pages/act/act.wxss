@@ -1,0 +1,45 @@
+@import "/font-awesome.wxss";
+.swiper-item{
+  display: block;
+  height: 150px;
+}
+
+nav-page,
+.nav-page,
+.nav-page__bd{
+    height: 100%;
+}
+.nav-page__bd{
+    padding-bottom: 0;
+}
+.nav-weui-tab__content{
+    padding-top: 10px;
+    text-align: center;
+}
+
+
+.item-text-2 {
+  display: flex;
+  flex-direction: row;
+  /* //两端对齐https://www.cnblogs.com/dragondean/p/5922740.html */
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+.button-sp-area{
+    margin: 0 auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 60%;
+}
+
+.textBtn{
+    /* // #3cc51f //#0bb20c  #1aad19 #09bb07 */
+    border-color:#09bb07;
+    border-width: 2px;
+
+    color:#09bb07;
+    margin-right: 10px;
+}

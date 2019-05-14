@@ -1,0 +1,30 @@
+<!--pages/msg/win/win.wxml-->
+<view class='winTop'>
+    <navigator url="/pages/friendView/friendView?fid={{urlParameter.fid}}">
+        <view class="win-title">{{urlParameter.name}}</view>
+    </navigator>
+</view>
+
+<view class='news'>
+    <view class="historycon">
+        <scroll-view scroll-y="true" scroll-top="{{scrollTop}}" class="history" wx:for="{{centendata}}" wx:key='item.time'>
+            <view>
+                <text class='time'>{{item.time}}</text>
+            </view>
+            <block >
+                <view class='news_block_{{item.origin}}'>
+                    <view class='news_text text_border_{{item.origin}}'>
+                        <!-- <template is="wxParse" data="{{wxParseData:{{item.time}}.nodes}}"/> -->
+                        <!-- {{item.content}} -->
+                            <rich-text nodes="{{item.content}}"></rich-text>
+                    </view>
+                </view>
+            </block>
+        </scroll-view>
+    </view>
+</view>
+
+<view class="sendmessage">
+    <editor id="editor" class="editor-container " bindinput="bindMsgChange"></editor>
+    <button class="weui-btn mini-btn" type="primary" size="mini">发送</button>
+</view>

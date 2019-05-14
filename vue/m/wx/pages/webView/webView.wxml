@@ -1,0 +1,3 @@
+<!--pages/webVew/webView.wxml-->
+<view>{{herf}}</view>
+<web-view src="{{herf}}"></web-view>

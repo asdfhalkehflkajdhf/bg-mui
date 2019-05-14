@@ -1,0 +1,103 @@
+<!--pages/actView/actView.wxml-->
+<!-- <import src="../../common/wxParse/wxParse.wxml"/> -->
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-article">
+            <image class="" style="width: 100%;" mode="widthFix" src="{{res.actFirstPic}}" ></image>
+            <view class="page__title">{{res.title}}</view>
+            <view class="weui-flex item-text-2">
+            <!-- 两端对齐 -->
+                <view class="weui-flex__item">
+                    <text class="textBtn">{{res.placeLife}}</text>
+                    <text class="textBtn" wx:if="{{res.activity_stats=='1'}}">进行中</text>
+                    <text class="textBtn" style='color:#9b9b9b;' wx:else>结束</text>
+                </view>
+                <view class="weui-flex__item item-text-right">
+                <!-- 右对齐 -->
+                    <button class="weui-btn mini-btn" type="primary" plain="true" size="mini"
+                        bindtap='gotoLoginPage' 
+                                wx:if="{{res.login_stats==false}}">{{res.contact}}</button>
+                    <button class="weui-btn mini-btn" type="primary" plain="true" size="mini"
+                        bindtap='sendReqInfo'
+                                wx:if="{{res.login_stats && res.activity_stats=='1'}}">请求</button>
+                    <button class="weui-btn mini-btn" type="primary" plain="true" size="mini"
+                        bindtap='gotoFriendView' data-uid='{{res.uid}}'
+                                wx:if="{{res.login_stats}}">作者</button>
+
+                </view>
+                <view><text class="fa fa-eye">{{res.eye}}</text></view>
+            </view>
+
+
+            <view class="weui-article__section">
+                <view class="weui-article__section">
+                    <view class="weui-article__h3">简单介绍</view>
+                    <view class="weui-article__p">
+                        <view class="weui-flex">
+                            <view class="">开始时间：</view>
+                            <view class="weui-flex__item">{{res.startTime}}</view>
+                        </view>
+
+                        <view class="weui-flex">
+                            <view class="">结束时间：</view>
+                            <view class="weui-flex__item">{{res.endTime}}</view>
+                        </view>
+
+                        <view class="weui-flex">
+                            <view class="">花费说明：</view>
+                            <view class="weui-flex__item">每人平均花费({{res.avgSpending}})￥,一次参加({{res.number}})人。具体安排听组织者的，可通同时有好多人进行。注意出行安全和现场信息核对。</view>
+                        </view>
+
+                        <view class="weui-flex">
+                            <view class="">简单介绍：</view>
+                            <view class="weui-flex__item">{{res.actBrief}}</view>
+                        </view>
+
+                        <view class="weui-flex">
+                            <view class="">关注情况：</view>
+                            <view class="weui-flex__item">{{attentionPeopleCount}}人</view>
+                        </view>
+
+                        <view class="weui-flex">
+                            <view class="">当前关注：</view>
+                            <view class="weui-flex__item">{{curAttentionPeople.length}}人
+                            </view>
+                        </view>                        
+                        <view class="page__desc">
+                            <button class="weui-btn mini-btn"
+                                type="primary" plain="true" size="mini"
+                                wx:for="{{curAttentionPeople}}"  wx:key="{{item.uid}}"
+                                bindtap='gotoFriendView' data-uid='{{item.uid}}'>{{item.name}}</button>
+                        </view>
+                        
+
+                        <view class="weui-flex">
+                            <view class="">之前关注：</view>
+                            <view class="weui-flex__item">{{befAttentionPeople.length}}人</view>
+                        </view>              
+                        <view class="page__desc">
+                            <button class="weui-btn mini-btn"
+                                type="primary" plain="true" size="mini"
+                                wx:for="{{befAttentionPeople}}"  wx:key="{{item.uid}}"
+                                bindtap='gotoFriendView' data-uid='{{item.uid}}'>{{item.name}}</button>
+                        </view>
+                        
+                    </view>
+                </view>
+
+                
+                <!-- 详细内容 -->
+                <view class="weui-article__section">
+                    <view class="weui-article__h3">详细情况</view>
+                    <view class="weui-article__p" >
+                        
+                        <!-- //这里data中article为bindName -->
+                        <template is="wxParse" data="{{wxParseData:actDetails.nodes}}"/>
+                    </view>
+                </view>
+
+            </view>
+        </view>
+    </view>
+</view>
+

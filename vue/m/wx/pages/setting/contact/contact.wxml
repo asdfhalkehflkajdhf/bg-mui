@@ -1,0 +1,13 @@
+<!--pages/setting/contact/contact.wxml-->
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+                <input class="weui-input" type='text' value="{{contact}}" bindblur='bindContactInput' placeholder="请输入联系方式" />
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells__title"></view>
+
+    <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" bindtap='userContactSet' >确定</button>
+    </view>
