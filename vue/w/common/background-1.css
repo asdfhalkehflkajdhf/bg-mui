@@ -20,6 +20,7 @@ body{
   padding: 0;
 	/* 没有滚动条 */
 	/* overflow:hidden; */
+	height:100%;
 	overflow-x:hidden;
 	background: #494A5F;	
 }
@@ -43,7 +44,7 @@ img{
   width: 100%;
 	height: auto;  /*自适应*/
   /* max-width: 1290px; */
-	min-height: 700px;
+	/* min-height: 700px; */
   margin: 0 auto;
   padding: 0 10px;
 }
@@ -51,7 +52,7 @@ img{
 .wrapper{
   padding: 10px 0;
 	height: auto;  /*自适应*/
-	min-height: 700px;
+	/* min-height: 700px; */
 }
 
 .placeholder-20{

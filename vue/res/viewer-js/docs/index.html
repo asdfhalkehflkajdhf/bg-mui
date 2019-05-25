@@ -7,7 +7,7 @@
   <meta name="description" content="JavaScript image viewer.">
   <meta name="author" content="Chen Fengyuan">
   <title>Viewer.js</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/viewer.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
@@ -29,27 +29,45 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbar-collapse" role="navigation">
-        <nav class="nav navbar-nav">
-          <a class="nav-link" href="https://github.com/fengyuanchen/viewerjs/blob/master/README.md" data-toggle="tooltip" title="View the documentation">Docs</a>
-          <a class="nav-link" href="https://github.com/fengyuanchen/viewerjs" data-toggle="tooltip" title="View the GitHub project">GitHub</a>
-          <a class="nav-link" href="https://fengyuanchen.github.io" data-toggle="tooltip" title="More projects">More</a>
-          <a class="nav-link" href="http://chenfengyuan.com" data-toggle="tooltip" title="About the author">About</a>
-        </nav>
+        <ul class="nav navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/fengyuanchen/viewerjs/blob/master/README.md" data-toggle="tooltip" title="View the documentation">Docs</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Examples
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="examples/custom-toolbar.html">Custom toolbar</a>
+              <a class="dropdown-item" href="examples/dynamic-viewer.html">Dynamic Viewer</a>
+              <a class="dropdown-item" href="examples/viewer-in-modal.html">Viewer in modal</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/fengyuanchen/viewerjs" data-toggle="tooltip" title="View the GitHub project">GitHub</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://fengyuanchen.github.io" data-toggle="tooltip" title="Explore more projects">Explore</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://chenfengyuan.com" data-toggle="tooltip" title="About the author">About</a>
+          </li>
+        </ul>
       </div>
     </div>
   </header>
 
   <!-- Jumbotron -->
-  <div class="jumbotron bg-primary text-white rounded-0">
+  <div class="jumbotron bg-primary text-white rounded-0" id="tttt">
     <div class="container">
       <div class="row">
         <div class="col-md">
-          <h1>Viewer.js <small class="h6">v1.0.0</small></h1>
+          <h1>Viewer.js <small class="h6">v1.3.3</small></h1>
           <p class="lead">JavaScript image viewer.</p>
         </div>
         <div class="col-md">
           <div class="carbonads">
-            <script id="_carbonads_js" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=fengyuanchen" async></script>
+            <script id="_carbonads_js" src="https://cdn.carbonads.com/carbon.js?serve=CKYI55Q7&placement=fengyuanchengithubio" async></script>
           </div>
         </div>
       </div>
@@ -74,7 +92,7 @@
             </label>
           </div>
           <button class="btn btn-primary btn-block d-md-none" id="toggle-options" data-target="#options" data-toggle="collapse" aria-expanded="true">Toggle options</button>
-          <div class="docs-collapse collapse" id="options" aria-labelledby="toggle-options">
+          <div class="docs-collapse collapse d-md-block" id="options" aria-labelledby="toggle-options">
             <ul class="list-group">
               <li class="list-group-item">
                 <div class="form-check">
@@ -192,31 +210,31 @@
         <hr>
         <div class="docs-buttons" role="group">
           <div class="input-group">
-            <span class="input-group-btn">
+            <span class="input-group-prepend">
               <button type="button" class="btn btn-primary" data-method="view" data-target="#viewIndex" title="View one of the images with image's index">View</button>
             </span>
             <input type="text" class="form-control" id="viewIndex" name="index" value="4" placeholder="index">
           </div>
           <div class="input-group">
-            <span class="input-group-btn">
+            <span class="input-group-prepend">
               <button type="button" class="btn btn-primary" data-enable="inline" data-method="zoom" data-target="#zoomRatio" title="Zoom the image">Zoom</button>
             </span>
             <input type="text" class="form-control" id="zoomRatio" name="ratio" value="0.5" placeholder="ratio">
           </div>
           <div class="input-group">
-            <span class="input-group-btn">
+            <span class="input-group-prepend">
               <button type="button" class="btn btn-primary" data-enable="inline" data-method="zoomTo" data-target="#zoomToRatio" title="Zoom the image to a special ratio">Zoom To</button>
             </span>
             <input type="text" class="form-control" id="zoomToRatio" name="ratio" value="1" placeholder="ratio">
           </div>
           <div class="input-group">
-            <span class="input-group-btn">
+            <span class="input-group-prepend">
               <button type="button" class="btn btn-primary" data-enable="inline" data-method="rotate" data-target="#rotateDegrees" title="Rotate the image">Rotate</button>
             </span>
             <input type="text" class="form-control" id="rotateDegrees" name="degrees" value="90" placeholder="degrees">
           </div>
           <div class="input-group">
-            <span class="input-group-btn">
+            <span class="input-group-prepend">
               <button type="button" class="btn btn-primary" data-enable="inline" data-method="rotateTo" data-target="#rotateToDegrees" title="Rotate the image to a special angle">Rotate To</button>
             </span>
             <input type="text" class="form-control" id="rotateToDegrees" name="degrees" value="360" placeholder="degrees">
@@ -249,7 +267,7 @@
             <button type="button" class="btn btn-primary" data-enable="modal" data-method="show" title="Show the viewer">Show</button>
             <button type="button" class="btn btn-primary" data-method="hide" title="Hide the viewer" disabled>Hide</button>
             <button type="button" class="btn btn-primary" data-enable="inline" data-method="full" title="Enter modal mode">Full</button>
-            <button type="button" class="btn btn-primary" data-method="exit" title="Exit modal mode" disabled>Exit</button>
+            <button type="button" class="btn btn-primary" data-enable="inline" data-method="exit" title="Exit modal mode" disabled>Exit</button>
           </div>
           <div class="btn-group d-flex" role="group">
             <button type="button" class="btn btn-primary" data-enable="inline" data-method="reset">Reset</button>
@@ -268,17 +286,16 @@
       <nav class="nav flex-wrap justify-content-center mb-3">
         <a class="nav-link" href="https://github.com/fengyuanchen/viewerjs">GitHub</a>
         <a class="nav-link" href="https://github.com/fengyuanchen/viewerjs/releases">Releases</a>
-        <a class="nav-link" href="https://github.com/fengyuanchen/viewerjs/blob/master/examples">Examples</a>
         <a class="nav-link" href="https://github.com/fengyuanchen/viewerjs/blob/master/LICENSE">License</a>
-        <a class="nav-link" href="http://chenfengyuan.com">About</a>
+        <a class="nav-link" href="https://chenfengyuan.com">About</a>
       </nav>
     </div>
   </footer>
 
   <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-  <script src="https://fengyuanchen.github.io/js/common.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://fengyuanchen.github.io/shared/google-analytics.js"></script>
   <script src="js/viewer.js"></script>
   <script src="js/main.js"></script>
 </body>

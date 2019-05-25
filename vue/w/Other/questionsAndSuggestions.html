@@ -30,36 +30,40 @@
 
 	</head>
 	<body>
-		
-		<div class="card">
-			问题建议QQ群：
-			<p>群1：666809502
-			<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=20a735e8c3475f517c537748009c3a49cb494a9955def3b6d9028c8e50580ea7" title="qq群1"><i class="fa fa-qq fa-fw"></i></a>
-			</p><p>群2：720321749
-				<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=93ac2c61a7c52b8b731c0d84a491371e146c6bcf74d79d92f76c8f429a9425c0" title="qq群2"><i class="fa fa-qq fa-fw"></i></a>
-			</p><p>邮箱：
-			<a target="_blank" href="mailto:liuzhuchen@163.com" title="邮件liuzhuchen@163.com"><i class="fa fa-envelope-o fa-fw"></i></a>
-			</p>
-			<h2 class="text-center">问题建议</h2>
-			<form>
-				<div class="form-group row">
-					<!-- <label for="标题" class="col-sm-2 col-form-label">标题</label> -->
-					<div class="col-sm-12">
-						<input type="number" class="form-control" maxlength="255" placeholder="标题1-255" v-model="suggestForm.title" maxlength="11" >
-					</div>
+		<div class="container">
+			<div class="wrapper" >
+				<div class="placeholder-10"></div>
+				<div class="card">
+					问题建议QQ群：
+					<p>群1：666809502
+					<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=20a735e8c3475f517c537748009c3a49cb494a9955def3b6d9028c8e50580ea7" title="qq群1"><i class="fa fa-qq fa-fw"></i></a>
+					</p><p>群2：720321749
+						<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=93ac2c61a7c52b8b731c0d84a491371e146c6bcf74d79d92f76c8f429a9425c0" title="qq群2"><i class="fa fa-qq fa-fw"></i></a>
+					</p><p>邮箱：
+					<a target="_blank" href="mailto:liuzhuchen@163.com" title="邮件liuzhuchen@163.com"><i class="fa fa-envelope-o fa-fw"></i></a>
+					</p>
+					<h2 class="text-center">问题建议</h2>
+					<form>
+						<div class="form-group row">
+							<!-- <label for="标题" class="col-sm-2 col-form-label">标题</label> -->
+							<div class="col-sm-12">
+								<input type="number" class="form-control" maxlength="255" placeholder="标题1-255" v-model="suggestForm.title" maxlength="11" >
+							</div>
+						</div>
+						<div class="form-group row">
+							<!-- <label for="内容" class="col-sm-2 col-form-label">内容</label> -->
+							<div class="col-sm-12">
+								<textarea class="form-control" id="exampleFormControlTextarea1" 
+								rows="3" maxlength="1024" placeholder="内容1-1024"
+								v-model="suggestForm.content"></textarea>
+							</div>
+						</div>
+					
+						<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="suggest()">发送</button>
+					</form>
+					
 				</div>
-				<div class="form-group row">
-					<!-- <label for="内容" class="col-sm-2 col-form-label">内容</label> -->
-					<div class="col-sm-12">
-						<textarea class="form-control" id="exampleFormControlTextarea1" 
-						rows="3" maxlength="1024" placeholder="内容1-1024"
-						v-model="suggestForm.content"></textarea>
-					</div>
-				</div>
-			
-				<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="suggest()">发送</button>
-			</form>
-			
+			</div>
 		</div>
 	</body>
 	<script>

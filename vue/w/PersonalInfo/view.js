@@ -1,7 +1,39 @@
 
 var localToken = getLocalToken();
 
-
+	const options = {
+		url: 'imgShowRul',//定义获取显示图像URL的位置，src不显示原始大小的
+		title: true,
+		//图片工具栏
+		toolbar: {
+	
+			zoomIn: true,
+			zoomOut: true,
+			reset: true,
+			rotateLeft: true,
+			rotateRight: true,
+			flipHorizontal: true,
+			flipVertical: true,
+	
+			oneToOne: true,
+			prev: function() {
+				viewer.prev(true);
+			},
+			play: true,
+			next: function() {
+				viewer.next(true);
+			}
+			// download: function() {
+			// 	const a = document.createElement('a');
+	
+			// 	a.href = viewer.image.src;
+			// 	a.download = viewer.image.alt;
+			// 	document.body.appendChild(a);
+			// 	a.click();
+			// 	document.body.removeChild(a);
+			// },
+		}
+	};
 // 个人信息
 // 相册，视频，图片为一个表，按页页面分类，个人信息，动态信息，活动信息，资源保存以路径形式存储，时间，uid
 const userInfo = new Vue({
@@ -25,11 +57,13 @@ const userInfo = new Vue({
 			age:0
 		},
 		eduList:[],
+		imgList:[],
 		msg:""
 
 	},
 	created:function() {
 		this.getUserInfo();
+		this.getUserPhoto();
 	},
 	methods:{
 		getUserInfo:function(){
@@ -81,7 +115,39 @@ const userInfo = new Vue({
 				console.log(error);
 			});
 			
+		},
+	
+		getUserPhoto(){
+			var _this = this;
+			
+			// post 本地json会失败
+			gAxios.post('api/personalInfo/userImgGetList.php', {
+				token: localToken,
+				page_id: 1,
+				fid:getQueryString("fid")
+			})
+			.then(function (response) {
+				if(response.status==200){
+					// console.log(1);
+					var res=response.data;
+					if(res.code!=0){
+						layerMsg(res.msg, res.code);
+					}else{
+						//生成item
+						 _this.imgList = res.data;
+					}
+				}else{
+					layerMsg(response.statusText);
+				}
+				
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 		}
+	},
+	mounted:function(){
+		viewerGalley();
 	}
 
 });
@@ -91,56 +157,18 @@ const userInfo = new Vue({
 // 1 $(function () { });
 // 2 $(document).ready(function () { });
 // 3 window.onload = function () { }
-//相册更新数据，并追加到masonry容器中
-function viewerGalley() {
-	var galley = document.getElementById('imgListDiv');
-	var viewer = new Viewer(galley, {
-		url: 'imgShowRul',//定义获取显示图像URL的位置，src不显示原始大小的
-		//函数定义的是放大示的大小
-		//url: function(galley) {	return galley.src.replace('?size=160', '');	},
-		title: true,
-		//图片工具栏
-		toolbar: {
-	
-			zoomIn: true,
-			zoomOut: true,
-			reset: true,
-			rotateLeft: true,
-			rotateRight: true,
-			flipHorizontal: true,
-			flipVertical: true,
-	
-			oneToOne: true,
-			prev: function() {
-				viewer.prev(true);
-			},
-			play: true,
-			next: function() {
-				viewer.next(true);
-			},
-			// download: function() {
-			// 	const a = document.createElement('a');
-	
-			// 	a.href = viewer.image.src;
-			// 	a.download = viewer.image.alt;
-			// 	document.body.appendChild(a);
-			// 	a.click();
-			// 	document.body.removeChild(a);
-			// },
-		},
-		
-	});
-};
-//JS瀑布流插件masonry动态载入数据
-$(function () {
-	$("#getGridItem").on("click",function(){
-		reloadGridItem();
-	});
+//相册更新数据
 
-	// console.log(getQueryString("fid"));
+$(function () {
+	function viewerGalley(){
+		var galley = document.getElementById('pictures');
+		// var pictures = document.getElementsByClassName('docs-pictures');
+		//这里不知道是什么原因，无法获取元素对象，导致浏览图片js控件加载失败。可能是和vue有冲突。但是又要显示
+		var viewer = new window.Viewer(galley, options);
+	}
 
 	function reloadGridItem(){
-		var $container = $('#imgListDiv');
+		var $container = $('#pictures');
 	
 		// post 本地json会失败
 		gAxios.post('api/personalInfo/userImgGetList.php', {
@@ -149,14 +177,15 @@ $(function () {
 				fid:getQueryString("fid")
 		})
 		.then(function (response) {
-			var res=[];
+			
 			if(response.status==200){
 				// console.log(1);
-				res=response.data;
+				var res=response.data;
 				if(res.code!=0){
 					layerMsg(res.msg, res.code);
 				}else{
 					//生成item
+					 
 					$.each(res.data, function (i, data) {
 						var $gitem = $(
 							'<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12" >'
@@ -182,9 +211,6 @@ $(function () {
 		});
 	}
 	
-	reloadGridItem();
-	// var $getTempItemListElems=$($("#imgListDivTemp").html());
-	// $("#imgListDivTemp").empty();
-	// $container.append($getTempItemListElems).masonry('appended', $getTempItemListElems,true).masonry();
+	// reloadGridItem();
 });
 

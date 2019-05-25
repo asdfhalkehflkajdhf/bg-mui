@@ -1,5 +1,4 @@
 window.onload = function () {
-
   'use strict';
 
   var Viewer = window.Viewer;
@@ -9,6 +8,7 @@ window.onload = function () {
   var buttons = document.querySelector('.docs-buttons');
   var options = {
     // inline: true,
+	container:"#tttt",
     url: 'data-original',
     ready: function (e) {
       console.log(e.type);
@@ -17,6 +17,12 @@ window.onload = function () {
       console.log(e.type);
     },
     shown: function (e) {
+      console.log(e.type);
+    },
+	full: function (e) {
+      console.log(e.type);
+    },
+    exit: function (e) {
       console.log(e.type);
     },
     hide: function (e) {
@@ -30,10 +36,17 @@ window.onload = function () {
     },
     viewed: function (e) {
       console.log(e.type);
+    },
+    zoom: function (e) {
+      console.log(e.type);
+    },
+    zoomed: function (e) {
+      console.log(e.type);
     }
   };
-  var viewer;
-
+  var viewer = new Viewer(pictures, options);
+container = this.element.ownerDocument.querySelector(options.container);
+console.log(container);
   function toggleButtons(mode) {
     var targets;
     var target;
@@ -62,29 +75,6 @@ window.onload = function () {
     }
   }
 
-  addEventListener(pictures, 'ready', function (e) {
-    console.log(e.type);
-  });
-  addEventListener(pictures, 'show', function (e) {
-    console.log(e.type);
-  });
-  addEventListener(pictures, 'shown', function (e) {
-    console.log(e.type);
-  });
-  addEventListener(pictures, 'hide', function (e) {
-    console.log(e.type);
-  });
-  addEventListener(pictures, 'hidden', function (e) {
-    console.log(e.type);
-  });
-  addEventListener(pictures, 'view', function (e) {
-    console.log(e.type);
-  });
-  addEventListener(pictures, 'viewed', function (e) {
-    console.log(e.type);
-  });
-  viewer = new Viewer(pictures, options);
-
   toggleButtons(options.inline ? 'inline' : 'modal');
 
   toggles.onchange = function (event) {
@@ -107,6 +97,8 @@ window.onload = function () {
     var method = button.getAttribute('data-method');
     var target = button.getAttribute('data-target');
     var args = JSON.parse(button.getAttribute('data-arguments')) || [];
+
+	console.log(method, target, args);
 
     if (viewer && method) {
       if (target) {

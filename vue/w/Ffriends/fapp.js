@@ -155,7 +155,8 @@ const formTag = new Vue({
 				if(response.status==200){
 					res=response.data;
 					layerMsg(res.msg, res.code);
-					console.log(res);
+					//刷新当前子页面
+					top.navMenuLeft.refreshSubPage();
 				}else{
 					layerMsg("获取信息失败！");
 					return;

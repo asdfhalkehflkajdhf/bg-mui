@@ -45,10 +45,69 @@ const dynamicList = new Vue({
 // 1 $(function () { });
 // 2 $(document).ready(function () { });
 // 3 window.onload = function () { }
+function openSubPage(url,t, f){
+	
+	window.location.href=url;
+	// openSubWin(obj.url, obj.title, true);
+}
 
-
-
-
+//显示过程中不能屏幕居中，
+function showImg(id){
+	    // console.log(evt);
+	// console.log(id);
+	layer.photos({
+		photos: '#'+id,
+		// offset:  '100px',
+		anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机
+	});
+}
+//显示过程中不能屏幕居中，
+function viewerGalley(id) {
+	
+	let galley = document.getElementById(id);
+	let options = {
+		// inline: true,
+		url: 'imgShowRul',//定义获取显示图像URL的位置，src不显示原始大小的
+		//函数定义的是放大示的大小
+		//url: function(galley) {	return galley.src.replace('?size=160', '');	},
+		title: true,
+		//图片工具栏
+		toolbar: {
+	
+			zoomIn: true,
+			zoomOut: true,
+			reset: true,
+			rotateLeft: true,
+			rotateRight: true,
+			flipHorizontal: true,
+			flipVertical: true,
+	
+			oneToOne: true,
+			prev: function() {
+				viewer.prev(true);
+			},
+			play: true,
+			next: function() {
+				viewer.next(true);
+			},
+			// download: function() {
+			// 	const a = document.createElement('a');
+	
+			// 	a.href = viewer.image.src;
+			// 	a.download = viewer.image.alt;
+			// 	document.body.appendChild(a);
+			// 	a.click();
+			// 	document.body.removeChild(a);
+			// },
+		},
+		
+	};
+	
+	
+	var viewer = new Viewer(galley, options);
+	
+	
+};
 
 $(function () {
 	//JS瀑布流插件masonry动态载入数据
@@ -94,22 +153,68 @@ $(function () {
 				var idx = dynamicListLen+i1;
 				var liList="";
 				
+// 				$.each(data.imgObj.data, function (i2, data){
+// 					liList+='<li><img onclick="dynamicList.viewImg('+idx+', '+i2+')" class="rounded" src="'+data.thumb+'" alt="'+data.alt+'"></li>';
+// 				});
+// 
+// 				let $gitem = $(
+// 					'<div class="card">'
+// 					+'	<div class="card-body">'
+// 					//标题
+// 					+'		<a class="font-weight-bold dyn-item" style="font-size: 15px;" href="#" '
+// 					+'			data-url="../PersonalInfo/view.html?fid='+data.uid+'" onclick="dynamicList.viewUid(this)">'
+// 					+			data.nickname+'</a>'
+// 					+'		<span class="card__span_right" >'+data.ctime+'</span>'
+// 					//内容
+// 					+'		<div style="font-size: 20px;" >'+data.content+'</div>'
+// 					//图片
+// 					+'		<ul class="pictures '+picturesClass+'" style="text-align:center;">'
+// 					+			liList
+// 					+'		</ul>'
+// 					+'	</div>'
+// 					+'</div>'
+// 				);
+
+// layer.photos显示方式二
+// 				$.each(data.imgObj.data, function (i2, data){
+// 					liList+='<li><img onclick="showImg(\'layer-photos-'+idx+'\')" layer-pid="'+i2+'" class="rounded" layer-src="'+data.src+'" src="'+data.thumb+'" alt="'+data.alt+'"></li>';
+// 				});
+// 
+// 				let $gitem = $(
+// 					'<div class="card">'
+// 					+'	<div class="card-body">'
+// 					//标题
+// 					+'		<a class="font-weight-bold dyn-item" style="font-size: 15px;" href="#" '
+// 					+'			data-url="../PersonalInfo/view.html?fid='+data.uid+'" onclick="dynamicList.viewUid(this)">'
+// 					+			data.nickname+'</a>'
+// 					+'		<span class="card__span_right" >'+data.ctime+'</span>'
+// 					//内容
+// 					+'		<div style="font-size: 20px;" >'+data.content+'</div>'
+// 					//图片
+// 					+'		<ul id="layer-photos-'+idx+'" class="layer-photos-demo pictures '+picturesClass+'" style="text-align:center;">'
+// 					+			liList
+// 					+'		</ul>'
+// 					+'	</div>'
+// 					+'</div>'
+// 				);
+
 				$.each(data.imgObj.data, function (i2, data){
-					liList+='<li><img onclick="dynamicList.viewImg('+idx+', '+i2+')" class="rounded" src="'+data.thumb+'" alt="'+data.alt+'"></li>';
+					// liList+='<li><img onclick="viewerGalley(\'layer-photos-'+idx+'\')" class="rounded" imgShowRul="'+data.src+'" src="'+data.thumb+'" alt="'+data.alt+'"></li>';
+					liList+='<li><img onclick="" class="rounded" imgShowRul="'+data.src+'" src="'+data.thumb+'" alt="'+data.alt+'"></li>';
 				});
 
 				let $gitem = $(
 					'<div class="card">'
 					+'	<div class="card-body">'
 					//标题
-					+'		<a class="font-weight-bold dyn-item" style="font-size: 15px;" href="#" '
-					+'			data-url="../PersonalInfo/view.html?fid='+data.uid+'" onclick="dynamicList.viewUid(this)">'
+					+'		<a class="font-weight-bold dyn-item" style="font-size: 15px;" href="../PersonalInfo/view.html?fid='+data.uid+'" target="_black"'
+					+'			data-url="../PersonalInfo/view.html?fid='+data.uid+'" onclick="">'
 					+			data.nickname+'</a>'
 					+'		<span class="card__span_right" >'+data.ctime+'</span>'
 					//内容
 					+'		<div style="font-size: 20px;" >'+data.content+'</div>'
 					//图片
-					+'		<ul class="pictures '+picturesClass+'" style="text-align:center;">'
+					+'		<ul id="layer-photos-'+idx+'" class="layer-photos-demo pictures '+picturesClass+'" style="text-align:center;">'
 					+			liList
 					+'		</ul>'
 					+'	</div>'

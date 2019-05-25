@@ -28,13 +28,19 @@
 
 		<!-- 自有资源 -->
 		<link rel="stylesheet" type="text/css" href="./css/index.css">
+		
+		<!--放大图片浏览插件-->
+		<link rel="stylesheet" href="../../res/viewer-js/viewer.min.css">
+		<script src="../../res/viewer-js/viewer.min.js"></script>
+		
 		<!-- awesome图标 -->
 		<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
 
 	</head>
-	<body>
+	<body style="height:100%;">
+
 		<!-- //这个页面使用layer open打开，是给用户看的。 -->
-		<div class="container">
+		<div class="container" >
 			<div class="wrapper" >
 
 				<!-- //导航菜单 -->
@@ -48,8 +54,8 @@
 								动态管理
 							</button>
 							<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-								<a class="dropdown-item" href="#" onclick="openSubWin('manageDynamic.html','动态管理',true)">我的动态</a>
-								<a class="dropdown-item" href="#" onclick="openSubWin('editorDynamic.html','发布动态',true)">发布动态</a>
+								<a class="dropdown-item" href="#" onclick="openSubPage('manageDynamic.html','动态管理',true)">我的动态</a>
+								<a class="dropdown-item" href="#" onclick="openSubPage('editorDynamic.html','发布动态',true)">发布动态</a>
 							</div>
 						</div>
 					</div>

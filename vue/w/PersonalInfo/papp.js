@@ -36,7 +36,8 @@ const personalInfo = new Vue({
 				layerMsg("请先登陆！");
 				return;
 			}
-			openSubWin(obj.url, obj.title, true);
+			window.location.href=obj.url;
+			// openSubWin(obj.url, obj.title, true);
 		}
 	},
 	created:function(){

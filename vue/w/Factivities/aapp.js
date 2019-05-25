@@ -128,6 +128,8 @@ const formTag = new Vue({
 				if(response.status==200){
 					res=response.data;
 					layerMsg(res.msg, res.code);
+					//刷新当前子页面
+					top.navMenuLeft.refreshSubPage();
 				}else{
 					layerMsg("获取信息失败！");
 					return;
@@ -198,7 +200,11 @@ const imgListVar = new Vue({
 // 1 $(function () { });
 // 2 $(document).ready(function () { });
 // 3 window.onload = function () { }
-
+function openSubPage(url,t, f){
+	
+	window.location.href=url;
+	// openSubWin(obj.url, obj.title, true);
+}
 
 //JS瀑布流插件masonry动态载入数据
 $(function () {

@@ -3,5 +3,6 @@
     "usingComponents": {
     
     },
-    "navigationBarTitleText": "朋友"
+    "navigationBarTitleText": "朋友",
+    "enablePullDownRefresh":false
 }

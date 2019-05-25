@@ -83,7 +83,7 @@ Page({
      */
     onLoad: function (options) {
         // this.pageInit();
-        console.log("load 请求一次个人数据");
+        // console.log("load 请求一次个人数据");
     },
 
     /**
@@ -98,7 +98,7 @@ Page({
      */
     onShow: function () {
         this.pageInit();
-        console.log("show");
+        // console.log("show");
     },
 
     /**

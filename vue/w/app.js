@@ -1,6 +1,6 @@
 var localToken = getLocalToken();
 
-const navMenuLeft = new Vue({
+var navMenuLeft = new Vue({
 	el:"#navMenuLeft",
 	data:{
 		nvaListLeft:[
@@ -15,6 +15,9 @@ const navMenuLeft = new Vue({
 		preNavItem:[],
 	},
 	methods:{
+		refreshSubPage(){
+			subPageSwitch(curNavItem.ifm_url);
+		},
 		modActionStatus:function(curNavItemIndex, event){
 			//切换标签状态
 			// console.log(curNavItemIndex);

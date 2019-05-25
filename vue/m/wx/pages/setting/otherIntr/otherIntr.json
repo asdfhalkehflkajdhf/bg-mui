@@ -1,5 +1,6 @@
 {
-  "usingComponents": {
-      "eidtor":"/common/editor/editor"
-  }
+    "usingComponents": {
+        "eidtor":"/common/editor/editor"
+    },
+    "navigationBarTitleText": "希望"
 }

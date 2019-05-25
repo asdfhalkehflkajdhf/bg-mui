@@ -98,7 +98,7 @@
 						token: localToken,
 						msgLastTime: _vue_this.msgLastTime,
 						uid:getQueryString('fid'),
-						type:'info'
+						type:getQueryString('type')
 					})
 					.then(function (response) {
 						//   // 服务端返回的状态信息
@@ -157,7 +157,7 @@
 
 			},
 			created:function(){
-				// this.upMsgWin();
+				this.upMsgWin();
 			},
 			mounted:function(){
 				// 请求数据,更新页面,定时器
