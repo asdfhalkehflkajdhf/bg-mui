@@ -27,33 +27,36 @@
 		<!-- 自有资源 -->
 		<link rel="stylesheet" type="text/css" href="./css/view.css">
 		<!-- 瀑布流 20190322-->
-		<!-- <script src="../../res/js/masonry.pkgd.min.js"></script> -->
-		<!-- <script src="../../res/js/imagesloaded.pkgd.min.js"></script> -->
+		<script src="../../res/js/masonry.pkgd.min.js"></script>
+		<script src="../../res/js/imagesloaded.pkgd.min.js"></script>
 		<!--放大图片浏览插件-->
 		<link rel="stylesheet" href="../../res/viewer-js/viewer.min.css">
-		<script src="../../res/viewer-js/viewer.min.js" ></script>
+		<script src="../../res/viewer-js/viewer.min.js"></script>
+
 		<!-- awesome图标 -->
 		<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
 
 	</head>
 	<body>
-		<div class="container " id="showPersonalInfo">
+		<div class="container ">
 		    <div class="wrapper">
-				<div  class="placeholder-10"></div>
+				
 				<!-- //个人信息展示组 -->
-				<div v-if="res.uid<0 || res.find_switch==false">
-					<div class="card">
-						<div class="card-header text-center">
-							用户个人信息未公开
+				<div class="group" id="showPersonalInfo">
+					<div  class="placeholder-10"></div>
+					<div class="group-item" v-if="!(res.uid>=0 && res.find_switch)">
+						<div class="card" style="">
+							<div class="card-header text-center">
+								用户个人信息未开放
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="group"  v-if="res.uid>=0 && res.find_switch">
-					<div class="group-item">
-						<div class="card">
+					<div class="group-item" v-if="res.uid>=0 && res.find_switch">
+						<div class="card" style="">
 							<div class="card-header">
-								<div>uid:<span v-text="res.uid"></span>
-									<span class="fa fa-eye card__span_right" title="观看人数" v-text="res.eye"></span>
+								<div>
+								uid:<span v-text="res.uid"></span>
+								<span class="fa fa-eye card__span_right" title="观看人数" v-text="res.eye"></span>
 								</div>
 							</div>
 							<div class="card-header">
@@ -63,7 +66,7 @@
 							<ul class="list-group list-group-flush">
 								<!-- <li class="list-group-item">站内</li> -->
 								<li class="list-group-item ">
-									<div class="row" v-if="res.uid>=0">
+									<div class="row">
 										<div class="input-group col-sm">
 											<div class="input-group-prepend">
 												<span class="input-group-text" id="inputGroup-contact-sm">预留</span>
@@ -90,7 +93,7 @@
 					</div>
 
 
-					<div class="group-item">
+					<div class="group-item" v-if="res.uid>=0 && res.find_switch">
 						<div class="card" style="">
 							<div class="card-header">
 								基本信息
@@ -215,7 +218,7 @@
 							</ul>
 						</div>				
 					</div>
-					<div class="group-item">
+					<div class="group-item" v-if="res.uid>=0 && res.find_switch">
 						<div class="card" style="">
 							<div class="card-header">
 								个人介绍
@@ -226,7 +229,7 @@
 
 						</div>				
 					</div>
-					<div class="group-item">
+					<div class="group-item" v-if="res.uid>=0 && res.find_switch">
 						<div class="card" style="">
 							<div class="card-header">
 								对方要求
@@ -236,17 +239,15 @@
 							</div>
 						</div>			
 					</div>
-					<!-- 相册 -->
-					<div class="group-item">
+					<!-- 相册 ,这里不能使用条件显示，否则会不显示图片，会有冲突-->
+					<div class="group-item" >
 						<div class="card" style="">
 							<div class="card-header">
 								相册
 							</div>
 							<!-- //  -->
-							<div class="grid row docs-pictures" id="pictures" >
-								<div class="grid-item col-xl-3 col-lg-3 col-md-4 col-sm-6  col-xs-12" v-for="data in imgList">
-									<img class="" :src="data.src" :imgShowRul="data.thumb_src" :alt="data.alt">
-								</div>
+							<div class="grid row js-masonry " id="imgListDiv" >
+				
 							</div>
 
 
@@ -259,11 +260,9 @@
 							</div>
 						</div>
 					</div> -->
+					<div  class="placeholder-10"></div>
 				
 				</div>
-				
-				
-				<div  class="placeholder-10"></div>
 			</div> <!-- wrapper -->
 		</div>
 	</body>

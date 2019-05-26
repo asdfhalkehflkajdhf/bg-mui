@@ -1,13 +1,13 @@
 // pages/setting/changePW/changePW.js
 var app = getApp().globalData;
-var localToken = app.util.getLocalToken();
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        token: localToken,
+        token: "",
         srcPw: "",
         newPw1: "",
         newPw2: ""
@@ -47,7 +47,7 @@ Page({
     changePW: function () {
         //发送请求
         var _vueThis = this;
-
+        _vueThis.data.token = app.util.getLocalToken();
         if (!_vueThis.checkForm()) {
             return false;
         }

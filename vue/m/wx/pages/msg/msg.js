@@ -1,7 +1,7 @@
 // pages/msg/msg.js
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 var app = getApp().globalData;
-var localToken = app.util.getLocalToken();
+
 Page({
 
     /**
@@ -18,7 +18,7 @@ Page({
         sliderOffset: 0,
         sliderLeft: 0,
     },
-
+    
     /**
      * 生命周期函数--监听页面加载
      */
@@ -75,7 +75,7 @@ Page({
         wx.request({
             url: app.api.newsDelUserMsg, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 uid: uid,
                 type: _this.data.types[_this.data.activeIndex]
             },
@@ -129,7 +129,7 @@ Page({
         wx.request({
             url: app.api.blackListAdd, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 buid: uid,
                 uid: app.util.getLocalID(),
                 unname: name
@@ -179,12 +179,12 @@ Page({
 
     reloadGridItem: function() {
         let _this=this;
-
+ 
         wx.showLoading({ title: '加载中…' });
         wx.request({
             url: app.api.newsGetUserMsgList, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 type:_this.data.types[_this.data.activeIndex]
             },
             method: 'post',
@@ -209,7 +209,7 @@ Page({
                             })
                         }
                     }
-                    app.util.layerMsg(res.msg, res.code);
+                    // app.util.layerMsg(res.msg, res.code);
                 } else {
                     app.util.layerMsg(response.statusText);
                 }
@@ -241,6 +241,7 @@ Page({
     onShow: function () {
         let _this=this;
         _this.reloadGridItem();
+        
     },
 
   /**

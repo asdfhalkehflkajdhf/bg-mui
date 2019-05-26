@@ -1,6 +1,6 @@
 // pages/setBindEmail/setBindEmail.js
 var app = getApp().globalData;
-var localToken = app.util.getLocalToken();
+
 Page({
 
     /**
@@ -8,7 +8,7 @@ Page({
      */
     data: {
         boundEmailForm: {
-            token: localToken,
+            token: app.util.getLocalToken(),
             email: "",
             newEmail: "",
             checkCode: ""
@@ -30,7 +30,7 @@ Page({
         wx.request({
             url: app.api.userEmailGet, // 仅为示例，并非真实的接口地址
             // url:url,
-            data: { token: localToken},
+            data: { token: app.util.getLocalToken()},
             method: 'post',
             dataType: 'josn',
             header: {
@@ -96,6 +96,7 @@ Page({
         if (!_vueThis.checkForm()) {
             return false;
         };
+        _vueThis.data.boundEmailForm.token = app.util.getLocalToken();
         wx.showLoading({ title: '提交中…' });
         wx.request({
             url: app.api.userEmailSet, // 仅为示例，并非真实的接口地址
@@ -145,6 +146,7 @@ Page({
         if (!_vueThis.checkForm()) {
             return false;
         };
+        _vueThis.data.boundEmailForm.token = app.util.getLocalToken();
         wx.showLoading({ title: '提交中…' });
         wx.request({
             url: app.api.userEmailCodeSend, // 仅为示例，并非真实的接口地址
@@ -195,7 +197,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        let _this = this;
     },
 
     /**

@@ -7,9 +7,9 @@
 
 <view class='news'>
     <view class="historycon">
-        <scroll-view scroll-y="true" scroll-top="{{scrollTop}}" class="history" wx:for="{{centendata}}" wx:key='item.time'>
+        <scroll-view scroll-y="true" scroll-top="{{scrollTop}}" class="history" wx:for="{{msgList}}" wx:key='item.time'>
             <view>
-                <text class='time'>{{item.time}}</text>
+                <text class='time'>{{item.ctime}}</text>
             </view>
             <block >
                 <view class='news_block_{{item.origin}}'>

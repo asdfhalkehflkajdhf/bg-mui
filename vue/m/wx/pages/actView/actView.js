@@ -1,7 +1,7 @@
 // pages/actView/actView.js
 // pages/friendView/friendView.js
 var app = getApp().globalData;
-var localToken = app.util.getLocalToken();
+
 // var WxParse = require('../../common/wxParse/wxParse.js');
 Page({
 
@@ -60,7 +60,7 @@ Page({
         wx.request({
             url: app.api.actAttentionInfo, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 aid: _this.data.urlParameter.id
             },
             method: 'post',
@@ -109,7 +109,7 @@ Page({
         wx.request({
             url: app.api.actGetInfo, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 aid: _this.data.urlParameter.id
             },
             method: 'post',
@@ -156,7 +156,7 @@ Page({
         wx.request({
             url: app.api.actSendReqInfo, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 aid: _this.data.urlParameter.id,
                 auth_id: _this.data.res.uid,
                 type: 'act'

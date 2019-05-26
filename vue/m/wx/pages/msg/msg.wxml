@@ -16,14 +16,14 @@
                     <!-- bindlongpress="delMsgItem"  -->
                         <navigator bindlongtap="delMsgItem" 
                             data-uid="{{item.uid}}" data-idx="{{index}}" data-name="{{item.name}}"
-                            url="win/win?fid=0&type={{types[activeIndex]}}&name=item.name"
+                            url="win/win?fid={{item.uid}}&type={{types[activeIndex]}}&name={{item.name}}"
                             class="weui-cell weui-cell_access" hover-class="weui-cell_active"
                             wx:for="{{msgInfoList}}" wx:key="item.uid">
                             <view class="weui-cell__bd">
                                 <view>{{item.name}}</view>
                             </view>
                             <view class="weui-cell__ft ">
-                                <view class='reddot' wx:if="{{item.noRead}}">{{item.noRead}}</view>
+                                <view class='reddot' wx:if="{{item.noRead>0}}">{{item.noRead}}</view>
                                 <!-- <text>{{item.time}}</text> -->
                             </view>
                         </navigator>
@@ -34,14 +34,14 @@
                     <!-- bindlongpress="delMsgItem"  -->
                         <navigator bindlongtap="delMsgItem" 
                             data-uid="{{item.uid}}" data-idx="{{index}}" data-name="{{item.name}}"
-                            url="win/win?fid=0&type={{types[activeIndex]}}&name=item.name" 
+                            url="win/win?fid={{item.uid}}&type={{types[activeIndex]}}&name={{item.name}}" 
                             class="weui-cell weui-cell_access" hover-class="weui-cell_active"
                             wx:for="{{msgActList}}" wx:key="item.uid">
                             <view class="weui-cell__bd">
                                 <view>{{item.name}}</view>
                             </view>
                             <view class="weui-cell__ft ">
-                                <view class='reddot' wx:if="{{item.noRead}}">{{item.noRead}}</view>
+                                <view class='reddot' wx:if="{{item.noRead>0}}">{{item.noRead}}</view>
                                 <!-- <text>{{item.time}}</text> -->
                             </view>
                         </navigator>

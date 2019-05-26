@@ -1,6 +1,6 @@
 // pages/setting/edu/edu.js
 var app = getApp().globalData;
-var localToken = app.util.getLocalToken();
+
 Page({
 
     /**
@@ -15,7 +15,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        this.setData({
+            eduList: app.auth.data.eduList
+        })
     },
 
     bindVCodeInput: function (e) {
@@ -36,7 +38,7 @@ Page({
         wx.request({
             url: app.api.userEduSet, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 verify_code: _this.data.verify_code,
                 uid: app.auth.data.selfInfo.uid
             },

@@ -9,6 +9,7 @@ module.exports = {
         //登陆状态
         landing: false,
         uid: -1,
+        token:"",
 
 		loginForm: {
             phone: "",
@@ -26,7 +27,11 @@ module.exports = {
 
         //个人信息
         selfInfo:{},
-        eduList:[]
+        eduList:[],
+                   
+        livingList:[],//获取的原始数据    
+        livingTextList: [],//省，市，其中省不变动，市会变动
+        livingTextList2Obj: [],//对应所有省的市list
     },
     //获取user info
     getUserInfo: function () {
@@ -35,8 +40,8 @@ module.exports = {
         wx.request({
             url: api.userInfoGet, // 仅为示例，并非真实的接口地址
             data: {
-                token: util.getLocalToken(),
-                uid: util.getLocalID(),
+                token: _this.data.token,
+                uid: _this.data.uid
             },
             method: 'post',
             dataType: 'josn',
@@ -50,13 +55,13 @@ module.exports = {
                     //解析结果
                     if (res.code == 0) {
                         _this.data.selfInfo = res.data.res;
-                        _this.dtat.eduList = res.data.eduList;
+                        _this.data.eduList = res.data.eduList;
                     } else {
-                        app.util.layerMsg(res.msg, res.code);
+                        util.layerMsg(res.msg, res.code);
                     }
 
                 } else {
-                    app.util.layerMsg(response.statusText);
+                    util.layerMsg(response.statusText);
                 }
 
             },
@@ -68,6 +73,54 @@ module.exports = {
                 //都会执行,res参数 成功和失败一起的。
                 // errMsg:"request:ok"
                 // console.log(res);
+
+            }
+        });
+    },
+    userLivingPlaceGet() {
+        var _this = this;
+        wx.request({
+            url: api.userLivingPlaceGet, // 仅为示例，并非真实的接口地址
+            data: {
+                token: _this.data.token
+            },
+            method: 'post',
+            dataType: 'josn',
+            header: {
+                'content-type': 'application/json' // 默认值
+            },
+            success(response) {
+                if (response.statusCode == 200) {
+                    let res = JSON.parse(response.data);
+                    //这里必须使用setData，否则不进行渲染
+                    //生活地
+                    let regionIdx = [0, 0];
+                    let livingTextList1 = res.data.map(function (v) { return v.text; });
+                    
+                    let livingTextList2Obj = [];
+                    for (let i = 0; i < res.data.length; i++) {
+                        let item = res.data[i].data.map(function (v) { return v.text; });
+                        livingTextList2Obj.push(item);
+                    }
+                    let livingTextList2 = livingTextList2Obj[0];
+
+                    
+                    _this.data.livingList= res.data;
+                    _this.data.livingTextList= [livingTextList1, livingTextList2];
+                    _this.data.livingTextList2Obj= livingTextList2Obj;
+
+                    // console.log(_this.data.livingList);
+                } else {
+                    util.layerMsg(response.statusText);
+                }
+
+            },
+            fail(errMsg) {
+                console.log(errMsg);
+            },
+            complete(res) {
+                //都会执行,res参数 成功和失败一起的。
+                // errMsg:"request:ok"
 
             }
         });
@@ -150,17 +203,23 @@ module.exports = {
                     let res = JSON.parse(response.data);
                     //解析结果
                     if (res.code == 0) {
-                        // 获取个人信息
-                        _vueThis.getUserInfo();
+                        // 保存状态
+                        util.setLocalID(res.data.id);
+                        util.setLocalToken(res.data.token);
+                        _vueThis.data.uid=res.data.id;
+                        _vueThis.data.token = res.data.token;
+                        
+                        console.log(util.getLocalToken(), util.getLocalID());
+
                         //修改导航栏状态
                         _vueThis.setLanding(true);
                         if (res.data.isa == 1) {
                             //是管理员
                         }
-                        //
-                        // 保存状态
-                        util.setLocalID(res.data.id);
-                        util.setLocalToken(res.data.token);
+
+                        // 获取个人信息
+                        _vueThis.getUserInfo();
+                        _vueThis.userLivingPlaceGet();
 
                         //跳转到上一个页面
                         wx.navigateBack({

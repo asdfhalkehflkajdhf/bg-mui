@@ -1,7 +1,7 @@
 // pages/act/act.js
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 var app = getApp().globalData;
-var localToken = app.util.getLocalToken();
+
 
 Page({
 
@@ -190,7 +190,7 @@ Page({
 
         wx.request({
             url: app.api.actGetSearchCondition, // 仅为示例，并非真实的接口地址
-            data: { token: localToken, },
+            data: { token: app.util.getLocalToken(), },
             method: 'post',
             dataType: 'josn',
             header: {
@@ -262,7 +262,7 @@ Page({
         wx.request({
             url: app.api.actPutSearchCondition, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 data: _vueThis.conditionalForm
             },
             method: 'post',
@@ -315,7 +315,7 @@ Page({
         wx.request({
             url: app.api.actGetListInfo, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 page: _this.data.page++,
                 first_load_time: _this.data.fload_time
             },

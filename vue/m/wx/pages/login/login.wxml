@@ -25,7 +25,7 @@
         </view>
 
         <view class="weui-btn-area">
-            <button class="weui-btn" type="primary" plain="true" >登陆</button>
+            <button class="weui-btn" type="primary" plain="true" form-type="submit">登陆</button>
         </view>
     
         <view class="row" style='margin-top:20px;'>
@@ -69,7 +69,7 @@
         </view>
 
         <view class="weui-btn-area">
-            <button class="weui-btn" type="primary" plain="true" >注册</button>
+            <button class="weui-btn" type="primary" plain="true" form-type="submit">注册</button>
         </view>
     
         <view class="row" style='margin-top:20px;'>
@@ -99,7 +99,7 @@
         </view>
 
         <view class="weui-btn-area">
-            <button class="weui-btn" type="primary" plain="true" >提交</button>
+            <button class="weui-btn" type="primary" plain="true" form-type="submit">提交</button>
         </view>
     
         <view class="row" style='margin-top:20px;'>

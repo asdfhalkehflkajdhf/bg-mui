@@ -1,7 +1,7 @@
 // pages/dynamic/dynamic.js
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 var app = getApp().globalData;
-var localToken = app.util.getLocalToken();
+
 Page({
 
   /**
@@ -55,7 +55,7 @@ Page({
         wx.request({
             url: app.api.dynamicGetListInfo, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 page: _this.data.page++,
                 floadTime: _this.data.floadTime
             },
@@ -232,7 +232,7 @@ Page({
             url: app.api.dynamicAdd, // 仅为示例，并非真实的接口地址
             // url:url,
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 content: _vueThis.data.content,
                 list: JSON.stringify(upList)
             },
@@ -290,7 +290,7 @@ Page({
         }else{
             // 上传图片
             // FormData 对象
-            var formObj = { token: localToken, uid: app.util.getLocalID(), page_id: 3 };
+            var formObj = { token: app.util.getLocalToken(), uid: app.util.getLocalID(), page_id: 3 };
             // 发起上传请求
             app.util.uploadImgOneByOne(fileList, 0, formObj, _vueThis.upDyn, _vueThis.callBackRes);
         }

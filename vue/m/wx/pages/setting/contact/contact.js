@@ -1,6 +1,6 @@
 // pages/setting/contact/contact.js
 var app = getApp().globalData;
-var localToken = app.util.getLocalToken();
+
 Page({
 
     /**
@@ -33,7 +33,7 @@ Page({
         wx.request({
             url: app.api.userContactSet, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 contact: _this.data.contact,
                 uid: app.auth.data.selfInfo.uid
             },

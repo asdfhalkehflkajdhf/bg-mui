@@ -1,10 +1,7 @@
 // pages/friendView/friendView.js
 var app = getApp().globalData;
-var localToken = app.util.getLocalToken();
+
 // var WxParse = require('../../common/wxParse/wxParse.js');
-
-
-
 
 Page({
 
@@ -55,7 +52,7 @@ Page({
         wx.request({
             url: app.api.userInfoGet, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 uid: _this.data.urlParameter.fid
             },
             method: 'post',
@@ -107,7 +104,7 @@ Page({
         wx.request({
             url: app.api.newsAddUserMsg, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 uid: _this.data.urlParameter.fid,
                 msg: _this.data.msg,
                 type: 'info'
@@ -146,7 +143,7 @@ Page({
         wx.request({
             url: app.api.userImgGetList, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 page_id: 1,
                 fid: _this.data.urlParameter.fid
             },

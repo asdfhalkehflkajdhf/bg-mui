@@ -1,6 +1,5 @@
 // pages/msg/win/win.js
 var app = getApp().globalData;
-var localToken = app.util.getLocalToken();
 
 Page({
 
@@ -16,17 +15,17 @@ Page({
 
 
         // centendata: [
-        //     { time: "2019-03-05", content: "<p>asdf</p><p>asdfasdfasdf</p>", origin: "right"},
-        //     { time: "2019-03-05", content: "leftasdfasdfasdfasdf", origin: "left"},
-        //     { time: "2019-03-05", content: "asdfasdfasdfasdf", origin: "right"},
-        //     { time: "2019-03-05", content: "asdfasdfasdfasdf", origin: "right"},
-        //     { time: "2019-03-05", content: "leftasdfasdfasdfasdf", origin: "left"},
-        //     { time: "2019-03-05", content: "asdfasdfasdfasdf", origin: "right"},
-        //     { time: "2019-03-05", content: "asdfasdfasdfasdf", origin: "right"},
-        //     { time: "2019-03-05", content: "leftasdfasdfasdfasdf", origin: "left"},
-        //     { time: "2019-03-05", content: "asdfasdfasdfasdf", origin: "right"},
-        //     { time: "2019-03-05", content: "asdfasdfasdfasdf", origin: "right"},
-        //     { time: "2019-03-05", content: "leftasdfasdfasdfasdf", origin: "left"}
+        //     { ctime: "2019-03-05", content: "<p>asdf</p><p>asdfasdfasdf</p>", origin: "right"},
+        //     { ctime: "2019-03-05", content: "leftasdfasdfasdfasdf", origin: "left"},
+        //     { ctime: "2019-03-05", content: "asdfasdfasdfasdf", origin: "right"},
+        //     { ctime: "2019-03-05", content: "asdfasdfasdfasdf", origin: "right"},
+        //     { ctime: "2019-03-05", content: "leftasdfasdfasdfasdf", origin: "left"},
+        //     { ctime: "2019-03-05", content: "asdfasdfasdfasdf", origin: "right"},
+        //     { ctime: "2019-03-05", content: "asdfasdfasdfasdf", origin: "right"},
+        //     { ctime: "2019-03-05", content: "leftasdfasdfasdfasdf", origin: "left"},
+        //     { ctime: "2019-03-05", content: "asdfasdfasdfasdf", origin: "right"},
+        //     { ctime: "2019-03-05", content: "asdfasdfasdfasdf", origin: "right"},
+        //     { ctime: "2019-03-05", content: "leftasdfasdfasdfasdf", origin: "left"}
         // ]
     },
 
@@ -35,18 +34,21 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        console.log(options);
         // 获取url参数
         this.setData({
             urlParameter: options
         })
         //定时器，获取数据
-        // this.intervalId = setInterval(this.upMsgWin, 3000);
+        this.upMsgWin();
+        //定时器，获取数据
+        this.intervalId = setInterval(this.upMsgWin, 3000);
     },
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-        // clearInterval(this.intervalId);
+        clearInterval(this.intervalId);
     },
     //获取数据请求
     upMsgWin: function () {
@@ -54,7 +56,7 @@ Page({
         wx.request({
             url: app.api.newsGetUserMsg, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 msgLastTime: _this.data.msgLastTime,
                 uid: _this.data.urlParameter.fid,
                 type: _this.data.urlParameter.type
@@ -78,6 +80,7 @@ Page({
                         return;
                     } else {
                         let ml_data=_this.data.msgList.concat(res.data);
+                        console.log(ml_data);
                         _this.setData({
                             msgList: ml_data
                         })
@@ -109,7 +112,7 @@ Page({
         wx.request({
             url: app.api.newsAddUserMsg, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 uid: _this.data.urlParameter.fid,
                 msg: _this.data.msg,
                 type: _this.data.urlParameter.type
@@ -161,14 +164,14 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-
+        
     },
 
 

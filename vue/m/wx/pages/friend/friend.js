@@ -1,7 +1,7 @@
 // pages/friend/friend.js
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 var app = getApp().globalData;
-var localToken = app.util.getLocalToken();
+
 Page({
   /**
    * 页面的初始数据
@@ -132,7 +132,7 @@ Page({
         wx.request({
             url: app.api.friendGetListInfo, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 page: _this.data.page++
             },
             method: 'post',
@@ -326,7 +326,6 @@ Page({
                 break;
             }
         }
-
     },
     bindMStatusChange: function (e) {
         var _this = this;
@@ -344,7 +343,7 @@ Page({
 
         wx.request({
             url: app.api.friendGetSearchCondition, // 仅为示例，并非真实的接口地址
-            data: { token: localToken,},
+            data: { token: app.util.getLocalToken(),},
             method: 'post',
             dataType: 'josn',
             header: {
@@ -447,7 +446,7 @@ Page({
         wx.request({
             url: app.api.friendSetSearchCondition, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 data: _vueThis.conditionalForm
             },
             method: 'post',

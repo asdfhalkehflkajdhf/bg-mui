@@ -1,5 +1,5 @@
 <!--pages/setting/photo/photo.wxml-->
-<view>相片总数{{imgCount}}。管理请登陆web端</view>
+<view>已上传相片总数 {{imgCount}}。</view><view>管理请登陆web端。</view>
 <view class="page">
     <view class="page__bd">
         <view class="weui-cells">

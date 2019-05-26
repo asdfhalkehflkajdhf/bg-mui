@@ -1,31 +1,59 @@
 // pages/setting/baseInfo/baseInfo.js
 var app = getApp().globalData;
-var localToken = app.util.getLocalToken();
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+        //
+        nick_name: app.auth.data.selfInfo.nick_name,
+        height: app.auth.data.selfInfo.height,
+        weight: app.auth.data.selfInfo.weight,
+        income: app.auth.data.selfInfo.income,
+        profession: app.auth.data.selfInfo.profession,
+        tryst_expect: app.auth.data.selfInfo.tryst_expect,
+
+
         //////查找条件
         regionIdx: [0, 0],
-        liviingList:[],
         livingTextList: [],//省市
         livingTextList2Obj: [],//不全部的
 
         ownnessList:[],
         mStatusTextList:[],
         
-        
-        
         mStatusIdx: 0,
+    },
+
+
+    dataInit:function(){
+
+
+
+        this.setData({
+            nick_name: app.auth.data.selfInfo.nick_name,
+            height: app.auth.data.selfInfo.height,
+            weight: app.auth.data.selfInfo.weight,
+            income: app.auth.data.selfInfo.income,
+            profession: app.auth.data.selfInfo.profession,
+            tryst_expect: app.auth.data.selfInfo.tryst_expect,
+            livingTextList: app.auth.data.livingTextList,
+            livingTextList2Obj: app.auth.data.livingTextList2Obj,
+        })
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.dataInit();
 
+        this.userLivingPlaceInit();
+        this.userMaritalStatusGet();
+        console.log(this.data);
+        
     },
 
 
@@ -104,55 +132,31 @@ Page({
     },
 
 
-    userLivingPlaceGet() {
+    userLivingPlaceInit() {
         var _this = this;
-        wx.request({
-            url: app.api.userLivingPlaceGet, // 仅为示例，并非真实的接口地址
-            data: {
-                token: localToken
-            },
-            method: 'post',
-            dataType: 'josn',
-            header: {
-                'content-type': 'application/json' // 默认值
-            },
-            success(response) {
-                if (response.statusCode == 200) {
-                    let res = JSON.parse(response.data);
-                    //这里必须使用setData，否则不进行渲染
-                    //生活地
-                    let regionIdx = [0, 0];
-                    let livingTextList1 = res.data.map(function (v) { return v.text; });
-                    let code = app.auth.data.selfInfo.user_living_place_id;
-                    let id1 = code.substr(0, 2);
-                    let id2 = code.substr(2, 2);
-                    let livingTextList2Obj = [];
-                    for (let i = 0; i < res.data.length; i++) {
-                        if (res.data[i].value.substr(0, 2) == id1) { regionIdx[0] = i; }
-                        let item = res.data[i].data.map(function (v) { return v.text; });
-                        livingTextList2Obj.push(item);
-                    }
-                    let livingTextList2 = livingTextList2Obj[0];
-                    for (let i = 0; i < res.data[regionIdx[0]].length; i++) {
-                        if (res.data[regionIdx[0]].data[i].value.substr(2, 2) == id1) {
-                            regionIdx[1] = i;
-                            livingTextList2 = livingTextList2Obj[i];
-                        }
-                    }
 
-                } else {
-                    app.util.layerMsg(response.statusText);
-                }
+        let resData = app.auth.data.livingList;
+        
+        //生活地
+        let regionIdx = [0, 0];
+        let code = app.auth.data.selfInfo.user_living_place_id;
+        let id1 = code.substr(0, 2);
+        let id2 = code.substr(2, 2);
+        
+        for (let i = 0; i < resData.length; i++) {
+            if (resData[i].value.substr(0, 2) == id1) { regionIdx[0] = i; break;}
+        }
+        for (let i = 0; i < resData[regionIdx[0]].length; i++) {
+            if (resData[regionIdx[0]].data[i].value.substr(2, 2) == id1) {regionIdx[1] = i;break;}
+        }
 
-            },
-            fail(errMsg) {
-                console.log(errMsg);
-            },
-            complete(res) {
-                //都会执行,res参数 成功和失败一起的。
-                // errMsg:"request:ok"
+        console.log(regionIdx);
+        let livingTextList = _this.data.livingTextList;
+        livingTextList[1] = _this.data.livingTextList2Obj[regionIdx[0]]
 
-            }
+        _this.setData({
+            livingTextList: livingTextList,
+            regionIdx: regionIdx
         });
 
     },
@@ -161,7 +165,7 @@ Page({
         wx.request({
             url: app.api.userMaritalStatusGet, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken
+                token: app.util.getLocalToken()
             },
             method: 'post',
             dataType: 'josn',
@@ -176,7 +180,7 @@ Page({
                         ownnessList: res.data,
                         mStatusTextList: res.data.map(function (v) { return v.text; })
                     })
-
+                    _this.bindMStatusIdxInit(app.auth.data.selfInfo.ownness);
                 } else {
                     app.util.layerMsg(response.statusText);
                 }
@@ -200,7 +204,7 @@ Page({
         wx.request({
             url: app.api.userBaseSet, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 nick_name: app.auth.data.selfInfo.nick_name,
                 height: app.auth.data.selfInfo.height,
                 weight: app.auth.data.selfInfo.weight,

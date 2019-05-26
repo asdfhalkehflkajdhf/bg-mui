@@ -1,6 +1,6 @@
 // pages/setting/photo/photo.js
 var app = getApp().globalData;
-var localToken = app.util.getLocalToken();
+
 Page({
 
     /**
@@ -8,7 +8,7 @@ Page({
      */
     data: {
         /////////编辑////////
-        list: [],//页面显示
+        list: [],//页面显示,上传的内容
         imgCount:0
     },
 
@@ -74,18 +74,18 @@ Page({
         // 开始上传
         // 上传图片
         // FormData 对象
-        var formObj = { token: localToken, uid: app.util.getLocalID(), page_id: 1 };
+        var formObj = { token: app.util.getLocalToken(), uid: app.util.getLocalID(), page_id: 1 };
         // 发起上传请求
         app.util.uploadImgOneByOne(fileList, 0, formObj, _vueThis.upOK, _vueThis.callBackRes);
 
     },
     reloadGridItemCount: function(){
-
+        let _this=this;
         wx.showLoading({ title: '加载中…' });
         wx.request({
             url: app.api.userImgGetCount, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 uid: app.auth.data.selfInfo.uid
             },
             method: 'post',

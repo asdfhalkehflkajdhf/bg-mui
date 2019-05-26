@@ -1,6 +1,5 @@
 // pages/login/login.js
 var app = getApp().globalData;
-var localToken = app.util.getLocalToken();
 
 Page({
     data: {

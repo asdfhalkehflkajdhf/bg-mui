@@ -64,18 +64,10 @@ function uploadImgOneByOne(imgList, idx, formData, callBackFunc, callBackRes) {
 //////////////////登录状态
 var BoyGIDKey = 'BoyGID';
 function setLocalID(id) {
-    wx.setStorage({
-        key: BoyGIDKey,
-        data: id
-    });
+    wx.setStorageSync(BoyGIDKey,id);
 }
 function getLocalID() {
-    var BoyGIDVal = wx.getStorage({
-        key: BoyGIDKey,
-        success(res) {
-            // console.log(res.data)
-        }
-    });
+    var BoyGIDVal = wx.getStorageSync(BoyGIDKey);
     // console.log(BoyGIDVal);
     if (BoyGIDVal == null) {
         setLocalID("");
@@ -88,18 +80,10 @@ function getLocalID() {
 
 var BoyGTokenKey = 'BoyGToken';
 function setLocalToken(token) {
-    wx.setStorage({
-        key: BoyGTokenKey,
-        data: token
-    });
+    wx.setStorageSync(BoyGTokenKey,token);
 }
 function getLocalToken() {
-    var BoyGTokenVal = wx.getStorage({
-        key: BoyGTokenKey,
-        success(res) {
-            // console.log(res.data)
-        }
-    });
+    var BoyGTokenVal = wx.getStorageSync(BoyGTokenKey);
     
     if (BoyGTokenVal == null) {
         // console.log("get BoyGToken is null");
@@ -111,11 +95,7 @@ function getLocalToken() {
     }
 }
 function removeLocalToken() {
-    wx.setStorage({
-        key: BoyGTokenKey,
-        data: ""
-    });
-    
+    wx.setStorageSync(BoyGTokenKey,"");
 }
 
 function layerMsg(msg, code) {

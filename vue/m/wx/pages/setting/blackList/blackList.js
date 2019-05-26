@@ -1,6 +1,6 @@
 // pages/setting/blackList/blackList.js
 var app = getApp().globalData;
-var localToken = app.util.getLocalToken();
+
 Page({
 
     /**
@@ -51,7 +51,7 @@ Page({
         wx.request({
             url: app.api.blackListDel, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 id: id
             },
             method: 'post',
@@ -98,7 +98,7 @@ Page({
         wx.request({
             url: app.api.blackListGet, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken
+                token: app.util.getLocalToken()
             },
             method: 'post',
             dataType: 'josn',

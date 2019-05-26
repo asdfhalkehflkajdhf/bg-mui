@@ -1,6 +1,6 @@
 // pages/setting/qa/qa.js
 var app = getApp().globalData;
-var localToken = app.util.getLocalToken();
+
 Page({
 
     /**
@@ -52,7 +52,7 @@ Page({
         wx.request({
             url: app.api.otherSuggest, // 仅为示例，并非真实的接口地址
             data: {
-                token: localToken,
+                token: app.util.getLocalToken(),
                 title: _this.data.title,
                 content: _this.data.content
             },

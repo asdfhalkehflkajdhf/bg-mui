@@ -6,7 +6,7 @@
                 <view class="weui-label">邮箱：</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input" type="email" name="email" bindblur='bindEmailInput' placeholder="邮箱"/>
+                <input class="weui-input" type="email" name="email" bindblur='bindEmailInput' placeholder="邮箱" value='{{boundEmailForm.newEmail}}' />
             </view>
         </view>
 

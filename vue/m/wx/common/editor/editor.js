@@ -1,5 +1,5 @@
 var app = getApp().globalData;
-var localToken = app.util.getLocalToken();
+
 Component({
     /**
    * 组件的属性列表
@@ -33,9 +33,9 @@ Component({
         },
         contentInit(){
             if (this.properties.apiPath == "selfIntr") {
-                this.editorCtx.setContents({ html: app.auth.data.selfInfr});
+                this.editorCtx.setContents({ html: app.auth.data.selfInfo.selfIntr});
             } else if (this.properties.apiPath == "otherIntr") {
-                this.editorCtx.setContents({ html: app.auth.data.otherInfr });
+                this.editorCtx.setContents({ html: app.auth.data.selfInfo.otherIntr });
             }
         },
         userIntrSet() {
@@ -45,7 +45,7 @@ Component({
             wx.request({
                 url: _this.getApiPath(), // 仅为示例，并非真实的接口地址
                 data: {
-                    token: localToken,
+                    token: app.util.getLocalToken(),
                     intr: _this.data.content,
                     uid: app.util.getLocalID(),
                     res_list: app.auth.data.selfInfo.res_list
@@ -83,9 +83,8 @@ Component({
             const that = this
             //获取当前组件元素
             wx.createSelectorQuery().in(this).select('#editor').context(function (res) {
-                that.editorCtx = res.context
+                that.editorCtx = res.context;
                 that.contentInit();
-                
             }).exec();
 
         },
@@ -193,7 +192,7 @@ Component({
             // 开始上传
             // 上传图片
             // FormData 对象
-            var formObj = { token: localToken, uid: app.util.getLocalID(), page_id: 1 };
+            var formObj = { token: app.util.getLocalToken(), uid: app.util.getLocalID(), page_id: 1 };
             // 发起上传请求
             app.util.uploadImgOneByOne(imgPathList, 0, formObj, _vueThis.upOK, _vueThis.callBackRes);
 
