@@ -1,5 +1,5 @@
 <!--pages/friendView/friendView.wxml-->
-<!-- <import src="/common/wxParse/wxParse.wxml"/> -->
+<import src="/common/wxParse/wxParse.wxml"/>
 <view class="page">
     <view class="page__bd">
         <view class="weui-article" wx:if="{{res.uid<0 }}">
@@ -21,7 +21,6 @@
                                 {{res.contact}}
                             </view>
                             <button class="weui-btn mini-btn" type="primary" size="mini" 
-                                bindtap='gotoLoginPage' 
                                 wx:if="{{res.login_stats==false}}">{{res.contact}}</button>
                         </view>
                         <view class="weui-cells__title" wx:if="{{res.login_stats}}">站内</view>
@@ -57,16 +56,18 @@
                     <view class="weui-article__p" >
                         
                         <!-- //这里data中article为bindName -->
-                        <!-- <template is="wxParse" data="{{wxParseData:selfIntr.nodes}}"/> -->
-                        <rich-text nodes="{{res.selfIntr}}"></rich-text>
+                        <template is="wxParse" data="{{wxParseData:selfIntr.nodes}}"/>
+                        <!-- //使用rich-text图片内容不能自适应 -->
+                        <!-- <rich-text nodes="{{res.selfIntr}}"></rich-text> -->
                     </view>
                 </view>
                 <!-- 我理想的 -->
                 <view class="weui-article__section">
                     <view class="weui-article__h3">我理想的</view>
                     <view class="weui-article__p">
-                        <!-- <template is="wxParse" data="{{wxParseData:otherIntr.nodes}}"/> -->
-                        <rich-text nodes="{{res.otherIntr}}"></rich-text>
+                        <template is="wxParse" data="{{wxParseData:otherIntr.nodes}}"/>
+                        <!-- //使用rich-text图片内容不能自适应 -->
+                        <!-- <rich-text nodes="{{res.otherIntr}}"></rich-text> -->
                     </view>
                 </view>
                 

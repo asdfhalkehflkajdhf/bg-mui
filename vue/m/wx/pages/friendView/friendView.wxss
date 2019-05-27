@@ -1,6 +1,6 @@
 /* pages/friendView/friendView.wxss */
 @import "/font-awesome.wxss";
-/* @import "/common/wxParse/wxParse.wxss"; */
+@import "/common/wxParse/wxParse.wxss";
 
 .item-text-2 {
   display: flex;

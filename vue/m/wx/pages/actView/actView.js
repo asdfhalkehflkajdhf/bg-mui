@@ -2,7 +2,7 @@
 // pages/friendView/friendView.js
 var app = getApp().globalData;
 
-// var WxParse = require('../../common/wxParse/wxParse.js');
+var WxParse = require('../../common/wxParse/wxParse.js');
 Page({
 
     /**
@@ -126,7 +126,7 @@ Page({
                     _this.setData({
                         res: res.data
                     });
-                    // WxParse.wxParse('actDetails', 'html', res.data.actDetails, _this, 5);
+                    WxParse.wxParse('actDetails', 'html', res.data.actDetails, _this, 5);
                     // console.log(res);
                     if (res.data.aid == -1 || res.data.uid == -1) {
                         app.util.layerMsg("活动不存在！", 2);
@@ -187,10 +187,6 @@ Page({
 
     },
 
-    // 跳转到登陆
-    gotoLoginPage: function () {
-        app.util.layerMsg("跳转到登陆");
-    },
     gotoFriendView: function (event) {
         var uid = event.currentTarget.dataset['uid'];
         let url = "../friendView/friendView?fid=" + uid;

@@ -1,7 +1,7 @@
 // pages/friendView/friendView.js
 var app = getApp().globalData;
 
-// var WxParse = require('../../common/wxParse/wxParse.js');
+var WxParse = require('../../common/wxParse/wxParse.js');
 
 Page({
 
@@ -72,8 +72,8 @@ Page({
                         _this.setData({
                             res: res.data.res
                         });
-                        // WxParse.wxParse('selfIntr', 'html', res.data.res.selfIntr, _this, 5);
-                        // WxParse.wxParse('otherIntr', 'html', res.data.res.otherIntr, _this, 5);
+                        WxParse.wxParse('selfIntr', 'html', res.data.res.selfIntr, _this, 5);
+                        WxParse.wxParse('otherIntr', 'html', res.data.res.otherIntr, _this, 5);
                     } else {
                         app.util.layerMsg(res.msg, res.code);
                     }
@@ -178,12 +178,6 @@ Page({
             }
         });
     },
-
-    // 跳转到登陆
-    gotoLoginPage: function(){
-        app.util.layerMsg("跳转到登陆");
-    },
-
 
 
 
