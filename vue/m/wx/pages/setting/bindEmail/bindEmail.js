@@ -76,7 +76,7 @@ Page({
             app.util.layerMsg("邮箱不能为空！");
             return false;
         } else if (this.data.boundEmailForm.newEmail == this.data.boundEmailForm.email) {
-            app.util.layerMsg("同原来邮箱一样！");
+            app.util.layerMsg("同原邮箱一样！");
             return false;
         }
         return true;

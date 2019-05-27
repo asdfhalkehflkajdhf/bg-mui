@@ -9,7 +9,7 @@
         previous-margin="0px"
         next-margin="0px">
         <!-- <block > -->
-            <swiper-item  wx:for="{{lunBoTuList}}" wx:key="{{id}}">
+            <swiper-item  wx:for="{{lunBoTuList}}" wx:key="{{item.id}}">
                 <image src="{{item.src}}" mode='widthFix' class="swiper-item" bindtap='upAdsStatusInfo' data-idx="{{index}}"/>
             </swiper-item>
         <!-- </block> -->
@@ -92,12 +92,12 @@
                                 <view class="weui-label">年龄</view>
                             </view>
                             <view class="weui-cell__bd">
-                                <picker mode="multiSelector" value="{{ageIdx}}" 
+                                <picker mode="multiSelector"
                                     bindchange="bindAgeChange" 
                                     bindcolumnchange="bindAgeColumnChange" 
+                                    value="{{ageIdx}}"
                                     range="{{conditionalData.ageList}}">
-                                    <view class="weui-input">
-                                    {{conditionalData.ageList[0][ageIdx[0]]}}-{{conditionalData.ageList[1][ageIdx[1]]}}</view>
+                                    <view class="weui-input">{{conditionalData.ageList[0][ageIdx[0]]}}-{{conditionalData.ageList[1][ageIdx[1]]}}</view>
                                 </picker>
                             </view>
                         </view>
@@ -106,12 +106,12 @@
                                 <view class="weui-label">身高</view>
                             </view>
                             <view class="weui-cell__bd">
-                                <picker mode="multiSelector" value="{{heightIdx}}" 
+                                <picker mode="multiSelector" 
                                     bindchange="bindHeightChange" 
                                     bindcolumnchange="bindHeightColumnChange" 
+                                    value="{{heightIdx}}" 
                                     range="{{conditionalData.heightList}}">
-                                    <view class="weui-input">
-                                    {{conditionalData.heightList[0][heightIdx[0]]}}-{{conditionalData.heightList[1][heightIdx[1]]}}</view>
+                                    <view class="weui-input">{{conditionalData.heightList[0][heightIdx[0]]}}-{{conditionalData.heightList[1][heightIdx[1]]}}</view>
                                 </picker>
                             </view>
                         </view>

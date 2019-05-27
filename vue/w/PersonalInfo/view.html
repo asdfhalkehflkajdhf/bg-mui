@@ -44,14 +44,14 @@
 				<!-- //个人信息展示组 -->
 				<div class="group" id="showPersonalInfo">
 					<div  class="placeholder-10"></div>
-					<div class="group-item" v-if="!(res.uid>=0 && res.find_switch)">
+					<div class="group-item" v-if="!(res.uid>=0 )">
 						<div class="card" style="">
 							<div class="card-header text-center">
 								用户个人信息未开放
 							</div>
 						</div>
 					</div>
-					<div class="group-item" v-if="res.uid>=0 && res.find_switch">
+					<div class="group-item" v-if="res.uid>=0 ">
 						<div class="card" style="">
 							<div class="card-header">
 								<div>
@@ -93,7 +93,7 @@
 					</div>
 
 
-					<div class="group-item" v-if="res.uid>=0 && res.find_switch">
+					<div class="group-item" v-if="res.uid>=0 ">
 						<div class="card" style="">
 							<div class="card-header">
 								基本信息
@@ -218,7 +218,7 @@
 							</ul>
 						</div>				
 					</div>
-					<div class="group-item" v-if="res.uid>=0 && res.find_switch">
+					<div class="group-item" v-if="res.uid>=0 ">
 						<div class="card" style="">
 							<div class="card-header">
 								个人介绍
@@ -229,7 +229,7 @@
 
 						</div>				
 					</div>
-					<div class="group-item" v-if="res.uid>=0 && res.find_switch">
+					<div class="group-item" v-if="res.uid>=0 ">
 						<div class="card" style="">
 							<div class="card-header">
 								对方要求

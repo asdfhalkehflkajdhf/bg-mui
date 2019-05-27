@@ -4,7 +4,8 @@
     <view class="nav-page__bd">
         <view class="weui-cells weui-cells_after-title">
         <!-- bindlongpress="delMsgItem"  -->
-            <view bindtap="delItem" 
+            <view  bindlongtap="delItem" bindtap='tapOpenWin' 
+                bindtouchstart="touchStart" bindtouchend="touchEnd"
                 data-uid="{{item.black_uid}}" data-id="{{item.id}}" data-idx="{{index}}"
                 class="weui-cell weui-cell_access" hover-class="weui-cell_active"
                 wx:for="{{msgInfoList}}" wx:key="item.black_uid">

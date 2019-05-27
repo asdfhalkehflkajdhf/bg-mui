@@ -20,6 +20,12 @@ Page({
         })
     },
 
+    bindGotoChsi:function(){
+        
+        let url = "/pages/webView/webView?url=https://www.chsi.com.cn/xlcx/rhsq.jsp";
+        console.log(url);
+        app.util.gotoPage(url);
+    },
     bindVCodeInput: function (e) {
         this.setData({
             verify_code: e.detail.value
@@ -53,11 +59,12 @@ Page({
                     let res = JSON.parse(response.data);
                     //这里必须使用setData，否则不进行渲染
                     if (res.code == 0) {
-                        _this.data.eduList.push(res.data);
                         _this.setData({
                             verify_code:"",
-                            eduList: _this.data.eduList
-                        })
+                            eduList: res.data
+                        });
+                        //更新
+                        app.auth.data.eduList = res.data;
                         
                     }
                     app.util.layerMsg(res.msg, res.code);

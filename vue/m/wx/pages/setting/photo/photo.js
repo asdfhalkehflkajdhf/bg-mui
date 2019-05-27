@@ -59,7 +59,8 @@ Page({
         let upList = this.callBackRes.filter(item => item.upStatus > 0).map(item => item.upStatus);
         let imgCount = this.data.imgCount + upList.length;
         this.setData({
-            imgCount: imgCount
+            imgCount: imgCount,
+            list:[]
         });
     },
     upFrom: function () {
@@ -99,7 +100,7 @@ Page({
                     // console.log(response);
                     const res = JSON.parse(response.data);
                     //解析结果
-                    app.util.layerMsg(res.msg, res.code);
+                    // app.util.layerMsg(res.msg, res.code);
                     if (res.code == 0) {
                         _this.setData({
                             imgCount:res.data

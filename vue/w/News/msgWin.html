@@ -66,7 +66,10 @@
 					</div>
 	</body>
 	<script type="text/javascript">
-
+		String.prototype.startWith=function(str){
+			var reg=new RegExp("^"+str);
+			return reg.test(this);
+		}
 		var localToken = getLocalToken();
 		var msgWin = new Vue({
 			el: "#msgWin",
@@ -80,6 +83,13 @@
 				appendMsgWin:function(msgItem){
 					var $container= $("#msgItemList");
 					$.each(msgItem, function (i, data) {
+						
+						if(data.content.startWith("ACTREQ:")){
+							let tc = data.content.substr(7);
+							let tc_json = JSON.parse(tc);
+							data.content=tc_json.tc_json+'<a href="../Factivities/viewAction.html?id='+tc_json.aid+'" target="_black">'+tc_json.atitle+'</a>';
+						}
+						
 						var $gitem = $(
 							'<div>'
 							+'	<p class="text-center msg-time-backcolor">'+data.ctime+'</p>'

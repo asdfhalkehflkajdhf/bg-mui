@@ -2,25 +2,34 @@ var app = getApp().globalData;
 
 Component({
     /**
-   * 组件的属性列表
+   * 组件的属性列表,外部数据
    */
     properties: {
         apiPath: {
             type: String,
             value: '',
-        }
+        },
+        //组件数据一般都 在data中设置，其他位置不能进行初始化和定义
+        callBackRes: {
+            type: null,
+            value: [],
+        },
     },
 
   /**
-   * 组件的初始数据
+   * 组件的初始数据，内部数据
    */
     data: {
         formats: {},
         bottom: 0,
         placeholder: '开始输入...',
         _focus: false,
-        content:""
+        content:"",
+
+
     },
+    //图片上传
+    
     methods:{
         getApiPath(){
             if(this.properties.apiPath=="selfIntr"){
@@ -95,7 +104,7 @@ Component({
                 success(res) {
                     _this.data.content = res.html;
                     console.log(_this.data.content);
-                    // _this.userIntrSet();
+                    _this.userIntrSet();
                 }
             });
         },
@@ -157,11 +166,13 @@ Component({
             })
         },
 
-        //图片上传
-        callBackRes: [],
-        upOK: function () {
+        
+        upImgOk: function (imgObjList) {
+            // console.log(imgObjList)
             let that = this;
-            for (let item in this.callBackRes){
+            for (let i=0;i<imgObjList.length; ++i){
+                let item = imgObjList[i];
+                console.log(item)
                 if (item.upStatus>0){
                     //追加到img list
                     app.auth.data.selfInfo.res_list.push(item.upStatus);
@@ -174,28 +185,22 @@ Component({
                         },
                         success: function () {
                             console.log('insert image success')
+                        },
+                        fail:function() {
+                            console.log('insert image fail')
+                        },
+                        complete: function () {
+                            console.log('insert image complete')
                         }
                     })
                 }
             }
-            this.callBackRes=[];
+
         },
         upImg: function (imgPathList) {
-            var _vueThis = this;
-
-            // check from
-            if (imgPathList.length < 1) {
-                app.util.layerMsg("内容为空！", 2);
-                return false;
-            }
-
-            // 开始上传
-            // 上传图片
-            // FormData 对象
-            var formObj = { token: app.util.getLocalToken(), uid: app.util.getLocalID(), page_id: 1 };
-            // 发起上传请求
-            app.util.uploadImgOneByOne(imgPathList, 0, formObj, _vueThis.upOK, _vueThis.callBackRes);
-
+            const imgUpEventDetail = { imgList: imgPathList } // detail对象，提供给事件监听函数
+            const imgUpEventOption = {} // 触发事件的选项
+            this.triggerEvent('imgup', imgUpEventDetail, imgUpEventOption)
         },
 
     }

@@ -2,7 +2,10 @@
 <!-- <import src="/common/wxParse/wxParse.wxml"/> -->
 <view class="page">
     <view class="page__bd">
-        <view class="weui-article">
+        <view class="weui-article" wx:if="{{res.uid<0 }}">
+            <view class="weui-article__h1">{{res.nick_name}} 个人信息未开放</view>
+        </view>
+        <view class="weui-article" wx:else>
             <view class="weui-article__h1">{{res.nick_name}}</view>
             <view class=".item-text-2">
                 <text class="">uid:{{res.uid}}</text>

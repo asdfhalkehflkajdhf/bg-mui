@@ -6,7 +6,7 @@
             <view class="weui-label">昵称</view>
         </view>
         <view class="weui-cell__bd">
-            <input class="weui-input" bindchange="bindNickNameChange" value="{{nick_name}}" />
+            <input class="weui-input" bindchange="bindNickNameChange" value="{{nick_name}}" maxlength='32'/>
         </view>
         <!-- <view class="weui-cell__ft">
             <view class="weui-vcode-btn">获取验证码</view>
@@ -33,7 +33,7 @@
             <view class="weui-label">身高</view>
         </view>
         <view class="weui-cell__bd">
-            <input class="weui-input" type='number' bindchange="bindHeightChange" value="{{height}}" />
+            <input class="weui-input" type='number' bindchange="bindHeightChange" value="{{height}}" maxlength='3'/>
         </view>
     </view>
     <!-- // 体重 -->
@@ -42,7 +42,7 @@
             <view class="weui-label">体重</view>
         </view>
         <view class="weui-cell__bd">
-            <input class="weui-input" type='number' bindchange="bindWeightChange" value="{{weight}}" />
+            <input class="weui-input" type='number' bindchange="bindWeightChange" value="{{weight}}" maxlength='3'/>
         </view>                            
     </view>
     <view class="weui-cell weui-cell_input ">
@@ -50,7 +50,7 @@
             <view class="weui-label">收入</view>
         </view>
         <view class="weui-cell__bd">
-            <input class="weui-input" type='number' bindinput="bindIncomeInput" placeholder="" value='{{income}}' />
+            <input class="weui-input" type='number' bindinput="bindIncomeInput" placeholder="" value='{{income}}' maxlength='10'/>
         </view>
     </view>
 
@@ -59,7 +59,7 @@
             <view class="weui-label">职业</view>
         </view>
         <view class="weui-cell__bd">
-            <input class="weui-input" type='text' bindinput="bindProfessionInput" placeholder="" value='{{profession}}' />
+            <input class="weui-input" type='text' bindinput="bindProfessionInput" placeholder="" value='{{profession}}' maxlength='45'/>
         </view>
     </view>
     <view class="weui-cell weui-cell_input ">
@@ -67,7 +67,7 @@
             <view class="weui-label">爱好</view>
         </view>
         <view class="weui-cell__bd">
-            <input class="weui-input" type="text" bindinput="bindTrystInput" placeholder="" value='{{tryst_expect}}' />
+            <input class="weui-input" type="text" bindinput="bindTrystInput" placeholder="" value='{{tryst_expect}}' maxlength='128'/>
         </view>
     </view>
 

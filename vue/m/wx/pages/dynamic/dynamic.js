@@ -247,10 +247,16 @@ Page({
                     let res = JSON.parse(response.data);
                     //这里必须使用setData，否则不进行渲染
                     if (res.code == 0) {
+                        //清空内容，重新加载
                         _vueThis.setData({
                             list: [],
-                            content: ""
-                        })
+                            content: "",
+
+                            floadTime: "null",
+                            page: 0,
+                            dynamicList:[]
+                        });
+                        _vueThis.reloadGridItem();
                     }else{
                         app.util.layerMsg(res.msg, res.code);    
                     }
@@ -276,6 +282,7 @@ Page({
     upFrom:function() {
         var _vueThis = this;
         let fileList = _vueThis.data.list;
+        
         // check from
         if (fileList.length < 1 && _vueThis.data.content.length < 1) {
             app.util.layerMsg("内容为空！", 2);

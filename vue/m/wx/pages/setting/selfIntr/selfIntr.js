@@ -15,6 +15,28 @@ Page({
     onLoad: function (options) {
 
     },
+    callBackRes:[],
+    onImgUpOk:function(){
+        console.log(this.callBackRes);
+        this.selectComponent("#eidtor").upImgOk(this.callBackRes);
+    },
+    onImgUpEvent: function (e) {
+        var _this = this;
+        //  获取上传文件列表
+        let imgPathList = e.detail.imgList;
+        // check from
+        if (imgPathList.length < 1) {
+            app.util.layerMsg("内容为空！", 2);
+            return false;
+        }
+
+        // 开始上传
+        // 上传图片
+        // FormData 对象
+        var formObj = { token: app.util.getLocalToken(), uid: app.util.getLocalID(), page_id: 1 };
+        // 发起上传请求
+        app.util.uploadImgOneByOne(imgPathList, 0, formObj, _this.onImgUpOk, _this.callBackRes);
+    },
 
     /**
      * 生命周期函数--监听页面初次渲染完成

@@ -157,7 +157,7 @@ Page({
                 }
 
                 if (res.data.length == 0) {
-                    app.util.layerMsg("没有更多，请修改查找条件！");
+                    app.util.layerMsg("没有更多！");
                     return;
                 }
             },
@@ -185,7 +185,7 @@ Page({
     ///////////////查找条件
   //生活地
     bindRegionChange: function (e) {
-        console.log('picker发送选择改变，携带值为', e.detail.value)
+        // console.log('picker发送选择改变，携带值为', e.detail.value)
         var _this = this;
         let data = _this.data.conditionalForm;
         data.living = _this.data.conditionalData.livingList[e.detail.value[0]].data[e.detail.value[1]].value;
@@ -235,8 +235,8 @@ Page({
     bindAgeChange: function (e) {
         var _this = this;
         let data = _this.data.conditionalForm;
-        data.age1 = e.detail.value[0];
-        data.age2 = e.detail.value[1];
+        data.age1 = _this.data.conditionalData.ageList[0][e.detail.value[0]];
+        data.age2 = _this.data.conditionalData.ageList[0][e.detail.value[1]];
         this.setData({
             ageIdx: e.detail.value,
             conditionalForm: data
@@ -262,8 +262,8 @@ Page({
     bindHeightChange: function(e) {
         var _this = this;
         let data = _this.data.conditionalForm;
-        data.height1 = e.detail.value[0];
-        data.height2 = e.detail.value[1];
+        data.height1 = _this.data.conditionalData.heightList[0][e.detail.value[0]];
+        data.height2 = _this.data.conditionalData.heightList[0][e.detail.value[1]];
         this.setData({
             heightIdx: e.detail.value,
             conditionalForm: data
@@ -295,7 +295,6 @@ Page({
                 break;
             }
         }
-        
     },
     bindEduChange: function (e) {
         var _this = this;
@@ -314,7 +313,6 @@ Page({
         this.setData({
             conditionalForm: data
         })
-        console.log(this.data.conditionalForm);
     },
   //状态
     bindMStatusIdxInit: function (id) {
@@ -330,12 +328,11 @@ Page({
     bindMStatusChange: function (e) {
         var _this = this;
         let data = _this.data.conditionalForm;
-        data.ownness = e.detail.value;
+        data.ownness = _this.data.conditionalData.ownnessList[e.detail.value].value;
         this.setData({
             mStatusIdx: e.detail.value,
             conditionalForm: data
         })
-        console.log(this.data.conditionalForm);
     },
   //查找
     getFrom: function (e) {
@@ -380,8 +377,10 @@ Page({
                         ageList.push(i);
                     }
                     res['data']['conditionalData']['ageList'] = [ageList, ageList];
-                    let t_ageIdx = [ageList.indexOf(res['data']['conditionalForm']['age1']),
-                        ageList.indexOf(res['data']['conditionalForm']['age2'])];
+                    let t_ageIdx = [
+                        ageList.indexOf(parseInt(res['data']['conditionalForm']['age1'])),
+                        ageList.indexOf(parseInt(res['data']['conditionalForm']['age2']))
+                    ];
                     //身高
                     let heightList = [];
                     for (let i = 100; i < 250; i++) {
@@ -389,8 +388,8 @@ Page({
                     }
                     res['data']['conditionalData']['heightList'] = [heightList, heightList];
                     let t_heightIdx=[
-                        heightList.indexOf(res['data']['conditionalForm']['height1']),
-                        heightList.indexOf(res['data']['conditionalForm']['height2'])
+                        heightList.indexOf(parseInt(res['data']['conditionalForm']['height1'])),
+                        heightList.indexOf(parseInt(res['data']['conditionalForm']['height2']))
                     ];
                     // 学历
                     res['data']['conditionalData']['eduTextList'] = res['data']['conditionalData']['eduList'].map(function (v) { return v.text; });
@@ -418,10 +417,7 @@ Page({
                     _vueThis.bindEduIdxInit(res['data']['conditionalForm']['edu']);
                     //状态
                     _vueThis.bindMStatusIdxInit(res['data']['conditionalForm']['ownness']);
-                    
 
-                    console.log(_vueThis.data.conditionalData);
-                    console.log(_vueThis.data.conditionalForm);
                 } else {
                     app.util.layerMsg(response.statusText);
                 }
@@ -441,13 +437,15 @@ Page({
 		//更新表单
     upFrom: function (e) {
 		var _vueThis = this;
+
+        console.log(_vueThis.data.conditionalForm);
+        // return;
         wx.showLoading({ title: '提交中…' });
-        
         wx.request({
             url: app.api.friendSetSearchCondition, // 仅为示例，并非真实的接口地址
             data: {
                 token: app.util.getLocalToken(),
-                data: _vueThis.conditionalForm
+                data: _vueThis.data.conditionalForm
             },
             method: 'post',
             dataType: 'josn',
@@ -541,7 +539,7 @@ Page({
     },
     ///////////////// 选项卡
     tabClick: function (e) {
-        console.log(e.currentTarget);
+        // console.log(e.currentTarget);
         this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id

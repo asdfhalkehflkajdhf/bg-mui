@@ -1,13 +1,16 @@
 <!--pages/setting/edu/edu.wxml-->
+<view class=''>
+    <button class="weui-btn mini-btn" type="primary" size="mini" bindtap='bindGotoChsi'>如何申请在线验证报告      </button>
+</view>
 <view class="weui-cell weui-cell_input weui-cell_vcode">
     <view class="weui-cell__bd">
-        <input class="weui-input" bindblur='bindVCodeInput' placeholder="在线学籍验证码" />
+        <input class="weui-input" bindblur='bindVCodeInput' placeholder="在线学籍验证码" value='{{verify_code}}'/>
     </view>
     <view class="weui-cell__ft">
         <view class="weui-vcode-btn" bindtap='userEduSet'>添加</view>
     </view>
 </view>
-<view class="weui-cells weui-cells_after-title" wx:for="{{eduList}}" wx:key="*this">
+<view class="weui-cells weui-cells_after-title" wx:for="{{eduList}}" wx:key="item.id">
     <view class="weui-cells__title"></view>
     <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">

@@ -152,7 +152,6 @@ Page({
     sendReqInfo: function() {
         var _this = this;
         wx.showLoading({ title: '请求中…' });
-        
         wx.request({
             url: app.api.actSendReqInfo, // 仅为示例，并非真实的接口地址
             data: {

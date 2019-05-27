@@ -10,7 +10,7 @@ Page({
     },
 
     formLogin: function (e) {
-        console.log(e.detail.value);//格式 Object {userName: "user", userPassword: "password"}
+        // console.log(e.detail.value);//格式 Object {userName: "user", userPassword: "password"}
 
         //获得表单数据
         var objData = e.detail.value;
@@ -27,7 +27,7 @@ Page({
     },
 
     formRegist: function (e) {
-        console.log(e.detail.value);//格式 Object {userName: "user", userPassword: "password"}
+        // console.log(e.detail.value);//格式 Object {userName: "user", userPassword: "password"}
 
         //获得表单数据
         var objData = e.detail.value;
@@ -44,12 +44,12 @@ Page({
     },
 
     formForget: function (e) {
-        console.log(e.detail.value);//格式 Object {userName: "user", userPassword: "password"}
+        // console.log(e.detail.value);//格式 Object {userName: "user", userPassword: "password"}
 
         //获得表单数据
         var objData = e.detail.value;
 
-        if (objData.userName && objData.userPassword) {
+        if (objData.userName && objData.userEmail) {
             // 同步方式存储表单数据
             app.auth.setForgetForm(objData.userName, objData.userEmail);
             app.auth.forget();

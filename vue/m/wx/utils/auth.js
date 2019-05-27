@@ -33,6 +33,10 @@ module.exports = {
         livingTextList: [],//省，市，其中省不变动，市会变动
         livingTextList2Obj: [],//对应所有省的市list
     },
+    resetUserInfo:function(){
+        this.data.selfInfo={};
+        this.data.eduList=[];
+    },
     //获取user info
     getUserInfo: function () {
         var _this = this;
@@ -146,6 +150,7 @@ module.exports = {
                     let res = JSON.parse(response.data);
                     //解析结果
                     if (res.code == 0) {
+                        _vueThis.resetUserInfo();
                         // {code:0,msg:""}
                         _vueThis.setLanding(false);
                         // 保存状态//删除本地token
@@ -158,7 +163,7 @@ module.exports = {
                         _vueThis.setLanding(false);
 
                         //跳转到页面
-                        wx.navigateTo({
+                        wx.switchTab({
                             url: "/pages/friend/friend"
                         })
                     }

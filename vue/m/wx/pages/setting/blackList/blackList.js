@@ -16,7 +16,32 @@ Page({
     onLoad: function (options) {
         this.reloadGridItem();
     },
+    // 触摸开始时间
+    touchStartTime: 0,
+    // 触摸结束时间
+    touchEndTime: 0,
+    /// 按钮触摸开始触发的事件
+    touchStart: function (e) {
+        this.touchStartTime = e.timeStamp
+    },
 
+    /// 按钮触摸结束触发的事件
+    touchEnd: function (e) {
+        this.touchEndTime = e.timeStamp
+    },
+    //单击
+    tapOpenWin: function (e) {
+        var that = this
+        // 控制点击事件在350ms内触发，加这层判断是为了防止长按时会触发点击事件
+        if (that.touchEndTime - that.touchStartTime < 350) {
+            let uid = e.currentTarget.dataset.uid;
+            let idx = e.currentTarget.dataset.idx;
+            let id = e.currentTarget.dataset.id;
+            let url = "/pages/friendView/friendView?fid=" + uid;
+            app.util.gotoPage(url);
+        }
+
+    },
     /// 长按显示
     delItem: function (e) {
         let _this = this;

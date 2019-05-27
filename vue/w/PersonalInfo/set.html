@@ -44,8 +44,12 @@
 						<div class="group-item">
 							<div class="card" style="">
 								<div>
-									<button type="button" class="btn btn-success" v-show="res.find_switch" v-on:click="up_find_switch()">个人信息可被查找</button>
-									<button type="button" class="btn btn-outline-success" v-show="!res.find_switch" v-on:click="up_find_switch()">个人信息不可被查找</button>
+									<button type="button" class="btn btn-success" v-show="res.find_switch" v-on:click="up_find_switch()"
+									title="只是不被显示在找朋友页面,其他方式还是可能看到用户信息的,因为活动或是其他地方需要被看到"
+									>个人信息可被查找</button>
+									<button type="button" class="btn btn-outline-success" v-show="!res.find_switch" v-on:click="up_find_switch()"
+									title="只是不被显示在找朋友页面,其他方式还是可能看到用户信息的,因为活动或是其他地方需要被看到"
+									>个人信息不可被查找</button>
 								</div>
 							</div>
 						</div>

@@ -100,7 +100,6 @@ Page({
     sendMsg: function () {
         var _this = this;
         wx.showLoading({ title: '提交中…' });
-        
         wx.request({
             url: app.api.newsAddUserMsg, // 仅为示例，并非真实的接口地址
             data: {
@@ -119,7 +118,9 @@ Page({
                 if (response.statusCode == 200) {
                     let res = JSON.parse(response.data);
                     if (res.code == 0) {
-                        _this.data.msg = "";
+                        _this.setData({
+                            msg:""
+                        })
                     }
                     app.util.layerMsg(res.msg, res.code);
                 } else {

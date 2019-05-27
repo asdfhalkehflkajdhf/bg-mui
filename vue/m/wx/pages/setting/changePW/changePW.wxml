@@ -6,7 +6,7 @@
                 <view class="weui-label">原密码：</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input" type="text" name="srcPw" bindinput='bindSrcPwInput' placeholder="原密码"/>
+                <input class="weui-input" type="text" name="srcPw" bindinput='bindSrcPwInput' placeholder="原密码" maxlength='64' />
             </view>
         </view>
 
@@ -15,7 +15,7 @@
                 <view class="weui-label">新密码：</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input" type="text" name="newPw1" bindinput='bindNewPw1Input' placeholder="新密码"/>
+                <input class="weui-input" type="text" name="newPw1" bindinput='bindNewPw1Input' placeholder="新密码" maxlength='64' />
             </view>
         </view>
         <view class="weui-cell weui-cell_input">
@@ -23,7 +23,7 @@
                 <view class="weui-label">新密码：</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input" type="text" name="newPw2" bindinput='bindNewPw2Input' placeholder="确认"/>
+                <input class="weui-input" type="text" name="newPw2" bindinput='bindNewPw2Input' placeholder="确认" maxlength='64'/>
             </view>
         </view>
 

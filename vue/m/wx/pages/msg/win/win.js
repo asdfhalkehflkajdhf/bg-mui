@@ -1,6 +1,9 @@
 // pages/msg/win/win.js
 var app = getApp().globalData;
-
+String.prototype.startWith = function (str) {
+    var reg = new RegExp("^" + str);
+    return reg.test(this);
+};
 Page({
 
     /**
@@ -12,8 +15,10 @@ Page({
         intervalid1: -1,
         msgList:[],
         urlParameter: {},
+        actList:[],
 
-
+        curScrollTop:100,
+        scrollTop: 100,
         // centendata: [
         //     { ctime: "2019-03-05", content: "<p>asdf</p><p>asdfasdfasdf</p>", origin: "right"},
         //     { ctime: "2019-03-05", content: "leftasdfasdfasdfasdf", origin: "left"},
@@ -34,7 +39,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log(options);
+        // console.log(options);
         // 获取url参数
         this.setData({
             urlParameter: options
@@ -72,20 +77,39 @@ Page({
                     //解析结果
                     // 更新上次的获取数据时间
                     _this.data.msgLastTime = res.msgLastTime;
+
                     //   // 服务端返回的数据
                     if (res.data.length == 0) {
                         if (res.code) {
                             app.util.layerMsg(res.msg, res.code);
                         }
-                        return;
                     } else {
+                        if (_this.data.urlParameter.type == "act"){
+                            let actList=[];
+                            res.data.map(function (item, index, array) {
+                                if (item.origin == "left" && item.content.startWith("ACTREQ:")) {
+                                    let tc = array[index].content.substr(7);
+                                    let tc_json = JSON.parse(tc);
+                                    array[index].content = tc_json.head + '<a url="../actView/actView?id=' + tc_json.aid + '" >' + tc_json.atitle + '</a>';
+
+                                    if (tc_json.atitle.length>4){
+                                        tc_json.atitle = tc_json.atitle.substr(0, 4) + "...";
+                                    }
+                                    actList.push(tc_json);
+                                }
+                            });
+                            _this.setData({
+                                actList: actList
+                            })
+                        }
+
+                        // console.log(res.data);
                         let ml_data=_this.data.msgList.concat(res.data);
-                        console.log(ml_data);
                         _this.setData({
                             msgList: ml_data
                         })
                     };
-
+                    _this.pageScrollToBottom();
                 } else {
                     app.util.layerMsg(response.statusText);
                 }
@@ -104,17 +128,59 @@ Page({
 
 
     bindMsgChange:function(e){
-        console.log(e)
+        let _this=this;
+        _this.setData({
+            msg: e.detail.html
+        })
+    },
+
+    onEditorReady() {
+        const that = this
+        wx.createSelectorQuery().select('#editor').context(function (res) {
+            that.editorCtx = res.context
+        }).exec()
+    },
+    clear() {
+        this.editorCtx.clear({
+            success: function (res) {
+
+            }
+        })
+    },
+    pageScrollToBottom: function () {
+        var _this = this;
+        _this.data.curScrollTop = _this.data.scrollTop;
+        _this.setData({
+            scrollTop: _this.data.msgList.length * 100
+        });
+        //没有新内容不进行更新
+        if (_this.data.curScrollTop == _this.data.scrollTop){return;}
+
+        wx.createSelectorQuery().select('#scroll').boundingClientRect(function (rect) {
+            // 使页面滚动到底部
+            wx.pageScrollTo({
+                scrollTop: _this.data.scrollTop
+            })
+        }).exec()
     },
     // 发送数据
     sendMsg: function () {
+        function Trim(str) {
+            return str.replace(/(^\s*)|(\s*$)/g, "");
+        };
         var _this = this;
+
+        let content = Trim(_this.data.msg);
+        if (content.length<1){
+            return;
+        }
+
         wx.request({
             url: app.api.newsAddUserMsg, // 仅为示例，并非真实的接口地址
             data: {
                 token: app.util.getLocalToken(),
                 uid: _this.data.urlParameter.fid,
-                msg: _this.data.msg,
+                msg: content,
                 type: _this.data.urlParameter.type
             },
             method: 'post',
@@ -130,12 +196,8 @@ Page({
                         _this.setData({
                             msg:""
                         })
-                        let ml_data = _this.data.msgList.concat(res.data);
-                        _this.setData({
-                            msgList: ml_data
-                        })
+                        _this.clear();
                     }
-                    
                 } else {
                     app.util.layerMsg(response.statusText);
                 }
@@ -164,7 +226,8 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        
+        var _this = this;
+        _this.pageScrollToBottom();
     },
 
     /**

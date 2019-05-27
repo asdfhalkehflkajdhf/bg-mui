@@ -92,7 +92,8 @@
                     <view class="weui-article__p" >
                         
                         <!-- //这里data中article为bindName -->
-                        <template is="wxParse" data="{{wxParseData:actDetails.nodes}}"/>
+                        <!-- <template is="wxParse" data="{{wxParseData:actDetails.nodes}}"/> -->
+                        <rich-text nodes="{{res.actDetails}}"></rich-text>
                     </view>
                 </view>
 

@@ -39,8 +39,10 @@ Page({
             income: app.auth.data.selfInfo.income,
             profession: app.auth.data.selfInfo.profession,
             tryst_expect: app.auth.data.selfInfo.tryst_expect,
-            livingTextList: app.auth.data.livingTextList,
-            livingTextList2Obj: app.auth.data.livingTextList2Obj,
+
+            livingList: app.auth.data.livingList,//原始数据
+            livingTextList: app.auth.data.livingTextList, //变动数据
+            livingTextList2Obj: app.auth.data.livingTextList2Obj,//市一级所有数据
         })
     },
 
@@ -60,8 +62,9 @@ Page({
     ///////////////查找条件
     //生活地
     bindRegionChange: function (e) {
-        console.log('picker发送选择改变，携带值为', e.detail.value)
         var _this = this;
+        // console.log('picker发送选择改变，携带值为', e.detail.value);
+        
         app.auth.data.selfInfo.user_living_place_id = _this.data.livingList[e.detail.value[0]].data[e.detail.value[1]].value;
         this.setData({
             regionIdx: e.detail.value,

@@ -14,7 +14,7 @@
                 <!-- //动态 -->
                   <view class="weui-panel weui-panel_access">
                     <view class="weui-panel__bd">
-                        <view class="weui-media-box weui-media-box_text" wx:for="{{dynamicList}}" wx:key="*this" wx:for-index="dlIdx">
+                        <view class="weui-media-box weui-media-box_text" wx:for="{{dynamicList}}" wx:key="item.id" wx:for-index="dlIdx">
                             <!-- //昵称 -->
                             <view class="weui-flex item-text-2" >
                                 <view class='weui-flex__item'>
@@ -33,7 +33,7 @@
                                     <view class="weui-flex__item" >
                                         <image class="grid-img" mode="center" 
                                         bindtap='viewImg' data-dlIdx="{{dlIdx}}" data-imgidx="{{imgidx}}"
-                                        wx:for="{{item.imgObj.data}}" wx:key="*this" 
+                                        wx:for="{{item.imgObj.data}}" wx:key="imgObj.id" 
                                         wx:for-item="imgObj" wx:for-index="imgidx"
                                         src="{{imgObj.thumb}}"></image>
                                     </view>
@@ -56,7 +56,7 @@
                     <view class="weui-cells weui-cells_after-title">
                         <view class="weui-cell">
                             <view class="weui-cell__bd">
-                                <textarea class="weui-textarea" placeholder="请输入内容" style="height: 5em" bindinput="bindContentInput" maxlength='1000'/>
+                                <textarea class="weui-textarea" placeholder="请输入内容" style="height: 5em" bindinput="bindContentInput" maxlength='1000' value='{{content}}'/>
                                 <view class="weui-textarea-counter">{{content.length}}/1000</view>
                             </view>
                         </view>

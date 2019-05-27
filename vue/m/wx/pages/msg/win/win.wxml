@@ -3,11 +3,14 @@
     <navigator url="/pages/friendView/friendView?fid={{urlParameter.fid}}">
         <view class="win-title">{{urlParameter.name}}</view>
     </navigator>
+    <navigator url="/pages/actView/actView?id={{item.aid}}" class="win-title" wx:for="{{actList}}" wx:key="item.aid">{{item.atitle}}</navigator>
 </view>
 
 <view class='news'>
     <view class="historycon">
-        <scroll-view scroll-y="true" scroll-top="{{scrollTop}}" class="history" wx:for="{{msgList}}" wx:key='item.time'>
+        <scroll-view  class="history" id="scroll"
+        scroll-y="true" scroll-top="{{scrollTop}}"
+        wx:for="{{msgList}}" wx:key='item.ctime'>
             <view>
                 <text class='time'>{{item.ctime}}</text>
             </view>
@@ -25,6 +28,7 @@
 </view>
 
 <view class="sendmessage">
-    <editor id="editor" class="editor-container " bindinput="bindMsgChange"></editor>
-    <button class="weui-btn mini-btn" type="primary" size="mini">发送</button>
+    <editor id="editor" class="editor-container " 
+        bindinput="bindMsgChange" bindready="onEditorReady"></editor>
+    <button class="weui-btn mini-btn" type="primary" size="mini" bindtap='sendMsg'>发送</button>
 </view>

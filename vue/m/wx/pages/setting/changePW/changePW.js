@@ -31,7 +31,11 @@ Page({
 
     checkForm: function () {
         if (this.data.newPw1 != this.data.newPw2) {
-            app.util.layerMsg("新密码两次输入不对");
+            app.util.layerMsg("新密码输入一样");
+            return false;
+        }
+        if (this.data.srcPw == this.data.newPw2) {
+            app.util.layerMsg("新旧密码一样");
             return false;
         }
         if (this.data.newPw1.length == 0 ||

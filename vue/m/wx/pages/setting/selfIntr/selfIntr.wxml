@@ -6,4 +6,4 @@
 
 <!-- <template name="editor"> -->
 
-<selfEidtor apiPath="{{apiPath}}"></selfEidtor>
+<selfEidtor apiPath="{{apiPath}}" bindimgup="onImgUpEvent" id="eidtor"></selfEidtor>

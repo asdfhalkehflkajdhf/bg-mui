@@ -138,7 +138,7 @@ Page({
 
     //生活地
     bindRegionChange: function (e) {
-        console.log('picker发送选择改变，携带值为', e.detail.value)
+        // console.log('picker发送选择改变，携带值为', e.detail.value)
         var _this = this;
         let data = _this.data.conditionalForm;
         data.living = _this.data.conditionalData.livingList[e.detail.value[0]].data[e.detail.value[1]].value;
@@ -177,7 +177,7 @@ Page({
     bindActStatusChange: function (e) {
         var _this = this;
         let data = _this.data.conditionalForm;
-        data.status = e.detail.value;
+        data.status = _this.data.conditionalData.statusList[e.detail.value].value;
         this.setData({
             statusIdx: e.detail.value,
             conditionalForm: data
@@ -235,9 +235,6 @@ Page({
                     //状态
                     _vueThis.bindActStatusIdxInit(res['data']['conditionalForm']['status']);
 
-
-                    console.log(_vueThis.data.conditionalData);
-                    console.log(_vueThis.data.conditionalForm);
                 } else {
                     app.util.layerMsg(response.statusText);
                 }
@@ -257,13 +254,14 @@ Page({
     //更新表单
     upFrom: function (e) {
         var _vueThis = this;
-        wx.showLoading({ title: '提交中…' });
+        // console.log(_vueThis.data.conditionalForm);
         
+        wx.showLoading({ title: '提交中…' });
         wx.request({
             url: app.api.actPutSearchCondition, // 仅为示例，并非真实的接口地址
             data: {
                 token: app.util.getLocalToken(),
-                data: _vueThis.conditionalForm
+                data: _vueThis.data.conditionalForm
             },
             method: 'post',
             dataType: 'josn',

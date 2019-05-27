@@ -1,4 +1,4 @@
 <!--pages/setting/otherIntr/otherIntr.wxml-->
 
 
-<eidtor apiPath="{{apiPath}}"></eidtor>
+<eidtor apiPath="{{apiPath}}" bindimgup="onImgUpEvent" id="eidtor"></eidtor>

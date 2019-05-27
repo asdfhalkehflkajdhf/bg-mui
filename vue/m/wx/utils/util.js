@@ -4,6 +4,7 @@ var api = require("api.js");
    * 采用递归的方式上传多张
    */
 function uploadImgOneByOne(imgList, idx, formData, callBackFunc, callBackRes) {
+    
     wx.showLoading({ title: '正在上传第' + idx + '张', });
     let upRes = { upStatus: -1, src:"" };
     const uploadTask = wx.uploadFile({
@@ -22,8 +23,11 @@ function uploadImgOneByOne(imgList, idx, formData, callBackFunc, callBackRes) {
                 } else {
                     //// 有上传成功，更新res_list
                     // that.data.upStatus.push(1);
-                    upRes.upStatus = res.data.msg[imgList[idx]].imgId;
-                    upRes.src = res.data.msg[imgList[idx]].src;
+                    // 因为只是一张一张的上传，所以data中中人有一个list不需要使用for
+                    let key = res.data.ok[0];
+                    let value = res.data.msg[key];
+                    upRes.upStatus = value.imgId;
+                    upRes.src = value.src;
 
                 }
             } else {
@@ -38,12 +42,15 @@ function uploadImgOneByOne(imgList, idx, formData, callBackFunc, callBackRes) {
         },
         complete: function (response) {
             callBackRes.push(upRes);
+            console.log(callBackRes);
             idx=idx+1;
             if (idx < imgList.length) {
+                //单个上传完成回调
+
                 //递归调用，上传下一张
                 uploadImgOneByOne(imgList, idx, formData, callBackFunc, callBackRes);
             } else {
-                //开始上传文本
+                //全部上传完成回调
                 // that.upDyn();
                 if (callBackFunc!=null){
                     callBackFunc();
@@ -105,7 +112,7 @@ function layerMsg(msg, code) {
 	*/
 
     //没有定义的情况：7
-    if (!code) { code = 7; }
+    if (code == undefined || code == null || code ==NaN) { code = 7; }
 
     // icon_id 默认为1，表示成功
     let icon_id = "/res/img/status/success.png";

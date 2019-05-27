@@ -29,7 +29,7 @@ Page({
         })
     },
     checkForm: function () {
-        console.log(this.data);
+        // console.log(this.data);
         if (this.data.title.length == 0 ||
             this.data.content.length == 0
         ) {

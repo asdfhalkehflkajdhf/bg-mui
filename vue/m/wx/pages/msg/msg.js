@@ -8,7 +8,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        
+
         msgInfoList:[],
         msgActList: [],
         /////////nav 导航//////////
@@ -25,7 +25,32 @@ Page({
     onLoad: function (options) {
         this.tabInit();
     },
+    // 触摸开始时间
+    touchStartTime: 0,
+    // 触摸结束时间
+    touchEndTime: 0,  
+    /// 按钮触摸开始触发的事件
+    touchStart: function (e) {
+        this.touchStartTime = e.timeStamp
+    },
 
+    /// 按钮触摸结束触发的事件
+    touchEnd: function (e) {
+        this.touchEndTime = e.timeStamp
+    },
+    //单击
+    tapOpenWin: function(e){
+        var that = this
+        // 控制点击事件在350ms内触发，加这层判断是为了防止长按时会触发点击事件
+        if (that.touchEndTime - that.touchStartTime < 350) {
+            let uid = e.currentTarget.dataset.uid;
+            let idx = e.currentTarget.dataset.idx;
+            let name = e.currentTarget.dataset.name;
+            let url = "win/win?fid=" + uid + "&type=" + this.data.types[this.data.activeIndex] + "&name=" + name;
+            app.util.gotoPage(url);    
+        }
+        
+    },
     /// 长按
     delMsgItem: function (e) {
         let _this = this;
@@ -282,7 +307,7 @@ Page({
     // 选项卡
     tabClick: function (e) {
         let _this=this;
-        console.log(e.currentTarget);
+        // console.log(e.currentTarget);
         _this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id

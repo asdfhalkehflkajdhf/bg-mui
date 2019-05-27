@@ -14,9 +14,9 @@
                 <view class="" hidden="{{activeIndex != 0}}">
                     <view class="weui-cells weui-cells_after-title">
                     <!-- bindlongpress="delMsgItem"  -->
-                        <navigator bindlongtap="delMsgItem" 
+                        <view bindlongtap="delMsgItem" bindtap='tapOpenWin' 
+                            bindtouchstart="touchStart" bindtouchend="touchEnd"
                             data-uid="{{item.uid}}" data-idx="{{index}}" data-name="{{item.name}}"
-                            url="win/win?fid={{item.uid}}&type={{types[activeIndex]}}&name={{item.name}}"
                             class="weui-cell weui-cell_access" hover-class="weui-cell_active"
                             wx:for="{{msgInfoList}}" wx:key="item.uid">
                             <view class="weui-cell__bd">
@@ -26,7 +26,7 @@
                                 <view class='reddot' wx:if="{{item.noRead>0}}">{{item.noRead}}</view>
                                 <!-- <text>{{item.time}}</text> -->
                             </view>
-                        </navigator>
+                        </view>
                     </view>
                 </view>
 
