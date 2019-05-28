@@ -20,7 +20,8 @@ const lunBoTuVar = new Vue({
 			// post 本地json会失败
 			// axios.get('testjson/lunBoTuTest.json', {
 			gAxios.post('api/ads/getLunBoTuList.php', {
-				token: localToken
+				token: localToken,
+				page:2
 			})
 			.then(function (response) {
 				if(response.status==200){
@@ -33,7 +34,7 @@ const lunBoTuVar = new Vue({
 				console.log(error);
 			});
 		},
-		upAdsStatusInfo:function(id, herf){
+		upAdsStatusInfo:function(id, href){
 			var _this = this;
 			gAxios.post('api/ads/upAdsStatusInfo.php', {
 				id: id
@@ -41,7 +42,7 @@ const lunBoTuVar = new Vue({
 			.then(function (response) {
 				if(response.status==200){
 					// _this.res=response.data.data;
-					window.open(herf);
+					window.open(href);
 				}else{
 					layerMsg(response.statusTexte);
 				}
@@ -110,7 +111,7 @@ const formTag = new Vue({
 
 			})
 			.catch(function (error) {
-          console.log(error);
+				console.log(error);
 			});
 
 		},

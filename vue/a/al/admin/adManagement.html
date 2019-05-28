@@ -140,8 +140,24 @@
 	</body>
 	<script type="text/javascript">
 		var localToken = getLocalToken();
-
+		String.prototype.startWith=function(str){
+			var reg=new RegExp("^"+str);
+			return reg.test(this);
+		}
+		
 		function adsAdd(row) {
+			if(row.jump_addr.length<1 || row.res_addr.length<1 || row.page_id.length<1 ||
+			row.position_id.length<1 || row.type_id.length<1 || row.ads_number_total.length<1 ||
+			row.ads_start_time.length<1 || row.ads_end_time.length<1 || row.ads_number_total.length<1 
+			){
+				layerMsg("存在选项为空", 2);
+				return;
+			}
+			
+			if(!row.jump_addr.startWith("http")){
+				row.jump_addr = "http://"+row.jump_addr;
+			}
+			
 			gAxios.post('api/admin/adsAdd.php', row)
 				.then(function(response) {
 					if (response.status == 200) {
@@ -191,10 +207,12 @@
 						.then(function(response) {
 							if (response.status == 200) {
 								res = response.data;
+								
 								//解析结果
+								if (res.code == 0) {
+									_this.page_list=res.data;
+								}
 								layerMsg(res.msg, res.code);
-
-
 							} else {
 								layerMsg(response.statusText);
 							}
