@@ -12,7 +12,7 @@ Page({
         msgInfoList:[],
         msgActList: [],
         /////////nav 导航//////////
-        tabs: ["info", "act"],
+        tabs: ["朋友", "活动"],
         types: ["info", "act"],
         activeIndex: 0,
         sliderOffset: 0,

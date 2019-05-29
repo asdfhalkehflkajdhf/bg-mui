@@ -158,10 +158,14 @@ Page({
   },
     // 选项卡
     tabClick: function (e) {
-        console.log(e.currentTarget);
+        // console.log(e.currentTarget);
+        let _this=this;
         this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id
+        });
+        wx.setNavigationBarTitle({
+            title: _this.data.tabs[e.currentTarget.id]
         });
     },
     tabInit: function () {

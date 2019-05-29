@@ -12,8 +12,8 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.6",
-	"appid": "wxb08c86af1ef7409b",
+	"libVersion": "2.7.0",
+	"appid": "wx60884d589e44a3ed",
 	"projectname": "wx-BoyG",
 	"debugOptions": {
 		"hidedInDevtools": []

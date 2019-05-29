@@ -58,7 +58,9 @@ Page({
         wx.request({
             url: app.api.adsGetLunBoTuList, // 仅为示例，并非真实的接口地址
             // url:url,
-            data: {},
+            data: {
+                page: 2
+            },
             method: 'post',
             dataType: 'josn',
             header: {
@@ -413,10 +415,15 @@ Page({
   },
     // 选项卡
     tabClick: function (e) {
+        let _this = this;
         this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id
         });
+        wx.setNavigationBarTitle({
+            title: _this.data.tabs[e.currentTarget.id]
+        });
+        
     },
     tabInit: function(){
         var that = this;

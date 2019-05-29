@@ -76,11 +76,16 @@ Page({
 
     changeFormShow:function(e){
         // console.log(e.currentTarget.dataset.idx);
+        let _this = this;
         let show=[false, false, false];
+        let showTitle = ["登陆", "注册", "忘记密码"];
         show[e.currentTarget.dataset.idx]=true;
         this.setData({
             formShow:show
-        })
+        });
+        wx.setNavigationBarTitle({
+            title: showTitle[e.currentTarget.dataset.idx]
+        });
     },
     
     onReady: function () {
