@@ -1,7 +1,7 @@
 // 请求地址
 
-const baseUrl = "http://127.0.0.1/vue/";
-
+// const baseUrl = "http://127.0.0.1/vue/";
+const baseUrl = "https://www.男生女生.cn/";
 
 module.exports = {
     // 找朋友
