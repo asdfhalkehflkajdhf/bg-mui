@@ -1,0 +1,23 @@
+
+.container{
+	width: 100%;
+	height: auto;  /*自适应*/
+	max-width: 1290px;
+	min-height: 700px;
+	margin: 0 auto;
+	padding: 0 10px;
+}
+//顶部距离
+.wrapper{
+	padding: 10px 0;
+	height: auto;  /*自适应*/
+	min-height: 700px;
+	
+}
+
+.placeholder-20{
+	height: 20px;
+}
+.placeholder-10{
+	height: 10px;
+}

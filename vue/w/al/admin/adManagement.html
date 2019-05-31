@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- //允许网页宽度自动调整 -->
+		<!-- //https://www.cnblogs.com/MissZhao/p/5773091.html -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>BoyG-广告管理</title>
+		<!-- // jquery -->
+		<script src="../../../res/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+		<!-- // axios 请求接口 -->
+		<script src="../../../res/axios-0.19.0/axios.min.js" type="text/javascript"></script>
+		<!-- // vue库 -->
+		<script src="../../../res/vue-2.6.7/vue.min.js" type="text/javascript"></script>
+		<!-- // layer 弹出层 -->
+		<!-- // http://layer.layui.com/ -->
+		<script src="../../../res/layer-v3.1.1/layer.js"></script>
+		<link href="../../../res/layer-v3.1.1/theme/default/layer.css" rel="stylesheet">
+		<!-- 下拉菜单 -->
+		<script src="https://cdn.bootcss.com/popper.js/1.14.7/umd/popper.js"></script>
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="../../../res/bootstrap-4.0.0/css/bootstrap.min.css">
+		<script src="../../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
+
+		<link rel="stylesheet" href="./css/background-2.css">
+		<script src="../../../w/common/globalVar.js"></script>
+
+		<!-- 自有资源 -->
+		<link rel="stylesheet" href="../../../res/bootstrap-table-master/dist/bootstrap-table.min.css">
+		<script src="../../../res/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+		<script src="../../../res/bootstrap-table-master/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+		<!-- awesome图标 -->
+		<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+
+	</head>
+	<body>
+
+
+
+		<div class="container">
+			<div class="wrapper">
+				<div class="placeholder-10"></div>
+				<div id="accordion">
+					<div class="card">
+						<div class="card-header" id="headingOne">
+							<h5 class="mb-0">
+								<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+								 aria-controls="collapseOne">
+									广告投放添加
+								</button>
+							</h5>
+						</div>
+						<div id="collapseOne" class="collapse card-body" aria-labelledby="headingOne" data-parent="#accordion">
+							<form>
+								<div class="form-group row">
+									<label for="跳转地址" class="col-sm-1 col-form-label">跳转地址</label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" id="跳转地址" v-model="row.jump_addr" maxlength="256">
+									</div>
+									<label for="资源地址" class="col-sm-1 col-form-label">资源地址</label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" id="资源地址" v-model="row.res_addr" maxlength="256">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label for="投放页面" class="col-sm-1 col-form-label">投放页面</label>
+									<div class="col-sm-5">
+										<select class="form-control" id="投放页面" v-model="row.page_id">
+											<option :value="item.id" v-for="item in page_list" v-text="item.desc"></option>
+										</select>
+									</div>
+									<label for="投放位置" class="col-sm-1 col-form-label">投放位置</label>
+									<div class="col-sm-5">
+										<select class="form-control" id="投放位置" v-model="row.position_id">
+											<option :value="item.id" v-for="item in position_list" v-text="item.desc"></option>
+										</select>
+									</div>
+									<label for="资源类型" class="col-sm-1 col-form-label">资源类型</label>
+									<div class="col-sm-5">
+										<select class="form-control" id="资源类型" v-model="row.type_id">
+											<option :value="item.id" v-for="item in type_list" v-text="item.desc"></option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label for="要投次数" class="col-sm-1 col-form-label">要投次数</label>
+									<div class="col-sm-3">
+										<input type="number" class="form-control" id="要投次数" v-model="row.ads_number_total">
+									</div>
+									<label for="开始时间" class="col-sm-1 col-form-label">开始时间</label>
+									<div class="col-sm-3">
+										<input type="date" class="form-control" id="开始时间" v-model="row.ads_start_time">
+									</div>
+									<label for="结束时间" class="col-sm-1 col-form-label">结束时间</label>
+									<div class="col-sm-3">
+										<input type="date" class="form-control" id="结束时间" v-model="row.ads_end_time">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="描述" class="col-sm-1 col-form-label">描述</label>
+									<div class="col-sm-3">
+										<input type="text" class="form-control" id="描述" v-model="row.desc" maxlength="256">
+									</div>
+								</div>
+							</form>
+							<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit()">提交</button>
+						</div>
+					</div>
+				</div>
+
+
+
+				<table id="msgTable" data-toggle="table" data-thead-classes="thead-light" data-ajax="ajaxRequest"
+				 data-mobile-responsive="true" data-toolbar="#msgToolbar" data-show-refresh="true" data-show-toggle="true"
+				 data-show-fullscreen="true" data-search="true" data-query-params="queryParams" data-pagination="true">
+					<thead>
+						<tr>
+							<th data-field="id">id</th>
+							<th data-field="jump_addr" data-formatter="addrFormatter">跳转地址</th>
+							<th data-field="res_addr" data-formatter="addrFormatter">资源地址</th>
+							<th data-field="page_id">投放页面</th>
+							<th data-field="type_id">资源类型</th>
+							<th data-field="ads_number_total" >要投次数</th>
+							<th data-field="ads_number_cur">已投次数</th>
+							<th data-field="ads_start_time">开始时间</th>
+							<th data-field="ads_end_time">结束时间</th>
+							<th data-field="opt" data-formatter="optFormatter" data-events="optEvent">操作</th>
+
+						</tr>
+					</thead>
+				</table>
+
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+		var localToken = getLocalToken();
+		String.prototype.startWith=function(str){
+			var reg=new RegExp("^"+str);
+			return reg.test(this);
+		}
+		
+		function adsAdd(row) {
+			if(row.jump_addr.length<1 || row.res_addr.length<1 || row.page_id.length<1 ||
+			row.position_id.length<1 || row.type_id.length<1 || row.ads_number_total.length<1 ||
+			row.ads_start_time.length<1 || row.ads_end_time.length<1 || row.ads_number_total.length<1 
+			){
+				layerMsg("存在选项为空", 2);
+				return;
+			}
+			
+			if(!row.jump_addr.startWith("http")){
+				row.jump_addr = "http://"+row.jump_addr;
+			}
+			
+			gAxios.post('api/admin/adsAdd.php', row)
+				.then(function(response) {
+					if (response.status == 200) {
+						res = response.data;
+						//解析结果
+						layerMsg(res.msg, res.code);
+
+
+					} else {
+						layerMsg(response.statusText);
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		}
+
+		//提交表单
+		const adManagement = new Vue({
+			el: "#accordion",
+			data: {
+				row: {
+					token: localToken,
+					jump_addr: "",
+					res_addr: "",
+					page_id: "",
+					position_id: "",
+					type_id: "",
+					ads_number_total: "",
+					ads_start_time: "",
+					ads_end_time: "",
+					desc: ""
+				},
+				page_list: [],
+				position_list: [],
+				type_list: [],
+			},
+			methods: {
+				submit() {
+					adsAdd(this.row);
+				},
+				getPageList() {
+					var _this = this;
+					gAxios.post('api/admin/adsGetPageList.php', {
+							token: localToken
+						})
+						.then(function(response) {
+							if (response.status == 200) {
+								res = response.data;
+								
+								//解析结果
+								if (res.code == 0) {
+									_this.page_list=res.data;
+								}
+								layerMsg(res.msg, res.code);
+							} else {
+								layerMsg(response.statusText);
+							}
+						})
+						.catch(function(error) {
+							console.log(error);
+						});
+
+				},
+				getPositionList() {
+					var _this = this;
+					gAxios.post('api/admin/adsGetPositionList.php', {
+							token: localToken
+						})
+						.then(function(response) {
+							if (response.status == 200) {
+								res = response.data;
+								//解析结果
+								if (res.code == 0) {
+									_this.position_list=res.data;
+								}
+								layerMsg(res.msg, res.code);
+
+							} else {
+								layerMsg(response.statusText);
+							}
+						})
+						.catch(function(error) {
+							console.log(error);
+						});
+
+				},
+				getTypeList() {
+					var _this = this;
+					gAxios.post('api/admin/adsGetTypeList.php', {
+							token: localToken
+						})
+						.then(function(response) {
+							if (response.status == 200) {
+								res = response.data;
+								//解析结果
+								if (res.code == 0) {
+									_this.type_list=res.data;
+								}
+								layerMsg(res.msg, res.code);
+
+							} else {
+								layerMsg(response.statusText);
+							}
+						})
+						.catch(function(error) {
+							console.log(error);
+						});
+
+				}
+			},
+			created: function() {
+				this.getPageList();
+				this.getPositionList();
+				this.getTypeList();
+			}
+		});
+
+
+		function adsDel(row) {
+			gAxios.post('api/admin/adsDel.php', {
+					token: localToken,
+					id: row.id,
+				})
+				.then(function(response) {
+					if (response.status == 200) {
+						res = response.data;
+						//解析结果
+						if (res.code == 0) {
+							// 在页面删除
+							$("#msgTable").bootstrapTable('remove', {
+								field: 'id',
+								values: [row.id]
+							});
+						} 
+						layerMsg(res.msg, res.code);
+
+					} else {
+						layerMsg(response.statusText);
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+
+		}
+
+		function queryParams(params) {
+			//添加新参数,这里直接自定义,不使用控件预定义,太麻烦了,没有使用用例
+			// alert('queryParams: ' + JSON.stringify(params));
+			// console.log($('#inputGroupSelect01').val());
+			// 添加消息类型
+			params['token'] = localToken;
+			// {search: undefined, sort: "time", order: "desc", msgType: "info"}
+			// console.log(params);
+			return params
+		}
+
+		var optEvent = {
+			// event：jQuery事件。
+			// value：字段值。
+			// row：行记录数据。
+			// index：行索引
+
+			'click .remove': function(e, value, row, index) {
+				// 在服务端删除
+				adsDel(row);
+			},
+
+
+
+		}
+
+		function optFormatter(value, row, index, field) {
+			// value：字段值。
+			// row：行记录数据 字典。
+			// index：行索引。
+			// field：行字段name。
+			// 			console.log(value);
+			// 			console.log(row);
+			// 			console.log(index);
+			// 			console.log(field);
+			return [
+				'<a class="remove" href="javascript:void(0)" title="删除">',
+				'	<i class="fa fa-trash-o"></i>',
+				'</a>'
+			].join('')
+		}
+
+		function addrFormatter(value, row, index, field) {
+			return [
+				'<a class="name" href="'+value+'" target="_black">'+"url"+'</a>'
+			].join('')
+		}
+
+		function ajaxRequest(params) {
+			gAxios.post('api/admin/adsGet.php', params.data)
+				.then(function(response) {
+					if (response.status == 200) {
+						res = response.data;
+						params.success({
+							rows: res.data
+						})
+						layerMsg(res.msg, res.code);
+
+					} else {
+						layerMsg(response.statusText);
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+					
+				});
+
+		}
+	</script>
+
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- //允许网页宽度自动调整 -->
+		<!-- //https://www.cnblogs.com/MissZhao/p/5773091.html -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<title>BoyG-活动添加</title>
+		<!-- // jquery -->
+		<script src="../../../res/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+		<!-- // axios 请求接口 -->
+		<script src="../../../res/axios-0.19.0/axios.min.js"  type="text/javascript"></script>
+		<!-- // vue库 -->
+		<script src="../../../res/vue-2.6.7/vue.min.js" type="text/javascript"></script>
+		<!-- // layer 弹出层 -->
+		<!-- // http://layer.layui.com/ -->
+		<script src="../../../res/layer-v3.1.1/layer.js"></script>
+		<link href="../../../res/layer-v3.1.1/theme/default/layer.css" rel="stylesheet">
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="../../../res/bootstrap-4.0.0/css/bootstrap.min.css">
+		<script src="../../../res/bootstrap-4.0.0/js/bootstrap.min.js"></script>
+		
+		<script src="../../../w/common/globalVar.js"></script>
+		<link rel="stylesheet" href="./css/background-2.css">
+		<!-- 引入 ECharts 文件 -->
+		<script src="../../../res/echarts/echarts.min.js"></script>
+
+	</head>
+	<body>
+		<div class="container">
+			<div class="wrapper">
+				<div class="placeholder-10"></div>
+				<form >
+					<div class="form-group row">
+						<label for="统计时长" class="col-sm-2 col-form-label">统计时长</label>
+						<div class="col-sm-4 ">
+							<select class="custom-select" id="统计时长" v-model="conditionalForm.status" onchange="updateTable(this.value);">
+								<option value="7">7天</option>
+								<option value="30">30天</option>
+							</select>
+						</div>
+					</div>
+				</form>					
+				<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+				<!-- 统计 -->
+				<div id="main" style="width: 100%;height:500px;"></div>
+			</div>
+		</div>
+		
+
+	</body>
+<script>
+    var option = {
+        title: {
+            text: '用户总数： 注册总数：',
+            subtext: ' '
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            // data:['最高气温','最低气温']
+            data:['日注册量','日活量']
+
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataZoom: {
+                    yAxisIndex: 'none'
+                },
+                dataView: {readOnly: false},
+                magicType: {type: ['line', 'bar']},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis:  {
+            type: 'category',
+            boundaryGap: false,
+            data: []
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value} 人数'
+            }
+        },
+        series: [
+            {
+                name:'日注册量',
+                type:'line',
+                data:[],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            },
+
+            {
+                // name:'最低气温',
+                name:'日活量',
+                type:'line',
+                data:[],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'},
+                        [{
+                            symbol: 'none',
+                            x: '90%',
+                            yAxis: 'max'
+                        }, {
+                            symbol: 'circle',
+                            label: {
+                                normal: {
+                                    position: 'start',
+                                    formatter: '最大值'
+                                }
+                            },
+                            type: 'max',
+                            name: '最高点'
+                        }]
+                    ]
+                }
+            }
+        ]
+    };
+
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+<script>
+	var localToken = getLocalToken();
+	
+        function updateTable(day){
+
+            if(day<7){
+                day=7;
+            }
+			gAxios.post('api/admin/getStatisticsDescInfo.php', {
+				token: localToken,
+				num: day
+			})
+			.then(function (response) {
+				if(response.status==200){
+					var res=response.data;
+                    myChart.setOption({
+                        xAxis:{
+							data:res.data.date_t
+                        },
+                        series:[
+                            {
+                                //根据名字对应到相应的系列
+                                name:"日注册量",
+                                data:res.data.r_reg_n
+                            },
+                            {
+                                //根据名字对应到相应的系列
+                                name:"日活量",
+                                data:res.data.r_login_n
+                            }
+                        ]
+                    })
+					
+				}else{
+					layerMsg(response.statusText, 2);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+
+        }
+		
+	updateTable(7);
+</script>
+
+</html>
