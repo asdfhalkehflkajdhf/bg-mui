@@ -17,8 +17,8 @@ function wangEditorImg(editor, token, uid, page_id, imgSize){
 		page_id: page_id,
 		uid: uid
 	};
-	// 将 timeout 时间改为 3s
-	editor.customConfig.uploadImgTimeout = 3000;
+	// 将 timeout 时间改为 1分钟
+	editor.customConfig.uploadImgTimeout = 10000;
 	
 	// 监听函数
 	editor.customConfig.uploadImgHooks = {

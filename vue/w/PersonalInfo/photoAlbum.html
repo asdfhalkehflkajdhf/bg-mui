@@ -187,10 +187,12 @@
 			$.each(fileList, function(i, file){
 				formFile.append("file[]", file); //加入文件对象
 			});
-						
+			
+			var index = layer.load(1, { shade: [0.1,'#fff']}); //0.1透明度的白色背景		
 			// 发起上传请求
 			gAxios.post('api/personalInfo/userImgUp.php',formFile)
 			.then(function (response) {
+				layer.close(index);
 				if(response.status==200){
 					let res=response.data;
 					if(res.code){
@@ -229,6 +231,7 @@
 				}
 			})
 			.catch(function(error) {
+				layer.close(index);
 				console.log(error);
 			});
 			
