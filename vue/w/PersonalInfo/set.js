@@ -195,7 +195,7 @@ const userInfo = new Vue({
 		},
 		userSelfIntrSet(){
             var _this = this;
-			_this.res.res_list = $.merge(_this.res.res_list, editor_si.upImgResList);
+			_this.res.res_list = _this.res.res_list.concat( editor_si.upImgResList);
 			gAxios.post('api/personalInfo/userSelfIntrSet.php', {
 				token: localToken,
 				intr: editor_si.txt.html(),
@@ -217,7 +217,7 @@ const userInfo = new Vue({
 		},
 		userOtherIntrSet(){
             var _this = this;
-			_this.res.res_list = $.merge(_this.res.res_list, editor_ti.upImgResList);		
+			_this.res.res_list = _this.res.res_list.concat(editor_ti.upImgResList);
 			gAxios.post('api/personalInfo/userOtherIntrSet.php', {
 				token: localToken,
 				intr: editor_ti.txt.html(),

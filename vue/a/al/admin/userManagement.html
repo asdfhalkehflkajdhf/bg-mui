@@ -106,13 +106,20 @@ var localToken = getLocalToken();
 			row:{
 				token:localToken,
 				phone:"",
-				pw:""
+				pw:"123456"
 			},
 		},
 		methods:{
 			userAdd(){
 				let _this = this;
-
+				if(_this.row.phone.length==0){
+					layerMsg("手机号为空", 2);
+					return;
+				}
+				if(_this.row.pw.length==0){
+					layerMsg("密码为空", 2);
+					return;
+				}
 				gAxios.post('api/admin/userAdd.php', _this.row)
 				.then(function (response) {
 					if(response.status==200){
@@ -188,15 +195,18 @@ var localToken = getLocalToken();
 		},
 		'click .edit': function (e, value, row, index) {
 			request_url = '../../../w/PersonalInfo/set.html?fid='+row.uid;
-			openSubWin(request_url, row.name, true);
+			window.location.href=request_url;
+			// openSubWin(request_url, row.name, true);
 		},
 		'click .photo': function (e, value, row, index) {
 			request_url = '../../../w/PersonalInfo/photoAlbum.html?fid='+row.uid;
-			openSubWin(request_url, row.name, true);
+			window.location.href=request_url;
+			// openSubWin(request_url, row.name, true);
 		},
 		'click .edu': function (e, value, row, index) {
 			request_url = 'userSetEdu.html?fid='+row.uid;
-			openSubWin(request_url, row.name, true);
+			window.location.href=request_url;
+			// openSubWin(request_url, row.name, true);
 		},
 		'click .eye': function (e, value, row, index) {
 			// request_url = '../../../w/PersonalInfo/view.html?fid='+row.uid;

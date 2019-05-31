@@ -84,6 +84,15 @@
 		methods:{
 			submit(){
 				let _this = this;
+				if(	_this.row.uid.length==0){
+					layerMsg("用户uid为空");
+					return;
+				}
+				if(	_this.row.pw.length==0){
+					layerMsg("新密码为空");
+					return;
+				}
+							
 				gAxios.post('api/admin/resetpw.php', this.row)
 				.then(function (response) {
 					if(response.status==200){
