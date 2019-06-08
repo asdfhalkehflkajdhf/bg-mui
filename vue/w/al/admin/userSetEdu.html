@@ -107,7 +107,13 @@
 
 									<input type="date" placeholder="入学时间" class="form-control " id="入学时间" v-model="row.enty_time" >
 								</div>
-								
+								<div class="input-group col-sm">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="inputGroup-g-sm">毕业时间</span>
+									</div>
+
+									<input type="date" placeholder="毕业时间" class="form-control " id="毕业时间" v-model="row.grad_time" >
+								</div>								
 							</div>
 							
 							<div class="form-group row">
@@ -138,6 +144,7 @@
 				profession:"",
 				education:"",
 				enty_time:"",
+				grad_time:"",
 				birthday:""
 			},
 			livingPlaceList:[],
