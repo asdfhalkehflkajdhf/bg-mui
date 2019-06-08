@@ -70,15 +70,16 @@
                         <!-- <rich-text nodes="{{res.otherIntr}}"></rich-text> -->
                     </view>
                 </view>
-                
-                <!-- //相册 -->
-                <view class="weui-article__section">
-                    <view class="weui-article__h3">相册</view>
-                    <!-- <view class="weui-article__p"> -->
-                        <image class="" style="width: 100%;" mode='widthFix' src="{{item.src}}" wx:for="{{imgList}}"  wx:key="{{item.id}}"></image>
-                    <!-- </view> -->
-                </view>
+                <!-- //相册 -->        
+
             </view>
+        </view>
+        <!-- //相册 不论什么情况 图片都进行显示-->
+        <view class="weui-article__section">
+            <view class="weui-article__h3">相册</view>
+            <!-- <view class="weui-article__p"> -->
+                <image class="" style="width: 100%;" mode='widthFix' src="{{item.src}}" wx:for="{{imgList}}"  wx:key="{{item.id}}"></image>
+            <!-- </view> -->
         </view>
     </view>
 </view>
