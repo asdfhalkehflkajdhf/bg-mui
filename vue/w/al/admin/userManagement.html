@@ -85,6 +85,7 @@
 									<th data-field="uid">uid</th>
 									<th data-field="name">登陆名</th>
 									<th data-field="pw" >密码</th>
+									<th data-field="ctime" data-sortable="true">citme</th>
 									<!-- 这个返回个人信息是否添写，动态数，更新时间，活动数，更新时间 -->
 									<th data-field="info" data-formatter="infoFormatter" data-events="optEvent">个人信息</th>
 									<th data-field="opt" data-formatter="optFormatter" data-events="optEvent">操作</th>
@@ -127,8 +128,8 @@ var localToken = getLocalToken();
 						res=response.data;
 						layerMsg(res.msg, res.code);
 						if(res.code == 0){
-							_this.row.phone="";
-							_this.row.pw="";
+							// _this.row.phone="";
+							// _this.row.pw="";
 						}
 					}else{
 						layerMsg(response.statusText, 2);
