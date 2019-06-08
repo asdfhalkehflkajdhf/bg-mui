@@ -38,7 +38,7 @@ function removeLocalToken(){
 }
 ////////////////////////////////////////////////////////////
 //基础路径
-var baseURL = "https://www.jupengyou.top";
+var baseURL = "https://www.jupengyou.top/";
 var gAxios = axios.create({
 	baseURL:baseURL
 });
