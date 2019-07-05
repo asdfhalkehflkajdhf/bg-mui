@@ -76,7 +76,8 @@ $(function(){
 					top.layer.confirm('您确定要删除？', {
 						title: false, //不显示标题栏,
 						btn: ['确定','取消'] //按钮
-					}, function(index, layero){
+					// }, function(index, layero){
+					}, function(index){
 						var numUp = delParent.siblings().length;
 						if(numUp < maxImgNum+1){
 							delParent.parent().find(".z_file").show();
@@ -86,8 +87,8 @@ $(function(){
 						
 						 delParent.remove();
 						//layer.msg('的确很重要', {icon: 1});
-						layer.close(index);
-					}, function(index){
+						top.layer.close(index);
+					}, function(){
 						// layer.msg('也可以这样', {
 						// 	time: 20000, //20s后自动关闭
 						// 	btn: ['明白了', '知道了']

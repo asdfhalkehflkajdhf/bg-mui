@@ -40,7 +40,7 @@
                 <view class="weui-article__section">
                     <view class="weui-article__h3">基本信息</view>
                     <view class="weui-article__p">
-                        你好，我今年{{rs.age}}，{{rs.age}}，身高有{{res.height}}cm，体重{{res.weight}}Kg，目前在{{res.living_place}}从事{{res.profession}}行业类型的工作，收入大该有{{res.income}}元，生活平常经常{{res.tryst_expect}}。
+                        你好，我今年{{rss.age}}，身高有{{res.height}}cm，体重{{res.weight}}Kg，目前在{{res.living_place}}从事{{res.profession}}行业类型的工作，收入大该有{{res.income}}元，生活平常经常[{{res.tryst_expect}}]。
                     </view>
                 </view>
                 <!-- 学校 -->

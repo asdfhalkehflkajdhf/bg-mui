@@ -70,7 +70,8 @@ Page({
                         if (res.data.res.selfIntr == null) { res.data.res.selfIntr = "这个家伙比较懒，什么也没写"; }
                         if (res.data.res.otherIntr == null) { res.data.res.otherIntr = "这个家伙比较懒，什么也没写"; }
                         _this.setData({
-                            res: res.data.res
+                            res: res.data.res,
+                            eduList: res.data.eduList
                         });
                         WxParse.wxParse('selfIntr', 'html', res.data.res.selfIntr, _this, 5);
                         WxParse.wxParse('otherIntr', 'html', res.data.res.otherIntr, _this, 5);
