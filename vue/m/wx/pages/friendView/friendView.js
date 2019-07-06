@@ -37,8 +37,11 @@ Page({
      */
     onLoad: function (options) {
         // 获取url参数
-        this.data.urlParameter = options;
-        
+        this.setData({
+            urlParameter:options
+        })
+        // this.data.urlParameter = options;
+        console.log(options);
         // 请求数据
         this.getUserInfo();
         this.reloadGridItem();
