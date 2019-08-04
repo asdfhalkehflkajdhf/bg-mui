@@ -249,7 +249,7 @@ const userInfo = new Vue({
 					var res=response.data;
 					if(res.code==0){
 						_this.verify_code="";
-						_this.eduList.push(res.data);
+						_this.eduList.push(res.data[0]);
 					}
 					layerMsg(res.msg, res.code);
 				}else{
