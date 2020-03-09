@@ -39,7 +39,7 @@ Page({
         tabs: ["活动", "条件"],
         activeIndex: 0,
         sliderOffset: 0,
-        sliderLeft: 0
+        sliderLeft: 0 //这个是固定值，不在初始化后不进行改变
     },
 
   /**
@@ -280,7 +280,7 @@ Page({
                     _vueThis.setData({
                         activeIndex: 0,
                         sliderOffset: 0,
-                        sliderLeft: 0,
+                        // sliderLeft: 0,
 
                         page: 0,
                         fload_time: "null",

@@ -15,7 +15,7 @@ Page({
         tabs: ["朋友", "条件"],
         activeIndex: 0,
         sliderOffset: 0,
-        sliderLeft: 0,
+        sliderLeft: 0,//这个是固定值，不在初始化后不进行改变
 
 
         //////查找条件
@@ -465,7 +465,7 @@ Page({
                         page:0,
                         activeIndex: 0,
                         sliderOffset: 0,
-                        sliderLeft: 0,
+                        // sliderLeft: 0,
                         friendList:[]
                     });
                     // 请求数据

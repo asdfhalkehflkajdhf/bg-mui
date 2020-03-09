@@ -42,16 +42,68 @@
                 </view>
 
                 <view class="weui-article__section">
-                    <view class="weui-article__h3">基本信息</view>
+                    <view class="weui-flex">
+                      <view class="weui-flex__item"><view class="weui-article__h3 placeholder">基本信息</view></view>
+                    </view>
+                    
                     <view class="weui-article__p">
-                        你好，我今年{{rss.age}}，身高有{{res.height}}cm，体重{{res.weight}}Kg，目前在{{res.living_place}}从事{{res.profession}}行业类型的工作，收入大该有{{res.income}}元，生活平常经常[{{res.tryst_expect}}]。
+                      <view class="weui-flex">
+                          <view><view class="placeholder">年龄：</view></view>
+                          <view class="weui-flex__item"><view class="placeholder">{{res.age}}</view></view>
+                          <!-- <view><view class="placeholder">weui</view></view> -->
+                      </view>
+                      <view class="weui-flex">
+                          <view><view class="placeholder">身高：</view></view>
+                          <view class="weui-flex__item"><view class="placeholder">{{res.height}}cm</view></view>
+                          <!-- <view><view class="placeholder">weui</view></view> -->
+                      </view>
+                      <view class="weui-flex">
+                          <view><view class="placeholder">体重：</view></view>
+                          <view class="weui-flex__item"><view class="placeholder">{{res.weight}}Kg</view></view>
+                          <!-- <view><view class="placeholder">weui</view></view> -->
+                      </view>
+                      <view class="weui-flex">
+                          <view><view class="placeholder">工作类型：</view></view>
+                          <view class="weui-flex__item"><view class="placeholder">{{res.profession}}</view></view>
+                          <!-- <view><view class="placeholder">weui</view></view> -->
+                      </view>
+                      <view class="weui-flex">
+                          <view><view class="placeholder">大概月收入：</view></view>
+                          <view class="weui-flex__item"><view class="placeholder">{{res.income}}元</view></view>
+                          <!-- <view><view class="placeholder">weui</view></view> -->
+                      </view>
+                      <view class="weui-flex">
+                          <view><view class="placeholder">日常活动：</view></view>
+                          <view class="weui-flex__item"><view class="placeholder">{{res.tryst_expect}}</view></view>
+                          <!-- <view><view class="placeholder">weui</view></view> -->
+                      </view>
                     </view>
                 </view>
                 <!-- 学校 -->
                 <view class="weui-article__section">
-                    <view class="weui-article__h3">学校</view>
+                    <view class="weui-article__h3">上学经历</view>
                     <view class="weui-article__p" wx:for="{{eduList}}" wx:key="{{item.id}}">
-                        {{item.level}}是从{{item.s_time}}到{{item.e_time}}，在{{item.university}}学的{{item.profession}}专业。
+                      <view class="weui-flex">
+                          <view><view class="placeholder">学历：</view></view>
+                          <view class="weui-flex__item"><view class="placeholder">{{item.level}}</view></view>
+                          <!-- <view><view class="placeholder">weui</view></view> -->
+                      </view>                    
+                      <view class="weui-flex">
+                          <view><view class="placeholder">时间：</view></view>
+                          <view class="weui-flex__item"><view class="placeholder">{{item.s_time}}——{{item.e_time}}</view></view>
+                          <!-- <view><view class="placeholder">weui</view></view> -->
+                      </view>                      
+                      <view class="weui-flex">
+                          <view><view class="placeholder">学校：</view></view>
+                          <view class="weui-flex__item"><view class="placeholder">{{item.university}}</view></view>
+                          <!-- <view><view class="placeholder">weui</view></view> -->
+                      </view>  
+                      <view class="weui-flex">
+                          <view><view class="placeholder">专业：</view></view>
+                          <view class="weui-flex__item"><view class="placeholder">{{item.profession}}</view></view>
+                          <!-- <view><view class="placeholder">weui</view></view> -->
+                      </view>  
+
                     </view>
                 </view>
                 <!-- 我详细内容 -->
@@ -79,8 +131,8 @@
             </view>
         </view>
         <!-- //相册 不论什么情况 图片都进行显示-->
-        <view class="weui-article__section">
-            <view class="weui-article__h3">相册</view>
+        <view class="weui-article">
+            <view class="weui-article__section weui-article__h3">相册</view>
             <!-- <view class="weui-article__p"> -->
                 <image class="" style="width: 100%;" mode='widthFix' src="{{item.src}}" wx:for="{{imgList}}"  wx:key="{{item.id}}"></image>
             <!-- </view> -->

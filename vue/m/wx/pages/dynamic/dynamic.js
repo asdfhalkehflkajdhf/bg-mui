@@ -22,7 +22,7 @@ Page({
         tabs: ["动态", "添加"],
         activeIndex: 0,
         sliderOffset: 0,
-        sliderLeft: 0
+        sliderLeft: 0 //这个是固定值，不在初始化后不进行改变
     },
 
   /**

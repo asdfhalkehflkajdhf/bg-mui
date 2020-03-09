@@ -1,6 +1,6 @@
 <!--pages/about/about.wxml-->
 <view class="page" >
-    <view class="page__bd">
+    <view class="page__hd">
         <view class="page__title">公告</view>
         <view class="page__desc">联系方式：www.男生女生.cn</view>
     </view>
